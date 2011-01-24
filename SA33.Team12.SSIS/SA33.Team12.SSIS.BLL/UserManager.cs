@@ -18,6 +18,22 @@ namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
     {
+        public List<User> FindUserByCriteria(DTO.UserSearchDTO criteria)
+        {
+            var Query = 
+                from u in context.Users
+                where u.UserID == (criteria.UserID == null ? u.UserID : criteria.UserID)
+                && u.DepartmentID == (criteria.DepartmentID == null ? u.DepartmentID : criteria.DepartmentID)
+                && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
+                && u.MembershipProviderKey == (criteria.MembershipProviderKey == null ? u.MembershipProviderKey : criteria.MembershipProviderKey)
+                && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
+                && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
+                && u.FirstName == (criteria.FirstName == null ? u.FirstName : criteria.FirstName)
+                select u;
+            List<User> users = Query.ToList<User>();
+            return users;
+        }
+
         public User GetUserByMemberShip(MembershipUser membershipUser)
         {
             Guid providerKey = (Guid)membershipUser.ProviderUserKey;
@@ -30,27 +46,23 @@ namespace SA33.Team12.SSIS.BLL
             }
             else
             {
-                throw new NullReferenceException("User data not found!");
+                throw new Exceptions.UserException("User data not found!");
             }
         }
 
-        public void CreateUser(DAL.User user, MembershipUser membershipUser)
+        public void CreateUser(DAL.User user)
         {
             try
             {
-                Guid providerKey = (Guid)membershipUser.ProviderUserKey;
-                user.MembershipProviderKey = providerKey;
-
-                context.Users.AddObject(user);
-                context.SaveChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Users.AddObject(user);
+                    context.SaveChanges();
+                }
             }
-            catch (MembershipCreateUserException exception)
+            catch (Exception)
             {
-                throw new Exceptions.UserException(exception.Message);
-            }
-            catch (MembershipPasswordException exception)
-            {
-                throw new Exceptions.UserException(exception.Message);
+                throw;
             }
         }
 
@@ -64,15 +76,25 @@ namespace SA33.Team12.SSIS.BLL
                 tempUser.FirstName = user.FirstName;
                 tempUser.LastName = user.LastName;
                 tempUser.Email = user.Email;
-
-                context.Attach(user);
-                context.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
-                context.SaveChanges();
+                try
+                {
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        context.Attach(user);
+                        context.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
             else
             {
                 throw new NullReferenceException("User not found!");
             }
+
         }
 
         public void DeleteUser(string userName)
@@ -82,13 +104,24 @@ namespace SA33.Team12.SSIS.BLL
                          select u).FirstOrDefault();
             if (user != null)
             {
-                using (TransactionScope ts = new TransactionScope())
+                try
                 {
-                    context.Attach(user);
-                    context.Users.DeleteObject(user);
-                    context.SaveChanges();
-                    ts.Complete();
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        context.Attach(user);
+                        context.Users.DeleteObject(user);
+                        context.SaveChanges();
+                        ts.Complete();
+                    }
                 }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                throw new Exceptions.UserException("No user to delete.");
             }
         }
 
@@ -101,14 +134,11 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
-        public void GetUserByID()
+        public User GetUserByID(int userID)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void GetUserByProfile()
-        {
-            throw new System.NotImplementedException();
+            return (from u in context.Users
+                    where u.UserID == userID
+                    select u).FirstOrDefault<User>();
         }
 
         public List<Department> GetAllDepartment()
@@ -124,14 +154,47 @@ namespace SA33.Team12.SSIS.BLL
                     select d).FirstOrDefault();
         }
 
-        public void CreateDepartment()
+        public Department CreateDepartment(Department department)
         {
-            throw new System.NotImplementedException();
+            context.Departments.AddObject(department);
+            context.SaveChanges();
+            return department;
         }
 
-        public void UpdateDepartment()
+        public Department UpdateDepartment(Department department)
         {
-            throw new System.NotImplementedException();
+            Department persistedDepartment = (from d in context.Departments
+                                              where d.DepartmentID == department.DepartmentID
+                                              select d).FirstOrDefault<Department>();
+            if (persistedDepartment != null)
+            {
+                try
+                {
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        persistedDepartment.Code = department.Code;
+                        persistedDepartment.Name = department.Name;
+                        persistedDepartment.isBlackListed = department.isBlackListed;
+
+                        CollectionPoint newCollectionPoint = 
+                                (from c in context.CollectionPoints
+                                 where c.CollectionPointID == department.CollectionPointID
+                                 select c).First<CollectionPoint>();
+
+                        persistedDepartment.CollectionPoint = newCollectionPoint;
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return persistedDepartment;
+            }
+            else
+            {
+                throw new Exceptions.DepartmentException("No department found to update.");
+            }
         }
 
         public void DeleteDepartment()

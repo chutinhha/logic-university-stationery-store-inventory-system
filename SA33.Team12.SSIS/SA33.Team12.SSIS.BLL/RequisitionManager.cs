@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 using SA33.Team12.SSIS.DAL;
-using SA33.Team12.SSIS.DTO;
 using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 
@@ -56,17 +55,17 @@ namespace SA33.Team12.SSIS.BLL
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByCategory(Category category, DTO.RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByDepartment(Department department, DTO.RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByEmployee(User user, DTO.RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }
