@@ -7,7 +7,24 @@ using System;
 
 namespace SA33.Team12.SSIS.Exceptions
 {
-    public class UserException : ExceptionBase
+    [Serializable]
+    public class UserException:ExceptionBase
     {
+        public UserException(string message)
+            : base(message)
+        { }
+
+        public UserException()
+            : base()
+        { }
+
+        public UserException(string message, Exception inner)
+            : base(message, inner)
+        { }
+
+        public UserException(System.Runtime.Serialization.SerializationInfo info,
+                System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        { }
     }
 }
