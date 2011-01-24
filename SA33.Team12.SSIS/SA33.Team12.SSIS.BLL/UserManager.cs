@@ -56,55 +56,49 @@ namespace SA33.Team12.SSIS.BLL
 
         public void UpdateUser(User user)
         {
-            //User tempUser = (from u in context.Users
-            //                 where u.UserID == user.UserID
-            //                 select u).FirstOrDefault();
-            //if (tempUser != null)
-            //{
-            //    tempUser.FirstName = user.FirstName;
-            //    tempUser.LastName = user.LastName;
-            //    tempUser.Email = user.Email;
+            User tempUser = (from u in context.Users
+                             where u.UserID == user.UserID
+                             select u).FirstOrDefault();
+            if (tempUser != null)
+            {
+                tempUser.FirstName = user.FirstName;
+                tempUser.LastName = user.LastName;
+                tempUser.Email = user.Email;
 
-            //    context.Attach(user);
-            //    context.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
-            //    context.SaveChanges();
-            //} 
-            //else
-            //{
-            //    throw new NullReferenceException("User not found!");
-            //}
+                context.Attach(user);
+                context.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new NullReferenceException("User not found!");
+            }
         }
 
         public void DeleteUser(string userName)
         {
-            //User user = (from u in context.Users
-            //             where u.UserName.ToLower() == userName.ToLower()
-            //             select u).FirstOrDefault();
-            //if (user != null)
-            //{
-            //    using (TransactionScope ts = new TransactionScope())
-            //    {
-            //        Membership.DeleteUser(userName);
-            //        context.Attach(user);
-            //        context.Users.DeleteObject(user);
-            //        context.SaveChanges();
-            //        ts.Complete();
-            //    }
-            //}
+            User user = (from u in context.Users
+                         where u.UserName.ToLower() == userName.ToLower()
+                         select u).FirstOrDefault();
+            if (user != null)
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(user);
+                    context.Users.DeleteObject(user);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
         }
 
         public void DisableUser(string userName)
         {
-            //try
-            //{
-            //    MembershipUser membershipUser = Membership.GetUser(userName);
-            //    membershipUser.IsApproved = false;
-            //    Membership.UpdateUser(membershipUser);
-            //}
-            //catch
-            //{
-            //    throw new Exception("Error encounter while disabling user account.");
-            //}
+            if ("administrator".CompareTo(userName.ToLower()) == 0)
+            {
+                throw new Exceptions.UserException(@"Oh, ho! You are not allow to disable
+                    the almighty Administrator account!");
+            }
         }
 
         public void GetUserByID()

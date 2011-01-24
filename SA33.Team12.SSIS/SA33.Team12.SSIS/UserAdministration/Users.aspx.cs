@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-
+using System.Transactions;
 using SA33.Team12.SSIS;
 
 namespace SA33.Team12.SSIS.UserAdministration
@@ -28,16 +28,18 @@ namespace SA33.Team12.SSIS.UserAdministration
 
         protected void UserGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
         {
-            // the code below is commented because for testing purpose it is not needed yet
-            // other than that it is working fine ;)
+             //the code below is commented because for testing purpose it is not needed yet
+             //other than that it is working fine ;)
 
-            /*
             string userName = e.Values[0].ToString();
-            using (BLL.UserManager um = new BLL.UserManager())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
-                um.DeleteUser(userName);
+                using (BLL.UserManager um = new BLL.UserManager())
+                {
+                    um.DeleteUser(userName);
+                }
+                Membership.DeleteUser(userName);
             }
-             */
         }
 
         protected void UserGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -51,14 +53,32 @@ namespace SA33.Team12.SSIS.UserAdministration
 
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName.ToLower().CompareTo("disable") == 0)
+            switch (e.CommandName.ToLower())
             {
-                int rowID = int.Parse(e.CommandArgument.ToString());
-                string userName = UserGridView.DataKeys[rowID].Value.ToString();
-                using (BLL.UserManager um = new BLL.UserManager())
-                {
-                    um.DisableUser(userName);
-                }
+                case "disable":
+                    int rowID = int.Parse(e.CommandArgument.ToString());
+                    string userName = UserGridView.DataKeys[rowID].Value.ToString();
+                    try
+                    {
+                        using (TransactionScope ts = new TransactionScope())
+                        {
+                            using (BLL.UserManager um = new BLL.UserManager())
+                            {
+                                um.DisableUser(userName);
+                            }
+                            MembershipUser membershipUser = Membership.GetUser(userName);
+                            membershipUser.IsApproved = false;
+                            Membership.UpdateUser(membershipUser);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        this.ErrorMessage.Text = exception.Message;
+                    }
+
+                break;
+
+                case "delete": break;
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A) (A0076803A)
+ * Author: Naing Myo Aung (A0076803A)
  * Initial Implementation: 23/Jan/2011
  ***/
 
