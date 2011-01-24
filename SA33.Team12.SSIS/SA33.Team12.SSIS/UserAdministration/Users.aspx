@@ -12,9 +12,7 @@
 <asp:GridView runat="server"
     ID="UserGridView" AutoGenerateColumns="False" 
         DataSourceID="UserObjectDataSource" DataKeyNames="UserName" 
-        onrowdeleted="UserGridView_RowDeleted" 
-        onrowdeleting="UserGridView_RowDeleting" 
-        onrowcommand="UserGridView_RowCommand">
+        onrowcommand="UserGridView_RowCommand" AllowPaging="True">
     <Columns>
         <asp:BoundField DataField="UserName" HeaderText="UserName" 
             SortExpression="UserName" ReadOnly="True" />
@@ -37,9 +35,10 @@
             SortExpression="LastPasswordChangedDate" />
         <asp:CheckBoxField DataField="IsOnline" HeaderText="IsOnline" ReadOnly="True" 
             SortExpression="IsOnline" />
-        <asp:CommandField ShowDeleteButton="true" />
-        <asp:ButtonField ButtonType="Link" CommandName="Disable" Text="Disable" 
-            />
+        <asp:CommandField ShowSelectButton="True" />
+        <asp:ButtonField ButtonType="Link" 
+            CommandName="Disable" 
+            Text="Disable" />
     </Columns>
 </asp:GridView>
 
