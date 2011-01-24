@@ -7,14 +7,15 @@ using System;
 
 namespace SA33.Team12.SSIS.Exceptions
 {
+    [Serializable]
     public class ExceptionBase : ApplicationException
     {
-        public ExceptionBase (string message)
-            : base(message)
-        { }
-
-        public ExceptionBase()
-            : base()
-        { }
+        public ExceptionBase() { }
+        public ExceptionBase(string message) : base(message) { }
+        public ExceptionBase(string message, Exception inner) : base(message, inner) { }
+        protected ExceptionBase(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
     }
 }
