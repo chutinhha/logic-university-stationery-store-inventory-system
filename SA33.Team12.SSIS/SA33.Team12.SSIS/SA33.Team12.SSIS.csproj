@@ -111,8 +111,6 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Exceptions\ExceptionBase.cs" />
-    <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Test\Stationeries.aspx.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

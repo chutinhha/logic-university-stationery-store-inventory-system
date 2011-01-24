@@ -4,9 +4,6 @@
  ***/
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SA33.Team12.SSIS.Exceptions
 {
