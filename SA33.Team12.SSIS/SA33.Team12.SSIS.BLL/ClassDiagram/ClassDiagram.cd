@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SA33.Team12.SSIS.BLL.BusinessLogic" Collapsed="true">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BLL\BusinessLogic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.CatalogManager" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAICAgAAAAABIAQAQAAAAABAAAAAAAAAAQg=</HashCode>
+      <FileName>BLL\CatalogManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.AdjustmentVoucherManager" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAQAIAAAAAAAAAAABAAA=</HashCode>
+      <FileName>BLL\AdjustmentVoucherManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.DTO.AdjustmentVoucherSearchDTO" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAEAAAAA=</HashCode>
+      <FileName>DTO\AdjustmentVoucherSearchDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.RequisitionManager" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAIIAAAAAAAAAAACACAQAAAQIAAA=</HashCode>
+      <FileName>BLL\RequisitionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.DTO.RequisitioinSearchDTO" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\RequisitioinSearchDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.StationeryRetrievalManager" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAgAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BLL\StationeryRetrievalManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.DisbursementManager" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIgAAAAACAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BLL\DisbursementManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.PurchaseOrderManager" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BLL\PurchaseOrderManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SA33.Team12.SSIS.BLL.UserManager" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAQAACAAEAAAgAAAAAQAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>BLL\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

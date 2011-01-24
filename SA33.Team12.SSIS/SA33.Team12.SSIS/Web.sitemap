@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="default.aspx?" title="Home Page"  description="Home Page">
+    <siteMapNode url="default.aspx" title="Home Page"  description="Home Page" />
+    <siteMapNode url="~/Catalog/Categories.aspx?"
+                 title="Stationery Catalog"  description="Statoinery Catalog">
+      <siteMapNode url="~/Catalog/Categories.aspx"
+                  title="Category Listing" description="Category Listing" />
+    </siteMapNode>
+    <siteMapNode url="~/UserAdministration/Users.aspx" title="Website Users" description="Website user administration">
+      <siteMapNode url="~/UserAdministration/UserAdd.aspx" title="Add New User" description="Add New User" />
+
+    </siteMapNode>
+    <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
+
+    <siteMapNode url="~/Test/Stationeries.aspx" title="Stationery List" />
+  </siteMapNode>
+</siteMap>
