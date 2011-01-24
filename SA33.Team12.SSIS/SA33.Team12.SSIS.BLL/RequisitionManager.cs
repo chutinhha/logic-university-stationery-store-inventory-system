@@ -10,6 +10,8 @@ using System.ComponentModel;
 
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DTO;
+using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -17,7 +19,16 @@ namespace SA33.Team12.SSIS.BLL
     {
         public void CreateRequisition(Requsition requisition)
         {
-            throw new System.NotImplementedException();
+            try
+            {                
+               // context.AddToRequsitions(requisition);                
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager exceptionManager = EnterpriseLibraryContainer.Current.GetInstance<ExceptionManager>();
+                exceptionManager.HandleException(ex, "Policy");
+            }
+            
         }
 
         public void UpdateRequisitionStatus(Requsition requisition)
