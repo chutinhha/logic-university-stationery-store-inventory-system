@@ -9,6 +9,10 @@ namespace SA33.Team12.SSIS.BLL
 {
     public class StationeryManager : BusinessLogic
     {
+        /***
+         * this is a sample do not use this
+         * ***/
+
         public void CreateStationery(DAL.Stationery stationery)
         {
             context.Stationeries.AddObject(stationery);
