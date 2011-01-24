@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA33.Team12.SSIS.BLL", "SA3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA33.Team12.SSIS", "SA33.Team12.SSIS\SA33.Team12.SSIS.csproj", "{B9FCE260-8ABB-45AA-ACDB-806326557788}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA33.Team12.SSIS.Exceptions", "SA33.Team12.SSIS.Exceptions\SA33.Team12.SSIS.Exceptions.csproj", "{3708754C-2180-4B1B-B43F-CA127A3C11D9}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -29,6 +31,10 @@ Global
 		{B9FCE260-8ABB-45AA-ACDB-806326557788}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FCE260-8ABB-45AA-ACDB-806326557788}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9FCE260-8ABB-45AA-ACDB-806326557788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3708754C-2180-4B1B-B43F-CA127A3C11D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3708754C-2180-4B1B-B43F-CA127A3C11D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3708754C-2180-4B1B-B43F-CA127A3C11D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3708754C-2180-4B1B-B43F-CA127A3C11D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

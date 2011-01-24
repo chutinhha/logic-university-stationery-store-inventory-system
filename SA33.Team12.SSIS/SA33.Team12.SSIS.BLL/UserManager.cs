@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Web.Security;
 
 using System.Transactions;
 using SA33.Team12.SSIS.DAL;
@@ -17,7 +18,7 @@ namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
     {
-        public User GetUserByMemberShip() {/* MembershipUser membershipUser)
+        public User GetUserByMemberShip(MembershipUser membershipUser)
         {
             Guid providerKey = (Guid)membershipUser.ProviderUserKey;
             User user = (from u in context.Users
@@ -30,30 +31,27 @@ namespace SA33.Team12.SSIS.BLL
             else
             {
                 throw new NullReferenceException("User data not found!");
-            } */
-            return null;
+            }
         }
 
-        public void CreateUser(DAL.User user)
+        public void CreateUser(DAL.User user, MembershipUser membershipUser)
         {
-            //try
-            //{
-            //    MembershipUser membershipUser = Membership.CreateUser(user.UserName,
-            //                                    user.Password, user.Email);
-            //    Guid providerKey = (Guid)membershipUser.ProviderUserKey;
-            //    user.MembershipProviderKey = providerKey;
+            try
+            {
+                Guid providerKey = (Guid)membershipUser.ProviderUserKey;
+                user.MembershipProviderKey = providerKey;
 
-            //    context.Users.AddObject(user);
-            //    context.SaveChanges();
-            //}
-            //catch (MembershipCreateUserException exception)
-            //{
-            //    throw new Exceptions.UserException(exception.Message);
-            //}
-            //catch (MembershipPasswordException exception)
-            //{
-            //    throw new Exceptions.UserException(exception.Message);
-            //}
+                context.Users.AddObject(user);
+                context.SaveChanges();
+            }
+            catch (MembershipCreateUserException exception)
+            {
+                throw new Exceptions.UserException(exception.Message);
+            }
+            catch (MembershipPasswordException exception)
+            {
+                throw new Exceptions.UserException(exception.Message);
+            }
         }
 
         public void UpdateUser(User user)

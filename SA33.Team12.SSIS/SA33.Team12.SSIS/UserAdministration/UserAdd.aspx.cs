@@ -11,6 +11,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS;
+using System.Transactions;
 
 namespace SA33.Team12.SSIS.UserAdministration
 {
@@ -54,12 +55,19 @@ namespace SA33.Team12.SSIS.UserAdministration
                         DAL.Department department = um.GetDepartmentByID(departmentID);
                         user.Department = department;
 
-                        um.CreateUser(user);
+                        using (TransactionScope ts = new TransactionScope())
+                        {
+                            MembershipUser membershipUser = Membership.CreateUser(user.UserName,
+                                    user.Password, user.Email);
+
+                            um.CreateUser(user, membershipUser);
+                        }
+
                     }
                 }
                 catch (Exception exception)
                 {
-                    // if something is wrong display the error message
+                    // if something is wrong, display the error message
                     this.ErrorMessage.Text = exception.Message;
                 }
             }
