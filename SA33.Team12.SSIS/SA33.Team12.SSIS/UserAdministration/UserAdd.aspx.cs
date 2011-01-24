@@ -4,8 +4,6 @@
  ***/
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -60,7 +58,7 @@ namespace SA33.Team12.SSIS.UserAdministration
                             MembershipUser membershipUser = Membership.CreateUser(user.UserName,
                                     user.Password, user.Email);
 
-                            um.CreateUser(user, membershipUser);
+                            um.CreateUser(user);
                         }
 
                     }

@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Test\Stationeries.aspx" />
+    <Content Include="Test\Users.aspx" />
     <Content Include="UserAdministration\UserAdd.aspx" />
     <Content Include="Catalog\Categories.aspx" />
     <Content Include="Catalog\Stationeries.aspx" />
@@ -118,6 +119,13 @@
     <Compile Include="Test\Stationeries.aspx.designer.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserAdministration\UserAdd.aspx.cs">
       <DependentUpon>UserAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,6 +172,7 @@
     <Compile Include="UserAdministration\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Membership.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

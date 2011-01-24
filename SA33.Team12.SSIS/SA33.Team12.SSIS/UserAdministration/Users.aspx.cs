@@ -42,15 +42,6 @@ namespace SA33.Team12.SSIS.UserAdministration
             }
         }
 
-        protected void UserGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            if ("administrator".CompareTo(e.Keys[0].ToString().ToLower()) == 0)
-            {
-                this.ErrorMessage.Text = "Oh, ho! You are not allow to delete the almighty Administrator account!";
-                e.Cancel = true;
-            }
-        }
-
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             switch (e.CommandName.ToLower())
@@ -66,6 +57,8 @@ namespace SA33.Team12.SSIS.UserAdministration
                             {
                                 um.DisableUser(userName);
                             }
+
+                            // probably good to have Membership BLL Layer to deal with this
                             MembershipUser membershipUser = Membership.GetUser(userName);
                             membershipUser.IsApproved = false;
                             Membership.UpdateUser(membershipUser);

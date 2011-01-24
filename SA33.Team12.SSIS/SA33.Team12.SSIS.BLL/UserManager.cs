@@ -22,8 +22,8 @@ namespace SA33.Team12.SSIS.BLL
         {
             var Query = 
                 from u in context.Users
-                where u.UserID == (criteria.UserID == null ? u.UserID : criteria.UserID)
-                && u.DepartmentID == (criteria.DepartmentID == null ? u.DepartmentID : criteria.DepartmentID)
+                where u.UserID == (criteria.UserID == 0 ? u.UserID : criteria.UserID)
+                && u.DepartmentID == (criteria.DepartmentID == 0 ? u.DepartmentID : criteria.DepartmentID)
                 && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
                 && u.MembershipProviderKey == (criteria.MembershipProviderKey == null ? u.MembershipProviderKey : criteria.MembershipProviderKey)
                 && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
