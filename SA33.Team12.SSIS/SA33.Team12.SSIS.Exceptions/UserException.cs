@@ -9,8 +9,5 @@ namespace SA33.Team12.SSIS.Exceptions
 {
     public class UserException : ExceptionBase
     {
-        public UserException(string message)
-            : base(message)
-        { }
     }
 }
