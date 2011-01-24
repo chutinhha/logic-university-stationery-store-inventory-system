@@ -10,7 +10,7 @@ using System.Web;
 
 namespace SA33.Team12.SSIS.Exceptions
 {
-    public class UserException : ApplicationException
+    public class UserException : ExceptionBase
     {
         public UserException(string message)
             : base(message)
