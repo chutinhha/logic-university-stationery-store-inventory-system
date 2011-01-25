@@ -16,82 +16,108 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class UserDAO : DALLogic
     {
-     /*
-        public void CreateUser(DAL.User user, MembershipUser membershipUser)
+        public List<User> FindUserByCriteria(DTO.UserSearchDTO criteria)
         {
             try
             {
-                Guid providerKey = (Guid)membershipUser.ProviderUserKey;
-                user.MembershipProviderKey = providerKey;
-
-                context.Users.AddObject(user);
-                context.SaveChanges();
+                // This seems so easy to me
+                var Query =
+                    from u in context.Users
+                    where u.UserID == (criteria.UserID == 0 ? u.UserID : criteria.UserID)
+                    && u.DepartmentID == (criteria.DepartmentID == 0 ? u.DepartmentID : criteria.DepartmentID)
+                    && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
+                    && u.MembershipProviderKey == (criteria.MembershipProviderKey == new Guid() ? u.MembershipProviderKey : criteria.MembershipProviderKey)
+                    && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
+                    && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
+                    && u.Email == (criteria.Email == null ? u.Email : criteria.Email)
+                    select u;
+                List<User> users = Query.ToList<User>();
+                return users;
             }
-            catch (MembershipCreateUserException exception)
+            catch (Exception)
             {
-                throw new Exceptions.UserException(exception.Message);
-            }
-            catch (MembershipPasswordException exception)
-            {
-                throw new Exceptions.UserException(exception.Message);
+                throw;
             }
         }
 
-        public void UpdateUser(User user)
+        public List<User> GetUserByDepartment(DAL.Department department)
         {
-            User tempUser = (from u in context.Users
-                             where u.UserID == user.UserID
-                             select u).FirstOrDefault();
-            if (tempUser != null)
+            // isn't it obvious?
+            List<User> users = FindUserByCriteria(new DTO.UserSearchDTO() { DepartmentID = department.DepartmentID });
+            return users;
+        }
+
+        public User GetUserByID(int UserID)
+        {
+            return (from u in context.Users
+                    where u.UserID == UserID
+                    select u).First<User>();
+        }
+
+        public User CreateUser(DAL.User user)
+        {
+            try
             {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Users.AddObject(user);
+                    context.SaveChanges();
+                    return user;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public User UpdateUser(DAL.User user)
+        {
+            try
+            {
+                // First will throw excpetion if no user is found
+                User tempUser = (from u in context.Users
+                                 where u.UserID == user.UserID
+                                 select u).First<User>();
+
+
                 tempUser.FirstName = user.FirstName;
                 tempUser.LastName = user.LastName;
                 tempUser.Email = user.Email;
 
-                context.Attach(user);
-                context.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
-                context.SaveChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempUser);
+                    context.ObjectStateManager.ChangeObjectState(tempUser, EntityState.Modified);
+                    context.SaveChanges();
+                    return tempUser;
+                }
             }
-            else
+            catch (Exception)
             {
-                throw new NullReferenceException("User not found!");
+                throw;
             }
         }
 
-        public void DeleteUser(string userName)
+        public void DeleteUser(User user)
         {
-            User user = (from u in context.Users
-                         where u.UserName.ToLower() == userName.ToLower()
-                         select u).FirstOrDefault();
-            if (user != null)
+            try
             {
+                User persistedUser = (from u in context.Users
+                                      where u.UserName.ToLower() == user.UserName.ToLower()
+                                      select u).FirstOrDefault();
+
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(user);
-                    context.Users.DeleteObject(user);
+                    context.Users.DeleteObject(persistedUser);
                     context.SaveChanges();
                     ts.Complete();
                 }
             }
-        }
-
-        public void DisableUser(string userName)
-        {
-            if ("administrator".CompareTo(userName.ToLower()) == 0)
+            catch (Exception)
             {
-                throw new Exceptions.UserException(@"Oh, ho! You are not allow to disable
-                    the almighty Administrator account!");
+                throw;
             }
-        }
-
-        public void GetUserByID()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void GetUserByProfile()
-        {
-            throw new System.NotImplementedException();
         }
 
         public List<Department> GetAllDepartment()
@@ -107,24 +133,70 @@ namespace SA33.Team12.SSIS.DAL
                     select d).FirstOrDefault();
         }
 
-        public void CreateDepartment()
+        public Department CreateDepartment(Department department)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Departments.AddObject(department);
+                    context.SaveChanges();
+                    return department;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public void UpdateDepartment()
+        public Department UpdateDepartment(Department department)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                Department persistedDepartment = (from d in context.Departments
+                                                  where d.DepartmentID == department.DepartmentID
+                                                  select d).First<Department>();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    persistedDepartment.Code = department.Code;
+                    persistedDepartment.Name = department.Name;
+                    persistedDepartment.isBlackListed = department.isBlackListed;
+
+                    CollectionPoint newCollectionPoint =
+                            (from c in context.CollectionPoints
+                             where c.CollectionPointID == department.CollectionPointID
+                             select c).First<CollectionPoint>();
+
+                    persistedDepartment.CollectionPoint = newCollectionPoint;
+                    context.SaveChanges();
+
+                    return persistedDepartment;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
-        public void DeleteDepartment()
+        public void DeleteDepartment(Department department)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public void GetDepartmentByUserID(string user)
         {
             throw new System.NotImplementedException();
-        }*/
+        }
     }
 }
