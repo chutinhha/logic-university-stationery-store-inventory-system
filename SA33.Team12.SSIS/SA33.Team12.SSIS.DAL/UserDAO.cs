@@ -12,7 +12,7 @@ using System.Data;
 using System.Transactions;
 using SA33.Team12.SSIS.DAL;
 
-namespace SA33.Team12.SSIS.BLL
+namespace SA33.Team12.SSIS.DAL
 {
     public class UserDAO : DALLogic
     {

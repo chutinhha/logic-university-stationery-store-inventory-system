@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 using SA33.Team12.SSIS.DAL;
 
-namespace SA33.Team12.SSIS.BLL
+namespace SA33.Team12.SSIS.DAL
 {
     public class StationeryRetrievalDAO : DALLogic
     {

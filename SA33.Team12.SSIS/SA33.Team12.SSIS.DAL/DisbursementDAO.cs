@@ -7,7 +7,7 @@ using System;
 using System.Web;
 using System.ComponentModel;
 
-namespace SA33.Team12.SSIS.BLL
+namespace SA33.Team12.SSIS.DAL
 {
     public class DisbursementDAO : DALLogic
     {

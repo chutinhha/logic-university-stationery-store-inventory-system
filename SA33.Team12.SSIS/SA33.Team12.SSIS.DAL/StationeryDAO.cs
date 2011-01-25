@@ -5,7 +5,7 @@ using System.Web;
 
 using SA33.Team12.SSIS;
 
-namespace SA33.Team12.SSIS.BLL
+namespace SA33.Team12.SSIS.DAL
 {
     public class StationeryDAO : DALLogic
     {
