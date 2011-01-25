@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using SA33.Team12.SSIS.DAL;
 
-namespace SA33.Team12.SSIS.BLL
+namespace SA33.Team12.SSIS.DAL
 {
     public abstract class DALLogic : IDisposable
     {
