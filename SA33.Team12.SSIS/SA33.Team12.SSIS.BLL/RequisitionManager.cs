@@ -9,8 +9,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
-using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -31,15 +29,14 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception ex)
             {
-                ExceptionManager exceptionManager = EnterpriseLibraryContainer.Current.GetInstance<ExceptionManager>();
-                exceptionManager.HandleException(ex, "Policy");
+                
             }
             
         }
 
         public void UpdateRequisitionStatus(Requisition requisition)
         {
-            requisitionDAO.UpdateRequisitionStatus(requisition);
+           //requisitionDAO.UpdateRequisitionStatus(requisition, status);
         }
 
         public void ApproveRequisition(Requisition requisition)
@@ -55,7 +52,7 @@ namespace SA33.Team12.SSIS.BLL
 
         public void CancelRequisition()
         {
-            requisitionDAO.CancelRequisition();
+            //requisitionDAO.CancelRequisition();
         }
 
         public void UpdateRequisition(Requisition requisition)
