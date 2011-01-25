@@ -23,7 +23,7 @@ namespace SA33.Team12.SSIS.BLL
             requisitionDAO = new RequisitionDAO();
         }
 
-        public void CreateRequisition(Requsition requisition)
+        public void CreateRequisition(Requisition requisition)
         {
             try
             {
@@ -37,19 +37,19 @@ namespace SA33.Team12.SSIS.BLL
             
         }
 
-        public void UpdateRequisitionStatus(Requsition requisition)
+        public void UpdateRequisitionStatus(Requisition requisition)
         {
             requisitionDAO.UpdateRequisitionStatus(requisition);
         }
 
-        public void ApproveRequisition(Requsition requisition)
+        public void ApproveRequisition(Requisition requisition)
         {
             requisitionDAO.ApproveRequisition(requisition);
         }
 
-        public void ApproveRequisition(List<Requsition> requisitions)
+        public void ApproveRequisition(List<Requisition> requisitions)
         {
-            foreach(Requsition req in requisitions)
+            foreach(Requisition req in requisitions)
             requisitionDAO.ApproveRequisition(req);
         }
 
@@ -58,7 +58,7 @@ namespace SA33.Team12.SSIS.BLL
             requisitionDAO.CancelRequisition();
         }
 
-        public void UpdateRequisition(Requsition requisition)
+        public void UpdateRequisition(Requisition requisition)
         {
             requisitionDAO.UpdateRequisition(requisition);
         }
