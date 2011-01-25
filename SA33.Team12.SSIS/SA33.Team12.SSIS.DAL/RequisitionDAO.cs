@@ -17,7 +17,7 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class RequisitionDAO : DALLogic
     {
-        public void CreateRequisition(Requsition requisition)
+        public void CreateRequisition(Requisition requisition)
         {
             try
             {                
@@ -31,17 +31,17 @@ namespace SA33.Team12.SSIS.DAL
             
         }
 
-        public void UpdateRequisitionStatus(Requsition requisition)
+        public void UpdateRequisitionStatus(Requisition requisition)
         {
             throw new System.NotImplementedException();
         }
 
-        public void ApproveRequisition(Requsition requisition)
+        public void ApproveRequisition(Requisition requisition)
         {
             throw new System.NotImplementedException();
         }
 
-        public void ApproveRequisition(List<Requsition> requisitions)
+        public void ApproveRequisition(List<Requisition> requisitions)
         {
             throw new System.NotImplementedException();
         }
@@ -51,7 +51,7 @@ namespace SA33.Team12.SSIS.DAL
             throw new System.NotImplementedException();
         }
 
-        public void UpdateRequisition(Requsition requisition)
+        public void UpdateRequisition(Requisition requisition)
         {
             throw new System.NotImplementedException();
         }
