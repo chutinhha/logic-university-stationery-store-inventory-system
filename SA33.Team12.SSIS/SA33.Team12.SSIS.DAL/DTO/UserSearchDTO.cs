@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SA33.Team12.SSIS.BLL.DTO
+namespace SA33.Team12.SSIS.DAL.DTO
 {
     public class UserSearchDTO
     {
