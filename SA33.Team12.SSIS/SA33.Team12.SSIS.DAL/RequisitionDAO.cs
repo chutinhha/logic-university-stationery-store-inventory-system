@@ -11,10 +11,11 @@ using System.ComponentModel;
 using SA33.Team12.SSIS.DAL;
 using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class RequisitionManager : SA33.Team12.SSIS.BLL.BusinessLogic
+    public class RequisitionDAO : DALLogic
     {
         public void CreateRequisition(Requsition requisition)
         {
@@ -55,17 +56,17 @@ namespace SA33.Team12.SSIS.BLL
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByCategory(Category category, DTO.RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByDepartment(Department department, DTO.RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }
 
-        public void GetRequisitionByEmployee(User user, DTO.RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
         {
             throw new System.NotImplementedException();
         }

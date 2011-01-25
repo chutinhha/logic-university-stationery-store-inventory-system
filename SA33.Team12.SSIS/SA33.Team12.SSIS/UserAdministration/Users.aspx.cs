@@ -36,7 +36,7 @@ namespace SA33.Team12.SSIS.UserAdministration
             {
                 using (BLL.UserManager um = new BLL.UserManager())
                 {
-                    um.DeleteUser(userName);
+                    //um.DeleteUser(userName);
                 }
                 Membership.DeleteUser(userName);
             }
@@ -55,7 +55,7 @@ namespace SA33.Team12.SSIS.UserAdministration
                         {
                             using (BLL.UserManager um = new BLL.UserManager())
                             {
-                                um.DisableUser(userName);
+                               // um.DisableUser(userName);
                             }
 
                             // probably good to have Membership BLL Layer to deal with this

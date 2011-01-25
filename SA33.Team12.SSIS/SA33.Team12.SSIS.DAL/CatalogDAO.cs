@@ -12,7 +12,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class CatalogManager:BusinessLogic
+    public class CatalogDAO:DALLogic
     {
         public List<Category> GetAllCategory()
         {
@@ -32,8 +32,10 @@ namespace SA33.Team12.SSIS.BLL
 
         public void UpdateCategory(Category category)
         {
-            this.context.Categories.Attach(category);
-            this.context.ObjectStateManager.ChangeObjectState(category, System.Data.EntityState.Modified);
+            Category tempCategory = (from s in context.Categories where s.CategoryID == category.CategoryID select s).FirstOrDefault<Category>();
+            {
+                tempCategory.Name = category.Name;                
+            }
             this.context.SaveChanges();
         }
 

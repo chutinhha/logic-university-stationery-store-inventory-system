@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SA33.Team12.SSIS.BLL;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -13,10 +14,10 @@ namespace SA33.Team12.SSIS.Test
         {
             if (!Page.IsPostBack)
             {
-                using (BLL.UserManager um = new BLL.UserManager())
+                using (UserManager um = new UserManager())
                 {
-                    this.UserGridView.DataSource = um.FindUserByCriteria(new BLL.DTO.UserSearchDTO());
-                    this.UserGridView.DataBind();
+                  //  this.UserGridView.DataSource = um.FindUserByCriteria(new BLL.DTO.UserSearchDTO());
+                  //  this.UserGridView.DataBind();
                 }
             }
         }

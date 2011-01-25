@@ -17,7 +17,7 @@ namespace SA33.Team12.SSIS.Utilities
                 WebSecurity.MembershipUser membershipUser = 
                     WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
 
-                um.CreateUser(user);
+                //um.CreateUser(user);
             }
         }
     }
