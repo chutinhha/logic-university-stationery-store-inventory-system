@@ -8,7 +8,7 @@ using System.Text;
 namespace SA33.Team12.SSIS.Exceptions
 {
     [Serializable]
-    class DisbursementException:ExceptionBase
+     public class DisbursementException:ExceptionBase
     {
         public DisbursementException(string message)
             : base(message)
