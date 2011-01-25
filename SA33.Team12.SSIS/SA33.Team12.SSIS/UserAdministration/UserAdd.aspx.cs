@@ -50,15 +50,15 @@ namespace SA33.Team12.SSIS.UserAdministration
                         user.FirstName = firstName;
                         user.LastName = lastName;
 
-                        DAL.Department department = um.GetDepartmentByID(departmentID);
-                        user.Department = department;
+                      //  DAL.Department department = um.GetDepartmentByID(departmentID);
+                      //  user.Department = department;
 
                         using (TransactionScope ts = new TransactionScope())
                         {
                             MembershipUser membershipUser = Membership.CreateUser(user.UserName,
                                     user.Password, user.Email);
 
-                            um.CreateUser(user);
+                        //    um.CreateUser(user);
                         }
 
                     }
@@ -85,8 +85,8 @@ namespace SA33.Team12.SSIS.UserAdministration
             {
                 this.DepartmentDropDownList.DataValueField = "DepartmentID";
                 this.DepartmentDropDownList.DataTextField = "Name";
-                this.DepartmentDropDownList.DataSource = um.GetAllDepartment();
-                this.DepartmentDropDownList.DataBind();
+              //  this.DepartmentDropDownList.DataSource = um.GetAllDepartment();
+               // this.DepartmentDropDownList.DataBind();
             }
         }
 

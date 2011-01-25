@@ -2,7 +2,7 @@
 using System.Web;
 using System.ComponentModel;
 
-namespace SA33.Team12.SSIS.BLL.DTO
+namespace SA33.Team12.SSIS.DAL.DTO
 {
     public class RequisitioinSearchDTO
     {

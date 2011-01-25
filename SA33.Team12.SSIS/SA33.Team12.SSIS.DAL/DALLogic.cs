@@ -11,16 +11,16 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public abstract class BusinessLogic : IDisposable
+    public abstract class DALLogic : IDisposable
     {
         protected StationeryEntities context;
 
-        protected BusinessLogic()
+        protected DALLogic()
         {
             this.context = new StationeryEntities();
         }
 
-        ~BusinessLogic()
+        ~DALLogic()
         {
             Dispose(false);
         }

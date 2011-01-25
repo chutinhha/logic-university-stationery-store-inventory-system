@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class StationeryRetrievalManager : BusinessLogic
+    public class StationeryRetrievalDAO : DALLogic
     {
         public void CreateStationeryRetrievalForm(StationeryRetrievalForm stationeryRetrievalForm)
         {

@@ -9,24 +9,24 @@ using System.ComponentModel;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class DisbursementManager : SA33.Team12.SSIS.BLL.BusinessLogic
+    public class PurchaseOrderDAO : DALLogic
     {
-        public void CreateDisbursement()
+        public void CreatePurchaseOrder()
         {
             throw new System.NotImplementedException();
         }
 
-        public void CreateDisbursementFromSRF()
+        public void UpdatePurchaseOrder()
         {
             throw new System.NotImplementedException();
         }
 
-        public void CancelDisbursement()
+        public void ApprovePurchaseOrder()
         {
             throw new System.NotImplementedException();
         }
 
-        public void UpdateDisbursement()
+        public void CreateDeliveryOrder()
         {
             throw new System.NotImplementedException();
         }

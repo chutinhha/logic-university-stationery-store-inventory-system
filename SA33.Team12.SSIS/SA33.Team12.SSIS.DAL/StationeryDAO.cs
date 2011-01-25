@@ -7,7 +7,7 @@ using SA33.Team12.SSIS;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class StationeryManager : BusinessLogic
+    public class StationeryDAO : DALLogic
     {
         /***
          * this is a sample do not use this
