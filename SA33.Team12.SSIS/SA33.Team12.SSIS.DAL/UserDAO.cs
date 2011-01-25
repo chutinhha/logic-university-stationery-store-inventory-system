@@ -61,6 +61,7 @@ namespace SA33.Team12.SSIS.DAL
                 {
                     context.Users.AddObject(user);
                     context.SaveChanges();
+                    ts.Complete();
                     return user;
                 }
             }
@@ -89,6 +90,7 @@ namespace SA33.Team12.SSIS.DAL
                     context.Attach(tempUser);
                     context.ObjectStateManager.ChangeObjectState(tempUser, EntityState.Modified);
                     context.SaveChanges();
+                    ts.Complete();
                     return tempUser;
                 }
             }
@@ -140,6 +142,7 @@ namespace SA33.Team12.SSIS.DAL
                 {
                     context.Departments.AddObject(department);
                     context.SaveChanges();
+                    ts.Complete();
                     return department;
                 }
             }
@@ -169,7 +172,7 @@ namespace SA33.Team12.SSIS.DAL
 
                     persistedDepartment.CollectionPoint = newCollectionPoint;
                     context.SaveChanges();
-
+                    ts.Complete();
                     return persistedDepartment;
                 }
             }
