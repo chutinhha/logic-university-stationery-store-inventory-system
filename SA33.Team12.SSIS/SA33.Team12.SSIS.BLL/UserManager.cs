@@ -13,11 +13,18 @@ using System.Web.Security;
 
 using System.Transactions;
 using SA33.Team12.SSIS.DAL;
-
+using SA33.Team12.SSIS.DAL.DTO;
 namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
     {
+        public List<User> FindUserByCriteria(UserSearchDTO criteria)
+        {
+            using (UserDAO udao = new UserDAO())
+            {
+                return udao.FindUserByCriteria(criteria);
+            }
+        }
 
         public User DisableUser(User user)
         {

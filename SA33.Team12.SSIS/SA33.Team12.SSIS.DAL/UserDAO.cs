@@ -26,8 +26,8 @@ namespace SA33.Team12.SSIS.DAL
                     && u.DepartmentID == (criteria.DepartmentID == 0 ? u.DepartmentID : criteria.DepartmentID)
                     && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
                     && u.MembershipProviderKey == (criteria.MembershipProviderKey == new Guid() ? u.MembershipProviderKey : criteria.MembershipProviderKey)
-                    && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
-                    && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
+                    && u.FirstName.Contains((criteria.FirstName == null || criteria.FirstName == "" ? u.FirstName : criteria.FirstName))
+                    && u.LastName.Contains((criteria.LastName == null || criteria.LastName == "" ? u.LastName : criteria.LastName))
                     && u.Email == (criteria.Email == null ? u.Email : criteria.Email)
                     select u;
                 List<User> users = Query.ToList<User>();

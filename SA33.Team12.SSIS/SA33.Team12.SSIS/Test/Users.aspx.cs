@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
+using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -14,12 +16,43 @@ namespace SA33.Team12.SSIS.Test
         {
             if (!Page.IsPostBack)
             {
-                using (UserManager um = new UserManager())
-                {
-                  //  this.UserGridView.DataSource = um.FindUserByCriteria(new BLL.DTO.UserSearchDTO());
-                  //  this.UserGridView.DataBind();
-                }
+                LoadUserGridView();
             }
+        }
+
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            // Create filter
+            UserSearchDTO criteria = new UserSearchDTO();
+
+            // set filter from ui controls
+            criteria.FirstName = this.FirstNameTextBox.Text;
+            criteria.LastName = this.LastNameTextBox.Text;
+            using (UserManager um = new UserManager())
+            {
+                // get users by fileter
+                List<User> users = um.FindUserByCriteria(criteria);
+                this.UserGridView.DataSource = users;
+                this.UserGridView.DataBind();
+
+            }
+        }
+
+        protected void LoadUserGridView()
+        {
+            using (UserManager um = new UserManager())
+            {
+                List<User> users = um.FindUserByCriteria(new UserSearchDTO());
+                this.UserGridView.DataSource = users;
+                this.UserGridView.DataBind();
+            }
+        }
+
+        protected void ShowAllButton_Click(object sender, EventArgs e)
+        {
+            this.FirstNameTextBox.Text = "";
+            this.LastNameTextBox.Text = "";
+            LoadUserGridView();
         }
     }
 }
