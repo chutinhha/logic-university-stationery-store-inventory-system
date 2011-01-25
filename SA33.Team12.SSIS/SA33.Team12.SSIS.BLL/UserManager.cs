@@ -17,7 +17,29 @@ using SA33.Team12.SSIS.DAL;
 namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
-    {/*
+    {
+
+        public User DisableUser(User user)
+        {
+            if ("administrator".CompareTo(user.UserName.ToLower()) == 0)
+            {
+                throw new Exceptions.UserException(@"Oh, ho! You are not allow to disable
+                    the almighty Administrator account!");
+            }
+            return user;
+        }
+
+        public User EnableUser(User user)
+        {
+            if ("administrator".CompareTo(user.UserName.ToLower()) == 0)
+            {
+                throw new Exceptions.UserException(@"Oh, ho! You are not allow to enable
+                    the almighty Administrator account!");
+            }
+            return user;
+        }
+
+        /*
         public User GetUserByMemberShip(MembershipUser membershipUser)
         {
             Guid providerKey = (Guid)membershipUser.ProviderUserKey;

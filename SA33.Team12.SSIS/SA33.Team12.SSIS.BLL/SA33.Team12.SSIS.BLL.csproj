@@ -36,31 +36,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.Interception">
-      <HintPath>..\..\..\..\..\..\..\EntLib50Src\bin\Microsoft.Practices.Unity.Interception.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
