@@ -100,13 +100,11 @@
     <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="StationeryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StationeryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SA33.Team12.SSIS.Exceptions\SA33.Team12.SSIS.Exceptions.csproj">
