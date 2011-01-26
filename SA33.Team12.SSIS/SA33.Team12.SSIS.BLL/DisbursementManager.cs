@@ -22,7 +22,7 @@ namespace SA33.Team12.SSIS.BLL
 
         public void CreateDisbursement(Disbursement disbursement)
         {
-            disbursementDAO.CancelDisbursement();
+            disbursementDAO.CreateDisbursement(disbursement);
         }
 
         public void CreateDisbursementFromSRF()
@@ -35,9 +35,9 @@ namespace SA33.Team12.SSIS.BLL
             disbursementDAO.CancelDisbursement();
         }
 
-        public void UpdateDisbursement()
+        public void UpdateDisbursement(Disbursement disbursement,int newQuantity)
         {
-            disbursementDAO.UpdateDisbursement();
+            disbursementDAO.UpdateDisbursementQuantity(disbursement,newQuantity);
         }
     }
 }
