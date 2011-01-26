@@ -40,5 +40,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             purchaseOrderDAO.DeletePurchaseOrder(po);
         }
+
+        public List<PurchaseOrder> FindAllPurchaseOrder()
+        {
+            return purchaseOrderDAO.GetAllPurchaseOrder();
+        }
     }
 }
