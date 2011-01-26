@@ -5,8 +5,10 @@
 
 using System;
 using System.Web;
+using System.Collections.Generic;
 using System.ComponentModel;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -27,6 +29,16 @@ namespace SA33.Team12.SSIS.BLL
         public PurchaseOrder UpdatePurchaseOrder(PurchaseOrder po)
         {
             return purchaseOrderDAO.UpdatePurchaseOrder(po);
+        }
+
+        public List<PurchaseOrder> FindPurchaseOrderByCriteria(PurchaseOrderSearchDTO poSearchDTO)
+        {
+            return purchaseOrderDAO.FindPurchaseOrderByCriteria(poSearchDTO);
+        }
+
+        public void DeletePurchaseOrder(PurchaseOrder po)
+        {
+            purchaseOrderDAO.DeletePurchaseOrder(po);
         }
     }
 }
