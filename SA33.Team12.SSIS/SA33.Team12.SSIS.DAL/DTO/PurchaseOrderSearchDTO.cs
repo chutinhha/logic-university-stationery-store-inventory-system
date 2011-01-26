@@ -17,5 +17,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public String DONumber { get; set; }
         public String DateReceived { get; set; }
         public DateTime ReceiveBy { get; set; }
+        public Boolean IsDelivered { get; set; }
     }
 }
