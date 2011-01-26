@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SA33.Team12.SSIS.DAL.DTO
 {
-    class PurchaseOrderSearchDTO
+   public class PurchaseOrderSearchDTO
     {
         public int PurchaseOrderID { get; set; }
         public int SupplierID { get; set; }
