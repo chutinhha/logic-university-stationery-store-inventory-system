@@ -19,24 +19,14 @@ namespace SA33.Team12.SSIS.BLL
             purchaseOrderDAO = new PurchaseOrderDAO();
         }
 
-        public void CreatePurchaseOrder()
+        public PurchaseOrder CreatePurchaseOrder(PurchaseOrder po)
         {
-            purchaseOrderDAO.CreatePurchaseOrder();
+            return purchaseOrderDAO.CreatePurchaseOrder(po);
         }
 
-        public void UpdatePurchaseOrder()
+        public PurchaseOrder UpdatePurchaseOrder(PurchaseOrder po)
         {
-            purchaseOrderDAO.UpdatePurchaseOrder();
-        }
-
-        public void ApprovePurchaseOrder()
-        {
-            purchaseOrderDAO.ApprovePurchaseOrder();
-        }
-
-        public void CreateDeliveryOrder()
-        {
-            purchaseOrderDAO.CreatePurchaseOrder();
+            return purchaseOrderDAO.UpdatePurchaseOrder(po);
         }
     }
 }
