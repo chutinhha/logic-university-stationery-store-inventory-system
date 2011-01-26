@@ -9391,7 +9391,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy1", "SpecialStationery")]
-        public EntityCollection<SpecialStationery> CratedSpecialStationeries
+        public EntityCollection<SpecialStationery> CreatedSpecialStationeries
         {
             get
             {

@@ -1878,7 +1878,7 @@
           <NavigationProperty Name="CreatedStationeries" Relationship="SA33.Team12.SSIS.Model.Stationery_Created_By" FromRole="Users" ToRole="Stationeries" />
           <NavigationProperty Name="ModifiedStationeries" Relationship="SA33.Team12.SSIS.Model.Stationery_Modified_By" FromRole="Users" ToRole="Stationeries" />
           <NavigationProperty Name="StationeryRetrievalForms" Relationship="SA33.Team12.SSIS.Model.Stationery_RetrievedBy" FromRole="Users" ToRole="StationeryRetrievalForms" />
-          <NavigationProperty Name="CratedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="User" ToRole="SpecialStationery" />
+          <NavigationProperty Name="CreatedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="User" ToRole="SpecialStationery" />
           <NavigationProperty Name="ApprovedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1" FromRole="User" ToRole="SpecialStationery" />
           <NavigationProperty Name="ModifiedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1" FromRole="User" ToRole="SpecialStationery" />
         </EntityType>
