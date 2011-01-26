@@ -54,7 +54,10 @@
     <Compile Include="CatalogDAO.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="DTO\AdjustmentVoucherTransactionSearchDTO.cs" />
+    <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
     <Compile Include="PurchaseOrder.cs" />
+    <Compile Include="PurchaseOrderItem.cs" />
+    <Compile Include="PurchaseOrderItemDAO.cs" />
     <Compile Include="Requisition.cs" />
     <Compile Include="DALLogic.cs" />
     <Compile Include="DisbursementDAO.cs" />
