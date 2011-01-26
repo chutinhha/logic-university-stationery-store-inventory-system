@@ -42,7 +42,7 @@ namespace SA33.Team12.SSIS.DAL
                 //Add special requisition items to context
                 foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
                 {
-                    context.AddToSpeicalStationeries(splItem.SpeicalStationery);
+                    context.AddToSpecialStationeries(splItem.SpecialStationery);
                     context.AddToSpecialRequisitionItems(splItem);
                 }
 
@@ -241,17 +241,17 @@ namespace SA33.Team12.SSIS.DAL
                 {
                     tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
                 }
-                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null)
+                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
                 {
                     tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
                 }
 
-                if (requisitioinSearchDTO.StartDateRequested != null)
+                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue)
                 {
                     tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
                 }
 
-                if (requisitioinSearchDTO.EndDateRequested != null)
+                if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
                 {
                     tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
                 }               
