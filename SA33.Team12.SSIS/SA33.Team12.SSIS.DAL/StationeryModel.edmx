@@ -1878,9 +1878,9 @@
           <NavigationProperty Name="CreatedStationeries" Relationship="SA33.Team12.SSIS.Model.Stationery_Created_By" FromRole="Users" ToRole="Stationeries" />
           <NavigationProperty Name="ModifiedStationeries" Relationship="SA33.Team12.SSIS.Model.Stationery_Modified_By" FromRole="Users" ToRole="Stationeries" />
           <NavigationProperty Name="StationeryRetrievalForms" Relationship="SA33.Team12.SSIS.Model.Stationery_RetrievedBy" FromRole="Users" ToRole="StationeryRetrievalForms" />
-          <NavigationProperty Name="SpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="User" ToRole="SpecialStationery" />
-          <NavigationProperty Name="SpecialStationeries1" Relationship="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1" FromRole="User" ToRole="SpecialStationery" />
-          <NavigationProperty Name="SpecialStationeries2" Relationship="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1" FromRole="User" ToRole="SpecialStationery" />
+          <NavigationProperty Name="CratedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="User" ToRole="SpecialStationery" />
+          <NavigationProperty Name="ApprovedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1" FromRole="User" ToRole="SpecialStationery" />
+          <NavigationProperty Name="ModifiedSpecialStationeries" Relationship="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1" FromRole="User" ToRole="SpecialStationery" />
         </EntityType>
         <Association Name="AdjustmentVoucher_ApprovedBy">
           <End Role="Users" Type="SA33.Team12.SSIS.Model.User" Multiplicity="0..1" />
@@ -2455,9 +2455,9 @@
           <NavigationProperty Name="SpecialRequisitionItems" Relationship="SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1" FromRole="SpecialStationery" ToRole="SpecialRequisitionItem" />
           <NavigationProperty Name="StationeryRetrievalFormItems" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1" FromRole="SpecialStationery" ToRole="StationeryRetrievalFormItem" />
           <NavigationProperty Name="StockLogs" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1" FromRole="SpecialStationery" ToRole="StockLog" />
-          <NavigationProperty Name="User" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="SpecialStationery" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1" FromRole="SpecialStationery" ToRole="User" />
-          <NavigationProperty Name="User2" Relationship="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="CreatedByUser" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="ApprovedByUser" Relationship="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="ModifiedByUser" Relationship="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1" FromRole="SpecialStationery" ToRole="User" />
         </EntityType>
         <Association Name="Categories_SpecialStationeries_FK1">
           <End Type="SA33.Team12.SSIS.Model.Category" Role="Category" Multiplicity="1" />
