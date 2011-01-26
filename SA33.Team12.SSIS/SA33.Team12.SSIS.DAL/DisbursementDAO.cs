@@ -32,7 +32,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public void CreateDisbursementFromSRF()
+        public Disbursement CreateDisbursementFromSRF(StationeryRetrievalForm SRF)
         {
             throw new System.NotImplementedException();
         }
