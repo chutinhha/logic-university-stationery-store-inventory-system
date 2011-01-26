@@ -83,11 +83,43 @@ namespace SA33.Team12.SSIS.DAL
             return (from s in context.StockLogs select s).ToList<DAL.StockLog>();
         }
 
-        //Need to FindByCriteria & GetByID for both Temp and Actual
-
-        public List<AdjustmentVoucherTransaction> FindAdjustmentVoucherTransactionsByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        //Need to FindByCriteria Temp
+        public List<AdjustmentVoucherTransaction> FindAdjustmentVoucherTransactionsByCriteria(AdjustmentVoucherTransactionSearchDTO adjustmentVoucherTransactionSearchDTO)
         {
             var tempQuery = (from r in context.AdjustmentVoucherTransactions
+                             where 1 == 1
+                             select r);
+
+            if (adjustmentVoucherTransactionSearchDTO != null)
+            {
+                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID != -1)
+                {
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID);
+                }
+                if (adjustmentVoucherTransactionSearchDTO.StartDate != null && adjustmentVoucherTransactionSearchDTO.EndDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued >= adjustmentVoucherTransactionSearchDTO.StartDate && r.DateIssued <= adjustmentVoucherTransactionSearchDTO.EndDate);
+                }
+
+                if (adjustmentVoucherTransactionSearchDTO.StartDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued == adjustmentVoucherTransactionSearchDTO.StartDate);
+                }
+
+                if (adjustmentVoucherTransactionSearchDTO.EndDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued == adjustmentVoucherTransactionSearchDTO.EndDate);
+                }
+            }
+
+            return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
+
+        }
+
+        //Need to FindByCriteria Actual
+        public List<AdjustmentVoucher> FindAdjustmentVoucherByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        {
+            var tempQuery = (from r in context.AdjustmentVouchers
                              where 1 == 1
                              select r);
 
@@ -95,7 +127,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 if (adjustmentVoucherSearchDTO.AdjustmentVoucherID != -1)
                 {
-                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
                 }
                 if (adjustmentVoucherSearchDTO.StartDate != null && adjustmentVoucherSearchDTO.EndDate != null)
                 {
@@ -113,8 +145,7 @@ namespace SA33.Team12.SSIS.DAL
                 }
             }
 
-            return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
-
+            return (from q in tempQuery select q).ToList<AdjustmentVoucher>();
         }
 
 
