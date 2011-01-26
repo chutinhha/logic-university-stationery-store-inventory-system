@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Transactions;
 using SA33.Team12.SSIS;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -28,6 +29,7 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception ex)
             {
+                //To be continued
                 throw ex;
             }
         }
@@ -63,15 +65,58 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception ex)
             {
+                //To be continued
                 throw ex;
             }
         }
 
 
-        public List<DAL.StockLogTransaction> GetAllStockLogTransaction()
+        //To get All from the Temp StockLogTransactions 
+        public List<DAL.StockLogTransaction> GetAllStockLogTransactionTemp()
         {
             return (from s in context.StockLogTransactions select s).ToList<DAL.StockLogTransaction>();
         }
+
+        //To get All from the Actual StockLogs 
+        public List<DAL.StockLog> GetAllStockLogTransactionActual()
+        {
+            return (from s in context.StockLogs select s).ToList<DAL.StockLog>();
+        }
+
+        //Need to FindByCriteria & GetByID for both Temp and Actual
+
+        public List<AdjustmentVoucherTransaction> FindAdjustmentVoucherTransactionsByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        {
+            var tempQuery = (from r in context.AdjustmentVoucherTransactions
+                             where 1 == 1
+                             select r);
+
+            if (adjustmentVoucherSearchDTO != null)
+            {
+                if (adjustmentVoucherSearchDTO.AdjustmentVoucherID != -1)
+                {
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
+                }
+                if (adjustmentVoucherSearchDTO.StartDate != null && adjustmentVoucherSearchDTO.EndDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued >= adjustmentVoucherSearchDTO.StartDate && r.DateIssued <= adjustmentVoucherSearchDTO.EndDate);
+                }
+
+                if (adjustmentVoucherSearchDTO.StartDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued == adjustmentVoucherSearchDTO.StartDate);
+                }
+
+                if (adjustmentVoucherSearchDTO.EndDate != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateIssued == adjustmentVoucherSearchDTO.EndDate);
+                }
+            }
+
+            return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
+
+        }
+
 
         //Do we want to allow the user to modify the "Adjust Inventory after he has created it?"
         // the Temp Tables AjustmentVoucherTransactions and StockLog =Transactions only has "Create" Method without delete or anything else"
@@ -80,14 +125,19 @@ namespace SA33.Team12.SSIS.DAL
             DAL.StockLogTransaction tempStockLogTransaction = (from s in context.StockLogTransactions
                                                                                  where s.StockLogTransactionID == adjustmentVoucher.StockLogTransactionID
                                              select s).FirstOrDefault<DAL.StockLogTransaction>();
-            //tempStockLogTransaction.Type = StockLogTransaction.Type;
+            //tempStockLogTransaction.Type = StockLogTransactions.Type;
             //tempStockLogTransaction.Reason = StockLogTransaction.Reason;
             //tempStockLogTransaction.Quantity = StockLogTransaction.Quantity;
             //tempStockLogTransaction.Balance = StockLogTransaction.Balance;
-            context.ObjectStateManager.ChangeObjectState(tempStockLogTransaction, System.Data.EntityState.Modified);
-            context.SaveChanges();
+            //context.ObjectStateManager.ChangeObjectState(tempStockLogTransaction, System.Data.EntityState.Modified);
+            //context.SaveChanges();
         }
 
+
+
+
+
+        //To Delete from Temp StockLogTransactions those orders that has not yet been approved
         public void DeleteStockLogTransaction(DAL.StockLogTransaction adjustmentVoucher)
         {
             context.StockLogTransactions.Attach(adjustmentVoucher);
