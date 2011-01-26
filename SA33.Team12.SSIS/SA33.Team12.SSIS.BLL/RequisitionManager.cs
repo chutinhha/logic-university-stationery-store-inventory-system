@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -27,9 +28,9 @@ namespace SA33.Team12.SSIS.BLL
             {
                 requisitionDAO.CreateRequisition(requisition);                
             }
-            catch (Exception ex)
+            catch (RequisitionException ex)
             {
-                
+                throw new ApplicationException("Requisition creation Failed");
             }
             
         }
@@ -62,17 +63,17 @@ namespace SA33.Team12.SSIS.BLL
 
         public void GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
         {
-            requisitionDAO.GetRequisitionByCategory(category, requisitionSearchDTO);
+            //requisitionDAO.GetRequisitionByCategory(category, requisitionSearchDTO);
         }
 
         public void GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
         {
-            requisitionDAO.GetRequisitionByDepartment(department, requisitionSearchDTO);
+            //requisitionDAO.GetRequisitionByDepartment(department, requisitionSearchDTO);
         }
 
         public void GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
         {
-            requisitionDAO.GetRequisitionByEmployee(user, requisitionSearchDTO);
+            //requisitionDAO.GetRequisitionByEmployee(user, requisitionSearchDTO);
         }
 
            /// <summary>

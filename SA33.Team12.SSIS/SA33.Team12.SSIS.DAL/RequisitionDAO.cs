@@ -190,7 +190,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -201,7 +201,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -212,9 +212,46 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
+        }
+
+        /// <summary>
+        /// Find the requisition by search criteria
+        /// </summary>
+        /// <param name="requisitioinSearchDTO">requisitioinSearchDTO object</param>
+        /// <returns></returns>
+        public List<Requisition> FindRequisitionByCriteria(RequisitioinSearchDTO requisitioinSearchDTO)
+        {
+            var tempQuery = (from r in context.Requisitions
+                        where 1 == 1 select r);
+
+            if (requisitioinSearchDTO != null)
+            {
+                if (requisitioinSearchDTO.RequisitionID != -1)
+                {
+                    tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
+                }
+                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
+                }
+
+                if (requisitioinSearchDTO.StartDateRequested != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
+                }
+
+                if (requisitioinSearchDTO.EndDateRequested != null)
+                {
+                    tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
+                }               
+            }
+
+            return (from q in tempQuery select q).ToList<Requisition>() ;
+            
+ 
         }
 
         /// <summary>
@@ -227,5 +264,6 @@ namespace SA33.Team12.SSIS.DAL
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
         }
+
     }
 }
