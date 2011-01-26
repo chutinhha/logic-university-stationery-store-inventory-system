@@ -54,6 +54,9 @@
     <Compile Include="DALLogic.cs" />
     <Compile Include="DisbursementDAO.cs" />
     <Compile Include="DTO\AdjustmentVoucherSearchDTO.cs" />
+    <Compile Include="DTO\BlackListLogSearchDTO.cs" />
+    <Compile Include="DTO\CollectionPoint.cs" />
+    <Compile Include="DTO\DepartmentSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderSearchDTO.cs" />
     <Compile Include="DTO\RequisitioinSearchDTO.cs" />
     <Compile Include="DTO\UserSearchDTO.cs" />

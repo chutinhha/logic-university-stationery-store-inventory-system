@@ -31,7 +31,7 @@ namespace SA33.Team12.SSIS.Test
             using (UserManager um = new UserManager())
             {
                 // get users by fileter
-                List<User> users = um.FindUserByCriteria(criteria);
+                List<User> users = um.FindUsersByCriteria(criteria);
                 this.UserGridView.DataSource = users;
                 this.UserGridView.DataBind();
 
@@ -42,7 +42,7 @@ namespace SA33.Team12.SSIS.Test
         {
             using (UserManager um = new UserManager())
             {
-                List<User> users = um.FindUserByCriteria(new UserSearchDTO());
+                List<User> users = um.FindUsersByCriteria(new UserSearchDTO());
                 this.UserGridView.DataSource = users;
                 this.UserGridView.DataBind();
             }
