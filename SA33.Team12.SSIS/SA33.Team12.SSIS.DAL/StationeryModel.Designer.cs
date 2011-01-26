@@ -25,7 +25,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "AdjustmentVoucherTransactions_StockLogTransactions", "AdjustmentVoucherTransactions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.AdjustmentVoucherTransaction), "StockLogTransactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "ApprovalAudits_MadeBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "ApprovalAudits", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.ApprovalAudit), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_BlacklistLogs", "Departments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Department), "BlacklistLogs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.BlacklistLog), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Categories_SpeicalStationeries_FK1", "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Category), "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Categories_Stationeries_FK1", "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Category), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
@@ -35,7 +34,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_Requisitions_FK1", "Departments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Department), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "User_In_Department", "Departments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Department), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.User), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Disbursements_DisbursementItems_FK1", "Disbursements", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Disbursement), "DisbursementItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), "DisbursementItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_DisbursementItems_FK1", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "DisbursementItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalFormItemByDepts_DisbursementItems_FK1", "StationeryRetrievalFormItemByDepts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItemByDept), "DisbursementItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Disbursement_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Disbursements", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
@@ -56,12 +54,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisitions_StationeryRetrievalFormByRequisitions_FK1", "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), "StationeryRetrievalFormByRequisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormByRequisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_Of_Requisitions", "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), "SpecialRequisitionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialRequisitionItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Urgencies_Requisitions_FK1", "Urgencies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Urgency), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), "SpecialRequisitionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialRequisitionItem), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), "StockLogs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLog), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpeicalStationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpeicalStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StationeryRetrievalFormItems_FK1", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogs", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLog), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
@@ -72,6 +64,15 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_StationeryRetrievalFormItems_FK1", "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_RetrievedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Categories_SpecialStationeries_FK1", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Category), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_DisbursementItems_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "DisbursementItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "SpecialRequisitionItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialRequisitionItem), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "StationeryRetrievalFormItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogs_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "StockLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLog), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
 
 #endregion
 
@@ -382,22 +383,6 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SpeicalStationery> SpeicalStationeries
-        {
-            get
-            {
-                if ((_SpeicalStationeries == null))
-                {
-                    _SpeicalStationeries = base.CreateObjectSet<SpeicalStationery>("SpeicalStationeries");
-                }
-                return _SpeicalStationeries;
-            }
-        }
-        private ObjectSet<SpeicalStationery> _SpeicalStationeries;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Stationery> Stationeries
         {
             get
@@ -570,6 +555,22 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SpecialStationery> SpecialStationeries
+        {
+            get
+            {
+                if ((_SpecialStationeries == null))
+                {
+                    _SpecialStationeries = base.CreateObjectSet<SpecialStationery>("SpecialStationeries");
+                }
+                return _SpecialStationeries;
+            }
+        }
+        private ObjectSet<SpecialStationery> _SpecialStationeries;
 
         #endregion
         #region AddTo Methods
@@ -703,14 +704,6 @@ namespace SA33.Team12.SSIS.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SpeicalStationeries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSpeicalStationeries(SpeicalStationery speicalStationery)
-        {
-            base.AddObject("SpeicalStationeries", speicalStationery);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Stationeries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToStationeries(Stationery stationery)
@@ -796,6 +789,14 @@ namespace SA33.Team12.SSIS.DAL
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SpecialStationeries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSpecialStationeries(SpecialStationery specialStationery)
+        {
+            base.AddObject("SpecialStationeries", specialStationery);
         }
 
         #endregion
@@ -1881,28 +1882,6 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Categories_SpeicalStationeries_FK1", "SpeicalStationeries")]
-        public EntityCollection<SpeicalStationery> SpeicalStationeries
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Categories_Stationeries_FK1", "Stationeries")]
         public EntityCollection<Stationery> Stationeries
         {
@@ -2029,6 +2008,28 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.Category_Modified_By", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Categories_SpecialStationeries_FK1", "SpecialStationery")]
+        public EntityCollection<SpecialStationery> SpecialStationeries
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "SpecialStationery", value);
                 }
             }
         }
@@ -2185,7 +2186,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="collectionPointID">Initial value of the CollectionPointID property.</param>
         /// <param name="code">Initial value of the Code property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="isBlackListed">Initial value of the isBlackListed property.</param>
+        /// <param name="isBlackListed">Initial value of the IsBlackListed property.</param>
         public static Department CreateDepartment(global::System.Int32 departmentID, global::System.Int32 collectionPointID, global::System.String code, global::System.String name, global::System.Boolean isBlackListed)
         {
             Department department = new Department();
@@ -2193,7 +2194,7 @@ namespace SA33.Team12.SSIS.DAL
             department.CollectionPointID = collectionPointID;
             department.Code = code;
             department.Name = name;
-            department.isBlackListed = isBlackListed;
+            department.IsBlackListed = isBlackListed;
             return department;
         }
 
@@ -2304,24 +2305,24 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean isBlackListed
+        public global::System.Boolean IsBlackListed
         {
             get
             {
-                return _isBlackListed;
+                return _IsBlackListed;
             }
             set
             {
-                OnisBlackListedChanging(value);
-                ReportPropertyChanging("isBlackListed");
-                _isBlackListed = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("isBlackListed");
-                OnisBlackListedChanged();
+                OnIsBlackListedChanging(value);
+                ReportPropertyChanging("IsBlackListed");
+                _IsBlackListed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsBlackListed");
+                OnIsBlackListedChanged();
             }
         }
-        private global::System.Boolean _isBlackListed;
-        partial void OnisBlackListedChanging(global::System.Boolean value);
-        partial void OnisBlackListedChanged();
+        private global::System.Boolean _IsBlackListed;
+        partial void OnIsBlackListedChanging(global::System.Boolean value);
+        partial void OnIsBlackListedChanged();
 
         #endregion
     
@@ -2961,44 +2962,6 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries")]
-        public SpeicalStationery SpeicalStationery
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SpeicalStationery> SpeicalStationeryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationeries_DisbursementItems_FK1", "Stationeries")]
         public Stationery Stationery
         {
@@ -3065,6 +3028,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StationeryRetrievalFormItemByDept>("SA33.Team12.SSIS.Model.StationeryRetrievalFormItemByDepts_DisbursementItems_FK1", "StationeryRetrievalFormItemByDepts", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_DisbursementItems_FK1", "SpecialStationery")]
+        public SpecialStationery SpecialStationery
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "SpecialStationery").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "SpecialStationery").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SpecialStationery> SpecialStationeryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "SpecialStationery", value);
                 }
             }
         }
@@ -5261,16 +5262,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries")]
-        public SpeicalStationery SpeicalStationery
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery")]
+        public SpecialStationery SpecialStationery
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery").Value = value;
             }
         }
         /// <summary>
@@ -5278,17 +5279,17 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<SpeicalStationery> SpeicalStationeryReference
+        public EntityReference<SpecialStationery> SpecialStationeryReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpeicalStationeries", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialStationery", value);
                 }
             }
         }
@@ -5299,15 +5300,15 @@ namespace SA33.Team12.SSIS.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="SpeicalStationery")]
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="SpecialStationery")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SpeicalStationery : EntityObject
+    public partial class SpecialStationery : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new SpeicalStationery object.
+        /// Create a new SpecialStationery object.
         /// </summary>
         /// <param name="speicalStationeryID">Initial value of the SpeicalStationeryID property.</param>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
@@ -5318,19 +5319,19 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="categoryID">Initial value of the CategoryID property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        public static SpeicalStationery CreateSpeicalStationery(global::System.Int32 speicalStationeryID, global::System.String itemCode, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 categoryID, global::System.Boolean isApproved)
+        public static SpecialStationery CreateSpecialStationery(global::System.Int32 speicalStationeryID, global::System.String itemCode, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 categoryID, global::System.Boolean isApproved)
         {
-            SpeicalStationery speicalStationery = new SpeicalStationery();
-            speicalStationery.SpeicalStationeryID = speicalStationeryID;
-            speicalStationery.ItemCode = itemCode;
-            speicalStationery.Quantity = quantity;
-            speicalStationery.DateCreated = dateCreated;
-            speicalStationery.DateModified = dateModified;
-            speicalStationery.CreatedBy = createdBy;
-            speicalStationery.ModifiedBy = modifiedBy;
-            speicalStationery.CategoryID = categoryID;
-            speicalStationery.IsApproved = isApproved;
-            return speicalStationery;
+            SpecialStationery specialStationery = new SpecialStationery();
+            specialStationery.SpeicalStationeryID = speicalStationeryID;
+            specialStationery.ItemCode = itemCode;
+            specialStationery.Quantity = quantity;
+            specialStationery.DateCreated = dateCreated;
+            specialStationery.DateModified = dateModified;
+            specialStationery.CreatedBy = createdBy;
+            specialStationery.ModifiedBy = modifiedBy;
+            specialStationery.CategoryID = categoryID;
+            specialStationery.IsApproved = isApproved;
+            return specialStationery;
         }
 
         #endregion
@@ -5637,16 +5638,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Categories_SpeicalStationeries_FK1", "Categories")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Categories_SpecialStationeries_FK1", "Category")]
         public Category Category
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "Categories").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "Category").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "Categories").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "Category").Value = value;
             }
         }
         /// <summary>
@@ -5658,13 +5659,13 @@ namespace SA33.Team12.SSIS.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "Categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "Category");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1", "Categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Category>("SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1", "Category", value);
                 }
             }
         }
@@ -5675,18 +5676,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_DisbursementItems_FK1", "DisbursementItems")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_DisbursementItems_FK1", "DisbursementItem")]
         public EntityCollection<DisbursementItem> DisbursementItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DisbursementItem>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "DisbursementItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DisbursementItem>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "DisbursementItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DisbursementItem>("SA33.Team12.SSIS.Model.SpeicalStationeries_DisbursementItems_FK1", "DisbursementItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DisbursementItem>("SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1", "DisbursementItem", value);
                 }
             }
         }
@@ -5697,18 +5698,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries", "SpecialRequisitionItems")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialRequisitionItem")]
         public EntityCollection<SpecialRequisitionItem> SpecialRequisitionItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialRequisitionItem>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpecialRequisitionItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialRequisitionItem>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialRequisitionItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialRequisitionItem>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries", "SpecialRequisitionItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialRequisitionItem>("SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries1", "SpecialRequisitionItem", value);
                 }
             }
         }
@@ -5719,94 +5720,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "Users")]
-        public User CreatedByUser
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> CreatedByUserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy", "Users")]
-        public User ApprovedByUser
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> ApprovedByUserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItems")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItem")]
         public EntityCollection<StationeryRetrievalFormItem> StationeryRetrievalFormItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "StationeryRetrievalFormItem", value);
                 }
             }
         }
@@ -5817,18 +5742,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StockLogs_FK1", "StockLogs")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogs_FK1", "StockLog")]
         public EntityCollection<StockLog> StockLogs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StockLog>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "StockLogs");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StockLog>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "StockLog");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StockLog>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "StockLogs", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StockLog>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "StockLog", value);
                 }
             }
         }
@@ -5839,16 +5764,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy", "Users")]
-        public User ModifiedByUser
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy1", "User")]
+        public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "User").Value = value;
             }
         }
         /// <summary>
@@ -5856,17 +5781,93 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> ModifiedByUserReference
+        public EntityReference<User> UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy1", "User")]
+        public User User1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> User1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy1", "User")]
+        public User User2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> User2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "User", value);
                 }
             }
         }
@@ -6584,6 +6585,28 @@ namespace SA33.Team12.SSIS.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "StockLogTransaction")]
+        public EntityCollection<StockLogTransaction> StockLogTransactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StockLogTransaction>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "StockLogTransaction");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StockLogTransaction>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "StockLogTransaction", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -7155,44 +7178,6 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries")]
-        public SpeicalStationery SpeicalStationery
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SpeicalStationery> SpeicalStationeryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StationeryRetrievalFormItems_FK1", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationeries_StationeryRetrievalFormItems_FK1", "Stationeries")]
         public Stationery Stationery
         {
@@ -7281,6 +7266,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_StationeryRetrievalFormItems_FK1", "StationeryRetrievalForms", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery")]
+        public SpecialStationery SpecialStationery
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SpecialStationery> SpecialStationeryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1", "SpecialStationery", value);
                 }
             }
         }
@@ -8017,44 +8040,6 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries")]
-        public SpeicalStationery SpeicalStationery
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SpeicalStationery> SpeicalStationeryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_StockLogs_FK1", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogs", "Stationeries")]
         public Stationery Stationery
         {
@@ -8086,6 +8071,44 @@ namespace SA33.Team12.SSIS.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogs_FK1", "SpecialStationery")]
+        public SpecialStationery SpecialStationery
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "SpecialStationery").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "SpecialStationery").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SpecialStationery> SpecialStationeryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1", "SpecialStationery", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -8109,7 +8132,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="reason">Initial value of the Reason property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="balance">Initial value of the Balance property.</param>
-        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance)
+        /// <param name="stationeryID">Initial value of the StationeryID property.</param>
+        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID)
         {
             StockLogTransaction stockLogTransaction = new StockLogTransaction();
             stockLogTransaction.StockLogTransactionID = stockLogTransactionID;
@@ -8118,6 +8142,7 @@ namespace SA33.Team12.SSIS.DAL
             stockLogTransaction.Reason = reason;
             stockLogTransaction.Quantity = quantity;
             stockLogTransaction.Balance = balance;
+            stockLogTransaction.StationeryID = stationeryID;
             return stockLogTransaction;
         }
 
@@ -8270,6 +8295,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Int32 _Balance;
         partial void OnBalanceChanging(global::System.Int32 value);
         partial void OnBalanceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StationeryID
+        {
+            get
+            {
+                return _StationeryID;
+            }
+            set
+            {
+                OnStationeryIDChanging(value);
+                ReportPropertyChanging("StationeryID");
+                _StationeryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StationeryID");
+                OnStationeryIDChanged();
+            }
+        }
+        private global::System.Int32 _StationeryID;
+        partial void OnStationeryIDChanging(global::System.Int32 value);
+        partial void OnStationeryIDChanged();
 
         #endregion
     
@@ -8309,6 +8358,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AdjustmentVoucherTransaction>("SA33.Team12.SSIS.Model.AdjustmentVoucherTransactions_StockLogTransactions", "AdjustmentVoucherTransactions", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery")]
+        public Stationery Stationery
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "Stationery").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "Stationery").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Stationery> StationeryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "Stationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "Stationery", value);
                 }
             }
         }
@@ -9215,72 +9302,6 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "SpeicalStationeries")]
-        public EntityCollection<SpeicalStationery> CreatedSpeicalStationeries
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy", "SpeicalStationeries")]
-        public EntityCollection<SpeicalStationery> ApprovedSpeicalStationeries
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy", "SpeicalStationeries")]
-        public EntityCollection<SpeicalStationery> ModifiedSpeicalStationeries
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "SpeicalStationeries");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpeicalStationery>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy", "SpeicalStationeries", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationery_Approved_By", "Stationeries")]
         public EntityCollection<Stationery> ApprovedStationeries
         {
@@ -9359,6 +9380,72 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.Stationery_RetrievedBy", "StationeryRetrievalForms", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy1", "SpecialStationery")]
+        public EntityCollection<SpecialStationery> SpecialStationeries
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy1", "SpecialStationery", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy1", "SpecialStationery")]
+        public EntityCollection<SpecialStationery> SpecialStationeries1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy1", "SpecialStationery", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy1", "SpecialStationery")]
+        public EntityCollection<SpecialStationery> SpecialStationeries2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SpecialStationery>("SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy1", "SpecialStationery", value);
                 }
             }
         }
