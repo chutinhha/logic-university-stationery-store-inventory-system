@@ -54,7 +54,6 @@
     <Compile Include="DALLogic.cs" />
     <Compile Include="DisbursementDAO.cs" />
     <Compile Include="DTO\AdjustmentVoucherSearchDTO.cs" />
-    <Compile Include="DTO\PurchaseOrderSearchDTO.cs" />
     <Compile Include="DTO\RequisitioinSearchDTO.cs" />
     <Compile Include="DTO\UserSearchDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,11 +61,20 @@
     <Compile Include="RequisitionDAO.cs" />
     <Compile Include="Stationery.cs" />
     <Compile Include="StationeryDAO.cs" />
+    <Compile Include="StationeryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StationeryModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="StationeryRetrievalDAO.cs" />
     <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="StationeryModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StationeryModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SA33.Team12.SSIS.Exceptions\SA33.Team12.SSIS.Exceptions.csproj">
