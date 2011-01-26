@@ -76,7 +76,7 @@ namespace SA33.Team12.SSIS.DAL
                 var Query =
                     from u in context.PurchaseOrders
                     where u.PurchaseOrderID == (criteria.PurchaseOrderID == 0 ? u.PurchaseOrderID : criteria.PurchaseOrderID)
-                    && u.== (criteria.DepartmentID == 0 ? u.DepartmentID : criteria.DepartmentID)
+                    && u.SupplierID == (criteria.SupplierID == 0 ? u.SupplierID : criteria.SupplierID)
                     && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
                     && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
                     && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
