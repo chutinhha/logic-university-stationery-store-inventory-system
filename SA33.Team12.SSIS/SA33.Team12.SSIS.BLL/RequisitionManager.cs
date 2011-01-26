@@ -74,5 +74,15 @@ namespace SA33.Team12.SSIS.BLL
         {
             requisitionDAO.GetRequisitionByEmployee(user, requisitionSearchDTO);
         }
+
+           /// <summary>
+        /// Generate the requisitionID for each requisition
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public string GetRequisitionID(Requisition requisition)
+        {
+            return requisitionDAO.GetRequisitionID(requisition);
+        }
     }
 }
