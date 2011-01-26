@@ -8,12 +8,13 @@ using System.Web;
 using System.ComponentModel;
 using System.Transactions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SA33.Team12.SSIS.DAL
 {
     public class DisbursementDAO : DALLogic
     {
-        public Disbursement CreateDisbursement(Disbursement disbursement)
+        public Disbursement CreateDisbursement(DAL.Disbursement disbursement)
         {
             try
             {
@@ -31,6 +32,11 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public void CreateDisbursementFromSRF()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Boolean IsUnshownDisbursement(Disbursement disbursement)
         {
             bool disbursementStatus = false;
@@ -38,19 +44,32 @@ namespace SA33.Team12.SSIS.DAL
             return disbursementStatus;
         }
 
-        public void CreateDisbursementFromSRF()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void CancelDisbursement()
         {
             throw new System.NotImplementedException();
         }
 
-        public void UpdateDisbursement()
+        public Disbursement UpdateDisbursementQuantity(DAL.Disbursement disbursement, int newQuantity)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    DAL.DisbursementItem tempDisbursementItem = (from d in context.DisbursementItems
+                                                                 where d.DisbursementID == disbursement.DisbursementID
+                                                                 select d).FirstOrDefault<DAL.DisbursementItem>();
+                    tempDisbursementItem.QuantityDisbursed = newQuantity;
+                    context.ObjectStateManager.ChangeObjectState(tempDisbursementItem, System.Data.EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return disbursement;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.DisbursmentException("Update object not successful");
+            }
+            
         }
     }
 }
