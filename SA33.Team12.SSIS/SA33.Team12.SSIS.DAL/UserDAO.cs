@@ -24,11 +24,11 @@ namespace SA33.Team12.SSIS.DAL
                     from u in context.Users
                     where u.UserID == (criteria.UserID == 0 ? u.UserID : criteria.UserID)
                     && u.DepartmentID == (criteria.DepartmentID == 0 ? u.DepartmentID : criteria.DepartmentID)
-                    && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
+                    && u.UserName.Contains((criteria.UserName == null || criteria.UserName == "" ? u.UserName : criteria.UserName))
                     && u.MembershipProviderKey == (criteria.MembershipProviderKey == new Guid() ? u.MembershipProviderKey : criteria.MembershipProviderKey)
                     && u.FirstName.Contains((criteria.FirstName == null || criteria.FirstName == "" ? u.FirstName : criteria.FirstName))
                     && u.LastName.Contains((criteria.LastName == null || criteria.LastName == "" ? u.LastName : criteria.LastName))
-                    && u.Email == (criteria.Email == null ? u.Email : criteria.Email)
+                    && u.Email == (criteria.Email == null || criteria.Email == "" ? u.Email : criteria.Email)
                     select u;
                 List<User> users = Query.ToList<User>();
                 return users;
