@@ -148,6 +148,43 @@ namespace SA33.Team12.SSIS.DAL
             return (from q in tempQuery select q).ToList<AdjustmentVoucher>();
         }
 
+        //Need to FindByGetID Temp
+        public List<AdjustmentVoucherTransaction> FindAdjustmentVoucherTransactionsByGetID(AdjustmentVoucherTransactionSearchDTO adjustmentVoucherTransactionSearchDTO)
+        {
+            var tempQuery = (from r in context.AdjustmentVoucherTransactions
+                             where 1 == 1
+                             select r);
+
+            if (adjustmentVoucherTransactionSearchDTO != null)
+            {
+                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID != -1)
+                {
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID);
+                }
+            }
+
+            return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
+
+        }
+
+        //Need to FindByCriteria Actual
+        public List<AdjustmentVoucher> FindAdjustmentVoucherByGetID(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        {
+            var tempQuery = (from r in context.AdjustmentVouchers
+                             where 1 == 1
+                             select r);
+
+            if (adjustmentVoucherSearchDTO != null)
+            {
+                if (adjustmentVoucherSearchDTO.AdjustmentVoucherID != -1)
+                {
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
+                }
+            }
+
+            return (from q in tempQuery select q).ToList<AdjustmentVoucher>();
+        }
+
 
         //Do we want to allow the user to modify the "Adjust Inventory after he has created it?"
         // the Temp Tables AjustmentVoucherTransactions and StockLog =Transactions only has "Create" Method without delete or anything else"
