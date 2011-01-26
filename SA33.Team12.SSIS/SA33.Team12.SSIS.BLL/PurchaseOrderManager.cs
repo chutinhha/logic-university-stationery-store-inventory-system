@@ -45,5 +45,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             return purchaseOrderDAO.GetAllPurchaseOrder();
         }
+
+        public PurchaseOrder FindPurchaseOrderByID(int poID)
+        {
+            return purchaseOrderDAO.FindPurchaseOrderByID(poID);
+        }
     }
 }
