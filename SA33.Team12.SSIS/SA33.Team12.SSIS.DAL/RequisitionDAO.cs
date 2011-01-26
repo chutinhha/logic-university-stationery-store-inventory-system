@@ -181,7 +181,15 @@ namespace SA33.Team12.SSIS.DAL
 
                 throw new RequisitionException("Update requisition failed.");
             }
+        }
 
+        /// <summary>
+        /// Find All Requistions
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> FindAllRequisition()
+        {
+            return (from c in context.Requisitions select c).ToList<Requisition>();
         }
 
         /// <summary>
@@ -190,7 +198,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -201,7 +209,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -212,7 +220,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
+        public List<Requisition> FindRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -222,7 +230,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="requisitioinSearchDTO">requisitioinSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByCriteria(RequisitioinSearchDTO requisitioinSearchDTO)
+        public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
         {
             var tempQuery = (from r in context.Requisitions
                         where 1 == 1 select r);

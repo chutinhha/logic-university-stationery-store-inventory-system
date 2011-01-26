@@ -61,21 +61,39 @@ namespace SA33.Team12.SSIS.BLL
             requisitionDAO.UpdateRequisition(requisition);
         }
 
-        public void GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
+        /// <summary>
+        /// Find All Requistions
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> FindAllRequisition()
+        {
+            return requisitionDAO.FindAllRequisition();
+        }
+
+        public void GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
             //requisitionDAO.GetRequisitionByCategory(category, requisitionSearchDTO);
         }
 
-        public void GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             //requisitionDAO.GetRequisitionByDepartment(department, requisitionSearchDTO);
         }
 
-        public void GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
+        public void GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             //requisitionDAO.GetRequisitionByEmployee(user, requisitionSearchDTO);
         }
 
+        /// <summary>
+        /// Find the requisition by search criteria
+        /// </summary>
+        /// <param name="requisitioinSearchDTO">requisitioinSearchDTO object</param>
+        /// <returns></returns>
+        public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
+        {
+            return requisitionDAO.FindRequisitionByCriteria(requisitioinSearchDTO);
+        }
            /// <summary>
         /// Generate the requisitionID for each requisition
         /// </summary>
