@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdjustmentVoucher.cs" />
+    <Compile Include="AdjustmentVoucherDAO.cs" />
     <Compile Include="CatalogDAO.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="DALLogic.cs" />
