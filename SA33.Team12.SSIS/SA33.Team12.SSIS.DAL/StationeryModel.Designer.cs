@@ -71,6 +71,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalFormItems_StationeryRetrievalFormItemByDepts_FK1", "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), "StationeryRetrievalFormItemByDepts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItemByDept), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_StationeryRetrievalFormItems_FK1", "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_RetrievedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
 
 #endregion
 
@@ -3498,7 +3499,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="attentionTo">Initial value of the AttentionTo property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="dateReceived">Initial value of the DateReceived property.</param>
-        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived)
+        /// <param name="supplierID">Initial value of the SupplierID property.</param>
+        /// <param name="isDelivered">Initial value of the IsDelivered property.</param>
+        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered)
         {
             PurchaseOrder purchaseOrder = new PurchaseOrder();
             purchaseOrder.PurchaseOrderID = purchaseOrderID;
@@ -3507,6 +3510,8 @@ namespace SA33.Team12.SSIS.DAL
             purchaseOrder.AttentionTo = attentionTo;
             purchaseOrder.CreatedBy = createdBy;
             purchaseOrder.DateReceived = dateReceived;
+            purchaseOrder.SupplierID = supplierID;
+            purchaseOrder.IsDelivered = isDelivered;
             return purchaseOrder;
         }
 
@@ -3707,6 +3712,54 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _ReceivedBy;
         partial void OnReceivedByChanging(Nullable<global::System.Int32> value);
         partial void OnReceivedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SupplierID
+        {
+            get
+            {
+                return _SupplierID;
+            }
+            set
+            {
+                OnSupplierIDChanging(value);
+                ReportPropertyChanging("SupplierID");
+                _SupplierID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SupplierID");
+                OnSupplierIDChanged();
+            }
+        }
+        private global::System.Int32 _SupplierID;
+        partial void OnSupplierIDChanging(global::System.Int32 value);
+        partial void OnSupplierIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDelivered
+        {
+            get
+            {
+                return _IsDelivered;
+            }
+            set
+            {
+                OnIsDeliveredChanging(value);
+                ReportPropertyChanging("IsDelivered");
+                _IsDelivered = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDelivered");
+                OnIsDeliveredChanged();
+            }
+        }
+        private global::System.Boolean _IsDelivered;
+        partial void OnIsDeliveredChanging(global::System.Boolean value);
+        partial void OnIsDeliveredChanged();
 
         #endregion
     
@@ -3844,6 +3897,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.PurchaseOrders_CreatedBy", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "Supplier")]
+        public Supplier Supplier
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "Supplier").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "Supplier").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Supplier> SupplierReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "Supplier");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "Supplier", value);
                 }
             }
         }
@@ -8402,6 +8493,28 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Price>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "Prices", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "PurchaseOrder")]
+        public EntityCollection<PurchaseOrder> PurchaseOrders
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PurchaseOrder>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "PurchaseOrder");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PurchaseOrder>("SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1", "PurchaseOrder", value);
                 }
             }
         }

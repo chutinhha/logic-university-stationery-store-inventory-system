@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SA33.Team12.SSIS.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SA33.Team12.SSIS.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SA33Team12SSISModelStoreContainer">
           <EntitySet Name="AdjustmentVouchers" EntityType="SA33.Team12.SSIS.Model.Store.AdjustmentVouchers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AdjustmentVoucherTransactions" EntityType="SA33.Team12.SSIS.Model.Store.AdjustmentVoucherTransactions" store:Type="Tables" Schema="dbo" />
@@ -238,6 +238,10 @@
             <End Role="StationeryRetrievalForms" EntitySet="StationeryRetrievalForms" />
             <End Role="StationeryRetrievalFormItems" EntitySet="StationeryRetrievalFormItems" />
           </AssociationSet>
+          <AssociationSet Name="Suppliers_PurchaseOrders_FK1" Association="SA33.Team12.SSIS.Model.Store.Suppliers_PurchaseOrders_FK1">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+          </AssociationSet>
           <AssociationSet Name="Urgencies_Requisitions_FK1" Association="SA33.Team12.SSIS.Model.Store.Urgencies_Requisitions_FK1">
             <End Role="Urgencies" EntitySet="Urgencies" />
             <End Role="Requisitions" EntitySet="Requisitions" />
@@ -373,6 +377,7 @@
             <PropertyRef Name="PurchaseOrderID" />
           </Key>
           <Property Name="PurchaseOrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="PONumber" Type="char" Nullable="false" MaxLength="10" />
           <Property Name="DateOfOrder" Type="datetime" Nullable="false" />
           <Property Name="AttentionTo" Type="int" Nullable="false" />
@@ -380,6 +385,7 @@
           <Property Name="DONumber" Type="char" MaxLength="10" />
           <Property Name="DateReceived" Type="datetime" Nullable="false" />
           <Property Name="ReceivedBy" Type="int" />
+          <Property Name="IsDelivered" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RequisitionItems">
           <Key>
@@ -1170,6 +1176,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Suppliers_PurchaseOrders_FK1">
+          <End Role="Suppliers" Type="SA33.Team12.SSIS.Model.Store.Suppliers" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="SA33.Team12.SSIS.Model.Store.PurchaseOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="PurchaseOrders">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Urgencies_Requisitions_FK1">
           <End Role="Urgencies" Type="SA33.Team12.SSIS.Model.Store.Urgencies" Multiplicity="1" />
           <End Role="Requisitions" Type="SA33.Team12.SSIS.Model.Store.Requisitions" Multiplicity="*" />
@@ -1194,8 +1212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SA33.Team12.SSIS.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -1440,6 +1457,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="StationeryRetrievalForms" EntitySet="StationeryRetrievalForms" />
           </AssociationSet>
+          <AssociationSet Name="Suppliers_PurchaseOrders_FK1" Association="SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
           <Key>
@@ -1609,6 +1630,9 @@
           <NavigationProperty Name="ApprovedByUser" Relationship="SA33.Team12.SSIS.Model.PurchaseOrder_ApprovedBY" FromRole="PurchaseOrders" ToRole="Users" />
           <NavigationProperty Name="AttentionToUser" Relationship="SA33.Team12.SSIS.Model.PurchaseOrders_AttentionTo" FromRole="PurchaseOrders" ToRole="Users" />
           <NavigationProperty Name="CreatedByUser" Relationship="SA33.Team12.SSIS.Model.PurchaseOrders_CreatedBy" FromRole="PurchaseOrders" ToRole="Users" />
+          <Property Type="Int32" Name="SupplierID" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelivered" Nullable="false" />
+          <NavigationProperty Name="Supplier" Relationship="SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1" FromRole="PurchaseOrder" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="RequisitionItem">
           <Key>
@@ -1814,6 +1838,7 @@
           <Property Name="TenderedYear" Type="DateTime" Nullable="false" />
           <Property Name="PreferredRank" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Prices" Relationship="SA33.Team12.SSIS.Model.Prices_By_Supplier" FromRole="Suppliers" ToRole="Prices" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1" FromRole="Supplier" ToRole="PurchaseOrder" />
         </EntityType>
         <EntityType Name="Urgency">
           <Key>
@@ -2494,6 +2519,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Suppliers_PurchaseOrders_FK1">
+          <End Type="SA33.Team12.SSIS.Model.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="SA33.Team12.SSIS.Model.PurchaseOrder" Role="PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2586,7 +2623,9 @@
             <ScalarProperty Name="DeliveryRemarks" ColumnName="DeliveryRemarks" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrders"><EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.PurchaseOrder"><MappingFragment StoreEntitySet="PurchaseOrders">
-            <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+            <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
             <ScalarProperty Name="PONumber" ColumnName="PONumber" />
             <ScalarProperty Name="DateOfOrder" ColumnName="DateOfOrder" />
             <ScalarProperty Name="AttentionTo" ColumnName="AttentionTo" />
@@ -2984,10 +3023,10 @@
           <ConnectorPoint PointX="18" PointY="39.2968775" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrders_PurchaseOrderItems_FK1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="42.96875" />
-          <ConnectorPoint PointX="13.010414166666665" PointY="42.96875" />
-          <ConnectorPoint PointX="13.177080833333333" PointY="42.96875" />
-          <ConnectorPoint PointX="15.34375" PointY="42.96875" />
+          <ConnectorPoint PointX="9" PointY="42.936172688802081" />
+          <ConnectorPoint PointX="13.010414166666665" PointY="42.936172688802081" />
+          <ConnectorPoint PointX="13.177080833333333" PointY="42.936172688802081" />
+          <ConnectorPoint PointX="15.34375" PointY="42.936172688802081" />
           <ConnectorPoint PointX="15.34375" PointY="42.057190755208325" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_PurchaseOrderItems" ManuallyRouted="false">
@@ -2996,25 +3035,25 @@
           <ConnectorPoint PointX="15" PointY="40.438134010416661" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrder_ApprovedBY" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5169221875000005" PointY="40.345520833333325" />
-          <ConnectorPoint PointX="4.5169221875000005" PointY="43.913198242187505" />
-          <ConnectorPoint PointX="5.2259093229166673" PointY="43.913198242187505" />
-          <ConnectorPoint PointX="5.3925759895833334" PointY="43.913198242187505" />
+          <ConnectorPoint PointX="4.5608688281249989" PointY="40.345520833333325" />
+          <ConnectorPoint PointX="4.5608688281249989" PointY="43.913198242187505" />
+          <ConnectorPoint PointX="5.0498025260416668" PointY="43.913198242187505" />
+          <ConnectorPoint PointX="5.2164691927083329" PointY="43.913198242187505" />
           <ConnectorPoint PointX="5.6220695572916677" PointY="43.913198242187505" />
           <ConnectorPoint PointX="5.7887362239583338" PointY="43.913198242187505" />
           <ConnectorPoint PointX="7.5" PointY="43.913198242187505" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrders_AttentionTo" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.101563125" PointY="40.345520833333325" />
-          <ConnectorPoint PointX="6.101563125" PointY="43.050346621093759" />
+          <ConnectorPoint PointX="6.2589539453125012" PointY="40.345520833333325" />
+          <ConnectorPoint PointX="6.2589539453125012" PointY="43.050346621093759" />
           <ConnectorPoint PointX="7.5" PointY="43.050346621093759" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrders_CreatedBy" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.30924265625" PointY="40.345520833333325" />
-          <ConnectorPoint PointX="5.30924265625" PointY="44.776049863281251" />
-          <ConnectorPoint PointX="5.6220695572916677" PointY="44.776049863281251" />
-          <ConnectorPoint PointX="5.7887362239583338" PointY="44.776049863281251" />
-          <ConnectorPoint PointX="7.5" PointY="44.776049863281251" />
+          <ConnectorPoint PointX="5.133135859375" PointY="40.345520833333325" />
+          <ConnectorPoint PointX="5.133135859375" PointY="45.064502011718751" />
+          <ConnectorPoint PointX="5.6220695572916677" PointY="45.064502011718751" />
+          <ConnectorPoint PointX="5.7887362239583338" PointY="45.064502011718751" />
+          <ConnectorPoint PointX="7.5" PointY="45.064502011718751" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.RequisitionItems_Of_Requisitions" ManuallyRouted="false">
           <ConnectorPoint PointX="12" PointY="33.073196614583338" />
@@ -3252,6 +3291,10 @@
           <ConnectorPoint PointX="5.7054028906250007" PointY="40.345520833333325" />
           <ConnectorPoint PointX="5.7054028906250007" PointY="47.461293945312505" />
           <ConnectorPoint PointX="7.5" PointY="47.461293945312505" />
+        </AssociationConnector>
+        <AssociationConnector Association="SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1" >
+          <ConnectorPoint PointX="15.75" PointY="44.932444661458334" />
+          <ConnectorPoint PointX="9" PointY="44.932444661458334" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
