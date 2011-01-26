@@ -10,6 +10,7 @@ using System.ComponentModel;
 using SA33.Team12.SSIS;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.DAL.AdjustmentVoucherDAO;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -19,9 +20,15 @@ namespace SA33.Team12.SSIS.BLL
         /// Create new adjustment voucher
         /// </summary>
         /// <param name="adjustmentVoucher">The adjustment voucher object</param>
-        public void CreateAdjustmentVoucher(DAL.AdjustmentVoucher adjustmentVoucher)
+        /// Created by Anthony 26 Jan 2011
+        public void CreateAdjustmentVoucherTemp(DAL.AdjustmentVoucher adjustmentVoucher)
         {
-            
+            CreateStockLogTransactionTemp(adjustmentVoucher);
+        }
+
+        public void CreateAdjustmentVoucherActual(DAL.AdjustmentVoucher adjustmentVoucher)
+        {
+            CreateStockLogTransactionActual(adjustmentVoucher);
         }
 
         /// <summary>
