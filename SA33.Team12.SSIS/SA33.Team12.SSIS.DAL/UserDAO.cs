@@ -15,7 +15,8 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class UserDAO : DALLogic
     {
-        public List<User> FindUserByCriteria(DTO.UserSearchDTO criteria)
+        #region Users
+        public List<User> FindUsersByCriteria(DTO.UserSearchDTO criteria)
         {
             try
             {
@@ -39,11 +40,9 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<User> GetUserByDepartment(DAL.Department department)
+        public List<User> GetAllUsers()
         {
-            // isn't it obvious?
-            List<User> users = FindUserByCriteria(new DTO.UserSearchDTO() { DepartmentID = department.DepartmentID });
-            return users;
+            return FindUsersByCriteria(new DTO.UserSearchDTO());
         }
 
         public User GetUserByID(int UserID)
@@ -120,6 +119,22 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
+        #endregion
+
+        #region Departments
+        public List<Department> FindDepartmentsByCriteria(DTO.DepartmentSearchDTO criteria)
+        {
+            var Query =
+                from d in context.Departments
+                where d.DepartmentID == (criteria.DepartmentID == 0 ? d.DepartmentID : criteria.DepartmentID)
+                && d.CollectionPointID == (criteria.CollectionPointID == 0 ? d.CollectionPointID : criteria.CollectionPointID)
+                && d.Code == (criteria.Code == null || criteria.Code == "" ? d.Code : criteria.Code)
+                && d.Name == (criteria.Name == null || criteria.Name == "" ? d.Name : criteria.Name)
+                && d.isBlackListed == (criteria.IsBlackListed == null ? d.isBlackListed : criteria.IsBlackListed)
+                select d;
+            List<Department> departments = Query.ToList<Department>();
+            return departments;
+        }
 
         public List<Department> GetAllDepartment()
         {
@@ -187,18 +202,194 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Departments.Attach(department);
+                    context.Departments.DeleteObject(department);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
             }
             catch (Exception)
             {
-                
+                throw;
+            }
+        }
+        #endregion
+
+        #region CollectionPoints
+        public List<CollectionPoint> FindCollectionPointsByCriteria(DTO.CollectionPoint criteria)
+        {
+            var Query = from cp in context.CollectionPoints
+                        where cp.CollectionPointID == (criteria.CollectionPointID == 0 ? cp.CollectionPointID : criteria.CollectionPointID)
+                        && cp.Name == (criteria.Name == null || criteria.Name == "" ? cp.Name : criteria.Name)
+                        && cp.Time == (criteria.Time == null || criteria.Time == "" ? cp.Time : criteria.Time)
+                        select cp;
+            return Query.ToList<CollectionPoint>();
+        }
+
+        public List<CollectionPoint> GetAllCollectionPoints()
+        {
+            return (from cp in context.CollectionPoints
+                    select cp).ToList<CollectionPoint>();
+        }
+
+        public CollectionPoint GetCollectionPointByID(int CollectionPointID)
+        {
+            return (from u in context.CollectionPoints
+                    where u.CollectionPointID == CollectionPointID
+                    select u).First<CollectionPoint>();
+        }
+
+        public CollectionPoint CreateCollectionPoint(DAL.CollectionPoint collectionPoint)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.CollectionPoints.AddObject(collectionPoint);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return collectionPoint;
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
 
-        public void GetDepartmentByUserID(string user)
+        public CollectionPoint UpdateCollectionPoint(DAL.CollectionPoint collectionPoint)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                // First will throw excpetion if no user is found
+                CollectionPoint tempCollectionPoint = (from c in context.CollectionPoints
+                                                       where c.CollectionPointID == collectionPoint.CollectionPointID
+                                 select c).First<CollectionPoint>();
+
+                tempCollectionPoint.Name = collectionPoint.Name;
+                tempCollectionPoint.Time = collectionPoint.Time;
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.ObjectStateManager.ChangeObjectState(tempCollectionPoint, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempCollectionPoint;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
+        public void DeleteCollectionPoint(CollectionPoint collectionPoint)
+        {
+            try
+            {
+                CollectionPoint persistedCollectionPoint = (from c in context.CollectionPoints
+                                      where c.CollectionPointID == collectionPoint.CollectionPointID
+                                      select c).FirstOrDefault();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.CollectionPoints.DeleteObject(persistedCollectionPoint);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region BlacklistLogs
+        public List<BlacklistLog> FindBlacklistLogsByCriteria(DTO.BlackListLogSearchDTO criteria)
+        {
+            var Query = from cp in context.BlacklistLogs
+                        where cp.BlacklistLogID == (criteria.BlackListLogID == 0 ? cp.BlacklistLogID : criteria.BlackListLogID)
+                        select cp;
+            return Query.ToList<BlacklistLog>();
+        }
+
+        public List<BlacklistLog> GetAllBlacklistLogs()
+        {
+            return (from cp in context.BlacklistLogs
+                    select cp).ToList<BlacklistLog>();
+        }
+
+        public BlacklistLog GetBlacklistLogByID(int BlacklistLogID)
+        {
+            return (from u in context.BlacklistLogs
+                    where u.BlacklistLogID == BlacklistLogID
+                    select u).First<BlacklistLog>();
+        }
+
+        public BlacklistLog CreateBlacklistLog(DAL.BlacklistLog collectionPoint)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.BlacklistLogs.AddObject(collectionPoint);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return collectionPoint;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public BlacklistLog UpdateBlacklistLog(DAL.BlacklistLog collectionPoint)
+        {
+            try
+            {
+                // First will throw excpetion if no user is found
+                BlacklistLog tempBlacklistLog = (from c in context.BlacklistLogs
+                                                       where c.BlacklistLogID == collectionPoint.BlacklistLogID
+                                                       select c).First<BlacklistLog>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.ObjectStateManager.ChangeObjectState(tempBlacklistLog, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempBlacklistLog;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteBlacklistLog(BlacklistLog collectionPoint)
+        {
+            try
+            {
+                BlacklistLog persistedBlacklistLog = (from c in context.BlacklistLogs
+                                                            where c.BlacklistLogID == collectionPoint.BlacklistLogID
+                                                            select c).FirstOrDefault();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.BlacklistLogs.DeleteObject(persistedBlacklistLog);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion 
     }
 }

@@ -18,11 +18,11 @@ namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
     {
-        public List<User> FindUserByCriteria(UserSearchDTO criteria)
+        public List<User> FindUsersByCriteria(UserSearchDTO criteria)
         {
             using (UserDAO udao = new UserDAO())
             {
-                return udao.FindUserByCriteria(criteria);
+                return udao.FindUsersByCriteria(criteria);
             }
         }
 
