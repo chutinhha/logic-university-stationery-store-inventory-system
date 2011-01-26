@@ -9,7 +9,7 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class StationeryDAO : DALLogic
     {
-        /***
+        /*** 
          * this is a sample do not use this
          * ***/
 

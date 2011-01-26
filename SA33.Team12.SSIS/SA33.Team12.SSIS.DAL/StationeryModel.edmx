@@ -2790,7 +2790,7 @@
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucher" Width="1.5" PointX="7.5" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Width="1.5" PointX="3.125" PointY="20.25" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.ApprovalAudit" Width="1.5" PointX="7.5" PointY="29.25" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.BlacklistLog" Width="1.5" PointX="3" PointY="23" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.BlacklistLog" Width="1.5" PointX="3.625" PointY="23" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.Category" Width="1.5" PointX="7.5" PointY="32.125" Height="3.7109993489583388" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.CollectionPoint" Width="1.5" PointX="0.75" PointY="26.125" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.Department" Width="1.5" PointX="3" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
@@ -2861,8 +2861,8 @@
           <ConnectorPoint PointX="7.5" PointY="30.336293945312498" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Departments_BlacklistLogs" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="25.5" />
-          <ConnectorPoint PointX="3.75" PointY="24.787985026041667" />
+          <ConnectorPoint PointX="4.0625" PointY="25.5" />
+          <ConnectorPoint PointX="4.0625" PointY="24.787985026041667" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Categories_SpeicalStationeries_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="35.425201322916671" />
