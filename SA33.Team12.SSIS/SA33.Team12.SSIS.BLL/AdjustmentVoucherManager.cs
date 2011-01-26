@@ -23,12 +23,12 @@ namespace SA33.Team12.SSIS.BLL
         /// Created by Anthony 26 Jan 2011
         public void CreateAdjustmentVoucherTemp(DAL.AdjustmentVoucher adjustmentVoucher)
         {
-            CreateStockLogTransactionTemp(adjustmentVoucher);
+            //CreateStockLogTransactionTemp(adjustmentVoucher);
         }
 
         public void CreateAdjustmentVoucherActual(DAL.AdjustmentVoucher adjustmentVoucher)
         {
-            CreateStockLogTransactionActual(adjustmentVoucher);
+            //CreateStockLogTransactionActual(adjustmentVoucher);
         }
 
         /// <summary>
