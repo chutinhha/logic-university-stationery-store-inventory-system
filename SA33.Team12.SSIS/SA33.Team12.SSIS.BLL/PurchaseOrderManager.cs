@@ -1,6 +1,6 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A)
- * Initial Implementation: 23/Jan/2011
+ * Author: Wang Pinyi (A0076771W)
+ * Initial Implementation: 25/Jan/2011
  ***/
 
 using System;
