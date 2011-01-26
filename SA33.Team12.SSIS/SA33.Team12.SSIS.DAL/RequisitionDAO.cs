@@ -29,7 +29,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                
+
                 //Add requisition to context                
                 context.AddToRequisitions(requisition);
 
@@ -79,7 +79,7 @@ namespace SA33.Team12.SSIS.DAL
                     var tempRequisition = (from p in context.Requisitions
                                            where p.RequisitionID == requisition.RequisitionID
                                            select p).FirstOrDefault<Requisition>();
-                    
+
                     tempRequisition.Status = status;
                     context.SaveChanges();
                 }
@@ -105,7 +105,7 @@ namespace SA33.Team12.SSIS.DAL
                                            where p.RequisitionID == requisition.RequisitionID
                                            select p).FirstOrDefault<Requisition>();
 
-                    
+
                     var status = (from s in context.Statuses where s.Name == "Approved & Pending" select s).FirstOrDefault<Status>();
 
                     //requisition status will be changed to "Approved & Pending"
@@ -150,7 +150,7 @@ namespace SA33.Team12.SSIS.DAL
 
                     var status = (from s in context.Statuses where s.Name == "Cancelled" select s).FirstOrDefault<Status>();
 
-                    UpdateRequisitionStatus(tempRequisition, status);                    
+                    UpdateRequisitionStatus(tempRequisition, status);
                     context.SaveChanges();
                 }
             }
@@ -178,10 +178,10 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception ex)
             {
-                
+
                 throw new RequisitionException("Update requisition failed.");
             }
-            
+
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="requisition"></param>
         /// <returns></returns>
-        private string GetRequisitionID(Requisition requisition)
+        public string GetRequisitionID(Requisition requisition)
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
