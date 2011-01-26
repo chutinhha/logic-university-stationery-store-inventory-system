@@ -76,11 +76,11 @@ namespace SA33.Team12.SSIS.DAL
                 var Query =
                     from u in context.PurchaseOrders
                     where u.PurchaseOrderID == (criteria.PurchaseOrderID == 0 ? u.PurchaseOrderID : criteria.PurchaseOrderID)
-                    && u.SupplierID == (criteria.SupplierID == 0 ? u.SupplierID : criteria.SupplierID)
-                    && u.UserName.Contains((criteria.UserName == null ? u.UserName : criteria.UserName))
+       /*             && u.SupplierID == (criteria.SupplierID == 0 ? u.SupplierID : criteria.SupplierID)
+                    && u.CreatedBy.Contains((criteria.CreatedBy == null ? u.CreatedBy : criteria.CreatedBy)
                     && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
                     && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
-                    && u.Email == (criteria.Email == null ? u.Email : criteria.Email)
+                    && u.Email == (criteria.Email == null ? u.Email : criteria.Email)*/
                     select u;
                 List<PurchaseOrder> purchaseOrders = Query.ToList<PurchaseOrder>();
                 return purchaseOrders;
