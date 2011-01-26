@@ -1,8 +1,6 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A)
- * Initial Implementation: 23/Jan/2011
- * Edited by Wang Pinyi (A0076771W)
- * on 25/Jan/2011
+ * Author: Wang Pinyi(A0076771W)
+ * Initial Implementation: 25/Jan/2011
  ***/
 
 using System;
@@ -34,14 +32,12 @@ namespace SA33.Team12.SSIS.DAL
             return (from p in context.PurchaseOrders
                     select p).ToList();
         }
-
         public void DeletePurchaseOrder(PurchaseOrder purchaseOrder)
         {
             this.context.PurchaseOrders.Attach(purchaseOrder);
             this.context.PurchaseOrders.DeleteObject(purchaseOrder);
             this.context.SaveChanges();
         }
-
         public PurchaseOrder UpdatePurchaseOrder(PurchaseOrder purchaseOrder)
         {
             try
@@ -68,7 +64,6 @@ namespace SA33.Team12.SSIS.DAL
                     throw new System.NotImplementedException();
             }     
         }
-
         public List<PurchaseOrder> FindPurchaseOrderByCriteria(DTO.PurchaseOrderSearchDTO criteria)
         {
             try
@@ -76,11 +71,12 @@ namespace SA33.Team12.SSIS.DAL
                 var Query =
                     from u in context.PurchaseOrders
                     where u.PurchaseOrderID == (criteria.PurchaseOrderID == 0 ? u.PurchaseOrderID : criteria.PurchaseOrderID)
-       /*             && u.SupplierID == (criteria.SupplierID == 0 ? u.SupplierID : criteria.SupplierID)
-                    && u.CreatedBy.Contains((criteria.CreatedBy == null ? u.CreatedBy : criteria.CreatedBy)
-                    && u.FirstName.Contains((criteria.FirstName == null ? u.FirstName : criteria.FirstName))
-                    && u.LastName.Contains((criteria.LastName == null ? u.LastName : criteria.LastName))
-                    && u.Email == (criteria.Email == null ? u.Email : criteria.Email)*/
+                    && u.SupplierID == (criteria.SupplierID == 0 ? u.SupplierID : criteria.SupplierID)
+                    && u.CreatedBy == (criteria.CreatedBy == 0 ? u.CreatedBy : criteria.CreatedBy)
+                    && u.AttentionTo==(criteria.AttentionTo == 0 ? u.AttentionTo : criteria.AttentionTo)
+                    && (criteria.EndDateOfOrder == null ? u.DateOfOrder == u.DateOfOrder : u.DateOfOrder <= criteria.EndDateOfOrder)
+                    && (criteria.StartDateOfOrder == null ? u.DateOfOrder == u.DateOfOrder : u.DateOfOrder >= criteria.StartDateOfOrder)
+                    && u.IsDelivered == (criteria.IsDelivered == null ? u.IsDelivered : criteria.IsDelivered)
                     select u;
                 List<PurchaseOrder> purchaseOrders = Query.ToList<PurchaseOrder>();
                 return purchaseOrders;
