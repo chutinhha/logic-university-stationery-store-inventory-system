@@ -12,6 +12,7 @@ using System.Linq;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using System.Transactions;
+using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -23,7 +24,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Create a new requisition and persist with database
         /// </summary>
-        /// <param name="requisition"></param>
+        /// <param name="requisition">requisition object</param>
         public void CreateRequisition(Requisition requisition)
         {
             try
@@ -48,7 +49,7 @@ namespace SA33.Team12.SSIS.DAL
                 //Get the status id for "Pending"
                 var status = (from s in context.Statuses where s.Name == "Pending" select s).FirstOrDefault<Status>();
 
-                //Update the status id for the new requistion to pending
+                //Update the status id for the new requistion to "Pending"
                 UpdateRequisitionStatus(requisition, status);
 
                 //Save the changes
@@ -57,7 +58,7 @@ namespace SA33.Team12.SSIS.DAL
             catch (Exception ex)
             {
                 //Exception thrown incase if insert fails
-                throw new ApplicationException("Create requisition failed.\n" + ex.Message);
+                throw new RequisitionException("Create requisition failed.");
             }
 
         }
@@ -65,8 +66,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Update the requisition status
         /// </summary>
-        /// <param name="requisition">requistion</param>
-        /// <param name="status">status</param>
+        /// <param name="requisition">requistion object</param>
+        /// <param name="status">status object</param>
         public void UpdateRequisitionStatus(Requisition requisition, Status status)
         {
             try
@@ -78,7 +79,6 @@ namespace SA33.Team12.SSIS.DAL
                     var tempRequisition = (from p in context.Requisitions
                                            where p.RequisitionID == requisition.RequisitionID
                                            select p).FirstOrDefault<Requisition>();
-
                     
                     tempRequisition.Status = status;
                     context.SaveChanges();
@@ -87,14 +87,14 @@ namespace SA33.Team12.SSIS.DAL
             catch (Exception ex)
             {
 
-                throw new ApplicationException("Update failed.\n" + ex.Message);
+                throw new RequisitionException("Update failed.");
             }
         }
 
         /// <summary>
         /// Approval of the requisition
         /// </summary>
-        /// <param name="requisition"></param>
+        /// <param name="requisition">requisition object</param>
         public void ApproveRequisition(Requisition requisition)
         {
             try
@@ -115,14 +115,14 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Approval Failed.\n" + ex.Message);
+                throw new RequisitionException("Approval Failed.");
             }
         }
 
         /// <summary>
         /// Approve all the requisitions
         /// </summary>
-        /// <param name="requisitions"></param>
+        /// <param name="requisitions">requisition collection</param>
         public void ApproveRequisition(List<Requisition> requisitions)
         {
             if (requisitions != null)
@@ -137,7 +137,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Cancel the requisition before approval
         /// </summary>
-        /// <param name="cancelRequisition"></param>
+        /// <param name="cancelRequisition">requisition object</param>
         public void CancelRequisition(Requisition cancelRequisition)
         {
             try
@@ -150,23 +150,21 @@ namespace SA33.Team12.SSIS.DAL
 
                     var status = (from s in context.Statuses where s.Name == "Cancelled" select s).FirstOrDefault<Status>();
 
-                    UpdateRequisitionStatus(tempRequisition, status);
-                    //tempRequisition.ApprovedBy = requisition.ApprovedBy;
-                    //tempRequisition.DateApproved = requisition.DateApproved;
-                    //context.SaveChanges();
+                    UpdateRequisitionStatus(tempRequisition, status);                    
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
 
-                throw new ApplicationException("Approval Failed.\n" + ex.Message);
+                throw new RequisitionException("Approval Failed");
             }
         }
 
         /// <summary>
         /// Update the requisition before approval
         /// </summary>
-        /// <param name="updateRequisition"></param>
+        /// <param name="updateRequisition">requisition object</param>
         public void UpdateRequisition(Requisition updateRequisition)
         {
             try
@@ -181,32 +179,49 @@ namespace SA33.Team12.SSIS.DAL
             catch (Exception ex)
             {
                 
-                throw new ApplicationException("Update requisition failed.\n" + ex.Message);
+                throw new RequisitionException("Update requisition failed.");
             }
             
         }
 
         /// <summary>
-        /// Get Requistion by category
+        /// Get Requistions by category
         /// </summary>
-        /// <param name="category"></param>
-        /// <param name="requisitionSearchDTO"></param>
+        /// <param name="category">category object</param>
+        /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
         public List<Requisition> GetRequisitionByCategory(Category category, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
         }
 
+        /// <summary>
+        /// Get Requisitions by department
+        /// </summary>
+        /// <param name="department">department object</param>
+        /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
+        /// <returns></returns>
         public List<Requisition> GetRequisitionByDepartment(Department department, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
         }
 
+        /// <summary>
+        /// Get Requisitions by Employee
+        /// </summary>
+        /// <param name="user">user object</param>
+        /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
+        /// <returns></returns>
         public List<Requisition> GetRequisitionByEmployee(User user, RequisitioinSearchDTO requisitionSearchDTO)
         {
             return null;
         }
 
+        /// <summary>
+        /// Generate the requisitionID for each requisition
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
         private string GetRequisitionID(Requisition requisition)
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();

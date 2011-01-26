@@ -43,6 +43,7 @@
     <Compile Include="DepartmentException.cs" />
     <Compile Include="ExceptionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequisitionException.cs" />
     <Compile Include="UserException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
