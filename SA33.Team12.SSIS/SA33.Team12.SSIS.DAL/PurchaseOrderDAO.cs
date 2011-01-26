@@ -86,6 +86,18 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
+        public PurchaseOrder FindPurchaseOrderByID(int poID)
+        {
+            try
+            {
+                PurchaseOrder purchaseOrderTemp = (from p in context.PurchaseOrders where p.PurchaseOrderID == poID select p).FirstOrDefault();
+                return purchaseOrderTemp;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
     }
 }
