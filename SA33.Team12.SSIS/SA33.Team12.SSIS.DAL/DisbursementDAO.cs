@@ -16,6 +16,7 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class DisbursementDAO : DALLogic
     {
+        #region Disbursement
         public Disbursement CreateDisbursement(DAL.Disbursement disbursement)
         {
             try
@@ -102,7 +103,9 @@ namespace SA33.Team12.SSIS.DAL
             List<Disbursement> disbursements = Query.ToList<Disbursement>();
             return disbursements;
         }
+        #endregion
 
+        #region DisbursementItem
         public DisbursementItem CreateDisbursementItem(DAL.DisbursementItem disbursementItem)
         {
             try
@@ -176,6 +179,25 @@ namespace SA33.Team12.SSIS.DAL
                     where d.DisbursementItemID == disbursementItemID
                     select d).FirstOrDefault();
         }
+
+        public List<DisbursementItem> FindDisbursementItemsByCriteria(DTO.DisbursementItemSearchDTO criteria)
+        {
+            var Query =
+                from d in context.DisbursementItems
+                where d.DisbursementItemID == (criteria.DisbursementItemID == 0 ? d.DisbursementItemID : criteria.DisbursementItemID)
+                && d.DisbursementID == (criteria.DisbursementID == 0 ? d.DisbursementID : criteria.DisbursementID)
+                && d.StationeryRetrievalFormItemByDeptID == (criteria.StationeryRetrievalFormItemByDeptID == 0 ? d.StationeryRetrievalFormItemByDeptID : criteria.StationeryRetrievalFormItemByDeptID)
+                && d.AdjustmentVoucherID == (criteria.AdjustmentVoucherID == 0 ? d.AdjustmentVoucherID : criteria.AdjustmentVoucherID)
+                && d.StationeryID == (criteria.StationeryID == 0 ? d.StationeryID : criteria.StationeryID)
+                && d.SpeicalStationeryID == (criteria.SpecialStationeryID == 0 ? d.SpeicalStationeryID : criteria.SpecialStationeryID)
+                && d.QuantityDisbursed == (criteria.QuantityDisbursed == 0 ? d.QuantityDisbursed : criteria.QuantityDisbursed)
+                && d.QuantityDamaged == (criteria.QuantityDamaged == 0 ? d.QuantityDamaged : criteria.QuantityDamaged)
+                && d.Reason == (criteria.Reason == null || criteria.Reason == "" ? d.Reason : criteria.Reason)
+                select d;
+            List<DisbursementItem> disbursementItems = Query.ToList<DisbursementItem>();
+            return disbursementItems;
+        }
+        #endregion
         /*public Disbursement CreateDisbursementFromSRF(StationeryRetrievalForm SRF)
         {
             DAL.Disbursement disbursement;
