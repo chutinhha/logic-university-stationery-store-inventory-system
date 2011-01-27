@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DepartmentException.cs" />
     <Compile Include="DisbursementException.cs" />
+    <Compile Include="DisbursementItemException.cs" />
     <Compile Include="ExceptionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseOrderException.cs" />
