@@ -30,24 +30,11 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
+                //Create a transaction scope
                 using (TransactionScope ts = new TransactionScope())
                 {
                     //Add requisition to context                
                     context.AddToRequisitions(requisition);
-
-
-                    //Add requisition items to context
-                    foreach (RequisitionItem reqItem in requisition.RequisitionItems)
-                    {
-                        CreateRequisitionItem(reqItem);
-                    }
-
-                    //Add special requisition items to context
-                    foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
-                    {
-                        context.AddToSpecialStationeries(splItem.SpecialStationery);
-                        context.AddToSpecialRequisitionItems(splItem);
-                    }
 
                     //Get the status id for "Pending"
                     var status = (from s in context.Statuses where s.Name == "Pending" select s).FirstOrDefault<Status>();
@@ -58,15 +45,15 @@ namespace SA33.Team12.SSIS.DAL
                     //Save the changes
                     context.SaveChanges();
 
-                    //Transaction completed
+                    //Notify Transaction completed
                     ts.Complete();
                 }
             }
             catch (Exception ex)
             {
                 //Exception thrown incase if insert fails
-                //throw new RequisitionException("Create requisition failed." +ex.Message);
-                throw;
+                throw new RequisitionException("Create requisition failed." +ex.Message);
+              
             }
         }
 
@@ -179,10 +166,10 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Find All Requistions
+        /// Get All Requistions
         /// </summary>
         /// <returns></returns>
-        public List<Requisition> FindAllRequisition()
+        public List<Requisition> GetAllRequisition()
         {
             return (from c in context.Requisitions select c).ToList<Requisition>();
         }
@@ -193,7 +180,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
+        public List<Requisition> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -204,7 +191,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
+        public List<Requisition> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
         }
@@ -215,9 +202,19 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> FindRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<Requisition> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             return null;
+        }
+
+        /// <summary>
+        /// Get Requisition by primary key
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
+        /// <returns></returns>
+        public Requisition GetRequisitionByID(Requisition requisition)
+        {
+            return GetAllRequisition().Where(r => r.RequisitionID == requisition.RequisitionID).FirstOrDefault<Requisition>();
         }
 
         /// <summary>
@@ -256,7 +253,7 @@ namespace SA33.Team12.SSIS.DAL
             return (from q in tempQuery select q).ToList<Requisition>();
 
         }
-
+        
         /// <summary>
         /// Generate the requisitionID for each requisition
         /// </summary>
@@ -408,7 +405,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
                 temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
-                //  temp.Price = requisitionItem.Price;
+                temp.Price = specialRequisitionItem.Price;
 
                 context.SaveChanges();
             }
