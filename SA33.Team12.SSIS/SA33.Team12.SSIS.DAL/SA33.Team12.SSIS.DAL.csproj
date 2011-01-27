@@ -54,6 +54,7 @@
     <Compile Include="CatalogDAO.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="DTO\AdjustmentVoucherTransactionSearchDTO.cs" />
+    <Compile Include="DTO\ApprovalAuditSearchDTO.cs" />
     <Compile Include="DTO\CategorySearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
     <Compile Include="PurchaseOrder.cs" />
