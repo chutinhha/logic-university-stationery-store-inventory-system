@@ -27,17 +27,17 @@ namespace SA33.Team12.SSIS.BLL
 
         public void CreateDisbursementFromSRF(StationeryRetrievalForm SRF)
         {
-            disbursementDAO.CreateDisbursementFromSRF(SRF);
+           // disbursementDAO.CreateDisbursementFromSRF(SRF);
         }
 
         public void CancelDisbursement()
         {
-            disbursementDAO.CancelDisbursement();
+           // disbursementDAO.CancelDisbursement();
         }
 
         public void UpdateDisbursement(Disbursement disbursement,int newQuantity)
         {
-            disbursementDAO.UpdateDisbursementQuantity(disbursement,newQuantity);
+           // disbursementDAO.UpdateDisbursementQuantity(disbursement,newQuantity);
         }
     }
 }
