@@ -70,6 +70,19 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public List<DisbursementItem> GetAllDisbursementItem()
+        {
+            return (from d in context.DisbursementItems
+                    select d).ToList();
+        }
 
+        public DisbursementItem GetDisbursementItemByID(int disbursementItemID)
+        {
+            return (from d in context.DisbursementItems
+                    where d.DisbursementItemID == disbursementItemID
+                    select d).FirstOrDefault();
+        }
+
+        
     }
 }
