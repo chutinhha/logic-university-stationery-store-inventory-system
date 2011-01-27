@@ -15,6 +15,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public DateTime DateModified { get; set; }
         public int CreatedBy { get; set; }
         public int ModifiedBy { get; set; }
-        public int ApprovedBy { get; set; }       
+        public int ApprovedBy { get; set; }
     }
 }
