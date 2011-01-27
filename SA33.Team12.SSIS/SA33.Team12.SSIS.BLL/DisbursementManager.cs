@@ -25,9 +25,9 @@ namespace SA33.Team12.SSIS.BLL
             disbursementDAO.CreateDisbursement(disbursement);
         }
 
-        public void CreateDisbursementFromSRF()
+        public void CreateDisbursementFromSRF(StationeryRetrievalForm SRF)
         {
-            disbursementDAO.CreateDisbursementFromSRF();
+            disbursementDAO.CreateDisbursementFromSRF(SRF);
         }
 
         public void CancelDisbursement()
