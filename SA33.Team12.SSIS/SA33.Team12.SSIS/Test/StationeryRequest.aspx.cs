@@ -13,17 +13,15 @@ namespace SA33.Team12.SSIS.Test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
             //Create instance of new requisition
             Requisition r = new Requisition();
-
          
             UserDAO user = new UserDAO();
             RequisitionDAO rq = new RequisitionDAO(); 
-            CatalogDAO cat = new CatalogDAO();
-           
+            CatalogDAO cat = new CatalogDAO();           
 
-            //set the properties of requisition object
+            //set the properties of requisition object            
             r.DepartmentID = user.GetDepartmentByID(1).DepartmentID;
             r.CreatedBy = user.GetUserByID(1).UserID;
             r.ApprovedBy = user.GetUserByID(2).UserID;
@@ -43,6 +41,7 @@ namespace SA33.Team12.SSIS.Test
 
             };
 
+
             //Create a new specialrequisitionitem for the current requisition
             SpecialRequisitionItem spi = new SpecialRequisitionItem()
             {
@@ -50,12 +49,13 @@ namespace SA33.Team12.SSIS.Test
                 SpeicalStationeryID = 1,
                 QuantityRequested = 10,
                 QuantityIssued = 10,
-                Price = 5
+                Price = 5,
+                Name = "arav",
+                Description = "tes"
             };
 
 
             //Add Child objects of the requisition objects
-
             //Add requisitionitem to requisition object
             r.RequisitionItems.Add(rqi);
 
@@ -65,6 +65,16 @@ namespace SA33.Team12.SSIS.Test
             //Persist requisition to database
             //EF is very intelligent. It will also persist to requistionitem and specialrequistionitem
             rq.CreateRequisition(r);
+
+
+            //Testing databinding after creation of requisitions
+            if (!IsPostBack)
+            {
+                if(r != null)
+                GridView1.DataSource = rq.GetRequisitionByID(r).RequisitionItems;
+                GridView1.DataBind();
+            }
+
         }
     }
 }

@@ -65,9 +65,9 @@ namespace SA33.Team12.SSIS.BLL
         /// Find All Requistions
         /// </summary>
         /// <returns></returns>
-        public List<Requisition> FindAllRequisition()
+        public List<Requisition> GetAllRequisition()
         {
-            return requisitionDAO.FindAllRequisition();
+            return requisitionDAO.GetAllRequisition();
         }
 
         public void GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
