@@ -24,5 +24,4 @@ namespace SA33.Team12.SSIS.DAL
             [Required(ErrorMessage = "Please select stationery item!")]
             public string StationeryID { get; set; }
         }
-    }
 }
