@@ -57,6 +57,7 @@
     <Compile Include="DTO\AdjustmentVoucherTransactionSearchDTO.cs" />
     <Compile Include="DTO\ApprovalAuditSearchDTO.cs" />
     <Compile Include="DTO\CategorySearchDTO.cs" />
+    <Compile Include="DTO\DisbursementItemSearchDTO.cs" />
     <Compile Include="DTO\DisbursementSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
     <Compile Include="DTO\StatusSearchDTO.cs" />
