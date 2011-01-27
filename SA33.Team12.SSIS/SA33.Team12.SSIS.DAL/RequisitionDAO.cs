@@ -30,35 +30,43 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                //Add requisition to context                
-                context.AddToRequisitions(requisition);
-
-                //Add requisition items to context
-                foreach (RequisitionItem reqItem in requisition.RequisitionItems)
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    CreateRequisitionItem(reqItem);
+                    //Add requisition to context                
+                    context.AddToRequisitions(requisition);
+
+
+                    //Add requisition items to context
+                    foreach (RequisitionItem reqItem in requisition.RequisitionItems)
+                    {
+                        CreateRequisitionItem(reqItem);
+                    }
+
+                    //Add special requisition items to context
+                    foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
+                    {
+                        context.AddToSpecialStationeries(splItem.SpecialStationery);
+                        context.AddToSpecialRequisitionItems(splItem);
+                    }
+
+                    //Get the status id for "Pending"
+                    var status = (from s in context.Statuses where s.Name == "Pending" select s).FirstOrDefault<Status>();
+
+                    //Update the status id for the new requistion to "Pending"
+                    UpdateRequisitionStatus(requisition, status);
+
+                    //Save the changes
+                    context.SaveChanges();
+
+                    //Transaction completed
+                    ts.Complete();
                 }
-
-                //Add special requisition items to context
-                foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
-                {
-                    context.AddToSpecialStationeries(splItem.SpecialStationery);
-                    context.AddToSpecialRequisitionItems(splItem);
-                }
-
-                //Get the status id for "Pending"
-                var status = (from s in context.Statuses where s.Name == "Pending" select s).FirstOrDefault<Status>();
-
-                //Update the status id for the new requistion to "Pending"
-                UpdateRequisitionStatus(requisition, status);
-
-                //Save the changes
-                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 //Exception thrown incase if insert fails
-                throw new RequisitionException("Create requisition failed.");
+                //throw new RequisitionException("Create requisition failed." +ex.Message);
+                throw;
             }
         }
 
@@ -79,8 +87,7 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception ex)
             {
-
-                throw new RequisitionException("Update requisition failed.");
+                throw new RequisitionException("Update requisition failed." + ex.Message);
             }
         }
 
@@ -93,21 +100,10 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                //Transcation processing
-                using (TransactionScope ts = new TransactionScope())
-                {
-                    //Get the requistion to update the status
-                    var tempRequisition = (from p in context.Requisitions
-                                           where p.RequisitionID == requisition.RequisitionID
-                                           select p).FirstOrDefault<Requisition>();
-
-                    tempRequisition.Status = status;
-                    context.SaveChanges();
-                }
+                requisition.StatusID = status.StatusID;
             }
             catch (Exception ex)
             {
-
                 throw new RequisitionException("Update failed.");
             }
         }
@@ -270,7 +266,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
-        } 
+        }
         #endregion
 
         #region RequisitionItem
@@ -376,7 +372,7 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
-        
+
         #endregion
 
         #region SpecialRequisitionItem
@@ -412,7 +408,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
                 temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
-              //  temp.Price = requisitionItem.Price;
+                //  temp.Price = requisitionItem.Price;
 
                 context.SaveChanges();
             }
@@ -547,7 +543,7 @@ namespace SA33.Team12.SSIS.DAL
         public List<Status> GetStatusByCriteria(StatusSearchDTO statusSearchDTO)
         {
             return GetAllStatuses().Where(s => s.Name == statusSearchDTO.Name).ToList<Status>();
-        } 
+        }
         #endregion
 
         #region Urgency
@@ -610,7 +606,7 @@ namespace SA33.Team12.SSIS.DAL
         public List<Urgency> GetUrgencyByCriteria(UrgencySearchDTO urgencySearchDTO)
         {
             return GetAllUrgencies().Where(s => s.Name == urgencySearchDTO.Name).ToList<Urgency>();
-        }  
+        }
         #endregion
     }
 }
