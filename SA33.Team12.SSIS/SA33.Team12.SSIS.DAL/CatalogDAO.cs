@@ -26,13 +26,13 @@ namespace SA33.Team12.SSIS.DAL
                     && c.Name.Contains((criteria.Name == null || criteria.Name == "" ? c.Name : criteria.Name))
                     && c.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? c.UnitOfMeasure : criteria.UnitOfMeasure)
                     && c.IsApproved == (criteria.IsApproved == null ? c.IsApproved : criteria.IsApproved)
-                    //&& c.DateCreated == (criteria.DateCreated == null || criteria.DateCreated == "" ? c.DateCreated : criteria.DateCreated)
-                    ////&& (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
-                    ////&& EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
-                    ////&& (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
-                    //&& c.DateModified == (criteria.DateModified == null || criteria.DateModified == "" ? c.DateModified : criteria.DateModified)
-                    //&& (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
-                    //&& EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
+                    //XX && c.DateCreated == (criteria.DateCreated == null || criteria.DateCreated == "" ? c.DateCreated : criteria.DateCreated)
+                    && (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateCreated == DateTime.MinValue ? c.DateCreated : criteria.StartDateCreated)) <= 0
+                      && EntityFunctions.DiffDays(c.DateCreated, (criteria.EndDateCreated == null || criteria.EndDateCreated == DateTime.MinValue ? c.DateCreated : criteria.EndDateCreated)) >= 0)
+                    && (EntityFunctions.DiffDays(c.DateCreated, (criteria.ExactDateCreated == null || criteria.ExactDateCreated == DateTime.MinValue ? c.DateCreated : criteria.ExactDateCreated)) == 0)
+                    //XX && c.DateModified == (criteria.DateModified == null || criteria.DateModified == "" ? c.DateModified : criteria.DateModified)
+                    //&& (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.StartDateBlackListed == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
+                        //&& EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
                     //&& (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
                     && c.CreatedBy == (criteria.CreatedBy == null ? c.CreatedBy : criteria.CreatedBy)
                     && c.ModifiedBy == (criteria.ModifiedBy == null ? c.ModifiedBy : criteria.ModifiedBy)
