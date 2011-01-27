@@ -3637,7 +3637,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="dateReceived">Initial value of the DateReceived property.</param>
         /// <param name="supplierID">Initial value of the SupplierID property.</param>
         /// <param name="isDelivered">Initial value of the IsDelivered property.</param>
-        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered)
+        /// <param name="dateToSuppy">Initial value of the DateToSuppy property.</param>
+        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered, global::System.DateTime dateToSuppy)
         {
             PurchaseOrder purchaseOrder = new PurchaseOrder();
             purchaseOrder.PurchaseOrderID = purchaseOrderID;
@@ -3648,6 +3649,7 @@ namespace SA33.Team12.SSIS.DAL
             purchaseOrder.DateReceived = dateReceived;
             purchaseOrder.SupplierID = supplierID;
             purchaseOrder.IsDelivered = isDelivered;
+            purchaseOrder.DateToSuppy = dateToSuppy;
             return purchaseOrder;
         }
 
@@ -3896,6 +3898,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Boolean _IsDelivered;
         partial void OnIsDeliveredChanging(global::System.Boolean value);
         partial void OnIsDeliveredChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateToSuppy
+        {
+            get
+            {
+                return _DateToSuppy;
+            }
+            set
+            {
+                OnDateToSuppyChanging(value);
+                ReportPropertyChanging("DateToSuppy");
+                _DateToSuppy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateToSuppy");
+                OnDateToSuppyChanged();
+            }
+        }
+        private global::System.DateTime _DateToSuppy;
+        partial void OnDateToSuppyChanging(global::System.DateTime value);
+        partial void OnDateToSuppyChanged();
 
         #endregion
     
