@@ -28,7 +28,7 @@ namespace SA33.Team12.SSIS.DAL
 
 
         }
-        public List<PurchaseOrderItem> GetAllPurchaseOrder()
+        public List<PurchaseOrderItem> GetAllPurchaseOrderItem()
         {
             return (from p in context.PurchaseOrderItems
                     select p).ToList();
