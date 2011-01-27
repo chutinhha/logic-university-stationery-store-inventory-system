@@ -73,6 +73,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
 
 #endregion
 
@@ -571,6 +572,54 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         private ObjectSet<SpecialStationery> _SpecialStationeries;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VW_RequisitionsByCategory> VW_RequisitionsByCategory
+        {
+            get
+            {
+                if ((_VW_RequisitionsByCategory == null))
+                {
+                    _VW_RequisitionsByCategory = base.CreateObjectSet<VW_RequisitionsByCategory>("VW_RequisitionsByCategory");
+                }
+                return _VW_RequisitionsByCategory;
+            }
+        }
+        private ObjectSet<VW_RequisitionsByCategory> _VW_RequisitionsByCategory;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VW_RequisitionsByDepartment> VW_RequisitionsByDepartment
+        {
+            get
+            {
+                if ((_VW_RequisitionsByDepartment == null))
+                {
+                    _VW_RequisitionsByDepartment = base.CreateObjectSet<VW_RequisitionsByDepartment>("VW_RequisitionsByDepartment");
+                }
+                return _VW_RequisitionsByDepartment;
+            }
+        }
+        private ObjectSet<VW_RequisitionsByDepartment> _VW_RequisitionsByDepartment;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VW_RequisitionsByEmployee> VW_RequisitionsByEmployee
+        {
+            get
+            {
+                if ((_VW_RequisitionsByEmployee == null))
+                {
+                    _VW_RequisitionsByEmployee = base.CreateObjectSet<VW_RequisitionsByEmployee>("VW_RequisitionsByEmployee");
+                }
+                return _VW_RequisitionsByEmployee;
+            }
+        }
+        private ObjectSet<VW_RequisitionsByEmployee> _VW_RequisitionsByEmployee;
 
         #endregion
         #region AddTo Methods
@@ -797,6 +846,30 @@ namespace SA33.Team12.SSIS.DAL
         public void AddToSpecialStationeries(SpecialStationery specialStationery)
         {
             base.AddObject("SpecialStationeries", specialStationery);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VW_RequisitionsByCategory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVW_RequisitionsByCategory(VW_RequisitionsByCategory vW_RequisitionsByCategory)
+        {
+            base.AddObject("VW_RequisitionsByCategory", vW_RequisitionsByCategory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VW_RequisitionsByDepartment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVW_RequisitionsByDepartment(VW_RequisitionsByDepartment vW_RequisitionsByDepartment)
+        {
+            base.AddObject("VW_RequisitionsByDepartment", vW_RequisitionsByDepartment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VW_RequisitionsByEmployee EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVW_RequisitionsByEmployee(VW_RequisitionsByEmployee vW_RequisitionsByEmployee)
+        {
+            base.AddObject("VW_RequisitionsByEmployee", vW_RequisitionsByEmployee);
         }
 
         #endregion
@@ -2559,6 +2632,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Int32 _CreatedBy;
         partial void OnCreatedByChanging(global::System.Int32 value);
         partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> StationeryRetrievalFormID
+        {
+            get
+            {
+                return _StationeryRetrievalFormID;
+            }
+            set
+            {
+                OnStationeryRetrievalFormIDChanging(value);
+                ReportPropertyChanging("StationeryRetrievalFormID");
+                _StationeryRetrievalFormID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StationeryRetrievalFormID");
+                OnStationeryRetrievalFormIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _StationeryRetrievalFormID;
+        partial void OnStationeryRetrievalFormIDChanging(Nullable<global::System.Int32> value);
+        partial void OnStationeryRetrievalFormIDChanged();
 
         #endregion
     
@@ -2620,6 +2717,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.Disbursement_Created_By", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm")]
+        public StationeryRetrievalForm StationeryRetrievalForm
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<StationeryRetrievalForm> StationeryRetrievalFormReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm", value);
                 }
             }
         }
@@ -5006,13 +5141,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="requisitionID">Initial value of the RequisitionID property.</param>
         /// <param name="quantityRequested">Initial value of the QuantityRequested property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static SpecialRequisitionItem CreateSpecialRequisitionItem(global::System.Int32 specialRequisitionItemsID, global::System.Int32 requisitionID, global::System.Int32 quantityRequested, global::System.String name)
+        /// <param name="price">Initial value of the Price property.</param>
+        public static SpecialRequisitionItem CreateSpecialRequisitionItem(global::System.Int32 specialRequisitionItemsID, global::System.Int32 requisitionID, global::System.Int32 quantityRequested, global::System.String name, global::System.Decimal price)
         {
             SpecialRequisitionItem specialRequisitionItem = new SpecialRequisitionItem();
             specialRequisitionItem.SpecialRequisitionItemsID = specialRequisitionItemsID;
             specialRequisitionItem.RequisitionID = requisitionID;
             specialRequisitionItem.QuantityRequested = quantityRequested;
             specialRequisitionItem.Name = name;
+            specialRequisitionItem.Price = price;
             return specialRequisitionItem;
         }
 
@@ -5213,6 +5350,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _RemarkByRequester;
         partial void OnRemarkByRequesterChanging(global::System.String value);
         partial void OnRemarkByRequesterChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
 
         #endregion
     
@@ -6800,6 +6961,28 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.Stationery_RetrievedBy", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_Disbursements_FK1", "Disbursement")]
+        public EntityCollection<Disbursement> Disbursements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Disbursement>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "Disbursement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Disbursement>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "Disbursement", value);
                 }
             }
         }
@@ -9451,6 +9634,541 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="VW_RequisitionsByCategory")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class VW_RequisitionsByCategory : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new VW_RequisitionsByCategory object.
+        /// </summary>
+        /// <param name="itemCode">Initial value of the ItemCode property.</param>
+        public static VW_RequisitionsByCategory CreateVW_RequisitionsByCategory(global::System.String itemCode)
+        {
+            VW_RequisitionsByCategory vW_RequisitionsByCategory = new VW_RequisitionsByCategory();
+            vW_RequisitionsByCategory.ItemCode = itemCode;
+            return vW_RequisitionsByCategory;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ItemCode
+        {
+            get
+            {
+                return _ItemCode;
+            }
+            set
+            {
+                if (_ItemCode != value)
+                {
+                    OnItemCodeChanging(value);
+                    ReportPropertyChanging("ItemCode");
+                    _ItemCode = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("ItemCode");
+                    OnItemCodeChanged();
+                }
+            }
+        }
+        private global::System.String _ItemCode;
+        partial void OnItemCodeChanging(global::System.String value);
+        partial void OnItemCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TotalQuantity
+        {
+            get
+            {
+                return _TotalQuantity;
+            }
+            set
+            {
+                OnTotalQuantityChanging(value);
+                ReportPropertyChanging("TotalQuantity");
+                _TotalQuantity = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalQuantity");
+                OnTotalQuantityChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TotalQuantity;
+        partial void OnTotalQuantityChanging(Nullable<global::System.Int32> value);
+        partial void OnTotalQuantityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TotalPrice
+        {
+            get
+            {
+                return _TotalPrice;
+            }
+            set
+            {
+                OnTotalPriceChanging(value);
+                ReportPropertyChanging("TotalPrice");
+                _TotalPrice = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalPrice");
+                OnTotalPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TotalPrice;
+        partial void OnTotalPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnTotalPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UnitOfMeasure
+        {
+            get
+            {
+                return _UnitOfMeasure;
+            }
+            set
+            {
+                OnUnitOfMeasureChanging(value);
+                ReportPropertyChanging("UnitOfMeasure");
+                _UnitOfMeasure = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UnitOfMeasure");
+                OnUnitOfMeasureChanged();
+            }
+        }
+        private global::System.String _UnitOfMeasure;
+        partial void OnUnitOfMeasureChanging(global::System.String value);
+        partial void OnUnitOfMeasureChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="VW_RequisitionsByDepartment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class VW_RequisitionsByDepartment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new VW_RequisitionsByDepartment object.
+        /// </summary>
+        /// <param name="itemCode">Initial value of the ItemCode property.</param>
+        public static VW_RequisitionsByDepartment CreateVW_RequisitionsByDepartment(global::System.String itemCode)
+        {
+            VW_RequisitionsByDepartment vW_RequisitionsByDepartment = new VW_RequisitionsByDepartment();
+            vW_RequisitionsByDepartment.ItemCode = itemCode;
+            return vW_RequisitionsByDepartment;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ItemCode
+        {
+            get
+            {
+                return _ItemCode;
+            }
+            set
+            {
+                if (_ItemCode != value)
+                {
+                    OnItemCodeChanging(value);
+                    ReportPropertyChanging("ItemCode");
+                    _ItemCode = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("ItemCode");
+                    OnItemCodeChanged();
+                }
+            }
+        }
+        private global::System.String _ItemCode;
+        partial void OnItemCodeChanging(global::System.String value);
+        partial void OnItemCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TotalQuantity
+        {
+            get
+            {
+                return _TotalQuantity;
+            }
+            set
+            {
+                OnTotalQuantityChanging(value);
+                ReportPropertyChanging("TotalQuantity");
+                _TotalQuantity = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalQuantity");
+                OnTotalQuantityChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TotalQuantity;
+        partial void OnTotalQuantityChanging(Nullable<global::System.Int32> value);
+        partial void OnTotalQuantityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TotalPrice
+        {
+            get
+            {
+                return _TotalPrice;
+            }
+            set
+            {
+                OnTotalPriceChanging(value);
+                ReportPropertyChanging("TotalPrice");
+                _TotalPrice = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalPrice");
+                OnTotalPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TotalPrice;
+        partial void OnTotalPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnTotalPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="VW_RequisitionsByEmployee")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class VW_RequisitionsByEmployee : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new VW_RequisitionsByEmployee object.
+        /// </summary>
+        /// <param name="requisitionForm">Initial value of the RequisitionForm property.</param>
+        /// <param name="dateRequested">Initial value of the DateRequested property.</param>
+        /// <param name="withSpecial">Initial value of the WithSpecial property.</param>
+        public static VW_RequisitionsByEmployee CreateVW_RequisitionsByEmployee(global::System.String requisitionForm, global::System.DateTime dateRequested, global::System.String withSpecial)
+        {
+            VW_RequisitionsByEmployee vW_RequisitionsByEmployee = new VW_RequisitionsByEmployee();
+            vW_RequisitionsByEmployee.RequisitionForm = requisitionForm;
+            vW_RequisitionsByEmployee.DateRequested = dateRequested;
+            vW_RequisitionsByEmployee.WithSpecial = withSpecial;
+            return vW_RequisitionsByEmployee;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RequisitionForm
+        {
+            get
+            {
+                return _RequisitionForm;
+            }
+            set
+            {
+                if (_RequisitionForm != value)
+                {
+                    OnRequisitionFormChanging(value);
+                    ReportPropertyChanging("RequisitionForm");
+                    _RequisitionForm = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("RequisitionForm");
+                    OnRequisitionFormChanged();
+                }
+            }
+        }
+        private global::System.String _RequisitionForm;
+        partial void OnRequisitionFormChanging(global::System.String value);
+        partial void OnRequisitionFormChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateRequested
+        {
+            get
+            {
+                return _DateRequested;
+            }
+            set
+            {
+                if (_DateRequested != value)
+                {
+                    OnDateRequestedChanging(value);
+                    ReportPropertyChanging("DateRequested");
+                    _DateRequested = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DateRequested");
+                    OnDateRequestedChanged();
+                }
+            }
+        }
+        private global::System.DateTime _DateRequested;
+        partial void OnDateRequestedChanging(global::System.DateTime value);
+        partial void OnDateRequestedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String WithSpecial
+        {
+            get
+            {
+                return _WithSpecial;
+            }
+            set
+            {
+                if (_WithSpecial != value)
+                {
+                    OnWithSpecialChanging(value);
+                    ReportPropertyChanging("WithSpecial");
+                    _WithSpecial = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("WithSpecial");
+                    OnWithSpecialChanged();
+                }
+            }
+        }
+        private global::System.String _WithSpecial;
+        partial void OnWithSpecialChanging(global::System.String value);
+        partial void OnWithSpecialChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Expense
+        {
+            get
+            {
+                return _Expense;
+            }
+            set
+            {
+                OnExpenseChanging(value);
+                ReportPropertyChanging("Expense");
+                _Expense = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Expense");
+                OnExpenseChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Expense;
+        partial void OnExpenseChanging(Nullable<global::System.Decimal> value);
+        partial void OnExpenseChanged();
+
+        #endregion
+    
     }
 
     #endregion
