@@ -11,5 +11,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public int DepartmentID { get; set; }
         public DateTime StartDateBlackListed { get; set; }
         public DateTime EndDateBlackListed { get; set; }
+        public DateTime ExactDateBlackListed { get; set; }
     }
 }
