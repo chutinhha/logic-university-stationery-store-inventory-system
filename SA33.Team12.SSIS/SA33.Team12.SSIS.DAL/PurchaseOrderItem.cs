@@ -11,10 +11,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SA33.Team12.SSIS.DAL
 {
-    public partial class PurchaseOrderItem
-    {
         [MetadataType(typeof(PurchaseOrderItemMetaData))]
-        public partial class PurchaseOrder
+        public partial class PurchaseOrderItem
         {
         }
 
