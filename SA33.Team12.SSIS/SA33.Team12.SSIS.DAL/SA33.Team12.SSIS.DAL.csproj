@@ -63,7 +63,6 @@
     <Compile Include="DTO\UrgencySearchDTO.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseOrderItem.cs" />
-    <Compile Include="PurchaseOrderItemDAO.cs" />
     <Compile Include="Requisition.cs" />
     <Compile Include="DALLogic.cs" />
     <Compile Include="DisbursementDAO.cs" />
