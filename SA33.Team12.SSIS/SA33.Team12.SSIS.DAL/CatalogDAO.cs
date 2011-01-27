@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Transactions;
+using System.Data;
+using System.Data.Objects;
 using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.DAL
@@ -19,15 +22,21 @@ namespace SA33.Team12.SSIS.DAL
             {
                 var Query =
                     from c in context.Categories
-                    where c.CategoryID == (criteria.CateogryID == 0 ? c.CategoryID : criteria.CateogryID)
+                    where c.CategoryID == (criteria.CategoryID == 0 ? c.CategoryID : criteria.CategoryID)
                     && c.Name.Contains((criteria.Name == null || criteria.Name == "" ? c.Name : criteria.Name))
                     && c.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? c.UnitOfMeasure : criteria.UnitOfMeasure)
-                    && c.IsApproved == (criteria.isApproved == null ? c.IsApproved : criteria.IsApproved)
-                    && c.DateCreated == (criteria.DateCreated == null || criteria.DateCreated == "" ? c.DateCreated : criteria.DateCreated)
-                    && c.DateModified == (criteria.DateModified == null || criteria.DateModified == "" ? c.DateModified : criteria.DateModified)
-                    && c.CreatedBy == (criteria.CreatedBy == null || criteria.CreatedBy == "" ? c.CreatedBy : criteria.CreatedBy)
-                    && c.ModifiedBy == (criteria.ModifiedBy == null || criteria.ModifiedBy == "" ? c.ModifiedBy : criteria.ModifiedBy)
-                    && c.ApprovedBy == (criteria.ApprovedBy == null || criteria.ApprovedBy == "" ? c.ApprovedBy : criteria.ApprovedBy)
+                    && c.IsApproved == (criteria.IsApproved == null ? c.IsApproved : criteria.IsApproved)
+                    //&& c.DateCreated == (criteria.DateCreated == null || criteria.DateCreated == "" ? c.DateCreated : criteria.DateCreated)
+                    ////&& (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
+                    ////&& EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
+                    ////&& (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
+                    //&& c.DateModified == (criteria.DateModified == null || criteria.DateModified == "" ? c.DateModified : criteria.DateModified)
+                    //&& (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
+                    //&& EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
+                    //&& (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
+                    && c.CreatedBy == (criteria.CreatedBy == null ? c.CreatedBy : criteria.CreatedBy)
+                    && c.ModifiedBy == (criteria.ModifiedBy == null ? c.ModifiedBy : criteria.ModifiedBy)
+                    && c.ApprovedBy == (criteria.ApprovedBy == null ? c.ApprovedBy : criteria.ApprovedBy)
                     select c;
                 List<Category> categories = Query.ToList<Category>();
                 return categories;
