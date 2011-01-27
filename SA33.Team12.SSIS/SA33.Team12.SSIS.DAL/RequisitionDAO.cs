@@ -13,6 +13,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using System.Transactions;
 using SA33.Team12.SSIS.Exceptions;
+using System.Data.Objects;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -191,8 +192,16 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
+            //var Query = null;
+               //from re in context.VW_RequisitionsByDepartment
+               //where re. == (user.UserName == "" ? re.UserName : user.UserName)
+               //&& (EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.StartDateRequested == null || requisitionSearchDTO.StartDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.StartDateRequested)) <= 0
+               //    && EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.EndDateRequested == null || requisitionSearchDTO.EndDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.EndDateRequested)) >= 0)
+
+               //select re;
+
             return null;
         }
 
@@ -202,9 +211,18 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<Requisition> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
-            return null;
+            var Query =
+                  from re in context.VW_RequisitionsByEmployee
+                  where re.UserName == (user.UserName == "" ? re.UserName : user.UserName)                 
+                  && (EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.StartDateRequested == null || requisitionSearchDTO.StartDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.StartDateRequested)) <= 0
+                      && EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.EndDateRequested == null || requisitionSearchDTO.EndDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.EndDateRequested)) >= 0)
+                  
+                  select re;
+
+            return Query.ToList<VW_RequisitionsByEmployee>();
+            
         }
 
         /// <summary>
