@@ -50,6 +50,26 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public void DeleteDisbursementItem(DAL.DisbursementItem disbursementItem)
+        {
+            try
+            {
+                DisbursementItem persistedDisbursementItem = (from d in context.DisbursementItems
+                                                              where d.DisbursementItemID == disbursementItem.DisbursementItemID
+                                                              select d).FirstOrDefault();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.DisbursementItems.DeleteObject(persistedDisbursementItem);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch
+            {
+                throw new Exceptions.DisbursmentItemException("Delete object not successful");
+            }
+        }
+
 
     }
 }
