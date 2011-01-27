@@ -79,7 +79,7 @@ namespace SA33.Team12.SSIS.Test
             {
                 if (r != null)
                 {
-                    GridView1.DataSource = rq.GetRequisitionByEmployee(user.GetUserByID(1), rsearch);
+                    GridView1.DataSource = rq.GetRequisitionByEmployee(user.GetUserByID(1), rsearch.StartDateRequested);
                     GridView1.DataBind();
                 }
             }
