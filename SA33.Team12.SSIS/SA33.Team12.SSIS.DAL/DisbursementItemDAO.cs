@@ -27,6 +27,29 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        
+        public DisbursementItem UpdateDisbursementItem(DAL.DisbursementItem disbursementItem)
+        {
+            try
+            {
+                DisbursementItem tempDisbursementItem = (from d in context.DisbursementItems
+                                                         where d.DisbursementItemID == disbursementItem.DisbursementItemID
+                                                         select d).First<DisbursementItem>();
+                tempDisbursementItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempDisbursementItem);
+                    context.ObjectStateManager.ChangeObjectState(tempDisbursementItem, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempDisbursementItem;
+                }
+            }
+            catch
+            {
+                throw new Exceptions.DisbursmentItemException("Update object not successful");
+            }
+        }
+
+
     }
 }
