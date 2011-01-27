@@ -14,7 +14,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             using (TransactionScope ts = new TransactionScope())
             {
-                context.Disbursements.AddObject(disbursementItem);
+       
 
             }
         }
