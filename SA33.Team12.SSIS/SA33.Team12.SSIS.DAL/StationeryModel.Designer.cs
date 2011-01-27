@@ -9832,6 +9832,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _UnitOfMeasure;
         partial void OnUnitOfMeasureChanging(global::System.String value);
         partial void OnUnitOfMeasureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CategoryID
+        {
+            get
+            {
+                return _CategoryID;
+            }
+            set
+            {
+                OnCategoryIDChanging(value);
+                ReportPropertyChanging("CategoryID");
+                _CategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CategoryID");
+                OnCategoryIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CategoryID;
+        partial void OnCategoryIDChanging(Nullable<global::System.Int32> value);
+        partial void OnCategoryIDChanged();
 
         #endregion
     
@@ -10007,6 +10031,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DepartmentID
+        {
+            get
+            {
+                return _DepartmentID;
+            }
+            set
+            {
+                OnDepartmentIDChanging(value);
+                ReportPropertyChanging("DepartmentID");
+                _DepartmentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DepartmentID");
+                OnDepartmentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DepartmentID;
+        partial void OnDepartmentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnDepartmentIDChanged();
 
         #endregion
     

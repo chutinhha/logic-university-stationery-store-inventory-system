@@ -176,14 +176,34 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Get Requistions by category
+        /// Get All Requistions by category
+        /// </summary>
+        /// <returns></returns>
+        public List<VW_RequisitionsByCategory> GetAllRequisitionByCategory()
+        {
+            return (from ri in context.VW_RequisitionsByCategory select ri).ToList<VW_RequisitionsByCategory>();
+        }
+
+        /// <summary>
+        /// Get Requistions by category filter
         /// </summary>
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
-        /// <returns></returns>
-        public List<Requisition> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
+        /// <returns>List of Requisitions by category</returns>
+        public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, DateTime date)
         {
-            return null;
+            return GetAllRequisitionByCategory()
+                .Where(ri => ri.CategoryID == (category.CategoryID == 0 ? ri.CategoryID : category.CategoryID)) 
+                 .ToList<VW_RequisitionsByCategory>();
+        }
+
+        /// <summary>
+        /// Get All Requistions by department
+        /// </summary>
+        /// <returns>List of Requisitions by department</returns>
+        public List<VW_RequisitionsByDepartment> GetAllRequisitionByDepartment()
+        {
+            return (from ri in context.VW_RequisitionsByDepartment select ri).ToList<VW_RequisitionsByDepartment>();
         }
 
         /// <summary>
@@ -192,17 +212,21 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, DateTime date)
         {
-            //var Query = null;
-               //from re in context.VW_RequisitionsByDepartment
-               //where re. == (user.UserName == "" ? re.UserName : user.UserName)
-               //&& (EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.StartDateRequested == null || requisitionSearchDTO.StartDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.StartDateRequested)) <= 0
-               //    && EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.EndDateRequested == null || requisitionSearchDTO.EndDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.EndDateRequested)) >= 0)
+            return GetAllRequisitionByDepartment()
+                .Where(ri => ri.DepartmentID == (department.DepartmentID == 0 ? ri.DepartmentID : department.DepartmentID))
+                .ToList<VW_RequisitionsByDepartment>();
+                
+        }
 
-               //select re;
-
-            return null;
+        /// <summary>
+        /// Get All Requistions by employee
+        /// </summary>
+        /// <returns>List of Requisitions by employee</returns>
+        public List<VW_RequisitionsByEmployee> GetAllRequisitionByEmployee()
+        {
+            return (from ri in context.VW_RequisitionsByEmployee select ri).ToList<VW_RequisitionsByEmployee>();
         }
 
         /// <summary>
@@ -211,17 +235,14 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, DateTime date)
         {
-            var Query =
-                  from re in context.VW_RequisitionsByEmployee
-                  where re.UserName == (user.UserName == "" ? re.UserName : user.UserName)                 
-                  && (EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.StartDateRequested == null || requisitionSearchDTO.StartDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.StartDateRequested)) <= 0
-                      && EntityFunctions.DiffDays(re.DateRequested, (requisitionSearchDTO.EndDateRequested == null || requisitionSearchDTO.EndDateRequested == DateTime.MinValue ? re.DateRequested : requisitionSearchDTO.EndDateRequested)) >= 0)
+            return GetAllRequisitionByEmployee().
+                  Where (re => re.DateRequested.Month == (date.Month == 0 ? re.DateRequested.Month : date.Month)                 
+                  && re.DateRequested.Year == (date.Year == 0 ? re.DateRequested.Year : date.Year))               
                   
-                  select re;
 
-            return Query.ToList<VW_RequisitionsByEmployee>();
+            .ToList<VW_RequisitionsByEmployee>();
             
         }
 

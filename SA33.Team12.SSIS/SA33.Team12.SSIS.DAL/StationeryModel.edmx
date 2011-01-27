@@ -41,7 +41,8 @@
       [VW_RequisitionsByCategory].[TotalQuantity] AS [TotalQuantity], 
       [VW_RequisitionsByCategory].[TotalPrice] AS [TotalPrice], 
       [VW_RequisitionsByCategory].[Name] AS [Name], 
-      [VW_RequisitionsByCategory].[UnitOfMeasure] AS [UnitOfMeasure]
+      [VW_RequisitionsByCategory].[UnitOfMeasure] AS [UnitOfMeasure], 
+      [VW_RequisitionsByCategory].[CategoryID] AS [CategoryID]
       FROM [dbo].[VW_RequisitionsByCategory] AS [VW_RequisitionsByCategory]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_RequisitionsByDepartment" EntityType="SA33.Team12.SSIS.Model.Store.VW_RequisitionsByDepartment" store:Type="Views" store:Schema="dbo" store:Name="VW_RequisitionsByDepartment">
@@ -51,7 +52,8 @@
       [VW_RequisitionsByDepartment].[TotalQuantity] AS [TotalQuantity], 
       [VW_RequisitionsByDepartment].[TotalPrice] AS [TotalPrice], 
       [VW_RequisitionsByDepartment].[Code] AS [Code], 
-      [VW_RequisitionsByDepartment].[Name] AS [Name]
+      [VW_RequisitionsByDepartment].[Name] AS [Name], 
+      [VW_RequisitionsByDepartment].[DepartmentID] AS [DepartmentID]
       FROM [dbo].[VW_RequisitionsByDepartment] AS [VW_RequisitionsByDepartment]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_RequisitionsByEmployee" EntityType="SA33.Team12.SSIS.Model.Store.VW_RequisitionsByEmployee" store:Type="Views" store:Schema="dbo" store:Name="VW_RequisitionsByEmployee">
@@ -619,6 +621,7 @@
           <Property Name="TotalPrice" Type="decimal" Precision="38" Scale="4" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="UnitOfMeasure" Type="varchar" MaxLength="255" />
+          <Property Name="CategoryID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SA33.Team12.SSIS.dbo.VW_RequisitionsByDepartment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -633,6 +636,7 @@
           <Property Name="TotalPrice" Type="decimal" Precision="38" Scale="4" />
           <Property Name="Code" Type="char" MaxLength="4" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="DepartmentID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SA33.Team12.SSIS.dbo.VW_RequisitionsByEmployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2682,6 +2686,7 @@
           <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
           <Property Type="String" Name="Name" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="UnitOfMeasure" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CategoryID" />
         </EntityType>
         <EntityType Name="VW_RequisitionsByDepartment">
           <Key>
@@ -2693,6 +2698,7 @@
           <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
           <Property Type="String" Name="Code" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="Name" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DepartmentID" />
         </EntityType>
         <EntityType Name="VW_RequisitionsByEmployee">
           <Key>
@@ -2965,6 +2971,7 @@
           <EntitySetMapping Name="VW_RequisitionsByCategory">
             <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.VW_RequisitionsByCategory">
               <MappingFragment StoreEntitySet="VW_RequisitionsByCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="UnitOfMeasure" ColumnName="UnitOfMeasure" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -2977,6 +2984,7 @@
           <EntitySetMapping Name="VW_RequisitionsByDepartment">
             <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.VW_RequisitionsByDepartment">
               <MappingFragment StoreEntitySet="VW_RequisitionsByDepartment">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
