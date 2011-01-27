@@ -34,7 +34,9 @@ namespace SA33.Team12.SSIS.DAL
 
         public Disbursement CreateDisbursementFromSRF(StationeryRetrievalForm SRF)
         {
-            throw new System.NotImplementedException();
+            DAL.Disbursement disbursement;
+            disbursement.CreatedBy=
+            return disbursement;
         }
 
         public Boolean IsUnshownDisbursement(Disbursement disbursement)
