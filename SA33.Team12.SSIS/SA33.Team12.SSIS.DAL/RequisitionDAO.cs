@@ -21,6 +21,7 @@ namespace SA33.Team12.SSIS.DAL
     /// </summary>
     public class RequisitionDAO : DALLogic
     {
+        #region Requisition
         /// <summary>
         /// Create a new requisition and persist with database
         /// </summary>
@@ -29,14 +30,13 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-
                 //Add requisition to context                
                 context.AddToRequisitions(requisition);
 
                 //Add requisition items to context
                 foreach (RequisitionItem reqItem in requisition.RequisitionItems)
                 {
-                    context.AddToRequisitionItems(reqItem);
+                    CreateRequisitionItem(reqItem);
                 }
 
                 //Add special requisition items to context
@@ -60,7 +60,28 @@ namespace SA33.Team12.SSIS.DAL
                 //Exception thrown incase if insert fails
                 throw new RequisitionException("Create requisition failed.");
             }
+        }
 
+        /// <summary>
+        /// Update the requisition before approval
+        /// </summary>
+        /// <param name="updateRequisition">requisition object</param>
+        public void UpdateRequisition(Requisition updateRequisition)
+        {
+            try
+            {
+                var tempReq = (from r in context.Requisitions
+                               where r.RequisitionID == updateRequisition.RequisitionID
+                               select r).FirstOrDefault<Requisition>();
+
+                tempReq = updateRequisition;
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw new RequisitionException("Update requisition failed.");
+            }
         }
 
         /// <summary>
@@ -162,28 +183,6 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Update the requisition before approval
-        /// </summary>
-        /// <param name="updateRequisition">requisition object</param>
-        public void UpdateRequisition(Requisition updateRequisition)
-        {
-            try
-            {
-                var tempReq = (from r in context.Requisitions
-                               where r.RequisitionID == updateRequisition.RequisitionID
-                               select r).FirstOrDefault<Requisition>();
-
-                tempReq = updateRequisition;
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw new RequisitionException("Update requisition failed.");
-            }
-        }
-
-        /// <summary>
         /// Find All Requistions
         /// </summary>
         /// <returns></returns>
@@ -233,7 +232,8 @@ namespace SA33.Team12.SSIS.DAL
         public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
         {
             var tempQuery = (from r in context.Requisitions
-                        where 1 == 1 select r);
+                             where 1 == 1
+                             select r);
 
             if (requisitioinSearchDTO != null)
             {
@@ -254,12 +254,11 @@ namespace SA33.Team12.SSIS.DAL
                 if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
                 {
                     tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
-                }               
+                }
             }
 
-            return (from q in tempQuery select q).ToList<Requisition>() ;
-            
- 
+            return (from q in tempQuery select q).ToList<Requisition>();
+
         }
 
         /// <summary>
@@ -271,7 +270,347 @@ namespace SA33.Team12.SSIS.DAL
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
+        } 
+        #endregion
+
+        #region RequisitionItem
+        /// <summary>
+        /// Create a new requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void CreateRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                context.AddToRequisitionItems(requisitionItem);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
+        /// <summary>
+        /// Update the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void UpdateRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                var temp = (from ri in context.RequisitionItems
+                            where ri.RequisitionItemID == requisitionItem.RequisitionItemID
+                            select ri).FirstOrDefault<RequisitionItem>();
+                temp.Stationery = requisitionItem.Stationery;
+                temp.QuantityRequested = requisitionItem.QuantityRequested;
+                temp.Price = requisitionItem.Price;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void DeleteRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                var temp = (from ri in context.RequisitionItems
+                            where ri.RequisitionID == requisitionItem.RequisitionID
+                            select ri).FirstOrDefault<RequisitionItem>();
+
+                context.RequisitionItems.DeleteObject(temp);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All RequisitionItems in the requisition form
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public List<RequisitionItem> GetAllRequisitionItems(Requisition requisition)
+        {
+            try
+            {
+                return (from ri in context.RequisitionItems
+                        where ri.RequisitionID == requisition.RequisitionID
+                        select ri).ToList<RequisitionItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get RequisitionItems by primary key
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <returns></returns>
+        public RequisitionItem GetAllRequisitionItemsByID(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                return (from ri in context.RequisitionItems
+                        where ri.RequisitionItemID == requisitionItem.RequisitionItemID
+                        select ri).FirstOrDefault<RequisitionItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        
+        #endregion
+
+        #region SpecialRequisitionItem
+        /// <summary>
+        /// Create a new requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void CreateSpecialSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                context.AddToSpecialRequisitionItems(specialRequisitionItem);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Update the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void UpdateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                var temp = (from ri in context.SpecialRequisitionItems
+                            where ri.SpecialRequisitionItemsID == specialRequisitionItem.SpecialRequisitionItemsID
+                            select ri).FirstOrDefault<SpecialRequisitionItem>();
+
+                temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
+                temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
+              //  temp.Price = requisitionItem.Price;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void DeleteSpecialRequisitionItem(SpecialRequisitionItem requisitionItem)
+        {
+            try
+            {
+                var temp = (from ri in context.SpecialRequisitionItems
+                            where ri.SpecialRequisitionItemsID == requisitionItem.SpecialRequisitionItemsID
+                            select ri).FirstOrDefault<SpecialRequisitionItem>();
+
+                context.SpecialRequisitionItems.DeleteObject(temp);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All RequisitionItems in the requisition form
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public List<SpecialRequisitionItem> GetAllSpecialRequisitionItems(Requisition requisition)
+        {
+            try
+            {
+                return (from ri in context.SpecialRequisitionItems
+                        where ri.RequisitionID == requisition.RequisitionID
+                        select ri).ToList<SpecialRequisitionItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get RequisitionItems by primary key
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <returns></returns>
+        public SpecialRequisitionItem GetAllSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                return (from ri in context.SpecialRequisitionItems
+                        where ri.SpecialRequisitionItemsID == specialRequisitionItem.SpecialRequisitionItemsID
+                        select ri).FirstOrDefault<SpecialRequisitionItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Status
+        public void CreateStatus(Status status)
+        {
+            try
+            {
+                context.AddToStatuses(status);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateStatus(Status status)
+        {
+            try
+            {
+                Status st = (from s in context.Statuses
+                             where s.StatusID == status.StatusID
+                             select s).FirstOrDefault<Status>();
+
+                st.Name = status.Name;
+                st.Group = status.Group;
+                st.Description = status.Description;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteStatus(Status status)
+        {
+            try
+            {
+                context.Statuses.DeleteObject(status);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Status> GetAllStatuses()
+        {
+            return (from s in context.Statuses select s).ToList<Status>();
+        }
+
+        public Status GetStatusByID(Status status)
+        {
+            return GetAllStatuses().Where(s => s.StatusID == status.StatusID).FirstOrDefault<Status>();
+        }
+
+        public List<Status> GetStatusByCriteria(StatusSearchDTO statusSearchDTO)
+        {
+            return GetAllStatuses().Where(s => s.Name == statusSearchDTO.Name).ToList<Status>();
+        } 
+        #endregion
+
+        #region Urgency
+        public void CreateUrgency(Urgency urgency)
+        {
+            try
+            {
+                context.AddToUrgencies(urgency);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateUrgency(Urgency urgency)
+        {
+            try
+            {
+                Urgency ur = (from u in context.Urgencies
+                              where u.UrgencyID == urgency.UrgencyID
+                              select u).FirstOrDefault<Urgency>();
+
+                ur.Name = urgency.Name;
+                ur.Level = urgency.Level;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteUrgency(Urgency urgency)
+        {
+            try
+            {
+                context.Urgencies.DeleteObject(urgency);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Urgency> GetAllUrgencies()
+        {
+            return (from s in context.Urgencies select s).ToList<Urgency>();
+        }
+
+        public Urgency GetUrgencyByID(Urgency urgency)
+        {
+            return GetAllUrgencies().Where(u => u.UrgencyID == urgency.UrgencyID).FirstOrDefault<Urgency>();
+        }
+
+        public List<Urgency> GetUrgencyByCriteria(UrgencySearchDTO urgencySearchDTO)
+        {
+            return GetAllUrgencies().Where(s => s.Name == urgencySearchDTO.Name).ToList<Urgency>();
+        }  
+        #endregion
     }
 }

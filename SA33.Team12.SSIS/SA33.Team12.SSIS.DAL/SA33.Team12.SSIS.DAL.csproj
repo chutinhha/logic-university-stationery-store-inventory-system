@@ -59,6 +59,8 @@
     <Compile Include="DTO\CategorySearchDTO.cs" />
     <Compile Include="DTO\DisbursementSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
+    <Compile Include="DTO\StatusSearchDTO.cs" />
+    <Compile Include="DTO\UrgencySearchDTO.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseOrderItem.cs" />
     <Compile Include="PurchaseOrderItemDAO.cs" />
@@ -91,6 +93,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StationeryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SA33.Team12.SSIS.Exceptions\SA33.Team12.SSIS.Exceptions.csproj">
