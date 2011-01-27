@@ -1,5 +1,5 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A)
+ * Author: Naing Myo Aung (A0076803A), Victor Tong(A0066920E)
  * Initial Implementation: 23/Jan/2011
  ***/
 
@@ -13,10 +13,44 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class CatalogDAO:DALLogic
     {
+        public List<Category> FindCategoryByCriteria(DTO.CategorySearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from c in context.Categories
+                    where c.CategoryID == (criteria.CateogryID == 0 ? c.CategoryID : criteria.CateogryID)
+                    && c.Name.Contains((criteria.Name == null || criteria.Name == "" ? c.Name : criteria.Name))
+                    && c.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? c.UnitOfMeasure : criteria.UnitOfMeasure)
+                    && c.IsApproved == (criteria.isApproved == null ? c.IsApproved : criteria.IsApproved)
+                    && c.DateCreated == (criteria.DateCreated == null || criteria.DateCreated == "" ? c.DateCreated : criteria.DateCreated)
+                    && c.DateModified == (criteria.DateModified == null || criteria.DateModified == "" ? c.DateModified : criteria.DateModified)
+                    && c.CreatedBy == (criteria.CreatedBy == null || criteria.CreatedBy == "" ? c.CreatedBy : criteria.CreatedBy)
+                    && c.ModifiedBy == (criteria.ModifiedBy == null || criteria.ModifiedBy == "" ? c.ModifiedBy : criteria.ModifiedBy)
+                    && c.ApprovedBy == (criteria.ApprovedBy == null || criteria.ApprovedBy == "" ? c.ApprovedBy : criteria.ApprovedBy)
+                    select c;
+                List<Category> categories = Query.ToList<Category>();
+                return categories;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }   
+
         public List<Category> GetAllCategory()
         {
                 return (from c in context.Categories
                         select c).ToList();
+        }
+
+        
+        public Category GetCategoryByID(int CategoryID)
+        {
+            Category category = (from c in context.Categories
+                                 where c.CategoryID == CategoryID
+                                 select c).FirstOrDefault();
+            return category;
         }
 
         public int CategoryCount()
@@ -43,14 +77,6 @@ namespace SA33.Team12.SSIS.DAL
             this.context.Categories.Attach(category);
             this.context.Categories.DeleteObject(category);
             this.context.SaveChanges();
-        }
-
-        public Category GetCategoryByID(int CategoryID)
-        {
-            Category category = (from c in context.Categories
-                                 where c.CategoryID == CategoryID
-                                 select c).FirstOrDefault();
-            return category;
         }
 
         public List<Stationery> GetAllStationery()
