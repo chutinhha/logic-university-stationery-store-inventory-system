@@ -11,9 +11,9 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public string Name { get; set; }
         public string UnitOfMeasure { get; set; }
         public bool IsApproved { get; set; }
-        //public DateTime StartDateCreated { get; set; }
-        //public DateTime EndDateCreated { get; set; }
-        //public DateTime ExactDateCreated { get; set; }
+        public DateTime StartDateCreated { get; set; }
+        public DateTime EndDateCreated { get; set; }
+        public DateTime ExactDateCreated { get; set; }
         //public DateTime StartDateModified { get; set; }
         //public DateTime EndDateModified { get; set; }
         //public DateTime ExactDateCreated { get; set; }
