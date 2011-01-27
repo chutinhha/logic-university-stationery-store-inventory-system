@@ -4,12 +4,11 @@
  ***/
 
 using System;
-using System.Web;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using System.Transactions;
+using System.Data.Objects;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -130,7 +129,7 @@ namespace SA33.Team12.SSIS.DAL
                 && d.CollectionPointID == (criteria.CollectionPointID == 0 ? d.CollectionPointID : criteria.CollectionPointID)
                 && d.Code == (criteria.Code == null || criteria.Code == "" ? d.Code : criteria.Code)
                 && d.Name == (criteria.Name == null || criteria.Name == "" ? d.Name : criteria.Name)
-                && d.isBlackListed == (criteria.IsBlackListed == null ? d.isBlackListed : criteria.IsBlackListed)
+                && d.IsBlackListed == (criteria.IsBlackListed == null ? d.IsBlackListed : criteria.IsBlackListed)
                 select d;
             List<Department> departments = Query.ToList<Department>();
             return departments;
@@ -178,7 +177,7 @@ namespace SA33.Team12.SSIS.DAL
                 {
                     persistedDepartment.Code = department.Code;
                     persistedDepartment.Name = department.Name;
-                    persistedDepartment.isBlackListed = department.isBlackListed;
+                    persistedDepartment.IsBlackListed = department.IsBlackListed;
 
                     CollectionPoint newCollectionPoint =
                             (from c in context.CollectionPoints
@@ -236,9 +235,9 @@ namespace SA33.Team12.SSIS.DAL
 
         public CollectionPoint GetCollectionPointByID(int CollectionPointID)
         {
-            return (from u in context.CollectionPoints
-                    where u.CollectionPointID == CollectionPointID
-                    select u).First<CollectionPoint>();
+            return (from cp in context.CollectionPoints
+                    where cp.CollectionPointID == CollectionPointID
+                    select cp).First<CollectionPoint>();
         }
 
         public CollectionPoint CreateCollectionPoint(DAL.CollectionPoint collectionPoint)
@@ -310,35 +309,41 @@ namespace SA33.Team12.SSIS.DAL
         #region BlacklistLogs
         public List<BlacklistLog> FindBlacklistLogsByCriteria(DTO.BlackListLogSearchDTO criteria)
         {
-            var Query = from cp in context.BlacklistLogs
-                        where cp.BlacklistLogID == (criteria.BlackListLogID == 0 ? cp.BlacklistLogID : criteria.BlackListLogID)
-                        select cp;
+            var Query = 
+                from bll in context.BlacklistLogs
+                where bll.BlacklistLogID == (criteria.BlackListLogID == 0 ? bll.BlacklistLogID : criteria.BlackListLogID)
+                && bll.DepartmentID == (criteria.DepartmentID == 0 ? bll.DepartmentID : criteria.DepartmentID)
+                && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.StartDateBlackListed == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
+                    && EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
+                && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
+                select bll;
+               
             return Query.ToList<BlacklistLog>();
         }
 
         public List<BlacklistLog> GetAllBlacklistLogs()
         {
-            return (from cp in context.BlacklistLogs
-                    select cp).ToList<BlacklistLog>();
+            return (from bll in context.BlacklistLogs
+                    select bll).ToList<BlacklistLog>();
         }
 
         public BlacklistLog GetBlacklistLogByID(int BlacklistLogID)
         {
-            return (from u in context.BlacklistLogs
-                    where u.BlacklistLogID == BlacklistLogID
-                    select u).First<BlacklistLog>();
+            return (from bll in context.BlacklistLogs
+                    where bll.BlacklistLogID == BlacklistLogID
+                    select bll).First<BlacklistLog>();
         }
 
-        public BlacklistLog CreateBlacklistLog(DAL.BlacklistLog collectionPoint)
+        public BlacklistLog CreateBlacklistLog(DAL.BlacklistLog blackListLog)
         {
             try
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.BlacklistLogs.AddObject(collectionPoint);
+                    context.BlacklistLogs.AddObject(blackListLog);
                     context.SaveChanges();
                     ts.Complete();
-                    return collectionPoint;
+                    return blackListLog;
                 }
             }
             catch (Exception)
@@ -347,13 +352,13 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public BlacklistLog UpdateBlacklistLog(DAL.BlacklistLog collectionPoint)
+        public BlacklistLog UpdateBlacklistLog(DAL.BlacklistLog blackListLog)
         {
             try
             {
-                // First will throw excpetion if no user is found
+                // First will throw exblletion if no user is found
                 BlacklistLog tempBlacklistLog = (from c in context.BlacklistLogs
-                                                       where c.BlacklistLogID == collectionPoint.BlacklistLogID
+                                                       where c.BlacklistLogID == blackListLog.BlacklistLogID
                                                        select c).First<BlacklistLog>();
 
                 using (TransactionScope ts = new TransactionScope())
@@ -370,12 +375,12 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public void DeleteBlacklistLog(BlacklistLog collectionPoint)
+        public void DeleteBlacklistLog(BlacklistLog blackListLog)
         {
             try
             {
                 BlacklistLog persistedBlacklistLog = (from c in context.BlacklistLogs
-                                                            where c.BlacklistLogID == collectionPoint.BlacklistLogID
+                                                            where c.BlacklistLogID == blackListLog.BlacklistLogID
                                                             select c).FirstOrDefault();
 
                 using (TransactionScope ts = new TransactionScope())
@@ -391,5 +396,92 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         #endregion 
+
+        #region ApprovalAudits
+        public List<ApprovalAudit> FindApprovalAuditsByCriteria(DTO.ApprovalAuditSearchDTO criteria)
+        {
+            var Query =
+                from aa in context.ApprovalAudits
+                where aa.ApprovalAuditID == (criteria.ApprovalAuditID == 0 ? aa.ApprovalAuditID : criteria.ApprovalAuditID)
+                select aa;
+
+            return Query.ToList<ApprovalAudit>();
+        }
+
+        public List<ApprovalAudit> GetAllApprovalAudits()
+        {
+            return (from aa in context.ApprovalAudits
+                    select aa).ToList<ApprovalAudit>();
+        }
+
+        public ApprovalAudit GetApprovalAuditByID(int ApprovalAuditID)
+        {
+            return (from aa in context.ApprovalAudits
+                    where aa.ApprovalAuditID == ApprovalAuditID
+                    select aa).First<ApprovalAudit>();
+        }
+
+        public ApprovalAudit CreateApprovalAudit(DAL.ApprovalAudit ApprovalAudit)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.ApprovalAudits.AddObject(ApprovalAudit);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return ApprovalAudit;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ApprovalAudit UpdateApprovalAudit(DAL.ApprovalAudit ApprovalAudit)
+        {
+            try
+            {
+                // First will throw exaaetion if no user is found
+                ApprovalAudit tempApprovalAudit = (from aa in context.ApprovalAudits
+                                                 where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
+                                                 select aa).First<ApprovalAudit>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.ObjectStateManager.ChangeObjectState(tempApprovalAudit, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempApprovalAudit;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteApprovalAudit(ApprovalAudit ApprovalAudit)
+        {
+            try
+            {
+                ApprovalAudit persistedApprovalAudit = (from aa in context.ApprovalAudits
+                                                      where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
+                                                      select aa).FirstOrDefault();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.ApprovalAudits.DeleteObject(persistedApprovalAudit);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }
