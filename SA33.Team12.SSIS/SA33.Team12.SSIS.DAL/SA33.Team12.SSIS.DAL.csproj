@@ -58,6 +58,7 @@
     <Compile Include="DTO\CategorySearchDTO.cs" />
     <Compile Include="DTO\DisbursementItemSearchDTO.cs" />
     <Compile Include="DTO\DisbursementSearchDTO.cs" />
+    <Compile Include="DTO\LocationSearchDTO.cs" />
     <Compile Include="DTO\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,9 +69,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\PriceSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
+    <Compile Include="DTO\SpecialStationerySearchDTO.cs" />
     <Compile Include="DTO\StationerySearchDTO.cs" />
     <Compile Include="DTO\StatusSearchDTO.cs" />
+    <Compile Include="DTO\SupplierSearchDTO.cs" />
     <Compile Include="DTO\UrgencySearchDTO.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseOrderItem.cs" />
