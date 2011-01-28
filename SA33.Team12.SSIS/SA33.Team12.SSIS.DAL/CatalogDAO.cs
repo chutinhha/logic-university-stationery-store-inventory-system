@@ -16,6 +16,7 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class CatalogDAO:DALLogic
     {
+        #region Categories
         public List<Category> FindCategoryByCriteria(DTO.CategorySearchDTO criteria)
         {
             try
@@ -134,9 +135,9 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
+        #endregion
 
-
-        // Stationeries
+        # region Stationeries
         public List<Stationery> FindStationeryByCriteria(DTO.StationerySearchDTO criteria)
         {
             try
@@ -155,8 +156,8 @@ namespace SA33.Team12.SSIS.DAL
                       && EntityFunctions.DiffDays(s.DateCreated, (criteria.EndDateCreated == null || criteria.EndDateCreated == DateTime.MinValue ? s.DateCreated : criteria.EndDateCreated)) >= 0)
                     && (EntityFunctions.DiffDays(s.DateCreated, (criteria.ExactDateCreated == null || criteria.ExactDateCreated == DateTime.MinValue ? s.DateCreated : criteria.ExactDateCreated)) == 0)
                     && (EntityFunctions.DiffDays(s.DateModified, (criteria.StartDateModified == null || criteria.StartDateModified == DateTime.MinValue ? s.DateModified : criteria.StartDateModified)) <= 0
-                      && EntityFunctions.DiffDays(s.DateCreated, (criteria.EndDateModified == null || criteria.EndDateModified == DateTime.MinValue ? s.DateModified : criteria.EndDateModified)) >= 0)
-                    && (EntityFunctions.DiffDays(s.DateCreated, (criteria.ExactDateModified == null || criteria.ExactDateModified == DateTime.MinValue ? s.DateModified : criteria.ExactDateModified)) == 0)
+                      && EntityFunctions.DiffDays(s.DateModified, (criteria.EndDateModified == null || criteria.EndDateModified == DateTime.MinValue ? s.DateModified : criteria.EndDateModified)) >= 0)
+                    && (EntityFunctions.DiffDays(s.DateModified, (criteria.ExactDateModified == null || criteria.ExactDateModified == DateTime.MinValue ? s.DateModified : criteria.ExactDateModified)) == 0)
                     && s.CreatedBy == (criteria.CreatedBy == null ? s.CreatedBy : criteria.CreatedBy)
                     && s.ModifiedBy == (criteria.ModifiedBy == null ? s.ModifiedBy : criteria.ModifiedBy)
                     && s.ApprovedBy == (criteria.ApprovedBy == null ? s.ApprovedBy : criteria.ApprovedBy)
@@ -265,6 +266,248 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
+        # endregion
 
+        # region SpecialStationeries
+        public List<SpecialStationery> FindSpecialStationeryByCriteria(DTO.SpecialStationerySearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from ss in context.SpecialStationeries
+                    where ss.SpecialStationeryID == (criteria.SpecialStationeryID == 0 ? ss.SpecialStationeryID : criteria.SpecialStationeryID)
+                    && ss.ItemCode.Contains((criteria.ItemCode == null || criteria.ItemCode == "" ? ss.ItemCode : criteria.ItemCode))
+                    && ss.Description.Contains((criteria.Description == null || criteria.Description == "" ? ss.Description : criteria.Description))
+                    && ss.Quantity == (criteria.Quantity == null ? ss.Quantity : criteria.Quantity)
+                    && (EntityFunctions.DiffDays(ss.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateCreated == DateTime.MinValue ? ss.DateCreated : criteria.StartDateCreated)) <= 0
+                      && EntityFunctions.DiffDays(ss.DateCreated, (criteria.EndDateCreated == null || criteria.EndDateCreated == DateTime.MinValue ? ss.DateCreated : criteria.EndDateCreated)) >= 0)
+                    && (EntityFunctions.DiffDays(ss.DateCreated, (criteria.ExactDateCreated == null || criteria.ExactDateCreated == DateTime.MinValue ? ss.DateCreated : criteria.ExactDateCreated)) == 0)
+                    && (EntityFunctions.DiffDays(ss.DateModified, (criteria.StartDateModified == null || criteria.StartDateModified == DateTime.MinValue ? ss.DateModified : criteria.StartDateModified)) <= 0
+                      && EntityFunctions.DiffDays(ss.DateModified, (criteria.EndDateModified == null || criteria.EndDateModified == DateTime.MinValue ? ss.DateModified : criteria.EndDateModified)) >= 0)
+                    && (EntityFunctions.DiffDays(ss.DateModified, (criteria.ExactDateModified == null || criteria.ExactDateModified == DateTime.MinValue ? ss.DateModified : criteria.ExactDateModified)) == 0)
+                    && (EntityFunctions.DiffDays(ss.DateApproved, (criteria.StartDateApproved == null || criteria.StartDateApproved == DateTime.MinValue ? ss.DateApproved : criteria.StartDateApproved)) <= 0
+                      && EntityFunctions.DiffDays(ss.DateApproved, (criteria.EndDateApproved == null || criteria.EndDateApproved == DateTime.MinValue ? ss.DateApproved : criteria.EndDateApproved)) >= 0)
+                    && (EntityFunctions.DiffDays(ss.DateApproved, (criteria.ExactDateApproved == null || criteria.ExactDateApproved == DateTime.MinValue ? ss.DateApproved : criteria.ExactDateApproved)) == 0)
+                    && ss.CreatedBy == (criteria.CreatedBy == null ? ss.CreatedBy : criteria.CreatedBy)
+                    && ss.ModifiedBy == (criteria.ModifiedBy == null ? ss.ModifiedBy : criteria.ModifiedBy)
+                    && ss.ApprovedBy == (criteria.ApprovedBy == null ? ss.ApprovedBy : criteria.ApprovedBy)
+                    && ss.CategoryID == (criteria.CategoryID == 0 ? ss.CategoryID : criteria.CategoryID)
+                    && ss.IsApproved == (criteria.IsApproved == null ? ss.IsApproved : criteria.IsApproved)
+                    select ss;
+                List<SpecialStationery> specialStationeries = Query.ToList<SpecialStationery>();
+                return specialStationeries;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<SpecialStationery> GetAllSpecialStationery()
+        {
+            return (from ss in context.SpecialStationeries
+                    select ss).ToList();
+        }
+
+        public SpecialStationery GetSpecialStationeryByID(int SpecialStationeryID)
+        {
+            SpecialStationery specialStationery = (from ss in context.SpecialStationeries
+                                                   where ss.SpecialStationeryID == SpecialStationeryID
+                                                   select ss).FirstOrDefault<SpecialStationery>();
+            return specialStationery;
+        }
+
+        public int GetSpecialStationeryCount()
+        {
+            return context.SpecialStationeries.Count();
+        }
+
+        public SpecialStationery CreateSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.SpecialStationeries.AddObject(specialStationery);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return specialStationery;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public SpecialStationery UpdateSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                SpecialStationery tempSpecialStationery = (from ss in context.SpecialStationeries
+                                             where ss.SpecialStationeryID == specialStationery.SpecialStationeryID
+                                             select ss).First<SpecialStationery>();
+
+                tempSpecialStationery.ItemCode = specialStationery.ItemCode;
+                tempSpecialStationery.Description = specialStationery.Description;
+                tempSpecialStationery.Quantity = specialStationery.Quantity;
+                tempSpecialStationery.DateCreated = specialStationery.DateCreated;
+                tempSpecialStationery.DateModified = specialStationery.DateModified;
+                tempSpecialStationery.DateApproved = specialStationery.DateApproved;
+                tempSpecialStationery.CreatedByUser = specialStationery.CreatedByUser;
+                tempSpecialStationery.ModifiedByUser = specialStationery.ModifiedByUser;
+                tempSpecialStationery.ApprovedByUser = specialStationery.ApprovedByUser;
+                tempSpecialStationery.Category = specialStationery.Category;
+                tempSpecialStationery.IsApproved = specialStationery.IsApproved;
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempSpecialStationery);
+                    context.ObjectStateManager.ChangeObjectState(tempSpecialStationery, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempSpecialStationery;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                SpecialStationery persistedSpecialStationery = (from ss in context.SpecialStationeries
+                                                                where ss.SpecialStationeryID == specialStationery.SpecialStationeryID
+                                                                select ss).First<SpecialStationery>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.SpecialStationeries.DeleteObject(persistedSpecialStationery);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        # endregion
+
+        # region Prices
+        public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from p in context.Prices
+                    where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
+                    && p.Name.Contains((criteria.Name == null || criteria.Name == "" ? p.Name : criteria.Name))
+                    && p.CreatedBy == (criteria.CreatedBy == null ? p.CreatedBy : criteria.CreatedBy)
+                    && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.StartCreatedDate)) <= 0
+                      && EntityFunctions.DiffDays(p.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.EndCreatedDate)) >= 0)
+                    && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.ExactCreatedDate)) == 0)
+                    select p;
+                List<Price> prices = Query.ToList<Price>();
+                return prices;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Price> GetAllPrice()
+        {
+            return (from p in context.Prices
+                    select p).ToList();
+        }
+
+        public Price GetPriceByID(int PriceID)
+        {
+            Price price = (from p in context.Prices
+                           where p.PriceID == PriceID
+                           select p).FirstOrDefault<Price>();
+            return price;
+        }
+
+        public int GetPriceCount()
+        {
+            return context.Prices.Count();
+        }
+
+        public Price CreatePrice(Price price)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Prices.AddObject(price);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return price;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Price UpdatePrice(Price price)
+        {
+            try
+            {
+                Price tempPrice = (from p in context.Prices
+                                   where p.PriceID == price.PriceID
+                                   select p).First<Price>();
+
+                tempPrice.Name = price.Name;
+                tempPrice.CreatedByUser = price.CreatedByUser;
+                tempPrice.CreatedDate = price.CreatedDate;
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempPrice);
+                    context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempPrice;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeletePrice(Price price)
+        {
+            try
+            {
+                Price persistedPrice = (from p in context.Prices
+                                        where p.PriceID == price.PriceID
+                                        select p).First<Price>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Prices.DeleteObject(persistedPrice);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        # endregion
+
+
+
+        // end
     }
 }
