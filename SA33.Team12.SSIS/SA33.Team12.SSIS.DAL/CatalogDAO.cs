@@ -49,14 +49,14 @@ namespace SA33.Team12.SSIS.DAL
         public List<Category> GetAllCategory()
         {
                 return (from c in context.Categories
-                        select r).ToList();
+                        select c).ToList();
         }
                 
         public Category GetCategoryByID(int CategoryID)
         {
             Category category = (from c in context.Categories
                                  where c.CategoryID == CategoryID
-                                 select r).FirstOrDefault<Category>();
+                                 select c).FirstOrDefault<Category>();
             return category;
         }
 
@@ -121,7 +121,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Category persistedCategory = (from c in context.Categories
                                       where c.CategoryID == category.CategoryID
-                                      select r).First<Category>();
+                                      select c).First<Category>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
@@ -345,8 +345,8 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 SpecialStationery tempSpecialStationery = (from ss in context.SpecialStationeries
-                                             where ss.SpecialStationeryID == specialStationery.SpecialStationeryID
-                                             select ss).First<SpecialStationery>();
+                                                           where ss.SpecialStationeryID == specialStationery.SpecialStationeryID
+                                                           select ss).First<SpecialStationery>();
 
                 tempSpecialStationery.ItemCode = specialStationery.ItemCode;
                 tempSpecialStationery.Description = specialStationery.Description;
@@ -410,7 +410,7 @@ namespace SA33.Team12.SSIS.DAL
                     && (EntityFunctions.DiffDays(l.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.StartCreatedDate)) <= 0
                       && EntityFunctions.DiffDays(l.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.EndCreatedDate)) >= 0)
                     && (EntityFunctions.DiffDays(l.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.ExactCreatedDate)) == 0)
-                    select p;
+                    select l;
                 List<Location> locations = Query.ToList<Location>();
                 return locations;
             }
@@ -506,20 +506,20 @@ namespace SA33.Team12.SSIS.DAL
         }
         # endregion
 
-        # region Prices
-        public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
+        # region StationeryPrices
+        public List<StationeryPrice> FindStationeryPriceByCriteria(DTO.StationeryPriceSearchDTO criteria)
         {
             try
             {
                 var Query =
-                    from p in context.Prices
-                    where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
+                    from p in context.StationeryPrices
+                    where p.StationeryPriceID == (criteria.StationeryPriceID == 0 ? p.StationeryPriceID : criteria.StationeryPriceID)
                     && p.StationeryID == (criteria.StationeryID == 0 ? p.StationeryID : criteria.StationeryID)
                     && p.SupplierID == (criteria.SupplierID == 0 ? p.SupplierID : criteria.SupplierID)
-                    && p.Amount == (criteria.Amount == null ? p.Amount : criteria.Amount)
+                    && p.Price == (criteria.Price == null ? p.Price : criteria.Price)
                     select p;
-                List<Price> prices = Query.ToList<Price>();
-                return prices;
+                List<StationeryPrice> stationeryPrices = Query.ToList<StationeryPrice>();
+                return stationeryPrices;
             }
             catch (Exception)
             {
@@ -527,35 +527,35 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<Price> GetAllPrice()
+        public List<StationeryPrice> GetAllStationeryPrice()
         {
-            return (from p in context.Prices
+            return (from p in context.StationeryPrices
                     select p).ToList();
         }
 
-        public Price GetPriceByID(int PriceID)
+        public StationeryPrice GetStationeryPriceByID(int StationeryPriceID)
         {
-            Price price = (from p in context.Prices
-                           where p.PriceID == PriceID
-                           select p).FirstOrDefault<Price>();
-            return price;
+            StationeryPrice stationeryPrice = (from p in context.StationeryPrices
+                                               where p.StationeryPriceID == StationeryPriceID
+                                               select p).FirstOrDefault<StationeryPrice>();
+            return stationeryPrice;
         }
 
-        public int GetPriceCount()
+        public int GetStationeryPriceCount()
         {
-            return context.Prices.Count();
+            return context.StationeryPrices.Count();
         }
 
-        public Price CreatePrice(Price price)
+        public StationeryPrice CreateStationeryPrice(StationeryPrice stationeryPrice)
         {
             try
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Prices.AddObject(price);
+                    context.StationeryPrices.AddObject(stationeryPrice);
                     context.SaveChanges();
                     ts.Complete();
-                    return price;
+                    return stationeryPrice;
                 }
             }
             catch (Exception)
@@ -564,25 +564,25 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public Price UpdatePrice(Price price)
+        public StationeryPrice UpdateStationeryPrice(StationeryPrice stationeryPrice)
         {
             try
             {
-                Price tempPrice = (from p in context.Prices
-                                   where p.PriceID == price.PriceID
-                                   select p).First<Price>();
+                StationeryPrice tempStationeryPrice = (from p in context.StationeryPrices
+                                                       where p.StationeryPriceID == stationeryPrice.StationeryPriceID
+                                                       select p).First<StationeryPrice>();
 
-                tempPrice.Stationery = price.Stationery;
-                tempPrice.Supplier = price.Supplier;
-                tempPrice.Amount = price.Amount;
+                tempStationeryPrice.Stationery = stationeryPrice.Stationery;
+                tempStationeryPrice.Supplier = stationeryPrice.Supplier;
+                tempStationeryPrice.Price = stationeryPrice.Price;
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempPrice);
-                    context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
+                    context.Attach(tempStationeryPrice);
+                    context.ObjectStateManager.ChangeObjectState(tempStationeryPrice, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
-                    return tempPrice;
+                    return tempStationeryPrice;
                 }
             }
             catch (Exception)
@@ -591,17 +591,17 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public void DeletePrice(Price price)
+        public void DeleteStationeryPrice(StationeryPrice stationeryPrice)
         {
             try
             {
-                Price persistedPrice = (from p in context.Prices
-                                        where p.PriceID == price.PriceID
-                                        select p).First<Price>();
+                StationeryPrice persistedStationeryPrice = (from p in context.StationeryPrices
+                                                            where p.StationeryPriceID == stationeryPrice.StationeryPriceID
+                                                            select p).First<StationeryPrice>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Prices.DeleteObject(persistedPrice);
+                    context.StationeryPrices.DeleteObject(persistedStationeryPrice);
                     context.SaveChanges();
                     ts.Complete();
                 }
