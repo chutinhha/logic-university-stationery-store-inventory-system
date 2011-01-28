@@ -1547,15 +1547,6 @@
             <End Role="StationeryRetrievalForm" EntitySet="StationeryRetrievalForms" />
             <End Role="Disbursement" EntitySet="Disbursements" />
           </AssociationSet>
-          <EntitySet Name="StationeryPrices" EntityType="SA33.Team12.SSIS.Model.StationeryPrice" />
-          <AssociationSet Name="Price_Of_Stationery_By_Supplier1" Association="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1">
-            <End Role="Stationery" EntitySet="Stationeries" />
-            <End Role="StationeryPrice" EntitySet="StationeryPrices" />
-          </AssociationSet>
-          <AssociationSet Name="Prices_By_Supplier1" Association="SA33.Team12.SSIS.Model.Prices_By_Supplier1">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="StationeryPrice" EntitySet="StationeryPrices" />
-          </AssociationSet>
           <EntitySet Name="SpecialStationeries" EntityType="SA33.Team12.SSIS.Model.SpecialStationery" />
           <AssociationSet Name="Categories_SpecialStationeries_FK1" Association="SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1">
             <End Role="Category" EntitySet="Categories" />
@@ -1588,6 +1579,15 @@
           <AssociationSet Name="SpeicalStationery_ModifiedBy" Association="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy">
             <End Role="User" EntitySet="Users" />
             <End Role="SpecialStationery" EntitySet="SpecialStationeries" />
+          </AssociationSet>
+          <EntitySet Name="StationeryPrices" EntityType="SA33.Team12.SSIS.Model.StationeryPrice" />
+          <AssociationSet Name="Price_Of_Stationery_By_Supplier" Association="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier">
+            <End Role="Stationery" EntitySet="Stationeries" />
+            <End Role="StationeryPrice" EntitySet="StationeryPrices" />
+          </AssociationSet>
+          <AssociationSet Name="Prices_By_Supplier" Association="SA33.Team12.SSIS.Model.Prices_By_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="StationeryPrice" EntitySet="StationeryPrices" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
@@ -1834,7 +1834,7 @@
           <NavigationProperty Name="CreatedByUser" Relationship="SA33.Team12.SSIS.Model.Stationery_Created_By" FromRole="Stationeries" ToRole="Users" />
           <NavigationProperty Name="ModifiedByUser" Relationship="SA33.Team12.SSIS.Model.Stationery_Modified_By" FromRole="Stationeries" ToRole="Users" />
           <NavigationProperty Name="StockLogTransactions" Relationship="SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1" FromRole="Stationery" ToRole="StockLogTransaction" />
-          <NavigationProperty Name="StationeryPrices" Relationship="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1" FromRole="Stationery" ToRole="StationeryPrice" />
+          <NavigationProperty Name="StationeryPrices" Relationship="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier" FromRole="Stationery" ToRole="StationeryPrice" />
         </EntityType>
         <EntityType Name="StationeryRetrievalFormByRequisition">
           <Key>
@@ -1938,7 +1938,7 @@
           <Property Name="TenderedYear" Type="DateTime" Nullable="false" />
           <Property Name="PreferredRank" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PurchaseOrders" Relationship="SA33.Team12.SSIS.Model.Suppliers_PurchaseOrders_FK1" FromRole="Supplier" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="StationeryPrices" Relationship="SA33.Team12.SSIS.Model.Prices_By_Supplier1" FromRole="Supplier" ToRole="StationeryPrice" />
+          <NavigationProperty Name="StationeryPrices" Relationship="SA33.Team12.SSIS.Model.Prices_By_Supplier" FromRole="Supplier" ToRole="StationeryPrice" />
         </EntityType>
         <EntityType Name="Urgency">
           <Key>
@@ -2573,43 +2573,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="StationeryPrice">
-          <Key>
-            <PropertyRef Name="PriceID" />
-            <PropertyRef Name="StationeryPriceID" />
-          </Key>
-          <Property Type="Int32" Name="PriceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="StationeryID" Nullable="false" />
-          <Property Type="Int32" Name="SupplierID" Nullable="false" />
-          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="Stationery" Relationship="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1" FromRole="StationeryPrice" ToRole="Stationery" />
-          <NavigationProperty Name="Supplier" Relationship="SA33.Team12.SSIS.Model.Prices_By_Supplier1" FromRole="StationeryPrice" ToRole="Supplier" />
-          <Property Type="Int32" Name="StationeryPriceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <Association Name="Price_Of_Stationery_By_Supplier1">
-          <End Type="SA33.Team12.SSIS.Model.Stationery" Role="Stationery" Multiplicity="1" />
-          <End Type="SA33.Team12.SSIS.Model.StationeryPrice" Role="StationeryPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Stationery">
-              <PropertyRef Name="StationeryID" />
-            </Principal>
-            <Dependent Role="StationeryPrice">
-              <PropertyRef Name="StationeryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Prices_By_Supplier1">
-          <End Type="SA33.Team12.SSIS.Model.Supplier" Role="Supplier" Multiplicity="1" />
-          <End Type="SA33.Team12.SSIS.Model.StationeryPrice" Role="StationeryPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="StationeryPrice">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SpecialStationery">
           <Key>
             <PropertyRef Name="SpecialStationeryID" />
@@ -2728,6 +2691,41 @@
             </Principal>
             <Dependent Role="SpecialStationery">
               <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StationeryPrice">
+          <Key>
+            <PropertyRef Name="StationeryPriceID" />
+          </Key>
+          <Property Type="Int32" Name="StationeryPriceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="StationeryID" Nullable="false" />
+          <Property Type="Int32" Name="SupplierID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Stationery" Relationship="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier" FromRole="StationeryPrice" ToRole="Stationery" />
+          <NavigationProperty Name="Supplier" Relationship="SA33.Team12.SSIS.Model.Prices_By_Supplier" FromRole="StationeryPrice" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="Price_Of_Stationery_By_Supplier">
+          <End Type="SA33.Team12.SSIS.Model.Stationery" Role="Stationery" Multiplicity="1" />
+          <End Type="SA33.Team12.SSIS.Model.StationeryPrice" Role="StationeryPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stationery">
+              <PropertyRef Name="StationeryID" />
+            </Principal>
+            <Dependent Role="StationeryPrice">
+              <PropertyRef Name="StationeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prices_By_Supplier">
+          <End Type="SA33.Team12.SSIS.Model.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="SA33.Team12.SSIS.Model.StationeryPrice" Role="StationeryPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="StationeryPrice">
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2989,16 +2987,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StationeryPrices">
-            <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.StationeryPrice">
-              <MappingFragment StoreEntitySet="StationeryPrices">
-                <ScalarProperty Name="StationeryPriceID" ColumnName="StationeryPriceID" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SpecialStationeries">
             <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.SpecialStationery">
               <MappingFragment StoreEntitySet="SpecialStationeries">
@@ -3014,6 +3002,16 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="SpecialStationeryID" ColumnName="SpecialStationeryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StationeryPrices">
+            <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.StationeryPrice">
+              <MappingFragment StoreEntitySet="StationeryPrices">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
+                <ScalarProperty Name="StationeryPriceID" ColumnName="StationeryPriceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3112,29 +3110,35 @@
           <ConnectorPoint PointX="3.75" PointY="24.787985026041667" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Categories_Stationeries_FK1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.010416666666666" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.177083333333334" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.244791666666666" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.411458333333334" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.619793666666666" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="10.786460333333334" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="12.395833333333334" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="12.416666666666666" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="12.583333333333334" PointY="35.468201497395839" />
-          <ConnectorPoint PointX="12.75" PointY="35.468201497395839" />
+          <ConnectorPoint PointX="9" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.244791666666666" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.411458333333334" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.736981166666666" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="10.903647833333334" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="12.166666666666666" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="12.395833333333334" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="12.416666666666666" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="12.583333333333334" PointY="35.456451822916669" />
+          <ConnectorPoint PointX="12.75" PointY="35.456451822916669" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Category_Approved_By" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="34.863549885642016" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="34.863549885642016" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="34.863549885642016" />
           <ConnectorPoint PointX="7.5" PointY="34.863549885642016" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Category_Created_By" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="34.300959635128748" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="34.300959635128748" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="34.300959635128748" />
           <ConnectorPoint PointX="7.5" PointY="34.300959635128748" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Category_Modified_By" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="35.351044747905149" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="35.351044747905149" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="35.351044747905149" />
           <ConnectorPoint PointX="7.5" PointY="35.351044747905149" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Department_CollectoinPoint" ManuallyRouted="false">
@@ -3170,26 +3174,24 @@
           <ConnectorPoint PointX="10.177083333333334" PointY="35.625" />
           <ConnectorPoint PointX="10.244791666666666" PointY="35.625" />
           <ConnectorPoint PointX="10.411458333333334" PointY="35.625" />
-          <ConnectorPoint PointX="10.619793666666666" PointY="35.625" />
-          <ConnectorPoint PointX="10.786460333333334" PointY="35.625" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="35.625" />
-          <ConnectorPoint PointX="12.270833333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.736981166666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.903647833333334" PointY="35.625" />
           <ConnectorPoint PointX="12.5" PointY="35.625" />
-          <ConnectorPoint PointX="12.5" PointY="33.625" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="33.625" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="33.625" />
-          <ConnectorPoint PointX="14.75" PointY="33.625" />
+          <ConnectorPoint PointX="12.5" PointY="33.578125" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="33.578125" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="33.578125" />
+          <ConnectorPoint PointX="14.75" PointY="33.578125" />
           <ConnectorPoint PointX="14.75" PointY="35.75" />
           <ConnectorPoint PointX="15.416667166666665" PointY="35.75" />
           <ConnectorPoint PointX="15.583333833333333" PointY="35.75" />
-          <ConnectorPoint PointX="16.24999975" PointY="35.75" />
-          <ConnectorPoint PointX="16.24999975" PointY="34.960999348958339" />
+          <ConnectorPoint PointX="16" PointY="35.75" />
+          <ConnectorPoint PointX="16" PointY="34.960999348958339" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_DisbursementItems_FK1" ManuallyRouted="false">
-          <ConnectorPoint PointX="14.25" PointY="34.321848958333334" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="34.321848958333334" />
-          <ConnectorPoint PointX="14.864583333333334" PointY="34.321848958333334" />
-          <ConnectorPoint PointX="15" PointY="34.321848958333334" />
+          <ConnectorPoint PointX="14.25" PointY="34.417999674479169" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="34.417999674479169" />
+          <ConnectorPoint PointX="14.833333333333334" PointY="34.417999674479169" />
+          <ConnectorPoint PointX="15" PointY="34.417999674479169" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.StationeryRetrievalFormItemByDepts_DisbursementItems_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="28.441793619791667" />
@@ -3223,20 +3225,22 @@
           <ConnectorPoint PointX="9" PointY="41.17494791666666" />
           <ConnectorPoint PointX="10.432291666666666" PointY="41.17494791666666" />
           <ConnectorPoint PointX="10.598958333333334" PointY="41.17494791666666" />
-          <ConnectorPoint PointX="13.0937475" PointY="41.17494791666666" />
-          <ConnectorPoint PointX="13.0937475" PointY="39.893616536458332" />
+          <ConnectorPoint PointX="13.25195390625" PointY="41.17494791666666" />
+          <ConnectorPoint PointX="13.25195390625" PointY="39.893616536458332" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrders_PurchaseOrderItems_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="42.889196400038649" />
           <ConnectorPoint PointX="9.6979166666666661" PointY="42.889196400038649" />
           <ConnectorPoint PointX="9.8645833333333339" PointY="42.889196400038649" />
-          <ConnectorPoint PointX="13.619792916666667" PointY="42.889196400038649" />
-          <ConnectorPoint PointX="13.786459583333334" PointY="42.889196400038649" />
+          <ConnectorPoint PointX="13.698896119791666" PointY="42.889196400038649" />
+          <ConnectorPoint PointX="13.865562786458334" PointY="42.889196400038649" />
           <ConnectorPoint PointX="15.34375" PointY="42.889196400038649" />
           <ConnectorPoint PointX="15.34375" PointY="42.057190755208325" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_PurchaseOrderItems" ManuallyRouted="false">
           <ConnectorPoint PointX="14.25" PointY="39.696808268229162" />
+          <ConnectorPoint PointX="14.666666666666666" PointY="39.696808268229162" />
+          <ConnectorPoint PointX="14.833333333333334" PointY="39.696808268229162" />
           <ConnectorPoint PointX="15" PointY="39.696808268229162" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.PurchaseOrder_ApprovedBY" ManuallyRouted="false">
@@ -3269,14 +3273,12 @@
           <ConnectorPoint PointX="7.5" PointY="44.289999132643494" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.RequisitionItems_Of_Requisitions" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="32.521393229166669" />
-          <ConnectorPoint PointX="12.197916666666666" PointY="32.521393229166669" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="32.521393229166669" />
-          <ConnectorPoint PointX="14.6875" PointY="32.521393229166669" />
-          <ConnectorPoint PointX="14.6875" PointY="35.018697916666667" />
-          <ConnectorPoint PointX="14.697916666666666" PointY="35.018697916666667" />
-          <ConnectorPoint PointX="14.864583333333334" PointY="35.018697916666667" />
-          <ConnectorPoint PointX="15.500000499999999" PointY="35.018697916666667" />
+          <ConnectorPoint PointX="12" PointY="32.497955729166669" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="32.497955729166669" />
+          <ConnectorPoint PointX="12.645833333333334" PointY="32.497955729166669" />
+          <ConnectorPoint PointX="14.6875" PointY="32.497955729166669" />
+          <ConnectorPoint PointX="14.6875" PointY="35.210999348958339" />
+          <ConnectorPoint PointX="15.500000499999999" PointY="35.210999348958339" />
           <ConnectorPoint PointX="15.500000499999999" PointY="36" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_RequisitionItems_FK1" ManuallyRouted="false">
@@ -3317,20 +3319,18 @@
           <ConnectorPoint PointX="12.75" PointY="31.052643229166669" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpecialRequisitionItems_Of_Requisitions" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="33.104449114583332" />
-          <ConnectorPoint PointX="12.197916666666666" PointY="33.104449114583332" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="33.104449114583332" />
-          <ConnectorPoint PointX="14.625" PointY="33.104449114583332" />
-          <ConnectorPoint PointX="14.625" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="14.666666666666666" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="14.864583333333334" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="15.416667166666665" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="15.583333833333333" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="16.166666416666668" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="16.333333083333333" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="17.166666666666668" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="17.333333333333332" PointY="35.210999348958339" />
-          <ConnectorPoint PointX="17.5" PointY="35.210999348958339" />
+          <ConnectorPoint PointX="12" PointY="33.069292864583332" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="33.069292864583332" />
+          <ConnectorPoint PointX="12.645833333333334" PointY="33.069292864583332" />
+          <ConnectorPoint PointX="14.625" PointY="33.069292864583332" />
+          <ConnectorPoint PointX="14.625" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="14.666666666666666" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="14.833333333333334" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="15.916666666666666" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="16.083333333333332" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="17.166666666666668" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="17.333333333333332" PointY="35.226624348958339" />
+          <ConnectorPoint PointX="17.5" PointY="35.226624348958339" />
           <ConnectorPoint PointX="17.5" PointY="34" />
           <ConnectorPoint PointX="18.6875" PointY="34" />
           <ConnectorPoint PointX="18.6875" PointY="34.25" />
@@ -3341,14 +3341,16 @@
           <ConnectorPoint PointX="11.65625" PointY="30.75" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_StationeryRetrievalFormItems_FK1" ManuallyRouted="false">
-          <ConnectorPoint PointX="13.70312625" PointY="39.893616536458332" />
-          <ConnectorPoint PointX="13.70312625" PointY="43.288348200019328" />
+          <ConnectorPoint PointX="13.782229453125" PointY="39.893616536458332" />
+          <ConnectorPoint PointX="13.782229453125" PointY="43.288348200019328" />
           <ConnectorPoint PointX="17.135416666666668" PointY="43.288348200019328" />
           <ConnectorPoint PointX="17.302083333333332" PointY="43.288348200019328" />
           <ConnectorPoint PointX="18" PointY="43.288348200019328" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_StockLogs" ManuallyRouted="false">
           <ConnectorPoint PointX="12.75" PointY="33.899230769230769" />
+          <ConnectorPoint PointX="12.62142556509888" PointY="33.770656334329651" />
+          <ConnectorPoint PointX="12.503574434901122" PointY="33.652805204131887" />
           <ConnectorPoint PointX="12.375" PointY="33.524230769230769" />
           <ConnectorPoint PointX="12.375" PointY="26.942047526041669" />
           <ConnectorPoint PointX="11.739583333333334" PointY="26.942047526041669" />
@@ -3356,71 +3358,67 @@
           <ConnectorPoint PointX="11.25" PointY="26.942047526041669" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationery_Approved_By" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="38.903451126635332" />
-          <ConnectorPoint PointX="7.25" PointY="38.903451126635332" />
-          <ConnectorPoint PointX="7.25" PointY="36.125" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="36.125" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="36.125" />
-          <ConnectorPoint PointX="9.625" PointY="36.125" />
-          <ConnectorPoint PointX="9.625" PointY="35.65625" />
-          <ConnectorPoint PointX="10.010416666666666" PointY="35.65625" />
-          <ConnectorPoint PointX="10.177083333333334" PointY="35.65625" />
-          <ConnectorPoint PointX="10.244791666666666" PointY="35.65625" />
-          <ConnectorPoint PointX="10.411458333333334" PointY="35.65625" />
-          <ConnectorPoint PointX="10.619793666666666" PointY="35.65625" />
-          <ConnectorPoint PointX="10.786460333333334" PointY="35.65625" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="35.65625" />
-          <ConnectorPoint PointX="12.208333333333334" PointY="35.65625" />
-          <ConnectorPoint PointX="12.3125" PointY="35.65625" />
-          <ConnectorPoint PointX="12.3125" PointY="33.609375" />
-          <ConnectorPoint PointX="12.376810897435897" PointY="33.609375" />
-          <ConnectorPoint PointX="12.624245794871795" PointY="33.609375" />
-          <ConnectorPoint PointX="13.559520730769233" PointY="33.609375" />
-          <ConnectorPoint PointX="13.559520730769233" PointY="33.875" />
+          <ConnectorPoint PointX="6.38905048076923" PointY="33.75" />
+          <ConnectorPoint PointX="6.38905048076923" PointY="33.5" />
+          <ConnectorPoint PointX="6.8702243589743572" PointY="33.5" />
+          <ConnectorPoint PointX="7.13419771794872" PointY="33.5" />
+          <ConnectorPoint PointX="7.25" PointY="33.5" />
+          <ConnectorPoint PointX="7.25" PointY="36.5" />
+          <ConnectorPoint PointX="9.3125" PointY="36.5" />
+          <ConnectorPoint PointX="9.3125" PointY="35.625" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.244791666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.411458333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.736981166666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.903647833333334" PointY="35.625" />
+          <ConnectorPoint PointX="12.125" PointY="35.625" />
+          <ConnectorPoint PointX="12.125" PointY="37.413240998697916" />
+          <ConnectorPoint PointX="12.75" PointY="37.413240998697916" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationery_Created_By" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="37.044068699181892" />
-          <ConnectorPoint PointX="7.104166666666667" PointY="37.044068699181892" />
-          <ConnectorPoint PointX="7.364583333333333" PointY="37.044068699181892" />
-          <ConnectorPoint PointX="7.375" PointY="37.044068699181892" />
-          <ConnectorPoint PointX="7.375" PointY="36.5" />
-          <ConnectorPoint PointX="9.5625" PointY="36.5" />
-          <ConnectorPoint PointX="9.5625" PointY="35.6875" />
-          <ConnectorPoint PointX="10.010416666666666" PointY="35.6875" />
-          <ConnectorPoint PointX="10.177083333333334" PointY="35.6875" />
-          <ConnectorPoint PointX="10.244791666666666" PointY="35.6875" />
-          <ConnectorPoint PointX="10.411458333333334" PointY="35.6875" />
-          <ConnectorPoint PointX="10.619793666666666" PointY="35.6875" />
-          <ConnectorPoint PointX="10.786460333333334" PointY="35.6875" />
-          <ConnectorPoint PointX="12.25" PointY="35.6875" />
-          <ConnectorPoint PointX="12.25" PointY="33.59375" />
-          <ConnectorPoint PointX="12.361185897435897" PointY="33.59375" />
-          <ConnectorPoint PointX="12.608620794871795" PointY="33.59375" />
-          <ConnectorPoint PointX="13.183029096153849" PointY="33.59375" />
-          <ConnectorPoint PointX="13.183029096153849" PointY="33.875" />
+          <ConnectorPoint PointX="6.75" PointY="37.122469830729116" />
+          <ConnectorPoint PointX="7.104166666666667" PointY="37.122469830729116" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="37.122469830729116" />
+          <ConnectorPoint PointX="7.375" PointY="37.122469830729116" />
+          <ConnectorPoint PointX="7.375" PointY="36.4375" />
+          <ConnectorPoint PointX="9.25" PointY="36.4375" />
+          <ConnectorPoint PointX="9.25" PointY="35.625" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.244791666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.411458333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.736981166666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.903647833333334" PointY="35.625" />
+          <ConnectorPoint PointX="12.3125" PointY="35.625" />
+          <ConnectorPoint PointX="12.3125" PointY="33.609375" />
+          <ConnectorPoint PointX="12.376810897435897" PointY="33.609375" />
+          <ConnectorPoint PointX="12.645833333333334" PointY="33.609375" />
+          <ConnectorPoint PointX="13.324959401442309" PointY="33.609375" />
+          <ConnectorPoint PointX="13.324959401442309" PointY="33.875" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationery_Modified_By" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="38.355447894046833" />
-          <ConnectorPoint PointX="7.1875" PointY="38.355447894046833" />
+          <ConnectorPoint PointX="6.75" PointY="38.494944661458383" />
+          <ConnectorPoint PointX="7.1875" PointY="38.494944661458383" />
           <ConnectorPoint PointX="7.1875" PointY="36.375" />
           <ConnectorPoint PointX="7.197916666666667" PointY="36.375" />
           <ConnectorPoint PointX="7.364583333333333" PointY="36.375" />
+          <ConnectorPoint PointX="9.2291666666666661" PointY="36.375" />
+          <ConnectorPoint PointX="9.3958333333333339" PointY="36.375" />
           <ConnectorPoint PointX="9.4375" PointY="36.375" />
-          <ConnectorPoint PointX="9.4375" PointY="35.71875" />
-          <ConnectorPoint PointX="10.010416666666666" PointY="35.71875" />
-          <ConnectorPoint PointX="10.177083333333334" PointY="35.71875" />
-          <ConnectorPoint PointX="10.244791666666666" PointY="35.71875" />
-          <ConnectorPoint PointX="10.411458333333334" PointY="35.71875" />
-          <ConnectorPoint PointX="10.619793666666666" PointY="35.71875" />
-          <ConnectorPoint PointX="10.786460333333334" PointY="35.71875" />
-          <ConnectorPoint PointX="12.1875" PointY="35.71875" />
-          <ConnectorPoint PointX="12.1875" PointY="33.625" />
-          <ConnectorPoint PointX="12.197916666666666" PointY="33.625" />
-          <ConnectorPoint PointX="12.364583333333334" PointY="33.625" />
+          <ConnectorPoint PointX="9.4375" PointY="35.625" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.244791666666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.411458333333334" PointY="35.625" />
+          <ConnectorPoint PointX="10.736981166666666" PointY="35.625" />
+          <ConnectorPoint PointX="10.903647833333334" PointY="35.625" />
+          <ConnectorPoint PointX="12.25" PointY="35.625" />
+          <ConnectorPoint PointX="12.25" PointY="33.625" />
           <ConnectorPoint PointX="12.392435897435897" PointY="33.625" />
-          <ConnectorPoint PointX="12.639870794871795" PointY="33.625" />
-          <ConnectorPoint PointX="13.936012365384617" PointY="33.625" />
-          <ConnectorPoint PointX="13.936012365384617" PointY="33.875" />
+          <ConnectorPoint PointX="12.645833333333334" PointY="33.625" />
+          <ConnectorPoint PointX="13.818731700721155" PointY="33.625" />
+          <ConnectorPoint PointX="13.818731700721155" PointY="33.875" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.StationeryRetrievalFormItemByDepts_StationeryRetrievalFormByRequisitions_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="27.443354191706732" />
@@ -3441,6 +3439,8 @@
         <AssociationConnector Association="SA33.Team12.SSIS.Model.StationeryRetrievalFormItems_StationeryRetrievalFormItemByDepts_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="18.75" PointY="41.75" />
           <ConnectorPoint PointX="18.75" PointY="37.634095052083339" />
+          <ConnectorPoint PointX="18.333333833333331" PointY="37.634095052083339" />
+          <ConnectorPoint PointX="18.166667166666667" PointY="37.634095052083339" />
           <ConnectorPoint PointX="17.25" PointY="37.634095052083339" />
           <ConnectorPoint PointX="17.25" PointY="28.946595052083339" />
           <ConnectorPoint PointX="15.724269530598958" PointY="28.946595052083339" />
@@ -3464,8 +3464,8 @@
           <ConnectorPoint PointX="9.78125" PointY="42.153595377604162" />
           <ConnectorPoint PointX="10.432291666666666" PointY="42.153595377604162" />
           <ConnectorPoint PointX="10.598958333333334" PointY="42.153595377604162" />
-          <ConnectorPoint PointX="13.619792916666667" PointY="42.153595377604162" />
-          <ConnectorPoint PointX="13.786459583333334" PointY="42.153595377604162" />
+          <ConnectorPoint PointX="13.698896119791666" PointY="42.153595377604162" />
+          <ConnectorPoint PointX="13.865562786458334" PointY="42.153595377604162" />
           <ConnectorPoint PointX="15.260416666666666" PointY="42.153595377604162" />
           <ConnectorPoint PointX="15.427083333333334" PointY="42.153595377604162" />
           <ConnectorPoint PointX="17.135416666666668" PointY="42.153595377604162" />
@@ -3485,13 +3485,15 @@
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1" >
           <ConnectorPoint PointX="12.806537461538463" PointY="33.875" />
+          <ConnectorPoint PointX="12.62142556509888" PointY="33.689888103560421" />
+          <ConnectorPoint PointX="12.503574434901122" PointY="33.572036973362657" />
           <ConnectorPoint PointX="12.40625" PointY="33.474712538461539" />
           <ConnectorPoint PointX="12.40625" PointY="21.893992513020834" />
           <ConnectorPoint PointX="11.739583333333334" PointY="21.893992513020834" />
           <ConnectorPoint PointX="11.572916666666666" PointY="21.893992513020834" />
           <ConnectorPoint PointX="6.875" PointY="21.893992513020834" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.VW_RequisitionsByCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.VW_RequisitionsByCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3848893229166666" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.VW_RequisitionsByDepartment" Width="1.5" PointX="2.75" PointY="0.75" Height="2.1725878906250102" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.VW_RequisitionsByEmployee" Width="1.5" PointX="0.75" PointY="3.75" Height="2.1725878906250102" />
         <AssociationConnector Association="SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1" >
@@ -3502,20 +3504,6 @@
           <ConnectorPoint PointX="7.3401755650988791" PointY="39.149713757817786" />
           <ConnectorPoint PointX="7.5" PointY="38.989889322916667" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.StationeryPrice" Width="1.5" PointX="21" PointY="39" Height="2.1725878906249818" />
-        <AssociationConnector Association="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1" >
-          <ConnectorPoint PointX="14.25" PointY="39.21875" />
-          <ConnectorPoint PointX="18.666666666666668" PointY="39.21875" />
-          <ConnectorPoint PointX="18.833333333333332" PointY="39.21875" />
-          <ConnectorPoint PointX="21" PointY="39.21875" />
-        </AssociationConnector>
-        <AssociationConnector Association="SA33.Team12.SSIS.Model.Prices_By_Supplier1" >
-          <ConnectorPoint PointX="17.21875" PointY="43.75" />
-          <ConnectorPoint PointX="17.21875" PointY="39.359377499999994" />
-          <ConnectorPoint PointX="18.666666666666668" PointY="39.359377499999994" />
-          <ConnectorPoint PointX="18.833333333333332" PointY="39.359377499999994" />
-          <ConnectorPoint PointX="21" PointY="39.359377499999994" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.SpecialStationery" Width="1.5" PointX="9.75" PointY="35.875" Height="4.8648079427083246" />
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Categories_SpecialStationeries_FK1" >
           <ConnectorPoint PointX="9" PointY="35.253050071614595" />
@@ -3523,42 +3511,28 @@
           <ConnectorPoint PointX="10.09375" PointY="35.875" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1" >
-          <ConnectorPoint PointX="10.703127" PointY="35.875" />
-          <ConnectorPoint PointX="10.703127" PointY="35.287903645833339" />
-          <ConnectorPoint PointX="12.041666666666666" PointY="35.287903645833339" />
-          <ConnectorPoint PointX="12.270833333333334" PointY="35.287903645833339" />
-          <ConnectorPoint PointX="12.28125" PointY="35.287903645833339" />
-          <ConnectorPoint PointX="12.28125" PointY="31.969589843750004" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="31.969589843750004" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="31.969589843750004" />
-          <ConnectorPoint PointX="15" PointY="31.969589843750004" />
+          <ConnectorPoint PointX="10.8203145" PointY="35.875" />
+          <ConnectorPoint PointX="10.8203145" PointY="35.287903645833339" />
+          <ConnectorPoint PointX="12.166666666666666" PointY="35.287903645833339" />
+          <ConnectorPoint PointX="12.395833333333334" PointY="35.287903645833339" />
+          <ConnectorPoint PointX="12.5625" PointY="35.287903645833339" />
+          <ConnectorPoint PointX="12.5625" PointY="31.957871093750004" />
+          <ConnectorPoint PointX="15" PointY="31.957871093750004" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpeicalStationeries" >
-          <ConnectorPoint PointX="11.0078155" PointY="35.875" />
-          <ConnectorPoint PointX="11.0078155" PointY="35.75" />
-          <ConnectorPoint PointX="12.125" PointY="35.75" />
-          <ConnectorPoint PointX="12.125" PointY="33.625" />
-          <ConnectorPoint PointX="12.197916666666666" PointY="33.625" />
-          <ConnectorPoint PointX="12.364583333333334" PointY="33.625" />
-          <ConnectorPoint PointX="12.392435897435897" PointY="33.625" />
-          <ConnectorPoint PointX="12.639870794871795" PointY="33.625" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="33.625" />
-          <ConnectorPoint PointX="14.770833333333334" PointY="33.625" />
-          <ConnectorPoint PointX="14.78125" PointY="33.625" />
-          <ConnectorPoint PointX="14.78125" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="15.416667166666665" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="15.583333833333333" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="16.166666416666668" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="16.333333083333333" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="17.166666666666668" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="17.333333333333332" PointY="35.480499674479169" />
-          <ConnectorPoint PointX="17.75" PointY="35.480499674479169" />
+          <ConnectorPoint PointX="11.25" PointY="39.201481997395831" />
+          <ConnectorPoint PointX="12.5" PointY="39.201481997395831" />
+          <ConnectorPoint PointX="12.5" PointY="39.951315104166667" />
+          <ConnectorPoint PointX="14.75" PointY="39.951315104166667" />
+          <ConnectorPoint PointX="14.75" PointY="38.807190755208339" />
+          <ConnectorPoint PointX="18.2500005" PointY="38.807190755208339" />
+          <ConnectorPoint PointX="18.2500005" PointY="37.384095052083339" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1" >
           <ConnectorPoint PointX="10.515625" PointY="40.739807942708325" />
           <ConnectorPoint PointX="10.515625" PointY="42.552648388821396" />
-          <ConnectorPoint PointX="13.619792916666667" PointY="42.552648388821396" />
-          <ConnectorPoint PointX="13.786459583333334" PointY="42.552648388821396" />
+          <ConnectorPoint PointX="13.698896119791666" PointY="42.552648388821396" />
+          <ConnectorPoint PointX="13.865562786458334" PointY="42.552648388821396" />
           <ConnectorPoint PointX="15.260416666666666" PointY="42.552648388821396" />
           <ConnectorPoint PointX="15.427083333333334" PointY="42.552648388821396" />
           <ConnectorPoint PointX="17.135416666666668" PointY="42.552648388821396" />
@@ -3577,8 +3551,10 @@
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpeicalStationeries_ApprovedBy" >
           <ConnectorPoint PointX="6.75" PointY="35.9375" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="35.9375" />
-          <ConnectorPoint PointX="9.7083333333333339" PointY="35.9375" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="35.9375" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="35.9375" />
+          <ConnectorPoint PointX="9.1666666666666661" PointY="35.9375" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="35.9375" />
           <ConnectorPoint PointX="9.75" PointY="35.9375" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.SpeicalStationery_ModifiedBy" >
@@ -3587,12 +3563,30 @@
           <ConnectorPoint PointX="7.208333333333333" PointY="39.590951126635275" />
           <ConnectorPoint PointX="7.28125" PointY="39.590951126635275" />
           <ConnectorPoint PointX="7.28125" PointY="36.25" />
+          <ConnectorPoint PointX="9.1666666666666661" PointY="36.25" />
+          <ConnectorPoint PointX="9.3333333333333339" PointY="36.25" />
           <ConnectorPoint PointX="9.375" PointY="36.25" />
           <ConnectorPoint PointX="9.375" PointY="35.75" />
           <ConnectorPoint PointX="9.4166666666666661" PointY="35.75" />
-          <ConnectorPoint PointX="9.7083333333333339" PointY="35.75" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="35.75" />
           <ConnectorPoint PointX="9.890623" PointY="35.75" />
           <ConnectorPoint PointX="9.890623" PointY="35.875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.StationeryPrice" Width="1.5" PointX="21" PointY="38.875" Height="2.1725878906249818" />
+        <AssociationConnector Association="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier" >
+          <ConnectorPoint PointX="14.25" PointY="39.15625" />
+          <ConnectorPoint PointX="14.666666666666666" PointY="39.15625" />
+          <ConnectorPoint PointX="14.833333333333334" PointY="39.15625" />
+          <ConnectorPoint PointX="18.666666666666668" PointY="39.15625" />
+          <ConnectorPoint PointX="18.833333333333332" PointY="39.15625" />
+          <ConnectorPoint PointX="21" PointY="39.15625" />
+        </AssociationConnector>
+        <AssociationConnector Association="SA33.Team12.SSIS.Model.Prices_By_Supplier" >
+          <ConnectorPoint PointX="17.21875" PointY="43.75" />
+          <ConnectorPoint PointX="17.21875" PointY="39.328127499999994" />
+          <ConnectorPoint PointX="18.666666666666668" PointY="39.328127499999994" />
+          <ConnectorPoint PointX="18.833333333333332" PointY="39.328127499999994" />
+          <ConnectorPoint PointX="21" PointY="39.328127499999994" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
