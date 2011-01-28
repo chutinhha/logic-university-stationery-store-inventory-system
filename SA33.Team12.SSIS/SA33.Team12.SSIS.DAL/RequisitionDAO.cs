@@ -66,12 +66,16 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                var tempReq = (from r in context.Requisitions
-                               where r.RequisitionID == updateRequisition.RequisitionID
-                               select r).FirstOrDefault<Requisition>();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var tempReq = (from r in context.Requisitions
+                                   where r.RequisitionID == updateRequisition.RequisitionID
+                                   select r).FirstOrDefault<Requisition>();
 
-                tempReq = updateRequisition;
-                context.SaveChanges();
+                    tempReq = updateRequisition;
+                    context.SaveChanges();
+                    ts.Complete();
+                }
             }
             catch (Exception ex)
             {
@@ -206,12 +210,12 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns>List of Requisitions by category</returns>
-        public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, DateTime date)
+        public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
                 return GetAllRequisitionByCategory()
-                .Where(ri => ri.CategoryID == (category.CategoryID == 0 ? ri.CategoryID : category.CategoryID))
+                .Where(ri => ri.CategoryID == (category.CategoryID == 0 ? ri.CategoryID : category.CategoryID))                
                  .ToList<VW_RequisitionsByCategory>();
             }
             catch (Exception)
@@ -244,7 +248,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, DateTime date)
+        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
@@ -331,7 +335,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 if (requisitioinSearchDTO != null)
                 {
-                    if (requisitioinSearchDTO.RequisitionID != -1)
+                    if (requisitioinSearchDTO.RequisitionID != 0)
                     {
                         tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
                     }
