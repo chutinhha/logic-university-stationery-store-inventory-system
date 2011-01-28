@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using SA33.Team12.SSIS.DAL;
 using System.Collections.Generic;
+using System.Data.Objects;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -125,9 +126,12 @@ namespace SA33.Team12.SSIS.DAL
         /// Find stationeryRetrievalForms by Criteria
         /// </summary>
         /// <returns>stationeryRetrievalForm object</returns>
-        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria()
+        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria(DTO.StationeryRetrievalFormSearchDTO stationeryRetrievalFormSearchDTO)
         {
-            return null;
+            return GetStationeryRetrievalFormByID(new StationeryRetrievalForm() { StationeryRetrievalFormID = stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID });
+                //.Where(r => r.StationeryRetrievalFormID == (stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID == 0 ? r.StationeryRetrievalFormID : stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID)
+                   
+
         }
         #endregion
 

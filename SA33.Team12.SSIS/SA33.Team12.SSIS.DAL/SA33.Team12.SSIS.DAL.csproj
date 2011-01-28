@@ -72,6 +72,7 @@
     <Compile Include="DTO\PriceSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderItemSearchDTO.cs" />
     <Compile Include="DTO\SpecialStationerySearchDTO.cs" />
+    <Compile Include="DTO\StationeryRetrievalFormSearchDTO.cs" />
     <Compile Include="DTO\StationerySearchDTO.cs" />
     <Compile Include="DTO\StatusSearchDTO.cs" />
     <Compile Include="DTO\SupplierSearchDTO.cs" />
