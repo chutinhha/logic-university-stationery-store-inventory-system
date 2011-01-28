@@ -3637,8 +3637,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="dateReceived">Initial value of the DateReceived property.</param>
         /// <param name="supplierID">Initial value of the SupplierID property.</param>
         /// <param name="isDelivered">Initial value of the IsDelivered property.</param>
-        /// <param name="dateToSuppy">Initial value of the DateToSuppy property.</param>
-        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered, global::System.DateTime dateToSuppy)
+        /// <param name="dateToSupply">Initial value of the DateToSupply property.</param>
+        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered, global::System.DateTime dateToSupply)
         {
             PurchaseOrder purchaseOrder = new PurchaseOrder();
             purchaseOrder.PurchaseOrderID = purchaseOrderID;
@@ -3649,7 +3649,7 @@ namespace SA33.Team12.SSIS.DAL
             purchaseOrder.DateReceived = dateReceived;
             purchaseOrder.SupplierID = supplierID;
             purchaseOrder.IsDelivered = isDelivered;
-            purchaseOrder.DateToSuppy = dateToSuppy;
+            purchaseOrder.DateToSupply = dateToSupply;
             return purchaseOrder;
         }
 
@@ -3904,24 +3904,24 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateToSuppy
+        public global::System.DateTime DateToSupply
         {
             get
             {
-                return _DateToSuppy;
+                return _DateToSupply;
             }
             set
             {
-                OnDateToSuppyChanging(value);
-                ReportPropertyChanging("DateToSuppy");
-                _DateToSuppy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DateToSuppy");
-                OnDateToSuppyChanged();
+                OnDateToSupplyChanging(value);
+                ReportPropertyChanging("DateToSupply");
+                _DateToSupply = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateToSupply");
+                OnDateToSupplyChanged();
             }
         }
-        private global::System.DateTime _DateToSuppy;
-        partial void OnDateToSuppyChanging(global::System.DateTime value);
-        partial void OnDateToSuppyChanged();
+        private global::System.DateTime _DateToSupply;
+        partial void OnDateToSupplyChanging(global::System.DateTime value);
+        partial void OnDateToSupplyChanged();
 
         #endregion
     
@@ -8968,7 +8968,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="membershipProviderKey">Initial value of the MembershipProviderKey property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.Int32 userID, global::System.Int32 departmentID, global::System.String userName, global::System.Guid membershipProviderKey, global::System.String email)
+        /// <param name="isEnabled">Initial value of the IsEnabled property.</param>
+        public static User CreateUser(global::System.Int32 userID, global::System.Int32 departmentID, global::System.String userName, global::System.Guid membershipProviderKey, global::System.String email, global::System.Boolean isEnabled)
         {
             User user = new User();
             user.UserID = userID;
@@ -8976,6 +8977,7 @@ namespace SA33.Team12.SSIS.DAL
             user.UserName = userName;
             user.MembershipProviderKey = membershipProviderKey;
             user.Email = email;
+            user.IsEnabled = isEnabled;
             return user;
         }
 
@@ -9176,6 +9178,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _Password;
         partial void OnPasswordChanging(global::System.String value);
         partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsEnabled
+        {
+            get
+            {
+                return _IsEnabled;
+            }
+            set
+            {
+                OnIsEnabledChanging(value);
+                ReportPropertyChanging("IsEnabled");
+                _IsEnabled = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsEnabled");
+                OnIsEnabledChanged();
+            }
+        }
+        private global::System.Boolean _IsEnabled;
+        partial void OnIsEnabledChanging(global::System.Boolean value);
+        partial void OnIsEnabledChanged();
 
         #endregion
     
