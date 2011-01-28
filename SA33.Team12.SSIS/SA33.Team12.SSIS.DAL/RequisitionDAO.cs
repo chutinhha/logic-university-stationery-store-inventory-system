@@ -282,13 +282,13 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, DateTime date)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
                 return GetAllRequisitionByEmployee().
-                  Where(re => re.DateRequested.Month == (date.Month == 0 ? re.DateRequested.Month : date.Month)
-                  && re.DateRequested.Year == (date.Year == 0 ? re.DateRequested.Year : date.Year))
+                  Where(re => re.DateRequested.Month == (requisitionSearchDTO.ExactDateRequested.Month == 0 ? re.DateRequested.Month : requisitionSearchDTO.ExactDateRequested.Month)
+                  && re.DateRequested.Year == (requisitionSearchDTO.ExactDateRequested.Year == 0 ? re.DateRequested.Year : requisitionSearchDTO.ExactDateRequested.Year))
             .ToList<VW_RequisitionsByEmployee>();
             }
             catch (Exception)
