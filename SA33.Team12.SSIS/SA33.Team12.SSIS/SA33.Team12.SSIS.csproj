@@ -63,6 +63,8 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Test\poItemTest.aspx" />
+    <Content Include="Test\POTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="Test\StationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
@@ -112,6 +114,20 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\poItemTest.aspx.cs">
+      <DependentUpon>poItemTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\poItemTest.aspx.designer.cs">
+      <DependentUpon>poItemTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\POTest.aspx.cs">
+      <DependentUpon>POTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\POTest.aspx.designer.cs">
+      <DependentUpon>POTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\Stationeries.aspx.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
