@@ -107,9 +107,9 @@ namespace SA33.Team12.SSIS.DAL
                     && (EntityFunctions.DiffDays(u.DateReceived, (criteria.StartDateReceived == null || criteria.StartDateReceived == DateTime.MinValue ? u.DateReceived : criteria.StartDateReceived)) <= 0
                     && EntityFunctions.DiffDays(u.DateReceived, (criteria.EndDateReceived == null || criteria.EndDateReceived == DateTime.MinValue ? u.DateReceived : criteria.EndDateReceived)) >= 0)
                     && (EntityFunctions.DiffDays(u.DateReceived, (criteria.ExactDateReceived == null || criteria.ExactDateReceived == DateTime.MinValue ? u.DateReceived : criteria.ExactDateReceived)) == 0)
-                    && (EntityFunctions.DiffDays(u.DateToSuppy, (criteria.StartDateToSupply == null || criteria.StartDateToSupply == DateTime.MinValue ? u.DateToSuppy : criteria.StartDateToSupply)) <= 0
-                    && EntityFunctions.DiffDays(u.DateToSuppy, (criteria.EndDateToSupply == null || criteria.EndDateToSupply == DateTime.MinValue ? u.DateToSuppy : criteria.EndDateToSupply)) >= 0)
-                    && (EntityFunctions.DiffDays(u.DateToSuppy, (criteria.ExactDateToSupply == null || criteria.ExactDateToSupply == DateTime.MinValue ? u.DateToSuppy : criteria.ExactDateToSupply)) == 0)
+                    && (EntityFunctions.DiffDays(u.DateToSupply, (criteria.StartDateToSupply == null || criteria.StartDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.StartDateToSupply)) <= 0
+                    && EntityFunctions.DiffDays(u.DateToSupply, (criteria.EndDateToSupply == null || criteria.EndDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.EndDateToSupply)) >= 0)
+                    && (EntityFunctions.DiffDays(u.DateToSupply, (criteria.ExactDateToSupply == null || criteria.ExactDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.ExactDateToSupply)) == 0)
                     && u.ReceivedBy == (criteria.ReceiveBy == 0 ? u.ReceivedBy : criteria.ReceiveBy)
                     && u.DONumber == (criteria.DONumber == null ? u.DONumber : criteria.DONumber)
                     select u;
