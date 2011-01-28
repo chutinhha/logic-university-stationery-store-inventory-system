@@ -41,7 +41,7 @@ namespace SA33.Team12.SSIS.Test
             po.SupplierID = 2;
             po.PONumber = "90000";
             po.DateOfOrder = t1;
-            po.DateToSuppy = t2;
+            po.DateToSupply = t2;
             po.AttentionTo = 2;
             po.CreatedBy = 2;
             po.DateReceived = t2;
