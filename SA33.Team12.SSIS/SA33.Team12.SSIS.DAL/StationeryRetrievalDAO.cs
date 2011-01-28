@@ -6,26 +6,364 @@
 using System;
 using System.Web;
 using System.ComponentModel;
-
+using System.Linq;
 using SA33.Team12.SSIS.DAL;
+using System.Collections.Generic;
 
 namespace SA33.Team12.SSIS.DAL
 {
     public class StationeryRetrievalDAO : DALLogic
     {
+        #region StationeryRetrievalForm
+        /// <summary>
+        /// Create a new stationery retrieval form
+        /// </summary>
+        /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
         public void CreateStationeryRetrievalForm(StationeryRetrievalForm stationeryRetrievalForm)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                context.AddToStationeryRetrievalForms(stationeryRetrievalForm);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
+        /// <summary>
+        /// Update Received Quantity in stationery retrieval form
+        /// </summary>
+        /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
         public void UpdateReceivedQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var temp = (from srf in context.StationeryRetrievalForms
+                            where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
+                            select srf).FirstOrDefault<StationeryRetrievalForm>();
+
+                foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
+                {
+                    UpdateStationeryRetrievalFormItem(srfi);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
+        /// <summary>
+        /// Update Actual Quantity in stationery retrieval form
+        /// </summary>
+        /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
         public void UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var temp = (from srf in context.StationeryRetrievalForms
+                            where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
+                            select srf).FirstOrDefault<StationeryRetrievalForm>();
+
+                foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
+                {
+                    foreach (StationeryRetrievalFormItemByDept srfid in srfi.StationeryRetrievalFormItemByDepts)
+                    {
+                        UpdateStationeryRetrievalFormItemByDept(srfid);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+        /// <summary>
+        /// Get All StationeryRetrievalForms
+        /// </summary>
+        /// <returns>List of StationeryRetrievalForm objects</returns>
+        public List<StationeryRetrievalForm> GetAllStationeryRetrievalForms()
+        {
+            try
+            {
+                return context.StationeryRetrievalForms.ToList<StationeryRetrievalForm>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get StationeryRetrievalForm by primary key
+        /// </summary>
+        /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
+        /// <returns>stationeryRetrievalForm object</returns>
+        public List<StationeryRetrievalForm> GetStationeryRetrievalFormByID(StationeryRetrievalForm stationeryRetrievalForm)
+        {
+            try
+            {
+                return GetAllStationeryRetrievalForms().
+                    Where(srf => srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID).ToList<StationeryRetrievalForm>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Find stationeryRetrievalForms by Criteria
+        /// </summary>
+        /// <returns>stationeryRetrievalForm object</returns>
+        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria()
+        {
+            return null;
+        }
+        #endregion
+
+        #region StationeryRetrievalFormItem
+        /// <summary>
+        /// Create a new Stationery Retrieval FormItem
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItem">stationeryRetrievalFormItem object</param>
+        public void CreateStationeryRetrievalFormItem(StationeryRetrievalFormItem stationeryRetrievalFormItem)
+        {
+            try
+            {
+                context.AddToStationeryRetrievalFormItems(stationeryRetrievalFormItem);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update the Stationery Retrieval FormItem
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItem">stationeryRetrievalFormItem object</param>
+        public void UpdateStationeryRetrievalFormItem(StationeryRetrievalFormItem stationeryRetrievalFormItem)
+        {
+            try
+            {
+                var temp = (from srfi in context.StationeryRetrievalFormItems
+                            where srfi.StationeryRetrievalFormItemID == stationeryRetrievalFormItem.StationeryRetrievalFormItemID
+                            select srfi).First<StationeryRetrievalFormItem>();
+
+                temp.QuantityRetrieved = stationeryRetrievalFormItem.QuantityRetrieved;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All Stationery Retrieval FormItems
+        /// </summary>
+        /// <returns>List of StationeryRetrievalFormItem objects</returns>
+        public List<StationeryRetrievalFormItem> GetAllStationeryRetrievalFormItems()
+        {
+            try
+            {
+                return context.StationeryRetrievalFormItems.ToList<StationeryRetrievalFormItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get Stationery Retrieval FormItem by primary key
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItem">stationeryRetrievalFormItem object</param>
+        /// <returns>List of StationeryRetrievalFormItem objects</returns>
+        public StationeryRetrievalFormItem GetStationeryRetrievalFormItemByID(StationeryRetrievalFormItem stationeryRetrievalFormItem)
+        {
+            try
+            {
+                return GetAllStationeryRetrievalFormItems().
+                    Where(srfi => srfi.StationeryRetrievalFormItemID == stationeryRetrievalFormItem.StationeryRetrievalFormItemID)
+                    .FirstOrDefault<StationeryRetrievalFormItem>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        } 
+        #endregion
+
+        #region StationeryRetrievalFormItemByDept
+        /// <summary>
+        /// Create a new Stationery Retrieval FormItemByDept
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItemByDept">stationeryRetrievalFormItemByDept object</param>
+        public void CreateStationeryRetrievalFormItemByDept(StationeryRetrievalFormItemByDept stationeryRetrievalFormItemByDept)
+        {
+            try
+            {
+                context.AddToStationeryRetrievalFormItemByDepts(stationeryRetrievalFormItemByDept);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update Stationery Retrieval FormItemByDept
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItemByDept">stationeryRetrievalFormItemByDept object</param>
+        public void UpdateStationeryRetrievalFormItemByDept(StationeryRetrievalFormItemByDept stationeryRetrievalFormItemByDept)
+        {
+            try
+            {
+                var temp = (from x in context.StationeryRetrievalFormItemByDepts
+                            where x.StationeryRetrievalFormItemByDeptID == stationeryRetrievalFormItemByDept.StationeryRetrievalFormItemByDeptID
+                            select x).FirstOrDefault<StationeryRetrievalFormItemByDept>();
+
+                temp.QuantityActual = stationeryRetrievalFormItemByDept.QuantityActual;
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All Stationery Retrieval FormItemByDept
+        /// </summary>
+        /// <returns>List of StationeryRetrievalFormItemByDept objects</returns>
+        public List<StationeryRetrievalFormItemByDept> GetAllStationeryRetrievalFormItemByDept()
+        {
+            try
+            {
+                return context.StationeryRetrievalFormItemByDepts.ToList<StationeryRetrievalFormItemByDept>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get Stationery Retrieval FormItemByDept by primary key
+        /// </summary>
+        /// <param name="stationeryRetrievalFormItemByDept">StationeryRetrievalFormItemByDept object</param>
+        /// <returns>StationeryRetrievalFormItemByDept object</returns>
+        public StationeryRetrievalFormItemByDept GetStationeryRetrievalFormItemByDeptByID(StationeryRetrievalFormItemByDept stationeryRetrievalFormItemByDept)
+        {
+            try
+            {
+                return GetAllStationeryRetrievalFormItemByDept()
+                    .Where(x => x.StationeryRetrievalFormItemByDeptID == stationeryRetrievalFormItemByDept.StationeryRetrievalFormItemByDeptID)
+                    .FirstOrDefault<StationeryRetrievalFormItemByDept>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        } 
+        #endregion
+
+        #region StationeryRetrievalFormByRequisition
+        /// <summary>
+        /// Create Stationery Retrieval Form By Requisition
+        /// </summary>
+        /// <param name="stationeryRetrievalFormByRequisition">StationeryRetrievalFormByRequisition object</param>
+        public void CreateStationeryRetrievalFormByRequisition(StationeryRetrievalFormByRequisition stationeryRetrievalFormByRequisition)
+        {
+            try
+            {
+                context.AddToStationeryRetrievalFormByRequisitions(stationeryRetrievalFormByRequisition);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update Stationery Retrieval Form By Requisition
+        /// </summary>
+        /// <param name="stationeryRetrievalFormByRequisition">StationeryRetrievalFormByRequisition object</param>
+        public void UpdateStationeryRetrievalFormByRequisition(StationeryRetrievalFormByRequisition stationeryRetrievalFormByRequisition)
+        {
+            try
+            {
+                var temp = (from x in context.StationeryRetrievalFormByRequisitions
+                            where x.StationeryRetrievalFormByRequisitionID == stationeryRetrievalFormByRequisition.StationeryRetrievalFormByRequisitionID
+                            select x).FirstOrDefault<StationeryRetrievalFormByRequisition>();
+
+                temp.RequisitionID = stationeryRetrievalFormByRequisition.RequisitionID;
+                temp.StationeryRetrievalFormItemByDeptID = stationeryRetrievalFormByRequisition.StationeryRetrievalFormItemByDeptID;
+
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All Stationery Retrieval Form By Requisitions
+        /// </summary>
+        /// <returns>List of StationeryRetrievalFormByRequisition objects</returns>
+        public List<StationeryRetrievalFormByRequisition> GetAllStationeryRetrievalFormByRequisitions()
+        {
+            try
+            {
+                return context.StationeryRetrievalFormByRequisitions.ToList<StationeryRetrievalFormByRequisition>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get Stationery Retrieval FormByRequistion by primary key
+        /// </summary>
+        /// <param name="stationeryRetrievalFormByRequisition">StationeryRetrievalFormByRequisition object</param>
+        /// <returns>StationeryRetrievalFormByRequisition object</returns>
+        public StationeryRetrievalFormByRequisition GetStationeryRetrievalFormByRequisitionByID(StationeryRetrievalFormByRequisition stationeryRetrievalFormByRequisition)
+        {
+            try
+            {
+                return GetAllStationeryRetrievalFormByRequisitions()
+                    .Where(x => x.StationeryRetrievalFormByRequisitionID == stationeryRetrievalFormByRequisition.StationeryRetrievalFormByRequisitionID)
+                    .FirstOrDefault<StationeryRetrievalFormByRequisition>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        } 
+        #endregion
     }
 }
