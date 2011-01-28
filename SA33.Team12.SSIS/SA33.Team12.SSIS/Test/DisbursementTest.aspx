@@ -9,7 +9,8 @@
         runat="server" Text="Search" onclick="btnGetDisbursementByID_Click" /><br/>
     <h3>Search Disbursement By Criteria</h3><br/>
     CreateBy:<asp:TextBox ID="txbCreateBy" runat="server"></asp:TextBox><br/>
-    <asp:Button ID="GetDisbursementByCriteria" runat="server" Text="Button" />
+    <asp:Button ID="GetDisbursementByCriteria" runat="server" Text="Search" 
+        onclick="GetDisbursementByCriteria_Click" />
     <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
 </asp:Content>

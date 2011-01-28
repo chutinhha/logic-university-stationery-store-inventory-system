@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -26,6 +27,15 @@ namespace SA33.Team12.SSIS.Test
             disbursements.Add(disbursement);
             this.GridView1.DataSource= disbursements;
             this.GridView1.DataBind();
+        }
+
+        protected void GetDisbursementByCriteria_Click(object sender, EventArgs e)
+        {
+            DisbursementSearchDTO searchCriteria = new DisbursementSearchDTO();
+            searchCriteria.CreatedBy = Convert.ToInt32(txbCreateBy.Text.ToString());
+            List<Disbursement> disbursements = disbursementDAO.FindDisbursementByCriteria(searchCriteria);
+            GridView1.DataSource = disbursements;
+            GridView1.DataBind();
         }
 
   
