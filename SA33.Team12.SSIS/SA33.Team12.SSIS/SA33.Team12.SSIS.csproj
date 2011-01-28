@@ -63,7 +63,6 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
-    <Content Include="Test\DisbursementTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="Test\StationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
@@ -113,13 +112,6 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test\DisbursementTest.aspx.cs">
-      <DependentUpon>DisbursementTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test\DisbursementTest.aspx.designer.cs">
-      <DependentUpon>DisbursementTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\Stationeries.aspx.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
