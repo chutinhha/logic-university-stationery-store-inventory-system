@@ -397,114 +397,115 @@ namespace SA33.Team12.SSIS.DAL
         }
         # endregion
 
-        # region Prices
-        public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
-        {
-            try
-            {
-                var Query =
-                    from p in context.Prices
-                    where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
-                    && p.Name.Contains((criteria.Name == null || criteria.Name == "" ? p.Name : criteria.Name))
-                    && p.CreatedBy == (criteria.CreatedBy == null ? p.CreatedBy : criteria.CreatedBy)
-                    && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.StartCreatedDate)) <= 0
-                      && EntityFunctions.DiffDays(p.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.EndCreatedDate)) >= 0)
-                    && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.ExactCreatedDate)) == 0)
-                    select p;
-                List<Price> prices = Query.ToList<Price>();
-                return prices;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //# region Prices
+        //public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
+        //{
+        //    try
+        //    {
+        //        var Query =
+        //            from p in context.Prices
+        //            where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
+        //            && p.StationeryID == (criteria.StationeryID == 0 ? p.StationeryID : criteria.StationeryID)
+        //            && p.SupplierID == (criteria.SupplierID == 0 ? p.SupplierID : criteria.SupplierID)
+        //            && p.CreatedBy == (criteria.CreatedBy == null ? p.CreatedBy : criteria.CreatedBy)
+        //            && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.StartCreatedDate)) <= 0
+        //              && EntityFunctions.DiffDays(p.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.EndCreatedDate)) >= 0)
+        //            && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.ExactCreatedDate)) == 0)
+        //            select p;
+        //        List<Price> prices = Query.ToList<Price>();
+        //        return prices;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        public List<Price> GetAllPrice()
-        {
-            return (from p in context.Prices
-                    select p).ToList();
-        }
+        //public List<Price> GetAllPrice()
+        //{
+        //    return (from p in context.Prices
+        //            select p).ToList();
+        //}
 
-        public Price GetPriceByID(int PriceID)
-        {
-            Price price = (from p in context.Prices
-                           where p.PriceID == PriceID
-                           select p).FirstOrDefault<Price>();
-            return price;
-        }
+        //public Price GetPriceByID(int PriceID)
+        //{
+        //    Price price = (from p in context.Prices
+        //                   where p.PriceID == PriceID
+        //                   select p).FirstOrDefault<Price>();
+        //    return price;
+        //}
 
-        public int GetPriceCount()
-        {
-            return context.Prices.Count();
-        }
+        //public int GetPriceCount()
+        //{
+        //    return context.Prices.Count();
+        //}
 
-        public Price CreatePrice(Price price)
-        {
-            try
-            {
-                using (TransactionScope ts = new TransactionScope())
-                {
-                    context.Prices.AddObject(price);
-                    context.SaveChanges();
-                    ts.Complete();
-                    return price;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public Price CreatePrice(Price price)
+        //{
+        //    try
+        //    {
+        //        using (TransactionScope ts = new TransactionScope())
+        //        {
+        //            context.Prices.AddObject(price);
+        //            context.SaveChanges();
+        //            ts.Complete();
+        //            return price;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        public Price UpdatePrice(Price price)
-        {
-            try
-            {
-                Price tempPrice = (from p in context.Prices
-                                   where p.PriceID == price.PriceID
-                                   select p).First<Price>();
+        //public Price UpdatePrice(Price price)
+        //{
+        //    try
+        //    {
+        //        Price tempPrice = (from p in context.Prices
+        //                           where p.PriceID == price.PriceID
+        //                           select p).First<Price>();
 
-                tempPrice.Name = price.Name;
-                tempPrice.CreatedByUser = price.CreatedByUser;
-                tempPrice.CreatedDate = price.CreatedDate;
+        //        tempPrice.Name = price.Name;
+        //        tempPrice.CreatedByUser = price.CreatedByUser;
+        //        tempPrice.CreatedDate = price.CreatedDate;
 
-                using (TransactionScope ts = new TransactionScope())
-                {
-                    context.Attach(tempPrice);
-                    context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
-                    context.SaveChanges();
-                    ts.Complete();
-                    return tempPrice;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //        using (TransactionScope ts = new TransactionScope())
+        //        {
+        //            context.Attach(tempPrice);
+        //            context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
+        //            context.SaveChanges();
+        //            ts.Complete();
+        //            return tempPrice;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        public void DeletePrice(Price price)
-        {
-            try
-            {
-                Price persistedPrice = (from p in context.Prices
-                                        where p.PriceID == price.PriceID
-                                        select p).First<Price>();
+        //public void DeletePrice(Price price)
+        //{
+        //    try
+        //    {
+        //        Price persistedPrice = (from p in context.Prices
+        //                                where p.PriceID == price.PriceID
+        //                                select p).First<Price>();
 
-                using (TransactionScope ts = new TransactionScope())
-                {
-                    context.Prices.DeleteObject(persistedPrice);
-                    context.SaveChanges();
-                    ts.Complete();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        # endregion
+        //        using (TransactionScope ts = new TransactionScope())
+        //        {
+        //            context.Prices.DeleteObject(persistedPrice);
+        //            context.SaveChanges();
+        //            ts.Complete();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+        //# endregion
 
 
 
