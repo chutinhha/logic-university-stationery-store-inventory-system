@@ -210,7 +210,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="category">category object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns>List of Requisitions by category</returns>
-        public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByCategory> GetRequisitionByCategoryID(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
@@ -248,7 +248,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartmentID(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
@@ -286,7 +286,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
         /// <returns></returns>
-        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployeeID(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
             {
@@ -344,7 +344,7 @@ namespace SA33.Team12.SSIS.DAL
 
                     if (requisitioinSearchDTO.ExactDateRequested >= DateTime.MinValue)
                     {
-                        GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) > 0).ToList<Requisition>();
+                        GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
                     }
                 }
                 
