@@ -464,8 +464,9 @@
             <PropertyRef Name="SpecialStationeryID" />
           </Key>
           <Property Name="SpecialStationeryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="ItemCode" Type="nchar" Nullable="false" MaxLength="4" />
-          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" Nullable="false" />
@@ -473,7 +474,6 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ApprovedBy" Type="int" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="IsApproved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Stationeries">
@@ -490,9 +490,10 @@
           <Property Name="QuantityInHand" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="DateApproved" Type="datetime" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
-          <Property Name="ApprovedBy" Type="int" Nullable="false" />
+          <Property Name="ApprovedBy" Type="int" />
           <Property Name="IsApproved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="StationeryPrices">
@@ -1186,7 +1187,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Stationery_Approved_By">
-          <End Role="Users" Type="SA33.Team12.SSIS.Model.Store.Users" Multiplicity="1" />
+          <End Role="Users" Type="SA33.Team12.SSIS.Model.Store.Users" Multiplicity="0..1" />
           <End Role="Stationeries" Type="SA33.Team12.SSIS.Model.Store.Stationeries" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -1612,7 +1613,7 @@
           <Property Name="AdjustmentVoucherTransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateIssued" Type="DateTime" Nullable="false" />
           <Property Name="VoucherNumber" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StockLogTransactions" Relationship="SA33.Team12.SSIS.Model.AdjustmentVoucherTransactions_StockLogTransactions" FromRole="AdjustmentVoucherTransactions" ToRole="StockLogTransactions" />
         </EntityType>
         <EntityType Name="ApprovalAudit">
@@ -1729,7 +1730,7 @@
           <Property Name="PurchaseOrderID" Type="Int32" Nullable="false" />
           <Property Name="QuantityToOrder" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="DeliveryRemarks" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DeliveryRemarks" Type="String" MaxLength="255" Unicode="true" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="PurchaseOrder" Relationship="SA33.Team12.SSIS.Model.PurchaseOrders_PurchaseOrderItems_FK1" FromRole="PurchaseOrderItems" ToRole="PurchaseOrders" />
           <NavigationProperty Name="Stationery" Relationship="SA33.Team12.SSIS.Model.Stationeries_PurchaseOrderItems" FromRole="PurchaseOrderItems" ToRole="Stationeries" />
         </EntityType>
@@ -1813,7 +1814,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
-          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" Nullable="false" />
           <Property Name="ReorderLevel" Type="Int32" Nullable="false" />
           <Property Name="ReorderQuantity" Type="Int32" Nullable="false" />
           <Property Name="QuantityInHand" Type="Int32" Nullable="false" />
@@ -1821,7 +1822,7 @@
           <Property Name="DateModified" Type="DateTime" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="ApprovedBy" Type="Int32" Nullable="false" />
           <Property Name="IsApproved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="SA33.Team12.SSIS.Model.Categories_Stationeries_FK1" FromRole="Stationeries" ToRole="Categories" />
           <NavigationProperty Name="DisbursementItems" Relationship="SA33.Team12.SSIS.Model.Stationeries_DisbursementItems_FK1" FromRole="Stationeries" ToRole="DisbursementItems" />
@@ -1835,6 +1836,7 @@
           <NavigationProperty Name="ModifiedByUser" Relationship="SA33.Team12.SSIS.Model.Stationery_Modified_By" FromRole="Stationeries" ToRole="Users" />
           <NavigationProperty Name="StockLogTransactions" Relationship="SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1" FromRole="Stationery" ToRole="StockLogTransaction" />
           <NavigationProperty Name="StationeryPrices" Relationship="SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier" FromRole="Stationery" ToRole="StationeryPrice" />
+          <Property Type="DateTime" Name="DateApproved" />
         </EntityType>
         <EntityType Name="StationeryRetrievalFormByRequisition">
           <Key>
@@ -2417,7 +2419,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Stationery_Approved_By">
-          <End Role="Users" Type="SA33.Team12.SSIS.Model.User" Multiplicity="0..1" />
+          <End Role="Users" Type="SA33.Team12.SSIS.Model.User" Multiplicity="1" />
           <End Role="Stationeries" Type="SA33.Team12.SSIS.Model.Stationery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -2529,7 +2531,7 @@
             <PropertyRef Name="ItemCode" />
           </Key>
           <Property Type="String" Name="ItemCode" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Type="Int32" Name="TotalQuantity" />
           <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
           <Property Type="String" Name="Name" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -2541,7 +2543,7 @@
             <PropertyRef Name="ItemCode" />
           </Key>
           <Property Type="String" Name="ItemCode" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Type="Int32" Name="TotalQuantity" />
           <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
           <Property Type="String" Name="Code" MaxLength="4" FixedLength="true" Unicode="false" />
@@ -2579,7 +2581,7 @@
           </Key>
           <Property Type="Int32" Name="SpecialStationeryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="ItemCode" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" />
           <Property Type="DateTime" Name="DateModified" Nullable="false" />
@@ -2859,7 +2861,8 @@
             <ScalarProperty Name="RemarkByRequester" ColumnName="RemarkByRequester" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Stationeries"><EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.Stationery"><MappingFragment StoreEntitySet="Stationeries">
-            <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
+            <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
+                <ScalarProperty Name="StationeryID" ColumnName="StationeryID" />
             <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
             <ScalarProperty Name="LocationID" ColumnName="LocationID" />
             <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
@@ -3035,7 +3038,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="StationeryModel" ZoomLevel="88">
+      <Diagram Name="StationeryModel" ZoomLevel="44">
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucher" Width="1.5" PointX="7.5" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Width="1.5" PointX="3.125" PointY="20.25" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.ApprovalAudit" Width="1.5" PointX="7.5" PointY="29.25" Height="2.172587890624996" IsExpanded="true" />

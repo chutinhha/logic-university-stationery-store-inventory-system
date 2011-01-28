@@ -54,7 +54,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Urgencies_Requisitions_FK1", "Urgencies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Urgency), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StationeryRetrievalFormItems_FK1", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogs", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLog), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_Modified_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalFormItemByDepts_StationeryRetrievalFormByRequisitions_FK1", "StationeryRetrievalFormItemByDepts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItemByDept), "StationeryRetrievalFormByRequisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormByRequisition), true)]
@@ -1200,12 +1200,14 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="adjustmentVoucherTransactionID">Initial value of the AdjustmentVoucherTransactionID property.</param>
         /// <param name="dateIssued">Initial value of the DateIssued property.</param>
         /// <param name="voucherNumber">Initial value of the VoucherNumber property.</param>
-        public static AdjustmentVoucherTransaction CreateAdjustmentVoucherTransaction(global::System.Int32 adjustmentVoucherTransactionID, global::System.DateTime dateIssued, global::System.String voucherNumber)
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        public static AdjustmentVoucherTransaction CreateAdjustmentVoucherTransaction(global::System.Int32 adjustmentVoucherTransactionID, global::System.DateTime dateIssued, global::System.String voucherNumber, global::System.Int32 createdBy)
         {
             AdjustmentVoucherTransaction adjustmentVoucherTransaction = new AdjustmentVoucherTransaction();
             adjustmentVoucherTransaction.AdjustmentVoucherTransactionID = adjustmentVoucherTransactionID;
             adjustmentVoucherTransaction.DateIssued = dateIssued;
             adjustmentVoucherTransaction.VoucherNumber = voucherNumber;
+            adjustmentVoucherTransaction.CreatedBy = createdBy;
             return adjustmentVoucherTransaction;
         }
 
@@ -1290,9 +1292,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> CreatedBy
+        public global::System.Int32 CreatedBy
         {
             get
             {
@@ -1307,8 +1309,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnCreatedByChanged();
             }
         }
-        private Nullable<global::System.Int32> _CreatedBy;
-        partial void OnCreatedByChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
         partial void OnCreatedByChanged();
 
         #endregion
@@ -3910,7 +3912,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="purchaseOrderID">Initial value of the PurchaseOrderID property.</param>
         /// <param name="quantityToOrder">Initial value of the QuantityToOrder property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 stationeryID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price)
+        /// <param name="deliveryRemarks">Initial value of the DeliveryRemarks property.</param>
+        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 stationeryID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price, global::System.String deliveryRemarks)
         {
             PurchaseOrderItem purchaseOrderItem = new PurchaseOrderItem();
             purchaseOrderItem.PurchaseOrderItemID = purchaseOrderItemID;
@@ -3918,6 +3921,7 @@ namespace SA33.Team12.SSIS.DAL
             purchaseOrderItem.PurchaseOrderID = purchaseOrderID;
             purchaseOrderItem.QuantityToOrder = quantityToOrder;
             purchaseOrderItem.Price = price;
+            purchaseOrderItem.DeliveryRemarks = deliveryRemarks;
             return purchaseOrderItem;
         }
 
@@ -4050,7 +4054,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String DeliveryRemarks
         {
@@ -4062,7 +4066,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDeliveryRemarksChanging(value);
                 ReportPropertyChanging("DeliveryRemarks");
-                _DeliveryRemarks = StructuralObject.SetValidValue(value, true);
+                _DeliveryRemarks = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("DeliveryRemarks");
                 OnDeliveryRemarksChanged();
             }
@@ -5287,6 +5291,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="specialStationeryID">Initial value of the SpecialStationeryID property.</param>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="dateModified">Initial value of the DateModified property.</param>
@@ -5295,11 +5300,12 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="categoryID">Initial value of the CategoryID property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        public static SpecialStationery CreateSpecialStationery(global::System.Int32 specialStationeryID, global::System.String itemCode, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.DateTime dateApproved, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 categoryID, global::System.Boolean isApproved)
+        public static SpecialStationery CreateSpecialStationery(global::System.Int32 specialStationeryID, global::System.String itemCode, global::System.String description, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.DateTime dateApproved, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 categoryID, global::System.Boolean isApproved)
         {
             SpecialStationery specialStationery = new SpecialStationery();
             specialStationery.SpecialStationeryID = specialStationeryID;
             specialStationery.ItemCode = itemCode;
+            specialStationery.Description = description;
             specialStationery.Quantity = quantity;
             specialStationery.DateCreated = dateCreated;
             specialStationery.DateModified = dateModified;
@@ -5368,7 +5374,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -5380,7 +5386,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -5869,6 +5875,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="categoryID">Initial value of the CategoryID property.</param>
         /// <param name="locationID">Initial value of the LocationID property.</param>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
         /// <param name="reorderLevel">Initial value of the ReorderLevel property.</param>
         /// <param name="reorderQuantity">Initial value of the ReorderQuantity property.</param>
         /// <param name="quantityInHand">Initial value of the QuantityInHand property.</param>
@@ -5876,14 +5883,16 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="dateModified">Initial value of the DateModified property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
+        /// <param name="approvedBy">Initial value of the ApprovedBy property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        public static Stationery CreateStationery(global::System.Int32 stationeryID, global::System.Int32 categoryID, global::System.Int32 locationID, global::System.String itemCode, global::System.Int32 reorderLevel, global::System.Int32 reorderQuantity, global::System.Int32 quantityInHand, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Boolean isApproved)
+        public static Stationery CreateStationery(global::System.Int32 stationeryID, global::System.Int32 categoryID, global::System.Int32 locationID, global::System.String itemCode, global::System.String description, global::System.Int32 reorderLevel, global::System.Int32 reorderQuantity, global::System.Int32 quantityInHand, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy, global::System.Boolean isApproved)
         {
             Stationery stationery = new Stationery();
             stationery.StationeryID = stationeryID;
             stationery.CategoryID = categoryID;
             stationery.LocationID = locationID;
             stationery.ItemCode = itemCode;
+            stationery.Description = description;
             stationery.ReorderLevel = reorderLevel;
             stationery.ReorderQuantity = reorderQuantity;
             stationery.QuantityInHand = quantityInHand;
@@ -5891,6 +5900,7 @@ namespace SA33.Team12.SSIS.DAL
             stationery.DateModified = dateModified;
             stationery.CreatedBy = createdBy;
             stationery.ModifiedBy = modifiedBy;
+            stationery.ApprovedBy = approvedBy;
             stationery.IsApproved = isApproved;
             return stationery;
         }
@@ -6000,7 +6010,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -6012,7 +6022,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -6192,9 +6202,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ApprovedBy
+        public global::System.Int32 ApprovedBy
         {
             get
             {
@@ -6209,8 +6219,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnApprovedByChanged();
             }
         }
-        private Nullable<global::System.Int32> _ApprovedBy;
-        partial void OnApprovedByChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _ApprovedBy;
+        partial void OnApprovedByChanging(global::System.Int32 value);
         partial void OnApprovedByChanged();
     
         /// <summary>
@@ -6236,6 +6246,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Boolean _IsApproved;
         partial void OnIsApprovedChanging(global::System.Boolean value);
         partial void OnIsApprovedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateApproved
+        {
+            get
+            {
+                return _DateApproved;
+            }
+            set
+            {
+                OnDateApprovedChanging(value);
+                ReportPropertyChanging("DateApproved");
+                _DateApproved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateApproved");
+                OnDateApprovedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateApproved;
+        partial void OnDateApprovedChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateApprovedChanged();
 
         #endregion
     
@@ -9704,10 +9738,12 @@ namespace SA33.Team12.SSIS.DAL
         /// Create a new VW_RequisitionsByCategory object.
         /// </summary>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
-        public static VW_RequisitionsByCategory CreateVW_RequisitionsByCategory(global::System.String itemCode)
+        /// <param name="description">Initial value of the Description property.</param>
+        public static VW_RequisitionsByCategory CreateVW_RequisitionsByCategory(global::System.String itemCode, global::System.String description)
         {
             VW_RequisitionsByCategory vW_RequisitionsByCategory = new VW_RequisitionsByCategory();
             vW_RequisitionsByCategory.ItemCode = itemCode;
+            vW_RequisitionsByCategory.Description = description;
             return vW_RequisitionsByCategory;
         }
 
@@ -9744,7 +9780,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -9756,7 +9792,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -9903,10 +9939,12 @@ namespace SA33.Team12.SSIS.DAL
         /// Create a new VW_RequisitionsByDepartment object.
         /// </summary>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
-        public static VW_RequisitionsByDepartment CreateVW_RequisitionsByDepartment(global::System.String itemCode)
+        /// <param name="description">Initial value of the Description property.</param>
+        public static VW_RequisitionsByDepartment CreateVW_RequisitionsByDepartment(global::System.String itemCode, global::System.String description)
         {
             VW_RequisitionsByDepartment vW_RequisitionsByDepartment = new VW_RequisitionsByDepartment();
             vW_RequisitionsByDepartment.ItemCode = itemCode;
+            vW_RequisitionsByDepartment.Description = description;
             return vW_RequisitionsByDepartment;
         }
 
@@ -9943,7 +9981,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -9955,7 +9993,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
