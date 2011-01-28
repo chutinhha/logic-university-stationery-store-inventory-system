@@ -335,25 +335,41 @@ namespace SA33.Team12.SSIS.DAL
 
                 if (requisitioinSearchDTO != null)
                 {
+                    List<Requisition> items = new List<Requisition>();
                     if (requisitioinSearchDTO.RequisitionID != 0)
-                    {
-                        tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
-                    }
-                    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
-                    {
-                        tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
+                    {                       
+                          items.Add(GetRequisitionByID(new Requisition() { RequisitionID = requisitioinSearchDTO.RequisitionID }));
+                          return items;
                     }
 
-                    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue)
+                    if (requisitioinSearchDTO.ExactDateRequested >= DateTime.MinValue)
                     {
-                        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
-                    }
-
-                    if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
-                    {
-                        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
+                        GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) > 0).ToList<Requisition>();
                     }
                 }
+                
+
+                //if (requisitioinSearchDTO != null)
+                //{
+                //    if (requisitioinSearchDTO.RequisitionID != 0)
+                //    {
+                //        tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
+                //    }
+                //    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
+                //    {
+                //        tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
+                //    }
+
+                //    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue)
+                //    {
+                //        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
+                //    }
+
+                //    if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
+                //    {
+                //        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
+                //    }
+                //}
 
                 return (from q in tempQuery select q).ToList<Requisition>();
             }
