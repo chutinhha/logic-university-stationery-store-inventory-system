@@ -8,6 +8,7 @@ namespace SA33.Team12.SSIS.DAL.DTO
     public class SpecialStationerySearchDTO
     {
         public int SpecialStationeryID { get; set; }
+        public int CategoryID { get; set; }
         public string ItemCode { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
@@ -23,7 +24,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public int CreatedBy { get; set; }
         public int ModifiedBy { get; set; }
         public int ApprovedBy { get; set; }
-        public int CategoryID { get; set; }
         public bool IsApproved { get; set; }
     }
 }
