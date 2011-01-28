@@ -67,6 +67,10 @@ namespace SA33.Team12.SSIS.Test
             rq.CreateRequisition(r);
 
 
+            rq.GetRequisitionItemsByID(rqi).QuantityIssued = 5;
+
+            rq.UpdateRequisition(r);
+
             DAL.DTO.RequisitionSearchDTO rsearch = new DAL.DTO.RequisitionSearchDTO()
             {
                 RequisitionID = r.RequisitionID,
