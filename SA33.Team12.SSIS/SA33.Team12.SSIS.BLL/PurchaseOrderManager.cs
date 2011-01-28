@@ -21,6 +21,7 @@ namespace SA33.Team12.SSIS.BLL
             purchaseOrderDAO = new PurchaseOrderDAO();
         }
 
+        //CRUD for PurchaseOrder
         public PurchaseOrder CreatePurchaseOrder(PurchaseOrder po)
         {
             return purchaseOrderDAO.CreatePurchaseOrder(po);
@@ -49,6 +50,37 @@ namespace SA33.Team12.SSIS.BLL
         public PurchaseOrder FindPurchaseOrderByID(int poID)
         {
             return purchaseOrderDAO.FindPurchaseOrderByID(poID);
+        }
+
+        // CRUD for PurchaseOrderItem
+        public PurchaseOrderItem CreatePurchaseOrderItem(PurchaseOrderItem item)
+        {
+            return purchaseOrderDAO.CreatePurchaseOrderItem(item);
+        }
+
+        public PurchaseOrderItem UpdatePurchaseOrderItem(PurchaseOrderItem item)
+        {
+            return purchaseOrderDAO.UpdatePurchaseOrderItem(item);
+        }
+
+        public void DeletePurchaseOrderItem(PurchaseOrderItem item)
+        {
+            purchaseOrderDAO.DeletePurchaseOrderItem(item);
+        }
+
+        public PurchaseOrderItem FindPurchaseOrderItemByID(int ID)
+        {
+            return purchaseOrderDAO.FindPurchaseOrderItemByID(ID);
+        }
+
+        public List<PurchaseOrderItem> FindPurchaseOrderItemByCriteria(PurchaseOrderItemSearchDTO criteria)
+        {
+            return purchaseOrderDAO.FindPurchaseOrderItemByCriteria(criteria);
+        }
+
+        public List<PurchaseOrderItem> FindAllPurchaseOrderItem()
+        {
+            return purchaseOrderDAO.GetAllPurchaseOrderItem();
         }
     }
 }
