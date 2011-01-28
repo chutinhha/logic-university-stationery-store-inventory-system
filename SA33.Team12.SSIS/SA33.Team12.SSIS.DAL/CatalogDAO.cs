@@ -158,6 +158,9 @@ namespace SA33.Team12.SSIS.DAL
                     && (EntityFunctions.DiffDays(s.DateModified, (criteria.StartDateModified == null || criteria.StartDateModified == DateTime.MinValue ? s.DateModified : criteria.StartDateModified)) <= 0
                       && EntityFunctions.DiffDays(s.DateModified, (criteria.EndDateModified == null || criteria.EndDateModified == DateTime.MinValue ? s.DateModified : criteria.EndDateModified)) >= 0)
                     && (EntityFunctions.DiffDays(s.DateModified, (criteria.ExactDateModified == null || criteria.ExactDateModified == DateTime.MinValue ? s.DateModified : criteria.ExactDateModified)) == 0)
+                    && (EntityFunctions.DiffDays(s.DateApproved, (criteria.StartDateApproved == null || criteria.StartDateApproved == DateTime.MinValue ? s.DateApproved : criteria.StartDateApproved)) <= 0
+                      && EntityFunctions.DiffDays(s.DateApproved, (criteria.EndDateApproved == null || criteria.EndDateApproved == DateTime.MinValue ? s.DateApproved : criteria.EndDateApproved)) >= 0)
+                    && (EntityFunctions.DiffDays(s.DateApproved, (criteria.ExactDateApproved == null || criteria.ExactDateApproved == DateTime.MinValue ? s.DateApproved : criteria.ExactDateApproved)) == 0)
                     && s.CreatedBy == (criteria.CreatedBy == null ? s.CreatedBy : criteria.CreatedBy)
                     && s.ModifiedBy == (criteria.ModifiedBy == null ? s.ModifiedBy : criteria.ModifiedBy)
                     && s.ApprovedBy == (criteria.ApprovedBy == null ? s.ApprovedBy : criteria.ApprovedBy)
@@ -226,6 +229,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempStationery.QuantityInHand = stationery.QuantityInHand;
                 tempStationery.DateCreated = stationery.DateCreated;
                 tempStationery.DateModified = stationery.DateModified;
+                tempStationery.DateApproved = stationery.DateApproved;
                 tempStationery.CreatedByUser = stationery.CreatedByUser;
                 tempStationery.ModifiedByUser = stationery.ModifiedByUser;
                 tempStationery.ApprovedByUser = stationery.ApprovedByUser;
@@ -252,7 +256,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Stationery persistedStationery = (from s in context.Stationeries
                                                   where s.StationeryID == stationery.StationeryID
-                                                select s).First<Stationery>();
+                                                  select s).First<Stationery>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
