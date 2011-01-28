@@ -14,9 +14,9 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public DateTime StartDateCreated { get; set; }
         public DateTime EndDateCreated { get; set; }
         public DateTime ExactDateCreated { get; set; }
-        //public DateTime StartDateModified { get; set; }
-        //public DateTime EndDateModified { get; set; }
-        //public DateTime ExactDateCreated { get; set; }
+        public DateTime StartDateModified { get; set; }
+        public DateTime EndDateModified { get; set; }
+        public DateTime ExactDateModified { get; set; }
         public int CreatedBy { get; set; }
         public int ModifiedBy { get; set; }
         public int ApprovedBy { get; set; }
