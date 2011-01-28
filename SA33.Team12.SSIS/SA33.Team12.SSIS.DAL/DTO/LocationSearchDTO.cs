@@ -7,12 +7,12 @@ namespace SA33.Team12.SSIS.DAL.DTO
 {
     public class LocationSearchDTO
     {
-        public int SupplierID { get; set; }
-        public string SupplierCode { get; set; }
-        public string CompanyName { get; set; }
-        public DateTime StartTenderedYear { get; set; }
-        public DateTime EndTenderedYear { get; set; }
-        public DateTime ExactTenderedYear { get; set; }
-        public int PreferredRank { get; set; }
+        public int LocationrID { get; set; }
+        public string Name { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime StartCreatedDate { get; set; }
+        public DateTime EndCreatedDate { get; set; }
+        public DateTime ExactCreatedDate { get; set; }
+
     }
 }
