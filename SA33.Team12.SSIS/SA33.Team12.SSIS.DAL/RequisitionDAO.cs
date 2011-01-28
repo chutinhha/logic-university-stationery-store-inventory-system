@@ -247,7 +247,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="department">department object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
-        /// <returns></returns>
+        /// <returns>List of VW_RequisitionsByDepartment objects</returns>
         public List<VW_RequisitionsByDepartment> GetRequisitionByDepartmentID(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
@@ -285,7 +285,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">requisitionSearchDTO object</param>
-        /// <returns></returns>
+        /// <returns>List of VW_RequisitionsByEmployee objects</returns>
         public List<VW_RequisitionsByEmployee> GetRequisitionByEmployeeID(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
             try
@@ -307,7 +307,7 @@ namespace SA33.Team12.SSIS.DAL
         /// Get Requisition by primary key
         /// </summary>
         /// <param name="requisition">requisition object</param>
-        /// <returns></returns>
+        /// <returns>requisition object</returns>
         public Requisition GetRequisitionByID(Requisition requisition)
         {
             try
@@ -324,7 +324,7 @@ namespace SA33.Team12.SSIS.DAL
         /// Find the requisition by search criteria
         /// </summary>
         /// <param name="requisitioinSearchDTO">requisitioinSearchDTO object</param>
-        /// <returns></returns>
+        /// <returns>List of Requisition objects</returns>
         public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
         {
             try
@@ -384,8 +384,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Generate the requisitionID for each requisition
         /// </summary>
-        /// <param name="requisition"></param>
-        /// <returns></returns>
+        /// <param name="requisition">requisition object</param>
+        /// <returns>string</returns>
         public string GetRequisitionID(Requisition requisition)
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
@@ -501,9 +501,9 @@ namespace SA33.Team12.SSIS.DAL
 
         #region SpecialRequisitionItem
         /// <summary>
-        /// Create a new requisitionItem
+        /// Create a new specialRequisitionItem
         /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
         public void CreateSpecialSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
         {
             try
@@ -519,9 +519,9 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Update the requisitionItem
+        /// Update the special requisitionItem
         /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
         public void UpdateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
         {
             try
@@ -544,9 +544,9 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Delete the requisitionItem
+        /// Delete the special requisitionItem
         /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
         public void DeleteSpecialRequisitionItem(SpecialRequisitionItem requisitionItem)
         {
             try
@@ -607,6 +607,10 @@ namespace SA33.Team12.SSIS.DAL
         #endregion
 
         #region Status
+        /// <summary>
+        /// Create a status object
+        /// </summary>
+        /// <param name="status">Status object</param>
         public void CreateStatus(Status status)
         {
             try
@@ -620,6 +624,10 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Update status object
+        /// </summary>
+        /// <param name="status">status object</param>
         public void UpdateStatus(Status status)
         {
             try
@@ -641,6 +649,10 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Delete status object
+        /// </summary>
+        /// <param name="status">status object</param>
         public void DeleteStatus(Status status)
         {
             try
@@ -654,16 +666,30 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Get All status levels
+        /// </summary>
+        /// <returns>List of status objects</returns>
         public List<Status> GetAllStatuses()
         {
             return (from s in context.Statuses select s).ToList<Status>();
         }
 
+        /// <summary>
+        /// Get status by primary key
+        /// </summary>
+        /// <param name="status">status object</param>
+        /// <returns>status object</returns>
         public Status GetStatusByID(Status status)
         {
             return GetAllStatuses().Where(s => s.StatusID == status.StatusID).FirstOrDefault<Status>();
         }
 
+        /// <summary>
+        /// Get status object by filter criteria
+        /// </summary>
+        /// <param name="statusSearchDTO">statusSearchDTO object</param>
+        /// <returns>List of status objects</returns>
         public List<Status> GetStatusByCriteria(StatusSearchDTO statusSearchDTO)
         {
             return GetAllStatuses().Where(s => s.Name == statusSearchDTO.Name).ToList<Status>();
@@ -671,6 +697,10 @@ namespace SA33.Team12.SSIS.DAL
         #endregion
 
         #region Urgency
+        /// <summary>
+        /// Create a urgency object
+        /// </summary>
+        /// <param name="urgency">Urgency object</param>
         public void CreateUrgency(Urgency urgency)
         {
             try
@@ -684,6 +714,10 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Update urgency object
+        /// </summary>
+        /// <param name="urgency">Urgency object</param>
         public void UpdateUrgency(Urgency urgency)
         {
             try
@@ -704,6 +738,10 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Delete urgency object
+        /// </summary>
+        /// <param name="urgency">Urgency object</param>
         public void DeleteUrgency(Urgency urgency)
         {
             try
@@ -717,16 +755,30 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        /// <summary>
+        /// Get All Urgency levels
+        /// </summary>
+        /// <returns>List of Urgency objects</returns>
         public List<Urgency> GetAllUrgencies()
         {
             return (from s in context.Urgencies select s).ToList<Urgency>();
         }
 
+        /// <summary>
+        /// Get urgency by primary key
+        /// </summary>
+        /// <param name="urgency">Urgency object</param>
+        /// <returns>Urgency object</returns>
         public Urgency GetUrgencyByID(Urgency urgency)
         {
             return GetAllUrgencies().Where(u => u.UrgencyID == urgency.UrgencyID).FirstOrDefault<Urgency>();
         }
 
+        /// <summary>
+        /// Get Urgency object by filter criteria
+        /// </summary>
+        /// <param name="urgencySearchDTO">urgencySearchDTO object</param>
+        /// <returns>List of Urgency objects</returns>
         public List<Urgency> GetUrgencyByCriteria(UrgencySearchDTO urgencySearchDTO)
         {
             return GetAllUrgencies().Where(s => s.Name == urgencySearchDTO.Name).ToList<Urgency>();
