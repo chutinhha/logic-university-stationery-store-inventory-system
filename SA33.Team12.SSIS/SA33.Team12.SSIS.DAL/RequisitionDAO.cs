@@ -482,7 +482,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="requisitionItem">requisitionItem object</param>
         /// <returns></returns>
-        public RequisitionItem GetAllRequisitionItemsByID(RequisitionItem requisitionItem)
+        public RequisitionItem GetRequisitionItemsByID(RequisitionItem requisitionItem)
         {
             try
             {
@@ -565,7 +565,7 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Get All RequisitionItems in the requisition form
+        /// Get All special RequisitionItems in the requisition form
         /// </summary>
         /// <param name="requisition"></param>
         /// <returns></returns>
@@ -585,11 +585,11 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
-        /// Get RequisitionItems by primary key
+        /// Get special RequisitionItems by primary key
         /// </summary>
         /// <param name="requisitionItem">requisitionItem object</param>
         /// <returns></returns>
-        public SpecialRequisitionItem GetAllSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
+        public SpecialRequisitionItem GetSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
         {
             try
             {
