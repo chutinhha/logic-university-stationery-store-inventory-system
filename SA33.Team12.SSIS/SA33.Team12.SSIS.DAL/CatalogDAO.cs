@@ -49,14 +49,14 @@ namespace SA33.Team12.SSIS.DAL
         public List<Category> GetAllCategory()
         {
                 return (from c in context.Categories
-                        select c).ToList();
+                        select r).ToList();
         }
                 
         public Category GetCategoryByID(int CategoryID)
         {
             Category category = (from c in context.Categories
                                  where c.CategoryID == CategoryID
-                                 select c).FirstOrDefault<Category>();
+                                 select r).FirstOrDefault<Category>();
             return category;
         }
 
@@ -121,7 +121,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Category persistedCategory = (from c in context.Categories
                                       where c.CategoryID == category.CategoryID
-                                      select c).First<Category>();
+                                      select r).First<Category>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
@@ -397,117 +397,332 @@ namespace SA33.Team12.SSIS.DAL
         }
         # endregion
 
-        //# region Prices
-        //public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
-        //{
-        //    try
-        //    {
-        //        var Query =
-        //            from p in context.Prices
-        //            where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
-        //            && p.StationeryID == (criteria.StationeryID == 0 ? p.StationeryID : criteria.StationeryID)
-        //            && p.SupplierID == (criteria.SupplierID == 0 ? p.SupplierID : criteria.SupplierID)
-        //            && p.CreatedBy == (criteria.CreatedBy == null ? p.CreatedBy : criteria.CreatedBy)
-        //            && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.StartCreatedDate)) <= 0
-        //              && EntityFunctions.DiffDays(p.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.EndCreatedDate)) >= 0)
-        //            && (EntityFunctions.DiffDays(p.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? p.CreatedDate : criteria.ExactCreatedDate)) == 0)
-        //            select p;
-        //        List<Price> prices = Query.ToList<Price>();
-        //        return prices;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        # region Locations
+        public List<Location> FindLocationByCriteria(DTO.LocationSearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from l in context.Locations
+                    where l.LocationID == (criteria.LocationID == 0 ? l.LocationID : criteria.LocationID)
+                    && l.Name.Contains((criteria.Name == null || criteria.Name == "" ? l.Name : criteria.Name))
+                    && l.CreatedBy == (criteria.CreatedBy == null ? l.CreatedBy : criteria.CreatedBy)
+                    && (EntityFunctions.DiffDays(l.CreatedDate, (criteria.StartCreatedDate == null || criteria.StartCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.StartCreatedDate)) <= 0
+                      && EntityFunctions.DiffDays(l.CreatedDate, (criteria.EndCreatedDate == null || criteria.EndCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.EndCreatedDate)) >= 0)
+                    && (EntityFunctions.DiffDays(l.CreatedDate, (criteria.ExactCreatedDate == null || criteria.ExactCreatedDate == DateTime.MinValue ? l.CreatedDate : criteria.ExactCreatedDate)) == 0)
+                    select p;
+                List<Location> locations = Query.ToList<Location>();
+                return locations;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //public List<Price> GetAllPrice()
-        //{
-        //    return (from p in context.Prices
-        //            select p).ToList();
-        //}
+        public List<Location> GetAllLocation()
+        {
+            return (from l in context.Locations
+                    select l).ToList();
+        }
 
-        //public Price GetPriceByID(int PriceID)
-        //{
-        //    Price price = (from p in context.Prices
-        //                   where p.PriceID == PriceID
-        //                   select p).FirstOrDefault<Price>();
-        //    return price;
-        //}
+        public Location GetLocationByID(int LocationID)
+        {
+            Location location = (from l in context.Locations
+                                 where l.LocationID == LocationID
+                                 select l).FirstOrDefault<Location>();
+            return location;
+        }
 
-        //public int GetPriceCount()
-        //{
-        //    return context.Prices.Count();
-        //}
+        public int GetLocationCount()
+        {
+            return context.Locations.Count();
+        }
 
-        //public Price CreatePrice(Price price)
-        //{
-        //    try
-        //    {
-        //        using (TransactionScope ts = new TransactionScope())
-        //        {
-        //            context.Prices.AddObject(price);
-        //            context.SaveChanges();
-        //            ts.Complete();
-        //            return price;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public Location CreateLocation(Location location)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Locations.AddObject(location);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return location;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //public Price UpdatePrice(Price price)
-        //{
-        //    try
-        //    {
-        //        Price tempPrice = (from p in context.Prices
-        //                           where p.PriceID == price.PriceID
-        //                           select p).First<Price>();
+        public Location UpdateLocation(Location location)
+        {
+            try
+            {
+                Location tempLocation = (from l in context.Locations
+                                         where l.LocationID == location.LocationID
+                                         select l).First<Location>();
 
-        //        tempPrice.Name = price.Name;
-        //        tempPrice.CreatedByUser = price.CreatedByUser;
-        //        tempPrice.CreatedDate = price.CreatedDate;
+                tempLocation.Name = location.Name;
+                tempLocation.CreatedByUser = location.CreatedByUser;
+                tempLocation.CreatedDate = location.CreatedDate;
 
-        //        using (TransactionScope ts = new TransactionScope())
-        //        {
-        //            context.Attach(tempPrice);
-        //            context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
-        //            context.SaveChanges();
-        //            ts.Complete();
-        //            return tempPrice;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempLocation);
+                    context.ObjectStateManager.ChangeObjectState(tempLocation, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempLocation;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //public void DeletePrice(Price price)
-        //{
-        //    try
-        //    {
-        //        Price persistedPrice = (from p in context.Prices
-        //                                where p.PriceID == price.PriceID
-        //                                select p).First<Price>();
+        public void DeleteLocation(Location location)
+        {
+            try
+            {
+                Location persistedLocation = (from l in context.Locations
+                                              where l.LocationID == location.LocationID
+                                              select l).First<Location>();
 
-        //        using (TransactionScope ts = new TransactionScope())
-        //        {
-        //            context.Prices.DeleteObject(persistedPrice);
-        //            context.SaveChanges();
-        //            ts.Complete();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-        //# endregion
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Locations.DeleteObject(persistedLocation);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        # endregion
 
+        # region Prices
+        public List<Price> FindPriceByCriteria(DTO.PriceSearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from p in context.Prices
+                    where p.PriceID == (criteria.PriceID == 0 ? p.PriceID : criteria.PriceID)
+                    && p.StationeryID == (criteria.StationeryID == 0 ? p.StationeryID : criteria.StationeryID)
+                    && p.SupplierID == (criteria.SupplierID == 0 ? p.SupplierID : criteria.SupplierID)
+                    && p.Amount == (criteria.Amount == null ? p.Amount : criteria.Amount)
+                    select p;
+                List<Price> prices = Query.ToList<Price>();
+                return prices;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        public List<Price> GetAllPrice()
+        {
+            return (from p in context.Prices
+                    select p).ToList();
+        }
+
+        public Price GetPriceByID(int PriceID)
+        {
+            Price price = (from p in context.Prices
+                           where p.PriceID == PriceID
+                           select p).FirstOrDefault<Price>();
+            return price;
+        }
+
+        public int GetPriceCount()
+        {
+            return context.Prices.Count();
+        }
+
+        public Price CreatePrice(Price price)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Prices.AddObject(price);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return price;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Price UpdatePrice(Price price)
+        {
+            try
+            {
+                Price tempPrice = (from p in context.Prices
+                                   where p.PriceID == price.PriceID
+                                   select p).First<Price>();
+
+                tempPrice.Stationery = price.Stationery;
+                tempPrice.Supplier = price.Supplier;
+                tempPrice.Amount = price.Amount;
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempPrice);
+                    context.ObjectStateManager.ChangeObjectState(tempPrice, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempPrice;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeletePrice(Price price)
+        {
+            try
+            {
+                Price persistedPrice = (from p in context.Prices
+                                        where p.PriceID == price.PriceID
+                                        select p).First<Price>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Prices.DeleteObject(persistedPrice);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        # endregion
+
+        #region Suppliers
+        public List<Supplier> FindSupplierByCriteria(DTO.SupplierSearchDTO criteria)
+        {
+            try
+            {
+                var Query =
+                    from r in context.Suppliers
+                    where r.SupplierID == (criteria.SupplierID == 0 ? r.SupplierID : criteria.SupplierID)
+                    && r.SupplierCode.Contains((criteria.SupplierCode == null || criteria.SupplierCode == "" ? r.SupplierCode : criteria.SupplierCode))
+                    && r.CompanyName.Contains((criteria.CompanyName == null || criteria.CompanyName == "" ? r.SupplierCode : criteria.CompanyName))
+                    && (EntityFunctions.DiffDays(r.TenderedYear, (criteria.StartTenderedYear == null || criteria.StartTenderedYear == DateTime.MinValue ? r.TenderedYear : criteria.StartTenderedYear)) <= 0
+                      && EntityFunctions.DiffDays(r.TenderedYear, (criteria.EndTenderedYear == null || criteria.EndTenderedYear == DateTime.MinValue ? r.TenderedYear : criteria.EndTenderedYear)) >= 0)
+                    && (EntityFunctions.DiffDays(r.TenderedYear, (criteria.ExactTenderedYear == null || criteria.ExactTenderedYear == DateTime.MinValue ? r.TenderedYear : criteria.ExactTenderedYear)) == 0)
+                    && r.PreferredRank == (criteria.PreferredRank == null ? r.PreferredRank : criteria.PreferredRank)
+                    select r;
+                List<Supplier> suppliers = Query.ToList<Supplier>();
+                return suppliers;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Supplier> GetAllSupplier()
+        {
+            return (from r in context.Suppliers
+                    select r).ToList();
+        }
+
+        public Supplier GetSupplierByID(int SupplierID)
+        {
+            Supplier supplier = (from r in context.Suppliers
+                                 where r.SupplierID == SupplierID
+                                 select r).FirstOrDefault<Supplier>();
+            return supplier;
+        }
+
+        public int SupplierCount()
+        {
+            return this.context.Suppliers.Count();
+        }
+
+        public Supplier CreateSupplier(Supplier supplier)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Suppliers.AddObject(supplier);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return supplier;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Supplier UpdateSupplier(Supplier supplier)
+        {
+            try
+            {
+                Supplier tempSupplier = (from r in context.Suppliers
+                                         where r.SupplierID == supplier.SupplierID
+                                         select r).First<Supplier>();
+
+                tempSupplier.SupplierCode = supplier.SupplierCode;
+                tempSupplier.CompanyName = supplier.CompanyName;
+                tempSupplier.TenderedYear = supplier.TenderedYear;
+                tempSupplier.PreferredRank = supplier.PreferredRank;
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Attach(tempSupplier);
+                    context.ObjectStateManager.ChangeObjectState(tempSupplier, EntityState.Modified);
+                    context.SaveChanges();
+                    ts.Complete();
+                    return tempSupplier;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteSupplier(Supplier supplier)
+        {
+            try
+            {
+                Supplier persistedSupplier = (from r in context.Suppliers
+                                              where r.SupplierID == supplier.SupplierID
+                                              select r).First<Supplier>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.Suppliers.DeleteObject(persistedSupplier);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
 
         // end
     }
