@@ -172,7 +172,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public List<Requisition> GetAllRequisition()
         {
-            return (from c in context.Requisitions select c).ToList<Requisition>();
+            try
+            {
+                return (from c in context.Requisitions select c).ToList<Requisition>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
         }
 
         /// <summary>
@@ -181,7 +189,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public List<VW_RequisitionsByCategory> GetAllRequisitionByCategory()
         {
-            return (from ri in context.VW_RequisitionsByCategory select ri).ToList<VW_RequisitionsByCategory>();
+            try
+            {
+                return (from ri in context.VW_RequisitionsByCategory select ri).ToList<VW_RequisitionsByCategory>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
         }
 
         /// <summary>
@@ -192,9 +208,17 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns>List of Requisitions by category</returns>
         public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, DateTime date)
         {
-            return GetAllRequisitionByCategory()
-                .Where(ri => ri.CategoryID == (category.CategoryID == 0 ? ri.CategoryID : category.CategoryID)) 
+            try
+            {
+                return GetAllRequisitionByCategory()
+                .Where(ri => ri.CategoryID == (category.CategoryID == 0 ? ri.CategoryID : category.CategoryID))
                  .ToList<VW_RequisitionsByCategory>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
         }
 
         /// <summary>
@@ -203,7 +227,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns>List of Requisitions by department</returns>
         public List<VW_RequisitionsByDepartment> GetAllRequisitionByDepartment()
         {
-            return (from ri in context.VW_RequisitionsByDepartment select ri).ToList<VW_RequisitionsByDepartment>();
+            try
+            {
+                return (from ri in context.VW_RequisitionsByDepartment select ri).ToList<VW_RequisitionsByDepartment>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
         }
 
         /// <summary>
@@ -214,10 +246,17 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, DateTime date)
         {
-            return GetAllRequisitionByDepartment()
+            try
+            {
+                return GetAllRequisitionByDepartment()
                 .Where(ri => ri.DepartmentID == (department.DepartmentID == 0 ? ri.DepartmentID : department.DepartmentID))
                 .ToList<VW_RequisitionsByDepartment>();
+            }
+            catch (Exception)
+            {
                 
+                throw;
+            }                          
         }
 
         /// <summary>
@@ -226,7 +265,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns>List of Requisitions by employee</returns>
         public List<VW_RequisitionsByEmployee> GetAllRequisitionByEmployee()
         {
-            return (from ri in context.VW_RequisitionsByEmployee select ri).ToList<VW_RequisitionsByEmployee>();
+            try
+            {
+                return (from ri in context.VW_RequisitionsByEmployee select ri).ToList<VW_RequisitionsByEmployee>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
         }
 
         /// <summary>
@@ -237,12 +284,18 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, DateTime date)
         {
-            return GetAllRequisitionByEmployee().
-                  Where (re => re.DateRequested.Month == (date.Month == 0 ? re.DateRequested.Month : date.Month)                 
-                  && re.DateRequested.Year == (date.Year == 0 ? re.DateRequested.Year : date.Year))               
-                  
-
+            try
+            {
+                return GetAllRequisitionByEmployee().
+                  Where(re => re.DateRequested.Month == (date.Month == 0 ? re.DateRequested.Month : date.Month)
+                  && re.DateRequested.Year == (date.Year == 0 ? re.DateRequested.Year : date.Year))
             .ToList<VW_RequisitionsByEmployee>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }      
             
         }
 
@@ -253,7 +306,14 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public Requisition GetRequisitionByID(Requisition requisition)
         {
-            return GetAllRequisition().Where(r => r.RequisitionID == requisition.RequisitionID).FirstOrDefault<Requisition>();
+            try
+            {
+                return GetAllRequisition().Where(r => r.RequisitionID == requisition.RequisitionID).FirstOrDefault<Requisition>();
+            }
+            catch (Exception)
+            {                
+                throw;
+            }           
         }
 
         /// <summary>
@@ -263,34 +323,42 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns></returns>
         public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
         {
-            var tempQuery = (from r in context.Requisitions
-                             where 1 == 1
-                             select r);
-
-            if (requisitioinSearchDTO != null)
+            try
             {
-                if (requisitioinSearchDTO.RequisitionID != -1)
+                var tempQuery = (from r in context.Requisitions
+                                 where 1 == 1
+                                 select r);
+
+                if (requisitioinSearchDTO != null)
                 {
-                    tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
-                }
-                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
-                {
-                    tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
+                    if (requisitioinSearchDTO.RequisitionID != -1)
+                    {
+                        tempQuery = tempQuery.Where(r => r.RequisitionID == requisitioinSearchDTO.RequisitionID);
+                    }
+                    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
+                    {
+                        tempQuery = tempQuery.Where(r => r.DateRequested >= requisitioinSearchDTO.StartDateRequested && r.DateRequested <= requisitioinSearchDTO.EndDateRequested);
+                    }
+
+                    if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue)
+                    {
+                        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
+                    }
+
+                    if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
+                    {
+                        tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
+                    }
                 }
 
-                if (requisitioinSearchDTO.StartDateRequested != null && requisitioinSearchDTO.StartDateRequested >= DateTime.MinValue)
-                {
-                    tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.StartDateRequested);
-                }
-
-                if (requisitioinSearchDTO.EndDateRequested != null && requisitioinSearchDTO.EndDateRequested >= DateTime.MinValue)
-                {
-                    tempQuery = tempQuery.Where(r => r.DateRequested == requisitioinSearchDTO.EndDateRequested);
-                }
+                return (from q in tempQuery select q).ToList<Requisition>();
             }
-
-            return (from q in tempQuery select q).ToList<Requisition>();
-
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
         
         /// <summary>
