@@ -18,12 +18,42 @@ namespace SA33.Team12.SSIS.BLL
 {
     public class UserManager : BusinessLogic
     {
+        private UserDAO udao;
+
+        public UserManager() {
+            udao = new UserDAO();
+        }
+
+        #region Users
+        public User CreateUser(User user)
+        {
+            try
+            {
+                udao.CreateUser(user);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("User account creation failed");
+            }
+            return user;
+        }
+
+        public User UpdateUser(User user)
+        {
+            try
+            {
+                udao.UpdateUser(user);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("User account updating failed");
+            }
+            return user;
+        }
+
         public List<User> FindUsersByCriteria(UserSearchDTO criteria)
         {
-            using (UserDAO udao = new UserDAO())
-            {
-                return udao.FindUsersByCriteria(criteria);
-            }
+            return udao.FindUsersByCriteria(criteria);
         }
 
         public User DisableUser(User user)
@@ -45,7 +75,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             return user;
         }
-
+        #endregion
         /*
         public User GetUserByMemberShip(MembershipUser membershipUser)
         {
