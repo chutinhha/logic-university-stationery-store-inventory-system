@@ -21,43 +21,57 @@ namespace SA33.Team12.SSIS.BLL
         /// </summary>
         /// <param name="adjustmentVoucher">The adjustment voucher object</param>
         /// Created by Anthony 26 Jan 2011
-        public void CreateAdjustmentVoucherTemp(DAL.AdjustmentVoucher adjustmentVoucher)
+
+        private AdjustmentVoucherDAO adjustmentVoucherDAO;
+        
+        public AdjustmentVoucherManager()
         {
-            //CreateStockLogTransactionTemp(adjustmentVoucher);
+            adjustmentVoucherDAO = new AdjustmentVoucherDAO();
+        }
+        #region Temp Table
+        //Create Temp Parent Table
+        public void CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        {
+            try
+            {
+                adjustmentVoucherDAO.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Adjustment Voucher Transaction creation Failed");
+            }
         }
 
-        public void CreateAdjustmentVoucherActual(DAL.AdjustmentVoucher adjustmentVoucher)
+        public void ApproveAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
         {
-            //CreateStockLogTransactionActual(adjustmentVoucher);
+            //Still thinking what to do with this
+            //AdjustmentVoucherDAO.ApproveAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
         }
 
-        /// <summary>
-        /// Update adjustment voucher before approval
-        /// </summary>
-        /// <param name="adjustmentVoucher">The adjustment voucher object</param>
-        public void UpdateAdjustmentVoucher(DAL.AdjustmentVoucher adjustmentVoucher)
+
+
+        #endregion
+
+        #region Acutal Table
+        //Create Actual Parent Table
+        public void CreateAdjustmentVoucher(AdjustmentVoucher adjustmentVoucher)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                adjustmentVoucherDAO.CreateAdjustmentVoucher(adjustmentVoucher);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Adjustment Voucher creation Failed");
+            }
         }
 
-        /// <summary>
-        /// Approval of adjustment voucher by supervisor or manager.
-        /// Throws NoAccessRightToApproveException when approved by user other than those mentioned above
-        /// </summary>
-        /// <param name="adjustmentVoucher">The adjustment voucher object</param>
-        /// <param name="user">User object of supervisor or manager</param>
-        public void ApproveAdjustmentVoucher(DAL.AdjustmentVoucher adjustmentVoucher, DAL.User user)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        /// <summary>
-        /// Find adjustment by provide criteria in AdjustmentVoucherSearchDTO object
-        /// </summary>
-        /// <param name="adjustmentVoucherSearchDTO">The adjustment voucher search object</param>
-        public void Find(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
-        {
-            throw new System.NotImplementedException();
-        }
+
+        #endregion
+
+
+
+
     }
 }
