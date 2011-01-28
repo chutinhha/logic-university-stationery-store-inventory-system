@@ -70,7 +70,7 @@ namespace SA33.Team12.SSIS.Test
             DAL.DTO.RequisitionSearchDTO rsearch = new DAL.DTO.RequisitionSearchDTO()
             {
                 RequisitionID = r.RequisitionID,
-                StartDateRequested = DateTime.Now,        
+             //   StartDateRequested = DateTime.Now,        
                 ExactDateRequested = DateTime.Now
 
             };
@@ -78,11 +78,11 @@ namespace SA33.Team12.SSIS.Test
             //Testing databinding after creation of requisitions
             if (!IsPostBack)
             {
-                if (r != null)
-                {
-                    GridView1.DataSource = rq.GetRequisitionByEmployee(user.GetUserByID(1), rsearch);
-                    GridView1.DataBind();
-                }
+                //if (r != null)
+                //{
+                //    GridView1.DataSource = rq.GetRequisitionByEmployee(user.GetUserByID(1), rsearch);
+                //    GridView1.DataBind();
+                //}
 
                 if (r != null)
                 {
