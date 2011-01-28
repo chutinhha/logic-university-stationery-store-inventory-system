@@ -12,6 +12,9 @@ using System.Collections.Generic;
 
 namespace SA33.Team12.SSIS.DAL
 {
+    /// <summary>
+    /// Stationery Retrieval DAO Class
+    /// </summary>
     public class StationeryRetrievalDAO : DALLogic
     {
         #region StationeryRetrievalForm
