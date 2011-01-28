@@ -280,6 +280,7 @@ namespace SA33.Team12.SSIS.DAL
                 var Query =
                     from ss in context.SpecialStationeries
                     where ss.SpecialStationeryID == (criteria.SpecialStationeryID == 0 ? ss.SpecialStationeryID : criteria.SpecialStationeryID)
+                    && ss.CategoryID == (criteria.CategoryID == 0 ? ss.CategoryID : criteria.CategoryID)
                     && ss.ItemCode.Contains((criteria.ItemCode == null || criteria.ItemCode == "" ? ss.ItemCode : criteria.ItemCode))
                     && ss.Description.Contains((criteria.Description == null || criteria.Description == "" ? ss.Description : criteria.Description))
                     && ss.Quantity == (criteria.Quantity == null ? ss.Quantity : criteria.Quantity)
@@ -295,7 +296,6 @@ namespace SA33.Team12.SSIS.DAL
                     && ss.CreatedBy == (criteria.CreatedBy == null ? ss.CreatedBy : criteria.CreatedBy)
                     && ss.ModifiedBy == (criteria.ModifiedBy == null ? ss.ModifiedBy : criteria.ModifiedBy)
                     && ss.ApprovedBy == (criteria.ApprovedBy == null ? ss.ApprovedBy : criteria.ApprovedBy)
-                    && ss.CategoryID == (criteria.CategoryID == 0 ? ss.CategoryID : criteria.CategoryID)
                     && ss.IsApproved == (criteria.IsApproved == null ? ss.IsApproved : criteria.IsApproved)
                     select ss;
                 List<SpecialStationery> specialStationeries = Query.ToList<SpecialStationery>();
@@ -352,6 +352,7 @@ namespace SA33.Team12.SSIS.DAL
                                                            where ss.SpecialStationeryID == specialStationery.SpecialStationeryID
                                                            select ss).First<SpecialStationery>();
 
+                tempSpecialStationery.Category = specialStationery.Category;
                 tempSpecialStationery.ItemCode = specialStationery.ItemCode;
                 tempSpecialStationery.Description = specialStationery.Description;
                 tempSpecialStationery.Quantity = specialStationery.Quantity;
@@ -361,7 +362,6 @@ namespace SA33.Team12.SSIS.DAL
                 tempSpecialStationery.CreatedByUser = specialStationery.CreatedByUser;
                 tempSpecialStationery.ModifiedByUser = specialStationery.ModifiedByUser;
                 tempSpecialStationery.ApprovedByUser = specialStationery.ApprovedByUser;
-                tempSpecialStationery.Category = specialStationery.Category;
                 tempSpecialStationery.IsApproved = specialStationery.IsApproved;
 
                 using (TransactionScope ts = new TransactionScope())
