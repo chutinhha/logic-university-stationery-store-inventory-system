@@ -64,8 +64,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Categories_SpecialStationeries_FK1", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Category), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_DisbursementItems_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "DisbursementItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.DisbursementItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialRequisitionItems_In_SpeicalStationeries", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "SpecialRequisitionItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialRequisitionItem), true)]
@@ -74,6 +72,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationeries_ApprovedBy", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpeicalStationery_ModifiedBy", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
 
 #endregion
 
@@ -592,22 +592,6 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<StationeryPrice> StationeryPrices
-        {
-            get
-            {
-                if ((_StationeryPrices == null))
-                {
-                    _StationeryPrices = base.CreateObjectSet<StationeryPrice>("StationeryPrices");
-                }
-                return _StationeryPrices;
-            }
-        }
-        private ObjectSet<StationeryPrice> _StationeryPrices;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SpecialStationery> SpecialStationeries
         {
             get
@@ -620,6 +604,22 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         private ObjectSet<SpecialStationery> _SpecialStationeries;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<StationeryPrice> StationeryPrices
+        {
+            get
+            {
+                if ((_StationeryPrices == null))
+                {
+                    _StationeryPrices = base.CreateObjectSet<StationeryPrice>("StationeryPrices");
+                }
+                return _StationeryPrices;
+            }
+        }
+        private ObjectSet<StationeryPrice> _StationeryPrices;
 
         #endregion
         #region AddTo Methods
@@ -857,19 +857,19 @@ namespace SA33.Team12.SSIS.DAL
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the StationeryPrices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStationeryPrices(StationeryPrice stationeryPrice)
-        {
-            base.AddObject("StationeryPrices", stationeryPrice);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SpecialStationeries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSpecialStationeries(SpecialStationery specialStationery)
         {
             base.AddObject("SpecialStationeries", specialStationery);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the StationeryPrices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStationeryPrices(StationeryPrice stationeryPrice)
+        {
+            base.AddObject("StationeryPrices", stationeryPrice);
         }
 
         #endregion
@@ -6569,18 +6569,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier1", "StationeryPrice")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier", "StationeryPrice")]
         public EntityCollection<StationeryPrice> StationeryPrices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "StationeryPrice");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "StationeryPrice");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "StationeryPrice", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "StationeryPrice", value);
                 }
             }
         }
@@ -6601,19 +6601,17 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Create a new StationeryPrice object.
         /// </summary>
-        /// <param name="priceID">Initial value of the PriceID property.</param>
+        /// <param name="stationeryPriceID">Initial value of the StationeryPriceID property.</param>
         /// <param name="stationeryID">Initial value of the StationeryID property.</param>
         /// <param name="supplierID">Initial value of the SupplierID property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        /// <param name="stationeryPriceID">Initial value of the StationeryPriceID property.</param>
-        public static StationeryPrice CreateStationeryPrice(global::System.Int32 priceID, global::System.Int32 stationeryID, global::System.Int32 supplierID, global::System.Decimal price, global::System.Int32 stationeryPriceID)
+        public static StationeryPrice CreateStationeryPrice(global::System.Int32 stationeryPriceID, global::System.Int32 stationeryID, global::System.Int32 supplierID, global::System.Decimal price)
         {
             StationeryPrice stationeryPrice = new StationeryPrice();
-            stationeryPrice.PriceID = priceID;
+            stationeryPrice.StationeryPriceID = stationeryPriceID;
             stationeryPrice.StationeryID = stationeryID;
             stationeryPrice.SupplierID = supplierID;
             stationeryPrice.Price = price;
-            stationeryPrice.StationeryPriceID = stationeryPriceID;
             return stationeryPrice;
         }
 
@@ -6625,27 +6623,27 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 PriceID
+        public global::System.Int32 StationeryPriceID
         {
             get
             {
-                return _PriceID;
+                return _StationeryPriceID;
             }
             set
             {
-                if (_PriceID != value)
+                if (_StationeryPriceID != value)
                 {
-                    OnPriceIDChanging(value);
-                    ReportPropertyChanging("PriceID");
-                    _PriceID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PriceID");
-                    OnPriceIDChanged();
+                    OnStationeryPriceIDChanging(value);
+                    ReportPropertyChanging("StationeryPriceID");
+                    _StationeryPriceID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StationeryPriceID");
+                    OnStationeryPriceIDChanged();
                 }
             }
         }
-        private global::System.Int32 _PriceID;
-        partial void OnPriceIDChanging(global::System.Int32 value);
-        partial void OnPriceIDChanged();
+        private global::System.Int32 _StationeryPriceID;
+        partial void OnStationeryPriceIDChanging(global::System.Int32 value);
+        partial void OnStationeryPriceIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6718,33 +6716,6 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Decimal _Price;
         partial void OnPriceChanging(global::System.Decimal value);
         partial void OnPriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 StationeryPriceID
-        {
-            get
-            {
-                return _StationeryPriceID;
-            }
-            set
-            {
-                if (_StationeryPriceID != value)
-                {
-                    OnStationeryPriceIDChanging(value);
-                    ReportPropertyChanging("StationeryPriceID");
-                    _StationeryPriceID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("StationeryPriceID");
-                    OnStationeryPriceIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _StationeryPriceID;
-        partial void OnStationeryPriceIDChanging(global::System.Int32 value);
-        partial void OnStationeryPriceIDChanged();
 
         #endregion
     
@@ -6756,16 +6727,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier1", "Stationery")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier", "Stationery")]
         public Stationery Stationery
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "Stationery").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "Stationery").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "Stationery").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "Stationery").Value = value;
             }
         }
         /// <summary>
@@ -6777,13 +6748,13 @@ namespace SA33.Team12.SSIS.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "Stationery");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "Stationery");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier1", "Stationery", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Price_Of_Stationery_By_Supplier", "Stationery", value);
                 }
             }
         }
@@ -6794,16 +6765,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier1", "Supplier")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier", "Supplier")]
         public Supplier Supplier
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "Supplier").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "Supplier").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "Supplier").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "Supplier").Value = value;
             }
         }
         /// <summary>
@@ -6815,13 +6786,13 @@ namespace SA33.Team12.SSIS.DAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "Supplier");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "Supplier");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "Supplier", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Supplier>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "Supplier", value);
                 }
             }
         }
@@ -8830,18 +8801,18 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier1", "StationeryPrice")]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier", "StationeryPrice")]
         public EntityCollection<StationeryPrice> StationeryPrices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "StationeryPrice");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "StationeryPrice");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Prices_By_Supplier1", "StationeryPrice", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StationeryPrice>("SA33.Team12.SSIS.Model.Prices_By_Supplier", "StationeryPrice", value);
                 }
             }
         }
