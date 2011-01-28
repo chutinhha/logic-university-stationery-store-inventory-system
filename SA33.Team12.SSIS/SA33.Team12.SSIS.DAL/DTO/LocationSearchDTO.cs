@@ -5,7 +5,14 @@ using System.Text;
 
 namespace SA33.Team12.SSIS.DAL.DTO
 {
-    class LocationSearchDTO
+    public class LocationSearchDTO
     {
+        public int SupplierID { get; set; }
+        public string SupplierCode { get; set; }
+        public string CompanyName { get; set; }
+        public DateTime StartTenderedYear { get; set; }
+        public DateTime EndTenderedYear { get; set; }
+        public DateTime ExactTenderedYear { get; set; }
+        public int PreferredRank { get; set; }
     }
 }

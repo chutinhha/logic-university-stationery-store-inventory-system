@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SA33.Team12.SSIS.DAL.DTO
 {
-    class StationerySearchDTO
+    public class StationerySearchDTO
     {
         public int StationeryID { get; set; }
         public int CategoryID { get; set; }
