@@ -38,5 +38,12 @@ namespace SA33.Team12.SSIS.BLL
         {
             stationeryDAO.DeleteStationery(stationery);
         }
+
+        //added by Wang Pinyi
+        //29/1/2011
+        public Stationery FindStationeryByID(int id)
+        {
+            return stationeryDAO.FindStationeryByID(id);
+        }
     }
 }
