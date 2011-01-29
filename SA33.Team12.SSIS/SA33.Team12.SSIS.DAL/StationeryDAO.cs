@@ -44,5 +44,21 @@ namespace SA33.Team12.SSIS.DAL
             context.Stationeries.DeleteObject(stationery);
             context.SaveChanges();
         }
+
+        //Method Name: FindStationeryByID()
+        //Created By: Wang Pinyi
+        //Date: 29/1/2011
+        public Stationery FindStationeryByID(int id)
+        {
+            try
+            {
+                Stationery stationery = (from p in context.Stationeries where p.StationeryID == id select p).FirstOrDefault();
+                return stationery;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
