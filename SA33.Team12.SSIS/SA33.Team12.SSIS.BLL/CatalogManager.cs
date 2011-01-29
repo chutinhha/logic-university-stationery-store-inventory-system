@@ -74,5 +74,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             catalogDAO.DeleteStationery(stationery);
         }
+
+        public Stationery FindStationeryByID(int id)
+        {
+            return catalogDAO.GetStationeryByID(id);
+        }
     }
 }
