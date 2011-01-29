@@ -37,12 +37,6 @@ namespace SA33.Team12.SSIS.DAL
                     //Add requisition to context                
                     context.AddToRequisitions(requisition);
 
-                    //Get the status id for "Pending"
-                    var status = (from s in context.Statuses where s.Name == "Pending" select s).FirstOrDefault<Status>();
-
-                    //Update the status id for the new requistion to "Pending"
-                    UpdateRequisitionStatus(requisition, status);
-
                     //Save the changes
                     context.SaveChanges();
 
@@ -685,6 +679,16 @@ namespace SA33.Team12.SSIS.DAL
             return GetAllStatuses().Where(s => s.StatusID == status.StatusID).FirstOrDefault<Status>();
         }
 
+        /// <summary>
+        /// Get status object by filter criteria
+        /// </summary>
+        /// <param name="statusSearchDTO">statusSearchDTO object</param>
+        /// <returns>List of status objects</returns>
+        public Status GetStatusByName(StatusSearchDTO statusSearchDTO)
+        {
+            return GetAllStatuses().Where(s => s.Name == statusSearchDTO.Name).FirstOrDefault<Status>();
+        }
+        
         /// <summary>
         /// Get status object by filter criteria
         /// </summary>
