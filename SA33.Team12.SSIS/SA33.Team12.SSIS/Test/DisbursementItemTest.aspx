@@ -9,6 +9,17 @@
     stationeryID:<asp:TextBox ID="txbStationeryID" runat="server"></asp:TextBox><br/>
     <asp:Button ID="btnGetItemsByID" runat="server" Text="Search" 
         onclick="btnGetItemsByID_Click" />
+    <h3>Update/Delete Item by ID</h3><br/>
+    QuantityDisbursed:<asp:TextBox ID="txbQuantity" runat="server"></asp:TextBox>
+    <asp:Button ID="btnUpdateItem" runat="server" Text="Update" 
+         OnClick="btnUpdateItem_Click"/>
+    <h3>Create Disbursement Items</h3><br/>
+    <asp:Button ID="btnCreate" runat="server" Text="Create" 
+        onclick="btnCreate_Click" />
+    <h3>delete Item just created</h3><br/>
+    ID:<asp:TextBox ID="txbIDForDelete" runat="server"></asp:TextBox>
+    <asp:Button ID="btnDelete" runat="server" Text="Delete" 
+        onclick="btnDelete_Click" />
     <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
 </asp:Content>
