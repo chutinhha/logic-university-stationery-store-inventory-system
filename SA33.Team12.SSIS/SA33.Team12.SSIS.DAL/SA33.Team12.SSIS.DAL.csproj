@@ -90,6 +90,7 @@
       <DependentUpon>StationeryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="StationeryRetrievalDAO.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
