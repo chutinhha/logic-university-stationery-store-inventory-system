@@ -44,7 +44,7 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                if (validateRequisition(requisition, RequisitionMethod.Create))
+                if (ValidateRequisition(requisition, RequisitionMethod.Create))
                 {
                     StatusSearchDTO sdto = new StatusSearchDTO() { Name = "Pending" };
                     Status status = requisitionDAO.GetStatusByName(sdto);
@@ -61,7 +61,7 @@ namespace SA33.Team12.SSIS.BLL
 
         public void UpdateRequisitionStatus(Requisition requisition, Status status)
         {
-            if (validateRequisition(requisition, RequisitionMethod.UpdateStatus))
+            if (ValidateRequisition(requisition, RequisitionMethod.UpdateStatus))
             {
                 requisitionDAO.UpdateRequisitionStatus(requisition, status);
             }
@@ -71,7 +71,7 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                if (validateRequisition(requisition, RequisitionMethod.Approve))
+                if (ValidateRequisition(requisition, RequisitionMethod.Approve))
                 {
                     requisitionDAO.ApproveRequisition(requisition);
                 }
@@ -99,7 +99,7 @@ namespace SA33.Team12.SSIS.BLL
 
         public void CancelRequisition(Requisition requisition)
         {
-            if (validateRequisition(requisition, RequisitionMethod.Cancel))
+            if (ValidateRequisition(requisition, RequisitionMethod.Cancel))
             {
                 requisitionDAO.CancelRequisition(requisition);
             }
@@ -109,7 +109,7 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                if (validateRequisition(requisition, RequisitionMethod.Update))
+                if (ValidateRequisition(requisition, RequisitionMethod.Update))
                 {
                     requisitionDAO.UpdateRequisition(requisition);
                 }
@@ -164,7 +164,7 @@ namespace SA33.Team12.SSIS.BLL
             return requisitionDAO.GetRequisitionID(requisition);
         }
 
-        private bool validateRequisition(Requisition requisition, RequisitionMethod requisitionMethod)
+        private bool ValidateRequisition(Requisition requisition, RequisitionMethod requisitionMethod)
         {
             try
             {
@@ -221,13 +221,14 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
-        private bool validateRequisitionItem(RequisitionItem requisitionItem, RequisitionMethod requisitionMethod)
+        private bool ValidateRequisitionItem(RequisitionItem requisitionItem, SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
         {
-            if (requisitionItem != null)
+            if (requisitionItem == null || specialRequisitionItem == null)
             {
                 if (requisitionMethod == RequisitionMethod.Create)
                 {
-                    if ((requisitionItem.RequisitionItemID != 0 && requisitionItem.RequisitionItemID != null) &&
+                    if ((requisitionItem.RequisitionItemID == 0 || 
+                        specialRequisitionItem.SpecialRequisitionItemsID==0) &&
                        (requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
                        (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
                        (requisitionItem.QuantityRequested > 0))
@@ -238,7 +239,14 @@ namespace SA33.Team12.SSIS.BLL
 
                 if (requisitionMethod == RequisitionMethod.Update)
                 {
-
+                    if ((requisitionItem.RequisitionItemID != 0 ||
+                      specialRequisitionItem.SpecialRequisitionItemsID == 0) &&
+                     (requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
+                     (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
+                     (requisitionItem.QuantityRequested > 0 && requisitionItem.QuantityRequested < requisitionItem.QuantityRequested))
+                    {
+                        return true;
+                    }
                 }
 
                 if (requisitionMethod == RequisitionMethod.Delete)
@@ -249,7 +257,7 @@ namespace SA33.Team12.SSIS.BLL
             return false;
         }
 
-        private bool validateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
+        private bool ValidateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
         {
             if (specialRequisitionItem != null)
             {
@@ -266,7 +274,13 @@ namespace SA33.Team12.SSIS.BLL
 
                 if (requisitionMethod == RequisitionMethod.Update)
                 {
-
+                    if ((specialRequisitionItem.SpecialRequisitionItemsID != 0 && specialRequisitionItem.SpecialRequisitionItemsID != null) &&
+                      (specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
+                      (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
+                      (specialRequisitionItem.QuantityRequested > 0))
+                    {
+                        return true;
+                    }
                 }
 
                 if (requisitionMethod == RequisitionMethod.Delete)
