@@ -239,6 +239,10 @@
       <Project>{7138FD53-E204-40F7-A561-42C3B851C7E1}</Project>
       <Name>SA33.Team12.SSIS.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SA33.Team12.SSIS.Exceptions\SA33.Team12.SSIS.Exceptions.csproj">
+      <Project>{3708754C-2180-4B1B-B43F-CA127A3C11D9}</Project>
+      <Name>SA33.Team12.SSIS.Exceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

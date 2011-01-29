@@ -1,46 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Security;
 using System.Transactions;
-using SA33.Team12.SSIS;
+using System.Collections.Generic;
+using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.UserAdministration
 {
     public partial class Users : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            DynamicDataManager.RegisterControl(this.UserDetailView);
+            this.UserDetailView.EnableDynamicData(typeof (User));
+            //this.UserGridView.EnableDynamicData(typeof(User)););
+
+            if (!Page.IsPostBack)
             {
                 // DataBindUserGridView();
             }
         }
 
-        public void DataBindUserGridView()
-        {
-            this.UserGridView.DataSource = Membership.GetAllUsers();
-            this.UserGridView.DataBind();
-        }
-
-        protected void UserGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
-        {
-             //the code below is commented because for testing purpose it is not needed yet
-             //other than that it is working fine ;)
-
-            string userName = e.Values[0].ToString();
-            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
-            {
-                using (BLL.UserManager um = new BLL.UserManager())
-                {
-                    //um.DeleteUser(userName);
-                }
-                Membership.DeleteUser(userName);
-            }
-        }
 
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -48,20 +28,13 @@ namespace SA33.Team12.SSIS.UserAdministration
             {
                 case "disable":
                     int rowID = int.Parse(e.CommandArgument.ToString());
-                    string userName = UserGridView.DataKeys[rowID].Value.ToString();
+                    int UserID = (int) UserGridView.DataKeys[rowID].Value;
                     try
                     {
                         using (TransactionScope ts = new TransactionScope())
                         {
-                            using (BLL.UserManager um = new BLL.UserManager())
-                            {
-                               // um.DisableUser(userName);
-                            }
-
-                            // probably good to have Membership BLL Layer to deal with this
-                            MembershipUser membershipUser = Membership.GetUser(userName);
-                            membershipUser.IsApproved = false;
-                            Membership.UpdateUser(membershipUser);
+                            DAL.User user = Utilities.Membership.GetUserById(UserID);
+                            Utilities.Membership.DisableUser(user);
                         }
                     }
                     catch (Exception exception)
@@ -69,10 +42,17 @@ namespace SA33.Team12.SSIS.UserAdministration
                         this.ErrorMessage.Text = exception.Message;
                     }
 
-                break;
+                    break;
+                case "edit":
 
+                    break;
                 case "delete": break;
             }
+        }
+
+        protected void UserGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UserDetailView.DataBind();
         }
     }
 }
