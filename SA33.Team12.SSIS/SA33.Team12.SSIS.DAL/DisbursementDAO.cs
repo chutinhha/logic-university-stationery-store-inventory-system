@@ -42,12 +42,14 @@ namespace SA33.Team12.SSIS.DAL
                 Disbursement tempDisbursement = (from d in context.Disbursements
                                                  where d.DisbursementID == disbursement.DisbursementID
                                                  select d).First<Disbursement>();
+                tempDisbursement.DisbursementID = disbursement.DisbursementID;
                 tempDisbursement.CreatedBy = disbursement.CreatedBy;
                 tempDisbursement.DateCreated = disbursement.DateCreated;
+                tempDisbursement.StationeryRetrievalFormID = disbursement.StationeryRetrievalFormID;
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempDisbursement);
-                    context.ObjectStateManager.ChangeObjectState(tempDisbursement, EntityState.Modified);
+                    //context.Attach(tempDisbursement);
+                    //context.ObjectStateManager.ChangeObjectState(tempDisbursement, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
                     return tempDisbursement;
@@ -98,7 +100,8 @@ namespace SA33.Team12.SSIS.DAL
                 from d in context.Disbursements
                 where d.DisbursementID == (criteria.DisbursementID == 0 ? d.DisbursementID : criteria.DisbursementID)
                 && d.CreatedBy == (criteria.CreatedBy == 0 ? d.CreatedBy : criteria.CreatedBy)
-                && d.DateCreated == (criteria.DateCreated == null ? d.DateCreated : criteria.DateCreated)
+                && d.DateCreated == (criteria.DateCreated == null||criteria.DateCreated==DateTime.MinValue ? d.DateCreated : criteria.DateCreated)
+                && d.StationeryRetrievalFormID==(criteria.StationeryRetrievalFormID==0?d.StationeryRetrievalFormID:criteria.StationeryRetrievalFormID)
                 select d;
             List<Disbursement> disbursements = Query.ToList<Disbursement>();
             return disbursements;
@@ -130,12 +133,23 @@ namespace SA33.Team12.SSIS.DAL
             {
                 DisbursementItem tempDisbursementItem = (from d in context.DisbursementItems
                                                          where d.DisbursementItemID == disbursementItem.DisbursementItemID
-                                                         select d).First<DisbursementItem>();
-                tempDisbursementItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
+                                                         select d).FirstOrDefault();
+                if (tempDisbursementItem == null)
+                {
+                    tempDisbursementItem.DisbursementItemID = disbursementItem.DisbursementItemID;
+                    tempDisbursementItem.DisbursementID = disbursementItem.DisbursementID;
+                    tempDisbursementItem.StationeryRetrievalFormItemByDeptID = disbursementItem.StationeryRetrievalFormItemByDeptID;
+                    tempDisbursementItem.AdjustmentVoucherID = disbursementItem.AdjustmentVoucherID;
+                    tempDisbursementItem.StationeryID = disbursementItem.StationeryID;
+                    tempDisbursementItem.SpeicalStationeryID = disbursementItem.SpeicalStationeryID;
+                    tempDisbursementItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
+                    tempDisbursementItem.QuantityDamaged = disbursementItem.QuantityDamaged;
+                    tempDisbursementItem.Reason = disbursementItem.Reason;
+                }
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempDisbursementItem);
-                    context.ObjectStateManager.ChangeObjectState(tempDisbursementItem, EntityState.Modified);
+                    //context.Attach(tempDisbursementItem);
+                    //context.ObjectStateManager.ChangeObjectState(tempDisbursementItem, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
                     return tempDisbursementItem;
