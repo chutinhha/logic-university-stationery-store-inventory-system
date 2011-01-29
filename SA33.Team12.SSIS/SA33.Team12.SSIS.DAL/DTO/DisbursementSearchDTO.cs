@@ -10,5 +10,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public int DisbursementID {get;set;}
         public DateTime DateCreated{get;set;}
         public int CreatedBy{get;set;}
+        public int StationeryRetrievalFormID { get; set; }
     }
 }
