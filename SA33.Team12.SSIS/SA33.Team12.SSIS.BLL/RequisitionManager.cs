@@ -13,19 +13,33 @@ using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.BLL
 {
+    /// <summary>
+    /// RequisitionManager Business Logic class
+    /// </summary>
     public class RequisitionManager : SA33.Team12.SSIS.BLL.BusinessLogic
     {
         private RequisitionDAO requisitionDAO;
         private enum RequisitionMethod
         {
-            Create, Update, Approve, Cancel, UpdateStatus
+            Create, Update, Approve, Cancel, UpdateStatus, Delete
+        };
+        private enum RequisitionType
+        {
+            Normal, Special
         };
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RequisitionManager()
         {
             requisitionDAO = new RequisitionDAO();
         }
 
+        /// <summary>
+        /// Create a new requisition and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
         public void CreateRequisition(Requisition requisition)
         {
             try
@@ -78,7 +92,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -93,7 +107,18 @@ namespace SA33.Team12.SSIS.BLL
 
         public void UpdateRequisition(Requisition requisition)
         {
-            requisitionDAO.UpdateRequisition(requisition);
+            try
+            {
+                if (validateRequisition(requisition, RequisitionMethod.Update))
+                {
+                    requisitionDAO.UpdateRequisition(requisition);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -147,11 +172,11 @@ namespace SA33.Team12.SSIS.BLL
                 {
                     if (requisitionMethod == RequisitionMethod.Create)
                     {
-                        if ((requisition.CreatedBy != null || requisition.CreatedByUser != null) &&
-                            (requisition.DepartmentID != null || requisition.Department != null) &&
+                        if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
+                            (requisition.DepartmentID != 0 || requisition.Department != null) &&
                             (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
-                            (requisition.StatusID != null || requisition.Status != null) &&
-                            (requisition.UrgencyID != null || requisition.Urgency != null) &&
+                            (requisition.StatusID != 0 || requisition.Status != null) &&
+                            (requisition.UrgencyID != 0 || requisition.Urgency != null) &&
                             (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() == DateTime.Now.Date.ToShortDateString()) &&
                             (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
                         {
@@ -160,11 +185,11 @@ namespace SA33.Team12.SSIS.BLL
                     }
                     if (requisitionMethod == RequisitionMethod.Update)
                     {
-                        if ((requisition.CreatedBy != null || requisition.CreatedByUser != null) &&
-                           (requisition.DepartmentID != null || requisition.Department != null) &&
+                        if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
+                           (requisition.DepartmentID != 0 || requisition.Department != null) &&
                            (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
-                           (requisition.StatusID != null || requisition.Status != null) &&
-                           (requisition.UrgencyID != null || requisition.Urgency != null) &&
+                           (requisition.StatusID != 0 || requisition.Status != null) &&
+                           (requisition.UrgencyID != 0 || requisition.Urgency != null) &&
                            (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() == string.Empty) &&
                            (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
                         {
@@ -182,11 +207,11 @@ namespace SA33.Team12.SSIS.BLL
 
                     if (requisitionMethod == RequisitionMethod.Approve || requisitionMethod == RequisitionMethod.Cancel)
                     {
-                        if (requisition.ApprovedBy == null && requisition.ApprovedByUser == null && requisition.DateApproved == null)
+                        if (requisition.ApprovedBy == 0 && requisition.ApprovedByUser == null && requisition.DateApproved == null)
                         {
                             return true;
                         }
-                    }                    
+                    }
                 }
                 return false;
             }
@@ -194,6 +219,62 @@ namespace SA33.Team12.SSIS.BLL
             {
                 throw new RequisitionException("Create Requisition failed. Please try again later");
             }
+        }
+
+        private bool validateRequisitionItem(RequisitionItem requisitionItem, RequisitionMethod requisitionMethod)
+        {
+            if (requisitionItem != null)
+            {
+                if (requisitionMethod == RequisitionMethod.Create)
+                {
+                    if ((requisitionItem.RequisitionItemID != 0 && requisitionItem.RequisitionItemID != null) &&
+                       (requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
+                       (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
+                       (requisitionItem.QuantityRequested > 0))
+                    {
+                        return true;
+                    }
+                }
+
+                if (requisitionMethod == RequisitionMethod.Update)
+                {
+
+                }
+
+                if (requisitionMethod == RequisitionMethod.Delete)
+                {
+
+                }
+            }
+            return false;
+        }
+
+        private bool validateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
+        {
+            if (specialRequisitionItem != null)
+            {
+                if (requisitionMethod == RequisitionMethod.Create)
+                {
+                    if ((specialRequisitionItem.SpecialRequisitionItemsID != 0 && specialRequisitionItem.SpecialRequisitionItemsID != null) &&
+                       (specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
+                       (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
+                       (specialRequisitionItem.QuantityRequested > 0))
+                    {
+                        return true;
+                    }
+                }
+
+                if (requisitionMethod == RequisitionMethod.Update)
+                {
+
+                }
+
+                if (requisitionMethod == RequisitionMethod.Delete)
+                {
+
+                }
+            }
+            return false;
         }
     }
 }
