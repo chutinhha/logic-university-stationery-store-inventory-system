@@ -38,6 +38,49 @@ namespace SA33.Team12.SSIS.Test
             GridView1.DataBind();
         }
 
+        protected void btnUpdateItem_Click(object sender, EventArgs e)
+        {
+            int disbursementItemID = Convert.ToInt32(txbDisbursementItemID.Text.ToString());
+            DisbursementItem disbursementItem = disbursementDAO.GetDisbursementItemByID(disbursementItemID);
+            int newQuantity = Convert.ToInt32(txbQuantity.Text.ToString());
+            disbursementItem.QuantityDisbursed = newQuantity;
+            DisbursementItem newItem = disbursementDAO.UpdateDisbursementItem(disbursementItem);
+            List<DisbursementItem> Items = new List<DisbursementItem>();
+            Items.Add(newItem);
+            GridView1.DataSource = Items;
+            GridView1.DataBind();
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            int disbursementItemID = Convert.ToInt32(txbDisbursementItemID.Text.ToString());
+            DisbursementItem disbursementItem = disbursementDAO.GetDisbursementItemByID(disbursementItemID);
+            DisbursementItem newItem = new DisbursementItem();
+            newItem.DisbursementID = disbursementItem.DisbursementID;
+            newItem.StationeryRetrievalFormItemByDeptID = disbursementItem.StationeryRetrievalFormItemByDeptID;
+            newItem.AdjustmentVoucherID = disbursementItem.AdjustmentVoucherID;
+            newItem.StationeryID = disbursementItem.StationeryID;
+            newItem.SpeicalStationeryID = disbursementItem.SpeicalStationeryID;
+            newItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
+            newItem.QuantityDamaged = disbursementItem.QuantityDamaged;
+            newItem.Reason = disbursementItem.Reason;
+            DisbursementItem createdItem = disbursementDAO.CreateDisbursementItem(newItem);
+            List<DisbursementItem> Items = new List<DisbursementItem>();
+            Items.Add(createdItem);
+            GridView1.DataSource = Items;
+            GridView1.DataBind();
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            int ItemID = Convert.ToInt32(txbIDForDelete.Text.ToString());
+            DisbursementItem Item = disbursementDAO.GetDisbursementItemByID(ItemID);
+            disbursementDAO.DeleteDisbursementItem(Item);
+            List<DisbursementItem> list = disbursementDAO.GetAllDisbursementItem();
+            GridView1.DataSource = list;
+            GridView1.DataBind();
+        }
+
 
     }
 }
