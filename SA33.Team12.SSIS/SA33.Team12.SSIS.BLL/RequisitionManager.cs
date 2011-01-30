@@ -23,10 +23,6 @@ namespace SA33.Team12.SSIS.BLL
         {
             Create, Update, Approve, Cancel, UpdateStatus, Delete
         };
-        private enum RequisitionType
-        {
-            Normal, Special
-        };
 
         /// <summary>
         /// Constructor
@@ -68,7 +64,7 @@ namespace SA33.Team12.SSIS.BLL
                     }
                 }
             }
-            catch (RequisitionException ex)
+            catch (RequisitionException)
             {
                 throw;
             }
@@ -301,7 +297,8 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         if ((specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
                          (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
-                         (specialRequisitionItem.QuantityRequested > 0 && specialRequisitionItem.QuantityRequested < specialRequisitionItem.QuantityRequested))
+                         (specialRequisitionItem.SpecialStationery.IsApproved == false) &&
+                         (specialRequisitionItem.QuantityRequested > 0))
                         {
                             return true;
                         }
