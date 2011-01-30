@@ -18,17 +18,18 @@ namespace SA33.Team12.SSIS.Test
             Requisition r = new Requisition();
          
             UserDAO user = new UserDAO();
-            RequisitionDAO rq = new RequisitionDAO(); 
+            RequisitionManager rq = new RequisitionManager(); 
             CatalogDAO cat = new CatalogDAO();           
 
             //set the properties of requisition object            
             r.DepartmentID = user.GetDepartmentByID(1).DepartmentID;
             r.CreatedBy = user.GetUserByID(1).UserID;
+            r.StatusID = rq.GetStatusByID(new Status() { StatusID = 1}).StatusID;
             r.ApprovedBy = user.GetUserByID(2).UserID;
             r.UrgencyID = rq.GetUrgencyByID(new Urgency() { UrgencyID = 1 }).UrgencyID;
             r.RequisitionForm = "test";
             r.DateRequested = DateTime.Now;
-            r.DateApproved = DateTime.Now;
+            //r.DateApproved = DateTime.Now;
 
             //Create a new requisitionitem for the current requisition
             RequisitionItem rqi = new RequisitionItem()
@@ -37,7 +38,7 @@ namespace SA33.Team12.SSIS.Test
                 StationeryID = cat.GetAllStationery().FirstOrDefault<Stationery>().StationeryID,
                 QuantityRequested = 10,
                 QuantityIssued = 10,
-                Price = 5
+                Price = 5                
 
             };
 
@@ -51,7 +52,8 @@ namespace SA33.Team12.SSIS.Test
                 QuantityIssued = 10,
                 Price = 5,
                 Name = "arav",
-                Description = "tes"
+                Description = "test"           
+                
             };
 
 
@@ -66,31 +68,22 @@ namespace SA33.Team12.SSIS.Test
             //EF is very intelligent. It will also persist to requistionitem and specialrequistionitem
             rq.CreateRequisition(r);
 
+            r = rq.GetAllRequisition().Last<Requisition>();
+            r.RequisitionItems.Last<RequisitionItem>().QuantityIssued = 6;
 
-            rq.GetRequisitionItemsByID(rqi).QuantityIssued = 5;
-
+           
             rq.UpdateRequisition(r);
 
-            DAL.DTO.RequisitionSearchDTO rsearch = new DAL.DTO.RequisitionSearchDTO()
-            {
-                RequisitionID = r.RequisitionID,
-             //   StartDateRequested = DateTime.Now,        
-                ExactDateRequested = DateTime.Now
-
-            };
 
             //Testing databinding after creation of requisitions
             if (!IsPostBack)
             {
-                //if (r != null)
-                //{
-                //    GridView1.DataSource = rq.GetRequisitionByEmployee(user.GetUserByID(1), rsearch);
-                //    GridView1.DataBind();
-                //}
+                GridView1.DataSource = rq.GetAllRequisitionItems(r);
+                GridView1.DataBind();
 
                 if (r != null)
                 {
-                    GridView2.DataSource = rq.FindRequisitionByCriteria(rsearch);
+                    GridView2.DataSource = rq.GetAllRequisition();
                     GridView2.DataBind();
                 }
             }
