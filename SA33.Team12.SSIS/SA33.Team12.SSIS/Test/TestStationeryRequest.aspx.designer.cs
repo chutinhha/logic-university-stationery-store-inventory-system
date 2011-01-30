@@ -10,7 +10,7 @@
 namespace SA33.Team12.SSIS.Test {
     
     
-    public partial class StationeryRequest {
+    public partial class TestStationeryRequest {
         
         /// <summary>
         /// GridView1 control.
