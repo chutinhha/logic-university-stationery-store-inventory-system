@@ -194,8 +194,9 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 return (from ri in context.StockLogTransactions
-                        where ri.StockLogTransactionID == ID
+                       where ri.StockLogTransactionID == ID
                         select ri).FirstOrDefault<StockLogTransaction>();
+
             }
             catch (Exception ex)
             {
