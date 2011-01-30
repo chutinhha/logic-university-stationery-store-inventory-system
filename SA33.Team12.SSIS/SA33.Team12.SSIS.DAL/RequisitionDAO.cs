@@ -334,7 +334,7 @@ namespace SA33.Team12.SSIS.DAL
 
                     if (requisitioinSearchDTO.ExactDateRequested >= DateTime.MinValue)
                     {
-                        tempQuery.Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
+                       // tempQuery.Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
                         //GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
                     }
                 }
