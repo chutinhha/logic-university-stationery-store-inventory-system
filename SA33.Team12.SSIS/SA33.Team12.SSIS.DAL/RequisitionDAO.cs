@@ -377,7 +377,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="requisition">requisition object</param>
         /// <returns>string</returns>
-        public string GetRequisitionID(Requisition requisition)
+        public string GetRequisitionNumber(Requisition requisition)
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;

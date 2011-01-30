@@ -189,6 +189,11 @@ namespace SA33.Team12.SSIS.DAL
             return stationery;
         }
 
+        public List<Stationery> GetStationeriesByCategory(int CategoryID)
+        {
+            return GetAllStationery().Where(x => x.CategoryID == CategoryID).ToList<Stationery>();
+        }
+
         public int GetStationeryCount()
         {
             return context.Stationeries.Count();
