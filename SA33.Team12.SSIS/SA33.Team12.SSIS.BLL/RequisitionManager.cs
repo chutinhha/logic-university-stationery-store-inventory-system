@@ -443,6 +443,113 @@ namespace SA33.Team12.SSIS.BLL
 
         #endregion
 
+        #region SpecialRequisitionItem
+        /// <summary>
+        /// Create a new specialRequisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void CreateSpecialSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                if (specialRequisitionItem != null)
+                {
+                    requisitionDAO.CreateSpecialSpecialRequisitionItem(specialRequisitionItem);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Update the special requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void UpdateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+
+                if (temp != null)
+                {
+                    temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
+                    temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
+                    temp.Price = specialRequisitionItem.Price;
+                    requisitionDAO.UpdateSpecialRequisitionItem(temp);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete the special requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void DeleteSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+
+                if (temp != null && ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Delete))
+                {
+                    requisitionDAO.DeleteSpecialRequisitionItem(temp);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All special RequisitionItems in the requisition form
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public List<SpecialRequisitionItem> GetAllSpecialRequisitionItems(Requisition requisition)
+        {
+            try
+            {
+                return requisitionDAO.GetAllSpecialRequisitionItems(requisition);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get special RequisitionItems by primary key
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <returns></returns>
+        public SpecialRequisitionItem GetSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                return requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
         #region Status
         /// <summary>
         /// Create a status object
