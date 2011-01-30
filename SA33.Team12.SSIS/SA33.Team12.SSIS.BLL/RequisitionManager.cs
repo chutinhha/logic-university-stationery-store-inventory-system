@@ -44,12 +44,28 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
+                bool isTestOK = false;
                 if (ValidateRequisition(requisition, RequisitionMethod.Create))
                 {
-                    StatusSearchDTO sdto = new StatusSearchDTO() { Name = "Pending" };
-                    Status status = requisitionDAO.GetStatusByName(sdto);
-                    requisitionDAO.UpdateRequisitionStatus(requisition, status);
-                    requisitionDAO.CreateRequisition(requisition);
+                    if (requisition.RequisitionItems.Count > 0)
+                    {
+                        foreach (RequisitionItem requisitionItem in requisition.RequisitionItems)
+                        {
+                            isTestOK = ValidateRequisitionItem(requisitionItem, RequisitionMethod.Create);
+                        }
+                        foreach (SpecialRequisitionItem specialRequisitionItem in requisition.SpecialRequisitionItems)
+                        {
+                            isTestOK = ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Create);
+                        }
+                    }
+
+                    if (isTestOK)
+                    {
+                        StatusSearchDTO sdto = new StatusSearchDTO() { Name = "Pending" };
+                        Status status = requisitionDAO.GetStatusByName(sdto);
+                        requisitionDAO.UpdateRequisitionStatus(requisition, status);
+                        requisitionDAO.CreateRequisition(requisition);
+                    }
                 }
             }
             catch (RequisitionException ex)
@@ -57,6 +73,22 @@ namespace SA33.Team12.SSIS.BLL
                 throw;
             }
 
+        }
+
+        public void UpdateRequisition(Requisition requisition)
+        {
+            try
+            {
+                if (ValidateRequisition(requisition, RequisitionMethod.Update))
+                {
+                    requisitionDAO.UpdateRequisition(requisition);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void UpdateRequisitionStatus(Requisition requisition, Status status)
@@ -103,23 +135,7 @@ namespace SA33.Team12.SSIS.BLL
             {
                 requisitionDAO.CancelRequisition(requisition);
             }
-        }
-
-        public void UpdateRequisition(Requisition requisition)
-        {
-            try
-            {
-                if (ValidateRequisition(requisition, RequisitionMethod.Update))
-                {
-                    requisitionDAO.UpdateRequisition(requisition);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        }        
 
         /// <summary>
         /// Find All Requistions
@@ -169,9 +185,10 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (requisition != null)
-                {
+                {                    
                     if (requisitionMethod == RequisitionMethod.Create)
                     {
+                        
                         if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
                             (requisition.DepartmentID != 0 || requisition.Department != null) &&
                             (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
@@ -180,11 +197,12 @@ namespace SA33.Team12.SSIS.BLL
                             (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() == DateTime.Now.Date.ToShortDateString()) &&
                             (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
                         {
-                            return true;
+                            return true;                          
                         }
+                        
                     }
                     if (requisitionMethod == RequisitionMethod.Update)
-                    {
+                    {                 
                         if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
                            (requisition.DepartmentID != 0 || requisition.Department != null) &&
                            (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
@@ -194,13 +212,13 @@ namespace SA33.Team12.SSIS.BLL
                            (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
                         {
                             return true;
-                        }
+                        }                        
                     }
 
                     if (requisitionMethod == RequisitionMethod.UpdateStatus)
                     {
                         if (requisition.RequisitionID != 0)
-                        {
+                        {                            
                             return true;
                         }
                     }
@@ -221,74 +239,89 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
-        private bool ValidateRequisitionItem(RequisitionItem requisitionItem, SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
+        private bool ValidateRequisitionItem(RequisitionItem requisitionItem, RequisitionMethod requisitionMethod)
         {
-            if (requisitionItem == null || specialRequisitionItem == null)
+            try
             {
-                if (requisitionMethod == RequisitionMethod.Create)
+                if (requisitionItem != null)
                 {
-                    if ((requisitionItem.RequisitionItemID == 0 || 
-                        specialRequisitionItem.SpecialRequisitionItemsID==0) &&
-                       (requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
-                       (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
-                       (requisitionItem.QuantityRequested > 0))
+                    if (requisitionMethod == RequisitionMethod.Create)
                     {
-                        return true;
+                        if ((requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
+                           (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
+                           (requisitionItem.QuantityRequested > 0))
+                        {
+                            return true;
+                        }
+                    }
+
+                    if (requisitionMethod == RequisitionMethod.Update)
+                    {
+                        if ((requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
+                         (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
+                         (requisitionItem.QuantityRequested > 0 && requisitionItem.QuantityRequested < requisitionItem.QuantityRequested))
+                        {
+                            return true;
+                        }
+                    }
+
+                    if (requisitionMethod == RequisitionMethod.Delete)
+                    {
+                        if (requisitionItem.RequisitionItemID != 0)
+                        {
+                            return true;
+                        }
                     }
                 }
-
-                if (requisitionMethod == RequisitionMethod.Update)
-                {
-                    if ((requisitionItem.RequisitionItemID != 0 ||
-                      specialRequisitionItem.SpecialRequisitionItemsID == 0) &&
-                     (requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
-                     (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
-                     (requisitionItem.QuantityRequested > 0 && requisitionItem.QuantityRequested < requisitionItem.QuantityRequested))
-                    {
-                        return true;
-                    }
-                }
-
-                if (requisitionMethod == RequisitionMethod.Delete)
-                {
-
-                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private bool ValidateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
         {
-            if (specialRequisitionItem != null)
+            try
             {
-                if (requisitionMethod == RequisitionMethod.Create)
+                if (specialRequisitionItem != null)
                 {
-                    if ((specialRequisitionItem.SpecialRequisitionItemsID != 0 && specialRequisitionItem.SpecialRequisitionItemsID != null) &&
-                       (specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
-                       (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
-                       (specialRequisitionItem.QuantityRequested > 0))
+                    if (requisitionMethod == RequisitionMethod.Create)
                     {
-                        return true;
+                        if ((specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
+                           (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpeicalStationeryID != null) &&
+                           (specialRequisitionItem.QuantityRequested > 0))
+                        {
+                            return true;
+                        }
+                    }
+
+                    if (requisitionMethod == RequisitionMethod.Update)
+                    {
+                        if ((specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
+                         (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
+                         (specialRequisitionItem.QuantityRequested > 0 && specialRequisitionItem.QuantityRequested < specialRequisitionItem.QuantityRequested))
+                        {
+                            return true;
+                        }
+                    }
+
+                    if (requisitionMethod == RequisitionMethod.Delete)
+                    {
+                        if (specialRequisitionItem.SpecialRequisitionItemsID != 0)
+                        {
+                            return true;
+                        }
                     }
                 }
-
-                if (requisitionMethod == RequisitionMethod.Update)
-                {
-                    if ((specialRequisitionItem.SpecialRequisitionItemsID != 0 && specialRequisitionItem.SpecialRequisitionItemsID != null) &&
-                      (specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
-                      (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
-                      (specialRequisitionItem.QuantityRequested > 0))
-                    {
-                        return true;
-                    }
-                }
-
-                if (requisitionMethod == RequisitionMethod.Delete)
-                {
-
-                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
     }
 }
