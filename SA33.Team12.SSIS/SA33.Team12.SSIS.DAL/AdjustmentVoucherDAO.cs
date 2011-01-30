@@ -13,18 +13,10 @@ namespace SA33.Team12.SSIS.DAL
 {
     public class AdjustmentVoucherDAO : DALLogic
     {
-        /***
-         * this is a sample do not use this
-         * ***/
-        //Created by Anthony 28 Jan 2011
+        //Created by Anthony 30 Jan 2011
 
-        #region AdjustmentVoucherTransaction (Temporary Table Parent)
+        #region AdjustmentVoucherTransaction (Temporary Table Parent) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
 
-        ///This is for the Temporary AdjustmentVoucherTransaction tables (AdjustmentVoucherTransaction)
-        /// <summary>
-        /// Create a new AdjustmentVoucherTransaction and persist with database
-        /// </summary>
-        /// <param name="adjustmentVoucherTransaction">AdjustmentVoucherTransaction object</param>
         public void CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction AdjustmentVoucherTransaction)
         {
             try
@@ -49,10 +41,6 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        /// <summary>
-        /// Update the AdjustmentVoucherTransaction before approval
-        /// </summary>
-        /// <param name="updateAdjustmentVoucherTransaction">AdjustmentVoucherTransaction object</param>
         public void UpdateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction updateAdjustmentVoucherTransaction)
         {
             try
@@ -63,20 +51,22 @@ namespace SA33.Team12.SSIS.DAL
 
                 tempReq = updateAdjustmentVoucherTransaction;
                 context.SaveChanges();
+                //                return (updateAdjustmentVoucherTransaction);
             }
             catch (Exception ex)
             {
                 throw new AdjustmentVoucherException("Update Adjustment Voucher failed." + ex.Message);
+
             }
+
+
+
+
         }
 
         ////This for the approval and to convert from the temp database into the actual database (Thinking on how to copy from temp table to the actual table)
 
 
-        /// <summary>
-        /// Get All AdjustmentVoucherTransaction
-        /// </summary>
-        /// <returns></returns>
         public List<AdjustmentVoucherTransaction> GetAllAdjustmentVoucherTransaction()
         {
             return (from c in context.AdjustmentVoucherTransactions select c).ToList<AdjustmentVoucherTransaction>();
@@ -91,9 +81,9 @@ namespace SA33.Team12.SSIS.DAL
 
             if (adjustmentVoucherTransactionSearchDTO != null)
             {
-                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID != -1)
+                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID != -1)
                 {
-                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID);
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID);
                 }
                 if (adjustmentVoucherTransactionSearchDTO.StartDate != null && adjustmentVoucherTransactionSearchDTO.EndDate != null)
                 {
@@ -124,42 +114,33 @@ namespace SA33.Team12.SSIS.DAL
 
             if (adjustmentVoucherTransactionSearchDTO != null)
             {
-                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID != -1)
+                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID != -1)
                 {
-                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherID);
+                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID);
                 }
             }
-
             return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
-
         }
 
         #endregion
 
-        #region StockLogTransaction (Temporary Table Items)
-        /// <summary>
-        /// Create a new StockLogTransaction
-        /// </summary>
-        /// <param name="StockLogTransaction">StockLogTransaction object</param>
-        public void CreateStockLogTransaction(StockLogTransaction stockLogTransaction)
+        #region StockLogTransaction (Temporary Table Items)  (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
+        //(Create, Update, Delete) (GetAll,GetID,GetCriteria)
+
+        public StockLogTransaction CreateStockLogTransaction(StockLogTransaction stockLogTransaction)
         {
             try
             {
                 context.AddToStockLogTransactions(stockLogTransaction);
+                return stockLogTransaction;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Creation Error" + ex.Message);
             }
-
         }
 
-        /// <summary>
-        /// Update the StockLogTransaction
-        /// </summary>
-        /// <param name="stockLogTransaction">StockLogTransaction object</param>
-        public void UpdateStockLogTransaction(StockLogTransaction stockLogTransaction)
+        public StockLogTransaction UpdateStockLogTransaction(StockLogTransaction stockLogTransaction)
         {
             try
             {
@@ -171,19 +152,14 @@ namespace SA33.Team12.SSIS.DAL
                 temp.Quantity = stockLogTransaction.Quantity;
                 temp.Balance = stockLogTransaction.Balance;
                 context.SaveChanges();
+                return stockLogTransaction;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Update Error" + ex.Message);
             }
         }
 
-
-        /// <summary>
-        /// Delete the StockLogTransaction
-        /// </summary>
-        /// <param name="stockLogTransaction">stockLogTransaction object</param>
         public void DeleteStockLogTransaction(StockLogTransaction stockLogTransaction)
         {
             try
@@ -194,65 +170,66 @@ namespace SA33.Team12.SSIS.DAL
 
                 context.StockLogTransactions.DeleteObject(temp);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Delete Error" + ex.Message);
             }
         }
 
-        /// <summary>
-        /// Get All StockLogTransaction in the AdjustmentVoucherTransaction form
-        /// </summary>
-        /// <param name="adjustmentVoucherTransaction"></param>
-        /// <returns></returns>
-        public List<StockLogTransaction> GetAllStockLogTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        public List<StockLogTransaction> GetAllStockLogTransaction()
         {
             try
             {
                 return (from ri in context.StockLogTransactions
-                        where ri.AdjustmentVoucherTransactionID == adjustmentVoucherTransaction.AdjustmentVoucherTransactionID
                         select ri).ToList<StockLogTransaction>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Get All Records Return Error" + ex.Message);
             }
         }
 
-
-        /// <summary>
-        /// Get StockLogTransaction by primary key
-        /// </summary>
-        /// <param name="stockLogTransaction">stockLogTransaction object</param>
-        /// <returns></returns>
-        public StockLogTransaction GetAllStockLogTransactionByID(StockLogTransaction stockLogTransaction)
+        public StockLogTransaction GetAllStockLogTransactionByID(int ID)
         {
             try
             {
                 return (from ri in context.StockLogTransactions
-                        where ri.StockLogTransactionID == stockLogTransaction.StockLogTransactionID
+                        where ri.StockLogTransactionID == ID
                         select ri).FirstOrDefault<StockLogTransaction>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Get All Records By ID Return Error" + ex.Message);
             }
         }
 
-
+        public List<StockLogTransaction> GetAllStockLogTransactionByCriteria(AdjustmentVoucherTransactionSearchDTO adjustmentVoucherTransactionSearchDTO)
+        {
+            try
+            {
+                var Query =
+                    from u in context.StockLogTransactions
+                    where u.StockLogTransactionID == (adjustmentVoucherTransactionSearchDTO.StockLogTransactionID == 0 ? u.StockLogTransactionID : adjustmentVoucherTransactionSearchDTO.StockLogTransactionID)
+                    && u.AdjustmentVoucherTransactionID == (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID == 0 ? u.AdjustmentVoucherTransactionID : adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID)
+                    && u.StationeryID == (adjustmentVoucherTransactionSearchDTO.StationeryID == 0 ? u.Type : adjustmentVoucherTransactionSearchDTO.StationeryID)
+                    && u.Type == (adjustmentVoucherTransactionSearchDTO.Type == 0 ? u.Type : adjustmentVoucherTransactionSearchDTO.Type)
+                    && u.Reason == (adjustmentVoucherTransactionSearchDTO.Reason == null ? u.Reason : adjustmentVoucherTransactionSearchDTO.Reason)
+                    && u.Quantity == (adjustmentVoucherTransactionSearchDTO.Quantity == 0 ? u.Quantity : adjustmentVoucherTransactionSearchDTO.Quantity)
+                    && u.Balance == (adjustmentVoucherTransactionSearchDTO.Balance == 0 ? u.Balance : adjustmentVoucherTransactionSearchDTO.Balance)
+                    select u;
+                List<StockLogTransaction> stockLogTransaction = Query.ToList<StockLogTransaction>();
+                return stockLogTransaction;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Stock Log Transaction Get All Records By Criteria Return Error" + ex.Message);
+            }
+        }
 
         #endregion
 
-        #region AdjustmentVoucher (Actual Table Parent)
+        #region AdjustmentVoucher (Actual Table Parent) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
 
-        ///This is for the Actual AdjustmentVoucher tables (AdjustmentVoucher)
-        /// <summary>
-        /// Create a new AdjustmentVoucher and persist with database
-        /// </summary>
-        /// <param name="adjustmentVoucher">AdjustmentVoucher object</param>
         public void CreateAdjustmentVoucher(AdjustmentVoucher AdjustmentVoucher)
         {
             try
@@ -260,7 +237,7 @@ namespace SA33.Team12.SSIS.DAL
                 //Create a transaction scope
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    //Add AdjustmentVoucher to context                
+                    //Add adjustmentVoucherTransaction to context                
                     context.AddToAdjustmentVouchers(AdjustmentVoucher);
 
                     //Save the changes
@@ -273,14 +250,10 @@ namespace SA33.Team12.SSIS.DAL
             catch (Exception ex)
             {
                 //Exception thrown incase if insert fails
-                throw new AdjustmentVoucherException("Create Adjustment Voucher failed." + ex.Message);
+                throw new AdjustmentVoucherException("Create Adjustment Voucher Transaction failed." + ex.Message);
             }
         }
 
-        /// <summary>
-        /// Update the AdjustmentVoucher after approval
-        /// </summary>
-        /// <param name="updateAdjustmentVoucher">AdjustmentVoucher object</param>
         public void UpdateAdjustmentVoucher(AdjustmentVoucher updateAdjustmentVoucher)
         {
             try
@@ -295,23 +268,24 @@ namespace SA33.Team12.SSIS.DAL
             catch (Exception ex)
             {
                 throw new AdjustmentVoucherException("Update Adjustment Voucher failed." + ex.Message);
+
             }
+
+
+
+
         }
 
         ////This for the approval and to convert from the temp database into the actual database (Thinking on how to copy from temp table to the actual table)
 
 
-        /// <summary>
-        /// Get All AdjustmentVoucher
-        /// </summary>
-        /// <returns></returns>
         public List<AdjustmentVoucher> GetAllAdjustmentVoucher()
         {
             return (from c in context.AdjustmentVouchers select c).ToList<AdjustmentVoucher>();
         }
 
         //Need to FindByCriteria Temp Table AdjustmentVoucherTransaction
-        public List<AdjustmentVoucher> FindAdjustmentVouchersByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        public List<AdjustmentVoucher> FindAdjustmentVoucherByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
         {
             var tempQuery = (from r in context.AdjustmentVouchers
                              where 1 == 1
@@ -344,7 +318,7 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         //Need to FindByGetID Temp Table AdjustmentVoucher
-        public List<AdjustmentVoucher> FindAdjustmentVouchersByGetID(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        public List<AdjustmentVoucher> FindAdjustmentVoucherByGetID(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
         {
             var tempQuery = (from r in context.AdjustmentVouchers
                              where 1 == 1
@@ -357,38 +331,27 @@ namespace SA33.Team12.SSIS.DAL
                     tempQuery = tempQuery.Where(r => r.AdjustmentVoucherID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
                 }
             }
-
             return (from q in tempQuery select q).ToList<AdjustmentVoucher>();
-
         }
 
         #endregion
 
+        #region StockLog (Actual Table Items)  (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
 
-        #region StockLog (Actual Table Items)
-        /// <summary>
-        /// Create a new StockLog
-        /// </summary>
-        /// <param name="StockLog">StockLog object</param>
-        public void CreateStockLog(StockLog stockLog)
+        public StockLog CreateStockLog(StockLog stockLog)
         {
             try
             {
                 context.AddToStockLogs(stockLog);
+                return stockLog;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Creation Error" + ex.Message);
             }
-
         }
 
-        /// <summary>
-        /// Update the StockLog
-        /// </summary>
-        /// <param name="stockLog">StockLog object</param>
-        public void UpdateStockLog(StockLog stockLog)
+        public StockLog UpdateStockLog(StockLog stockLog)
         {
             try
             {
@@ -400,19 +363,14 @@ namespace SA33.Team12.SSIS.DAL
                 temp.Quantity = stockLog.Quantity;
                 temp.Balance = stockLog.Balance;
                 context.SaveChanges();
+                return stockLog;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Transaction Update Error" + ex.Message);
             }
         }
 
-
-        /// <summary>
-        /// Delete the StockLog
-        /// </summary>
-        /// <param name="stockLog">stockLog object</param>
         public void DeleteStockLog(StockLog stockLog)
         {
             try
@@ -423,59 +381,65 @@ namespace SA33.Team12.SSIS.DAL
 
                 context.StockLogs.DeleteObject(temp);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Delete Error" + ex.Message);
             }
         }
 
-        /// <summary>
-        /// Get All StockLog in the AdjustmentVoucher form
-        /// </summary>
-        /// <param name="adjustmentVoucher"></param>
-        /// <returns></returns>
-        public List<StockLog> GetAllStockLog(AdjustmentVoucher adjustmentVoucher)
+        public List<StockLog> GetAllStockLog()
         {
             try
             {
                 return (from ri in context.StockLogs
-                        where ri.AdjustmentVoucherID == adjustmentVoucher.AdjustmentVoucherID
                         select ri).ToList<StockLog>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Get All Records Return Error" + ex.Message);
             }
         }
 
-
-        /// <summary>
-        /// Get StockLog by primary key
-        /// </summary>
-        /// <param name="stockLog">stockLog object</param>
-        /// <returns></returns>
-        public StockLog GetAllStockLogByID(StockLog stockLog)
+        public StockLog GetAllStockLogByID(int ID)
         {
             try
             {
                 return (from ri in context.StockLogs
-                        where ri.StockLogID == stockLog.StockLogID
+                        where ri.StockLogID == ID
                         select ri).FirstOrDefault<StockLog>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception("Stock Log Get All Records By ID Return Error" + ex.Message);
             }
         }
 
-
+        public List<StockLog> GetAllStockLogByCriteria(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        {
+            try
+            {
+                var Query =
+                    from u in context.StockLogs
+                    where u.StockLogID == (adjustmentVoucherSearchDTO.StockLogID == 0 ? u.StockLogID : adjustmentVoucherSearchDTO.StockLogID)
+                    && u.AdjustmentVoucherID == (adjustmentVoucherSearchDTO.AdjustmentVoucherID == 0 ? u.AdjustmentVoucherID : adjustmentVoucherSearchDTO.AdjustmentVoucherID)
+                    && u.StationeryID == (adjustmentVoucherSearchDTO.StationeryID == 0 ? u.Type : adjustmentVoucherSearchDTO.StationeryID)
+                    && u.Type == (adjustmentVoucherSearchDTO.Type == 0 ? u.Type : adjustmentVoucherSearchDTO.Type)
+                    && u.Reason == (adjustmentVoucherSearchDTO.Reason == null ? u.Reason : adjustmentVoucherSearchDTO.Reason)
+                    && u.Quantity == (adjustmentVoucherSearchDTO.Quantity == 0 ? u.Quantity : adjustmentVoucherSearchDTO.Quantity)
+                    && u.Balance == (adjustmentVoucherSearchDTO.Balance == 0 ? u.Balance : adjustmentVoucherSearchDTO.Balance)
+                    select u;
+                List<StockLog> stockLog = Query.ToList<StockLog>();
+                return stockLog;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Stock Log Transaction Get All Records By Criteria Return Error" + ex.Message);
+            }
+        }
 
         #endregion
 
-
+ 
         /*
         ///My codes ---> Anthony
 
