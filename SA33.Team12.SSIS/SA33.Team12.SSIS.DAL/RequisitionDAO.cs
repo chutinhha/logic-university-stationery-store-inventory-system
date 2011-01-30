@@ -393,7 +393,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                context.AddToRequisitionItems(requisitionItem);
+                context.AddToRequisitionItems(requisitionItem);                
             }
             catch (Exception)
             {
@@ -499,7 +499,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                context.AddToSpecialRequisitionItems(specialRequisitionItem);
+                context.AddToSpecialRequisitionItems(specialRequisitionItem);                
             }
             catch (Exception)
             {
@@ -546,7 +546,11 @@ namespace SA33.Team12.SSIS.DAL
                             where ri.SpecialRequisitionItemsID == requisitionItem.SpecialRequisitionItemsID
                             select ri).FirstOrDefault<SpecialRequisitionItem>();
 
-                context.SpecialRequisitionItems.DeleteObject(temp);
+                if (temp != null)
+                {                    
+                    context.SpecialRequisitionItems.DeleteObject(temp);
+                    context.SaveChanges();
+                }
             }
             catch (Exception)
             {

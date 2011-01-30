@@ -74,6 +74,9 @@ namespace SA33.Team12.SSIS.Test
            
             rq.UpdateRequisition(r);
 
+            spi = rq.GetAllSpecialRequisitionItems(r).Last<SpecialRequisitionItem>();
+
+            rq.DeleteSpecialRequisitionItem(spi);
 
             //Testing databinding after creation of requisitions
             if (!IsPostBack)
