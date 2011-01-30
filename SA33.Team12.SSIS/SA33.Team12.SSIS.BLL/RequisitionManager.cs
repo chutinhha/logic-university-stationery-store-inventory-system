@@ -187,9 +187,9 @@ namespace SA33.Team12.SSIS.BLL
         /// </summary>
         /// <param name="requisition"></param>
         /// <returns></returns>
-        public string GetRequisitionID(Requisition requisition)
+        public string GetRequisitionNumber(Requisition requisition)
         {
-            return requisitionDAO.GetRequisitionID(requisition);
+            return requisitionDAO.GetRequisitionNumber(requisition);
         }
 
         private bool ValidateRequisition(Requisition requisition, RequisitionMethod requisitionMethod)
