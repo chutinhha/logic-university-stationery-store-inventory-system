@@ -18,6 +18,8 @@ namespace SA33.Team12.SSIS.Utilities
                 {
                     using (BLL.UserManager um = new BLL.UserManager())
                     {
+                        if (user.Password == null || user.Password.Trim() == "")
+                            user.Password = WebSecurity.Membership.GeneratePassword(8, 0);
                         WebSecurity.MembershipUser membershipUser =
                             WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
                         Guid ProviderKey = (Guid)membershipUser.ProviderUserKey;
@@ -61,6 +63,10 @@ namespace SA33.Team12.SSIS.Utilities
                     }
                 }
                 return user;
+            }
+            catch (Exceptions.UserException userex)
+            {
+                throw userex;
             }
             catch (Exception)
             {
@@ -114,7 +120,7 @@ namespace SA33.Team12.SSIS.Utilities
         public static List<DAL.User> GetUsersById(int userId)
         {
             User user = GetUserById(userId);
-            if (user!= null) return new List<User>() {user};
+            if (user != null) return new List<User>() { user };
             return null;
         }
 

@@ -42,25 +42,25 @@
 </fieldset>
 <fieldset>
 <legend>User Detail</legend>
-<asp:DetailsView runat="server" ID="UserDetailView" 
-        AutoGenerateRows="False" DataSourceID="UserDetailObjectDataSource">
+<asp:DetailsView runat="server" ID="UserDetailView" DataKeyNames="UserID"
+        AutoGenerateRows="False" DataSourceID="UserDetailObjectDataSource" 
+        oniteminserting="UserDetailView_ItemInserting" 
+        ondatabound="UserDetailView_DataBound" 
+        onitemupdating="UserDetailView_ItemUpdating">
     <EmptyDataTemplate>
         Please select an user to view its detail.
     </EmptyDataTemplate>
     <Fields>
-        <asp:BoundField DataField="UserID" HeaderText="UserID" 
-            SortExpression="UserID" />
-        <asp:BoundField DataField="DepartmentID" HeaderText="DepartmentID" 
-            SortExpression="DepartmentID" />
         <asp:TemplateField HeaderText="Department">
             <ItemTemplate>
-                <asp:DynamicControl runat="server" ID="DepartmentLabel"
-                    DataField="DepartmentID" Mode="ReadOnly" />
+                <asp:Literal runat="server" ID="DepartmentLiteral" />
             </ItemTemplate>
             <EditItemTemplate>
                 <asp:DropDownList runat="server" ID="DepartmentDropdownList"
                     DataSourceID="DepartmentObjectDataSource"
-                    DataTextField="Name" DataValueField="DepartmentID">
+                    DataTextField="Name" DataValueField="DepartmentID"
+                    SelectedValue='<%# Eval("DepartmentID") %>'
+                    OnInit="DepartmentDropDownList_Init">
                 </asp:DropDownList>
                 <asp:ObjectDataSource 
                     runat="server" 
@@ -73,6 +73,8 @@
         </asp:TemplateField>
         <asp:BoundField DataField="UserName" HeaderText="UserName" 
             SortExpression="UserName" />
+        <asp:BoundField DataField="Password" HeaderText="Password"
+            SortExpression="Password" />
         <asp:BoundField DataField="FirstName" HeaderText="FirstName" 
             SortExpression="FirstName" />
         <asp:BoundField DataField="LastName" HeaderText="LastName" 

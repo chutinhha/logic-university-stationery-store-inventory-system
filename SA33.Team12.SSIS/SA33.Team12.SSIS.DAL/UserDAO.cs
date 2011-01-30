@@ -73,22 +73,24 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                // First will throw excpetion if no user is found
-                User persistedUser = (from u in context.Users
-                                 where u.UserID == user.UserID
-                                 select u).First<User>();
-                persistedUser.Department = user.Department;
-                persistedUser.UserName = user.UserName;
-                persistedUser.Password = user.Password;
-                persistedUser.MembershipProviderKey = user.MembershipProviderKey;
-                persistedUser.FirstName = user.FirstName;
-                persistedUser.LastName = user.LastName;
-                persistedUser.Email = user.Email;
-                persistedUser.Password = user.Password;
-                persistedUser.IsEnabled = user.IsEnabled;
-
                 using (TransactionScope ts = new TransactionScope())
                 {
+                    // First will throw excpetion if no user is found
+                    User persistedUser = (from u in context.Users
+                                     where u.UserID == user.UserID
+                                     select u).First<User>();
+
+                    persistedUser.Department = user.Department;
+                    
+                    persistedUser.UserName = user.UserName;
+                    persistedUser.Password = user.Password;
+                    persistedUser.MembershipProviderKey = user.MembershipProviderKey;
+                    persistedUser.FirstName = user.FirstName;
+                    persistedUser.LastName = user.LastName;
+                    persistedUser.Email = user.Email;
+                    persistedUser.Password = user.Password;
+                    persistedUser.IsEnabled = user.IsEnabled;
+
                     context.ObjectStateManager.ChangeObjectState(persistedUser, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
