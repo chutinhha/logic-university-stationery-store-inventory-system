@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace SA33.Team12.SSIS.DAL.DTO
 {
-    //Edit by Anthony 26 Jan 2011
+    //Edit by Anthony 30 Jan 2011
     //This is for the Temp AdjustmentVoucherTransactions & StockLogTransactions
     public class AdjustmentVoucherTransactionSearchDTO
     {
