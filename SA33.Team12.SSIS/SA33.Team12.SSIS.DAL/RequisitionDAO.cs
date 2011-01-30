@@ -88,7 +88,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 requisition.StatusID = status.StatusID;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new RequisitionException("Update failed.");
             }
@@ -116,7 +116,7 @@ namespace SA33.Team12.SSIS.DAL
                     context.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new RequisitionException("Approval Failed.");
             }
@@ -157,7 +157,7 @@ namespace SA33.Team12.SSIS.DAL
                     context.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw new RequisitionException("Approval Failed");
@@ -172,7 +172,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return (from c in context.Requisitions select c).ToList<Requisition>();
+                return context.Requisitions.ToList<Requisition>();
             }
             catch (Exception)
             {
@@ -189,7 +189,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return (from ri in context.VW_RequisitionsByCategory select ri).ToList<VW_RequisitionsByCategory>();
+                return context.VW_RequisitionsByCategory.ToList<VW_RequisitionsByCategory>();
             }
             catch (Exception)
             {
@@ -227,7 +227,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return (from ri in context.VW_RequisitionsByDepartment select ri).ToList<VW_RequisitionsByDepartment>();
+                return context.VW_RequisitionsByDepartment.ToList<VW_RequisitionsByDepartment>();
             }
             catch (Exception)
             {
@@ -265,7 +265,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return (from ri in context.VW_RequisitionsByEmployee select ri).ToList<VW_RequisitionsByEmployee>();
+                return context.VW_RequisitionsByEmployee.ToList<VW_RequisitionsByEmployee>();
             }
             catch (Exception)
             {
@@ -323,22 +323,19 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                var tempQuery = (from r in context.Requisitions
-                                 where 1 == 1
-                                 select r);
+                var tempQuery = GetAllRequisition();
 
                 if (requisitioinSearchDTO != null)
-                {
-                    List<Requisition> items = new List<Requisition>();
+                {                    
                     if (requisitioinSearchDTO.RequisitionID != 0)
-                    {                       
-                          items.Add(GetRequisitionByID(new Requisition() { RequisitionID = requisitioinSearchDTO.RequisitionID }));
-                          return items;
+                    {                        
+                        tempQuery.Where(x => x.RequisitionID == requisitioinSearchDTO.RequisitionID).FirstOrDefault<Requisition>();                        
                     }
 
                     if (requisitioinSearchDTO.ExactDateRequested >= DateTime.MinValue)
                     {
-                        GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
+                        tempQuery.Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
+                        //GetAllRequisition().Where(x => EntityFunctions.DiffDays(x.DateApproved, requisitioinSearchDTO.ExactDateRequested) >= 0).ToList<Requisition>();
                     }
                 }
                 
@@ -365,7 +362,7 @@ namespace SA33.Team12.SSIS.DAL
                 //    }
                 //}
 
-                return (from q in tempQuery select q).ToList<Requisition>();
+                return tempQuery.ToList<Requisition>();
             }
             catch (Exception)
             {
