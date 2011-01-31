@@ -13,8 +13,28 @@ namespace SA33.Team12.SSIS.DAL
 
     public class StationeryMetaData
     {
+        // item code format must be letter A-Z followed by 3 digits
         [Required(ErrorMessage="Please enter item code.")]
-        [RegularExpression(".{4}", ErrorMessage="Pleaes enter valid item code.")]
+        [RegularExpression(".^[A-Z]{1}[0-9]{3}$", ErrorMessage = "Pleaes enter valid item code.")]
         public string ItemCode { get; set; }
+
+        [Required(ErrorMessage = "Please enter item description.")]
+        [StringLength(255, ErrorMessage = "Item description cannot be longer than 255 characters")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Please enter reorder level.")]
+        public int ReorderLevel { get; set; }
+
+        [Required(ErrorMessage = "Please enter reorder quantity.")]
+        public int ReorderQuantity { get; set; }
+
+        [Required(ErrorMessage = "Please enter quantity in hand.")]
+        public int QuantityInHand { get; set; }
+
+        [Required(ErrorMessage = "Please select category.")]
+        public int CategoryID { get; set; }
+
+        [Required(ErrorMessage = "Please select location.")]
+        public int LocationID { get; set; }
     }
 }

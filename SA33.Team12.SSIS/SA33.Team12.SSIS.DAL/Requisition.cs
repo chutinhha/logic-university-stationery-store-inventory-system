@@ -13,12 +13,11 @@ namespace SA33.Team12.SSIS.DAL
 
     public class RequisitionMetaData
     {
-        [Required(ErrorMessage="Category name cannot be blank!")]
-        [StringLength(255, ErrorMessage="Category name cannot be longer than 255 characters")]
-        public string Name { get; set; }
+        [Required(ErrorMessage="Requisition form cannot be blank!")]
+        [StringLength(13, ErrorMessage="Requisition form cannot be longer than 13 characters")]
+        public string RequisitionForm { get; set; }
 
-        [Required(ErrorMessage = "Unit of measure name cannot be blank!")]
-        [StringLength(255, ErrorMessage = "Unit of measure cannot be longer than 255 characters")]
-        public string UnitOfMeasure { get; set; }
+        [Required(ErrorMessage = "Please select urgency level!")]
+        public int UrgencyID { get; set; }
     }
 }
