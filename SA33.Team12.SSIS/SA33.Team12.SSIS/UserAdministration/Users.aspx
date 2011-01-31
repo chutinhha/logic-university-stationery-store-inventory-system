@@ -42,50 +42,142 @@
 </fieldset>
 <fieldset>
 <legend>User Detail</legend>
-<asp:DetailsView runat="server" ID="UserDetailView" DataKeyNames="UserID"
-        AutoGenerateRows="False" DataSourceID="UserDetailObjectDataSource" 
-        oniteminserting="UserDetailView_ItemInserting" 
-        ondatabound="UserDetailView_DataBound" 
-        onitemupdating="UserDetailView_ItemUpdating">
+
+<asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True"
+        DataSourceID="UserDetailObjectDataSource" 
+        ondatabinding="UserFormView_DataBinding" 
+        oniteminserting="UserFormView_ItemInserting" 
+        onitemupdating="UserFormView_ItemUpdating">
     <EmptyDataTemplate>
-        Please select an user to view its detail.
+        Please select a user to view its detail.
+        &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" 
+            CommandName="New" Text="New" />
     </EmptyDataTemplate>
-    <Fields>
-        <asp:TemplateField HeaderText="Department">
-            <ItemTemplate>
-                <asp:Literal runat="server" ID="DepartmentLiteral" />
-            </ItemTemplate>
-            <EditItemTemplate>
-                <asp:DropDownList runat="server" ID="DepartmentDropdownList"
-                    DataSourceID="DepartmentObjectDataSource"
-                    DataTextField="Name" DataValueField="DepartmentID"
-                    SelectedValue='<%# Eval("DepartmentID") %>'
-                    OnInit="DepartmentDropDownList_Init">
-                </asp:DropDownList>
-                <asp:ObjectDataSource 
-                    runat="server" 
-                    ID="DepartmentObjectDataSource" 
-                    DataObjectTypeName="SA33.Team12.SSIS.DAL.Department"
-                    SelectMethod="GetAllDepartments" 
-                    TypeName="SA33.Team12.SSIS.BLL.UserManager">
-                </asp:ObjectDataSource>    
-            </EditItemTemplate>
-        </asp:TemplateField>
-        <asp:BoundField DataField="UserName" HeaderText="UserName" 
-            SortExpression="UserName" />
-        <asp:BoundField DataField="Password" HeaderText="Password"
-            SortExpression="Password" />
-        <asp:BoundField DataField="FirstName" HeaderText="FirstName" 
-            SortExpression="FirstName" />
-        <asp:BoundField DataField="LastName" HeaderText="LastName" 
-            SortExpression="LastName" />
-        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-        <asp:CheckBoxField DataField="IsEnabled" HeaderText="IsEnabled" 
-            SortExpression="IsEnabled" />
-        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-            ShowInsertButton="True" />
-    </Fields>
-</asp:DetailsView>
+    <EditItemTemplate>
+        DepartmentID:
+        <asp:DynamicControl ID="DynamicControl1" runat="server" 
+            DataField="DepartmentID" Mode="Edit" Visible="false" />
+
+        <asp:DropDownList runat="server" ID="DepartmentDropDownList"
+            DataTextField="Name" DataValueField="DepartmentID"
+            DataSourceID="DepartmentObjectDataSource" 
+            SelectedValue='<%# Eval("DepartmentID") %>'>
+        </asp:DropDownList>
+        <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource"
+            DataObjectTypeName="SA33.Team12.SSIS.DAL.User" 
+            TypeName="SA33.Team12.SSIS.BLL.UserManager"
+            SelectMethod="GetAllDepartments">
+        </asp:ObjectDataSource>
+        UserName:
+        <asp:DynamicControl ID="UserNameDynamicControl" runat="server" 
+            DataField="UserName" Mode="Edit" />
+        <br />
+        FirstName:
+        <asp:DynamicControl ID="FirstNameDynamicControl" runat="server" 
+            DataField="FirstName" Mode="Edit" />
+        <br />
+        LastName:
+        <asp:DynamicControl ID="LastNameDynamicControl" runat="server" 
+            DataField="LastName" Mode="Edit" />
+        <br />
+        Email:
+        <asp:DynamicControl ID="EmailDynamicControl" runat="server" DataField="Email" 
+            Mode="Edit" />
+        <br />
+        Password:
+        <asp:DynamicControl ID="PasswordDynamicControl" runat="server" 
+            DataField="Password" Mode="Edit" />
+        <br />
+        IsEnabled:
+        <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
+            DataField="IsEnabled" Mode="Edit" />
+        <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
+            CommandName="Update" Text="Update" />
+        &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
+            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+    </EditItemTemplate>
+    <InsertItemTemplate>
+        DepartmentID:
+        <asp:DropDownList runat="server" ID="DepartmentDropDownList"
+            DataTextField="Name" DataValueField="DepartmentID" 
+            DataSourceID="DepartmentObjectDataSource">
+        </asp:DropDownList>
+        <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource"
+            DataObjectTypeName="SA33.Team12.SSIS.DAL.User" 
+            TypeName="SA33.Team12.SSIS.BLL.UserManager"
+            SelectMethod="GetAllDepartments">
+        </asp:ObjectDataSource>
+        <br />
+        UserName:
+        <asp:DynamicControl ID="UserNameDynamicControl" runat="server" 
+            DataField="UserName" Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        FirstName:
+        <asp:DynamicControl ID="FirstNameDynamicControl" runat="server" 
+            DataField="FirstName" Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        LastName:
+        <asp:DynamicControl ID="LastNameDynamicControl" runat="server" 
+            DataField="LastName" Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        Email:
+        <asp:DynamicControl ID="EmailDynamicControl" runat="server" DataField="Email" 
+            Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        Password:
+        <asp:DynamicControl ID="PasswordDynamicControl" runat="server" 
+            DataField="Password" Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        IsEnabled:
+        <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
+            DataField="IsEnabled" Mode="Insert" ValidationGroup="Insert" />
+        <br />
+        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
+            CommandName="Insert" Text="Insert" ValidationGroup="Insert" />
+        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
+            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+    </InsertItemTemplate>
+    <ItemTemplate>
+        UserID:
+        <asp:DynamicControl ID="UserIDDynamicControl" runat="server" DataField="UserID" 
+            Mode="ReadOnly" />
+        <br />
+        DepartmentID:
+        <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
+            DataField="DepartmentID" Mode="ReadOnly" />
+        <br />
+        UserName:
+        <asp:DynamicControl ID="UserNameDynamicControl" runat="server" 
+            DataField="UserName" Mode="ReadOnly" />
+        <br />
+        FirstName:
+        <asp:DynamicControl ID="FirstNameDynamicControl" runat="server" 
+            DataField="FirstName" Mode="ReadOnly" />
+        <br />
+        LastName:
+        <asp:DynamicControl ID="LastNameDynamicControl" runat="server" 
+            DataField="LastName" Mode="ReadOnly" />
+        <br />
+        Email:
+        <asp:DynamicControl ID="EmailDynamicControl" runat="server" DataField="Email" 
+            Mode="ReadOnly" />
+        <br />
+        Password:
+        <asp:DynamicControl ID="PasswordDynamicControl" runat="server" 
+            DataField="Password" Mode="ReadOnly" />
+        <br />
+        IsEnabled:
+        <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
+            DataField="IsEnabled" Mode="ReadOnly" />
+        <br />
+        <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" 
+            CommandName="Edit" Text="Edit" />
+        &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" 
+            CommandName="Delete" Text="Delete" />
+        &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" 
+            CommandName="New" Text="New" />
+    </ItemTemplate>
+</asp:FormView>
 
 <asp:ObjectDataSource ID="UserDetailObjectDataSource" runat="server" 
         DataObjectTypeName="SA33.Team12.SSIS.DAL.User" DeleteMethod="DeleteUser" 
@@ -100,5 +192,8 @@
 
 <asp:DynamicDataManager runat="server" ID="DynamicDataManager" >
 </asp:DynamicDataManager>
+
+<asp:ValidationSummary runat="server" ID="ValidationSummary" CssClass="failureNotification" />
+
 
 </asp:Content>

@@ -79,8 +79,12 @@ namespace SA33.Team12.SSIS.DAL
                     User persistedUser = (from u in context.Users
                                      where u.UserID == user.UserID
                                      select u).First<User>();
+                    Department department = (from d in context.Departments
+                                             where d.DepartmentID == user.DepartmentID
+                                             select d).FirstOrDefault<Department>();
 
-                    persistedUser.Department = user.Department;
+
+                    persistedUser.Department = department;
                     
                     persistedUser.UserName = user.UserName;
                     persistedUser.Password = user.Password;

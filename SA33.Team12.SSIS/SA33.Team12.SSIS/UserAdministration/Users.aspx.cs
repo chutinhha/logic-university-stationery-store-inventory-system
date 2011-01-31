@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
@@ -10,13 +11,12 @@ namespace SA33.Team12.SSIS.UserAdministration
 {
     public partial class Users : System.Web.UI.Page
     {
-        private Literal departmentLiteral;
         private DropDownList departmentDropDownList;
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            DynamicDataManager.RegisterControl(this.UserDetailView);
-            this.UserDetailView.EnableDynamicData(typeof(User));
+            DynamicDataManager.RegisterControl(this.UserFormView);
+            this.UserFormView.EnableDynamicData(typeof(User));
         }
 
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -49,7 +49,6 @@ namespace SA33.Team12.SSIS.UserAdministration
 
         protected void UserGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UserDetailView.DataBind();
         }
 
         protected void DepartmentDropDownList_Init(object sender, EventArgs e)
@@ -57,9 +56,11 @@ namespace SA33.Team12.SSIS.UserAdministration
             departmentDropDownList = sender as DropDownList;
         }
 
-        protected void DepartmentLiteral_Init(object sender, EventArgs e)
+
+        protected void UserDetailView_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
         {
-            departmentLiteral = sender as Literal;
+            var departmentID = Convert.ToInt32(departmentDropDownList.SelectedValue);
+            e.NewValues["DepartmentID"] = departmentID;
         }
 
         protected void UserDetailView_ItemInserting(object sender, DetailsViewInsertEventArgs e)
@@ -68,25 +69,32 @@ namespace SA33.Team12.SSIS.UserAdministration
             e.Values["DepartmentID"] = departmentID;
         }
 
-        protected void UserDetailView_DataBound(object sender, EventArgs e)
+        protected void UserFormView_DataBinding(object sender, EventArgs e)
         {
-            if(UserDetailView.CurrentMode == DetailsViewMode.ReadOnly)
+
+        }
+
+        protected void UserFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
+        {
+            FormView userFormView = sender as FormView;
+            if (UserFormView != null)
             {
-                List<DAL.User> users = UserDetailObjectDataSource.Select() as List<User>;
-                if (users != null && users.Count > 0)
-                {
-                    DAL.User user = users[0];
-                    Literal departmentLiteral = UserDetailView.FindControl("DepartmentLiteral") as Literal;
-                    if (departmentLiteral != null)
-                        departmentLiteral.Text = user.Department.Name;
-                }
+                DropDownList departmentDropDownList =
+                    userFormView.FindControl("DepartmentDropDownList") as DropDownList;
+
+                e.Values["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
             }
         }
 
-        protected void UserDetailView_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+        protected void UserFormView_ItemUpdating(object sender, FormViewUpdateEventArgs e)
         {
-            var departmentID = Convert.ToInt32(departmentDropDownList.SelectedValue);
-            e.NewValues["DepartmentID"] = departmentID;
+            FormView userFormView = sender as FormView;
+            if (UserFormView != null)
+            {
+                DropDownList departmentDropDownList =
+                    userFormView.FindControl("DepartmentDropDownList") as DropDownList;
+                e.NewValues["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
+            }
         }
 
     }
