@@ -9,9 +9,8 @@ using System.Text;
 
 namespace SA33.Team12.SSIS.Exceptions
 {
-    class PurchaseOrderException : ExceptionBase
+    public class PurchaseOrderException : ExceptionBase
     {
-        private String p;
          public PurchaseOrderException()
             : base()
         {
