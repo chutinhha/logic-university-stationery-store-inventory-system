@@ -10,6 +10,25 @@ namespace SA33.Team12.SSIS.Utilities
 {
     public static class Membership
     {
+        public static User GetCurrentLoggedInUser()
+        {
+            WebSecurity.MembershipUser membershipUser  = WebSecurity.Membership.GetUser();
+            if(membershipUser != null)
+            {
+                using (UserManager userManager  = new UserManager())
+                {
+                    List<User> users =
+                        userManager.FindUsersByCriteria(
+                            new UserSearchDTO() {UserName = membershipUser.UserName});
+                    if (users.Count > 0) return users[0];
+                }
+            }
+            else
+            {
+                throw new Exceptions.UserException("No current logged in user.");
+            }
+        }
+
         public static DAL.User CreateUser(DAL.User user)
         {
             try
@@ -24,6 +43,11 @@ namespace SA33.Team12.SSIS.Utilities
                             WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
                         Guid ProviderKey = (Guid)membershipUser.ProviderUserKey;
                         user.MembershipProviderKey = ProviderKey;
+                        string[] roles = user.Role.Split(",");
+                        if (roles.Length > 0)
+                        {
+                            
+                        }
                         um.CreateUser(user);
                     }
                     ts.Complete();
