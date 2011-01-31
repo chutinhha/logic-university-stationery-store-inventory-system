@@ -44,6 +44,7 @@
 
 <asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True"
         DataSourceID="UserDetailObjectDataSource" 
+        onerror="UserFormView_Error"
         oniteminserting="UserFormView_ItemInserting" 
         onitemupdating="UserFormView_ItemUpdating" 
         onitemcommand="UserFormView_ItemCommand" 
@@ -61,7 +62,7 @@
         DepartmentID:
                 </td>
                 <td>
-        <asp:DynamicControl ID="DynamicControl1" runat="server" 
+        <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
             DataField="DepartmentID" Mode="Edit" Visible="false" />
 
         <asp:DropDownList runat="server" ID="DepartmentDropDownList"
@@ -126,8 +127,11 @@
                     Role:
                 </td>
                 <td>
-                    <asp:RadioButtonList ID="MemebershipRoleRadioButtonList" runat="server">
-                    </asp:RadioButtonList>
+            <asp:DynamicControl ID="RoleDynamicControl" runat="server" 
+                DataField="Role" Mode="Edit" Visible="false" />
+
+                    <asp:DropDownList ID="MemebershipRoleDropDownList" runat="server">
+                    </asp:DropDownList>
                     <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" runat="server" 
                         SelectMethod="GetAllRoles" 
                         TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
@@ -151,12 +155,19 @@
                 </td>
             </tr>
     </table>
-
     </EditItemTemplate>
     <InsertItemTemplate>
+        <table style="width:100%;">
+            <tr>
+                <td>
         DepartmentID:
+                </td>
+                <td>
+        <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
+            DataField="DepartmentID" Mode="Insert" Visible="false" />
+
         <asp:DropDownList runat="server" ID="DepartmentDropDownList"
-            DataTextField="Name" DataValueField="DepartmentID" 
+            DataTextField="Name" DataValueField="DepartmentID"
             DataSourceID="DepartmentObjectDataSource">
         </asp:DropDownList>
         <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource"
@@ -164,35 +175,86 @@
             TypeName="SA33.Team12.SSIS.BLL.UserManager"
             SelectMethod="GetAllDepartments">
         </asp:ObjectDataSource>
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
         UserName:
+                </td>
+                <td>
         <asp:DynamicControl ID="UserNameDynamicControl" runat="server" 
-            DataField="UserName" Mode="Insert" ValidationGroup="Insert" />
-        <br />
+            DataField="UserName" Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
         FirstName:
+                </td>
+                <td>
         <asp:DynamicControl ID="FirstNameDynamicControl" runat="server" 
-            DataField="FirstName" Mode="Insert" ValidationGroup="Insert" />
-        <br />
+            DataField="FirstName" Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
         LastName:
+                </td>
+                <td>
         <asp:DynamicControl ID="LastNameDynamicControl" runat="server" 
-            DataField="LastName" Mode="Insert" ValidationGroup="Insert" />
-        <br />
+            DataField="LastName" Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
         Email:
+                </td>
+                <td>
         <asp:DynamicControl ID="EmailDynamicControl" runat="server" DataField="Email" 
-            Mode="Insert" ValidationGroup="Insert" />
-        <br />
+            Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
         Password:
+                </td>
+                <td>
         <asp:DynamicControl ID="PasswordDynamicControl" runat="server" 
-            DataField="Password" Mode="Insert" ValidationGroup="Insert" />
-        <br />
-        IsEnabled:
-        <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
-            DataField="IsEnabled" Mode="Insert" ValidationGroup="Insert" />
-        <br />
-        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-            CommandName="Insert" Text="Insert" ValidationGroup="Insert" />
-        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
-            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+            DataField="Password" Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Role:
+                </td>
+                <td>
+                    <asp:DynamicControl ID="RoleDynamicControl" runat="server" 
+                        DataField="Role" Mode="Insert" Visible="false" />
+
+                    <asp:DropDownList ID="MemebershipRoleDropDownList" runat="server">
+                    </asp:DropDownList>
+                    <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" runat="server" 
+                        SelectMethod="GetAllRoles" 
+                        TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
+                </td>
+            <tr>
+                <td>
+                    IsEnabled: &nbsp;&nbsp;</td>
+                <td>
+                    <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
+                        DataField="IsEnabled" Mode="Insert" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;</td>
+                <td>
+                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
+                        CommandName="Insert" Text="Insert" ValidationGroup="Insert" />
+                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
+                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </td>
+            </tr>
+    </table>
     </InsertItemTemplate>
     <ItemTemplate>
         UserID:

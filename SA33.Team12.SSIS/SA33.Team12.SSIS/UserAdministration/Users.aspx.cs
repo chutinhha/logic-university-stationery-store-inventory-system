@@ -18,6 +18,23 @@ namespace SA33.Team12.SSIS.UserAdministration
             this.UserFormView.EnableDynamicData(typeof(User));
         }
 
+        protected void UserFormView_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            if(exception.InnerException is Exceptions.UserException)
+            {
+                this.ErrorMessage.Text = exception.InnerException.Message;
+            }else if (exception is Exceptions.UserException)
+            {
+                this.ErrorMessage.Text = exception.Message;
+            }
+            //else
+            //{
+            //    Server.Transfer("~/GenericErrorPage.aspx", true);
+            //}
+            Server.ClearError();
+        }
+
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             switch (e.CommandName.ToLower())
@@ -55,6 +72,15 @@ namespace SA33.Team12.SSIS.UserAdministration
                     userFormView.FindControl("DepartmentDropDownList") as DropDownList;
 
                 e.Values["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
+                
+                DropDownList MemebershipRoleDropDownList =
+                 UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+                string roles = string.Empty;
+                foreach (ListItem item in MemebershipRoleDropDownList.Items)
+                {
+                    if (item.Selected) roles += item.Value + ",";
+                }
+                e.Values["Role"] = roles;
             }
         }
 
@@ -67,10 +93,10 @@ namespace SA33.Team12.SSIS.UserAdministration
                     userFormView.FindControl("DepartmentDropDownList") as DropDownList;
                 e.NewValues["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
 
-                RadioButtonList MemebershipRoleRadioButtonList =
-                  UserFormView.FindControl("MemebershipRoleRadioButtonList") as RadioButtonList;
+                DropDownList MemebershipRoleDropDownList =
+                  UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
                 string roles = string.Empty;
-                foreach (ListItem item in MemebershipRoleRadioButtonList.Items)
+                foreach (ListItem item in MemebershipRoleDropDownList.Items)
                 {
                     if (item.Selected) roles += item.Value + ",";
                 }
@@ -80,21 +106,25 @@ namespace SA33.Team12.SSIS.UserAdministration
 
         protected void UserFormView_DataBound(object sender, EventArgs e)
         {
-            if (UserFormView.CurrentMode == FormViewMode.Edit)
+            if (UserFormView.CurrentMode == FormViewMode.Edit || UserFormView.CurrentMode == FormViewMode.Insert)
             {
-                DataBindMemebershipRadioButtonList();
+                DataBindMemebershipDropDownList();
+            }
+            else if(UserFormView.CurrentMode == FormViewMode.ReadOnly)
+            {
+                
             }
         }
 
-        protected void DataBindMemebershipRadioButtonList()
+        protected void DataBindMemebershipDropDownList()
         {
-            RadioButtonList MemebershipRoleRadioButtonList =
-                UserFormView.FindControl("MemebershipRoleRadioButtonList") as RadioButtonList;
-            if (MemebershipRoleRadioButtonList != null)
+            DropDownList MemebershipRoleDropDownList =
+                UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+            if (MemebershipRoleDropDownList != null)
             {
-                MemebershipRoleRadioButtonList.DataSource = Roles.GetAllRoles();
-                MemebershipRoleRadioButtonList.DataBind();
-                MemebershipRoleRadioButtonList.Items[0].Selected = true;
+                MemebershipRoleDropDownList.DataSource = Roles.GetAllRoles();
+                MemebershipRoleDropDownList.DataBind();
+                MemebershipRoleDropDownList.Items[0].Selected = true;
             }
         }
 
@@ -117,7 +147,5 @@ namespace SA33.Team12.SSIS.UserAdministration
                 default: break;
             }
         }
-
-
     }
 }
