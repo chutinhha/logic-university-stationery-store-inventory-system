@@ -50,7 +50,6 @@ namespace SA33.Team12.SSIS.BLL
 
                 if (ValidateRequisition(requisition, RequisitionMethod.Create))
                 {
-
                     if (requisition.RequisitionItems.Count > 0 || requisition.SpecialRequisitionItems.Count > 0)
                     {
                         foreach (RequisitionItem requisitionItem in requisition.RequisitionItems)
