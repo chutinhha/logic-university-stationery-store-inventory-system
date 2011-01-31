@@ -18,10 +18,15 @@ namespace SA33.Team12.SSIS.DAL
 
         public class PurchaseOrderItemMetaData
         {
+            // reorde quantity has to be a positive integer
             [Required(ErrorMessage = "Please fill in reorder quantity!")]
-            public string QuantityToOrder { get; set; }
+            [RegularExpression("^\\d+$", ErrorMessage = "Please enter a positive integer value.")]
+            public int QuantityToOrder { get; set; }
 
-            [Required(ErrorMessage = "Please select stationery item!")]
-            public string StationeryID { get; set; }
+            [Required(ErrorMessage = "Please select a stationery item!")]
+            public int StationeryID { get; set; }
+
+            [StringLength(255, ErrorMessage = "Delivery remarks cannot be longer than 255 characters")]
+            public string DeliveryRemarks { get; set; }
         }
 }

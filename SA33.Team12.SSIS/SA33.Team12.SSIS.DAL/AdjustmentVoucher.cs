@@ -14,8 +14,9 @@ namespace SA33.Team12.SSIS.DAL
 
     public class AdjustmentVoucherMetaData
     {
-        [Required(ErrorMessage="Please enter item code.")]
-        [RegularExpression(".{4}", ErrorMessage="Please enter valid item code.")]
-        public string StationeryID { get; set; }
+        // voucher number must be five digits
+        [Required(ErrorMessage="Please enter voucher number")]
+        [RegularExpression("^[0-9]{5}$", ErrorMessage="Please enter valid voucher number.")]
+        public string VoucherNumber { get; set; }
     }
 }
