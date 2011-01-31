@@ -114,6 +114,7 @@ namespace SA33.Team12.SSIS.DAL
                     //requisition status will be changed to "Approved & Pending"
                     UpdateRequisitionStatus(tempRequisition, status);
                     context.SaveChanges();
+                    ts.Complete();
                 }
             }
             catch (Exception)
@@ -157,6 +158,7 @@ namespace SA33.Team12.SSIS.DAL
                     //requisition status will be changed to "Rejected"
                     UpdateRequisitionStatus(tempRequisition, status);
                     context.SaveChanges();
+                    ts.Complete();
                 }
             }
             catch (Exception)
@@ -198,6 +200,7 @@ namespace SA33.Team12.SSIS.DAL
 
                     UpdateRequisitionStatus(tempRequisition, status);
                     context.SaveChanges();
+                    ts.Complete();
                 }
             }
             catch (Exception)
