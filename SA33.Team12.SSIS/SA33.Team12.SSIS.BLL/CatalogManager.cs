@@ -1,6 +1,6 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A), Victor Tong(A0066920E)
- * Initial Implementation: 23/Jan/2011
+ * Author: Victor Tong(A0066920E)
+ * Initial Implementation: 30/Jan/2011
  ***/
 
 using System;
@@ -48,7 +48,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateCategory(category);
+                if (category != null)
+                {
+                    category.DateCreated = DateTime.Now;
+                    catalogDAO.CreateCategory(category);
+                }
             }
             catch (Exception)
             { 
@@ -61,7 +65,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateCategory(category);
+                if (category != null)
+                {
+                    category.DateModified = DateTime.Now;
+                    catalogDAO.UpdateCategory(category);
+                }
             }
             catch (Exception)
             {
@@ -74,13 +82,17 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteCategory(category);
+                if (category != null)
+                {
+                    catalogDAO.DeleteCategory(category);
+                }
             }
             catch (Exception)
             {
                 throw new Exceptions.UserException("Catalog category deletion failed.");
             }
         }
+
         #endregion
 
         #region Stationeries
@@ -108,7 +120,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateStationery(stationery);
+                if (stationery != null)
+                {
+                    stationery.DateCreated = DateTime.Now;
+                    catalogDAO.CreateStationery(stationery);
+                }
             }
             catch (Exception)
             {
@@ -121,7 +137,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateStationery(stationery);
+                if (stationery != null)
+                {
+                    stationery.DateModified = DateTime.Now;
+                    catalogDAO.UpdateStationery(stationery);
+                }
             }
             catch (Exception)
             {
@@ -135,7 +155,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteStationery(stationery);
+                if (stationery != null)
+                {
+                    catalogDAO.DeleteStationery(stationery);
+                }
             }
             catch (Exception)
             {
@@ -169,7 +192,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateSpecialStationery(specialStationery);
+                if (specialStationery != null)
+                {
+                    specialStationery.DateCreated = DateTime.Now;
+                    catalogDAO.CreateSpecialStationery(specialStationery);
+                }
             }
             catch (Exception)
             {
@@ -182,7 +209,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateSpecialStationery(specialStationery);
+                if (specialStationery != null)
+                {
+                    specialStationery.DateModified = DateTime.Now;
+                    catalogDAO.UpdateSpecialStationery(specialStationery);
+                }
             }
             catch (Exception)
             {
@@ -195,7 +226,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteSpecialStationery(specialStationery);
+                if (specialStationery != null)
+                {
+                    catalogDAO.DeleteSpecialStationery(specialStationery);
+                }
             }
             catch (Exception)
             {
@@ -229,7 +263,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateLocation(location);
+                if (location != null)
+                {
+                    catalogDAO.CreateLocation(location);
+                }
             }
             catch (Exception)
             {
@@ -242,7 +279,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateLocation(location);
+                if (location != null)
+                {
+                    catalogDAO.UpdateLocation(location);
+                }
             }
             catch (Exception)
             {
@@ -255,7 +295,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteLocation(location);
+                if (location != null)
+                {
+                    catalogDAO.DeleteLocation(location);
+                }
             }
             catch (Exception)
             {
@@ -289,7 +332,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateStationeryPrice(stationeryPrice);
+                if (stationeryPrice != null)
+                {
+                    catalogDAO.CreateStationeryPrice(stationeryPrice);
+                }
             }
             catch (Exception)
             {
@@ -302,7 +348,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateStationeryPrice(stationeryPrice);
+                if (stationeryPrice != null)
+                {
+                    catalogDAO.UpdateStationeryPrice(stationeryPrice);
+                }
             }
             catch (Exception)
             {
@@ -315,7 +364,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteStationeryPrice(stationeryPrice);
+                if (stationeryPrice != null)
+                {
+                    catalogDAO.DeleteStationeryPrice(stationeryPrice);
+                }
             }
             catch (Exception)
             {
@@ -349,7 +401,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.CreateSupplier(supplier);
+                if (supplier != null)
+                {
+                    catalogDAO.CreateSupplier(supplier);
+                }
             }
             catch (Exception)
             {
@@ -362,7 +417,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.UpdateSupplier(supplier);
+                if (supplier != null)
+                {
+                    catalogDAO.UpdateSupplier(supplier);
+                }
             }
             catch (Exception)
             {
@@ -375,7 +433,10 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                catalogDAO.DeleteSupplier(supplier);
+                if (supplier != null)
+                {
+                    catalogDAO.DeleteSupplier(supplier);
+                }
             }
             catch (Exception)
             {
