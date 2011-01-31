@@ -91,7 +91,8 @@
                     DataTextField="Name" DataValueField="CategoryID" AutoPostBack="True">
                 </asp:DropDownList>
                 <asp:ObjectDataSource ID="CategoryDS" runat="server" 
-                    SelectMethod="GetAllCategory" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+                    SelectMethod="GetAllCategories" 
+                    TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
                 </asp:ObjectDataSource>
             </td>
             <td>
