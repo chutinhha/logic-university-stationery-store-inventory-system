@@ -49,12 +49,12 @@ namespace SA33.Team12.SSIS.BLL
                 requisition.StatusID = status.StatusID;
 
                 if (ValidateRequisition(requisition, RequisitionMethod.Create))
-                {                   
+                {
 
                     if (requisition.RequisitionItems.Count > 0 || requisition.SpecialRequisitionItems.Count > 0)
                     {
                         foreach (RequisitionItem requisitionItem in requisition.RequisitionItems)
-                        {                            
+                        {
                             isTestOK = ValidateRequisitionItem(requisitionItem, RequisitionMethod.Create);
                             if (!isTestOK)
                             {
@@ -68,13 +68,17 @@ namespace SA33.Team12.SSIS.BLL
                             {
                                 break;
                             }
-                                
+
                         }
                     }
 
                     if (isTestOK)
                     {
                         requisitionDAO.CreateRequisition(requisition);
+                    }
+                    else
+                    {
+                        ErrorMessage("Create Requisition Failed. Please check the input.");
                     }
                 }
             }
@@ -85,6 +89,10 @@ namespace SA33.Team12.SSIS.BLL
 
         }
 
+        /// <summary>
+        /// Update requisition and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
         public void UpdateRequisition(Requisition requisition)
         {
             try
@@ -113,6 +121,10 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         requisitionDAO.UpdateRequisition(requisition);
                     }
+                    else
+                    {
+                        ErrorMessage("Update Requisition Failed");
+                    }
                 }
             }
             catch (Exception)
@@ -122,6 +134,11 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
+        /// <summary>
+        /// Update requisition status and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
+        /// <param name="status">status object</param>
         public void UpdateRequisitionStatus(Requisition requisition, Status status)
         {
             if (ValidateRequisition(requisition, RequisitionMethod.UpdateStatus))
@@ -130,6 +147,10 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
+        /// <summary>
+        /// Approve single requisition and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
         public void ApproveRequisition(Requisition requisition)
         {
             try
@@ -137,6 +158,10 @@ namespace SA33.Team12.SSIS.BLL
                 if (ValidateRequisition(requisition, RequisitionMethod.Approve))
                 {
                     requisitionDAO.ApproveRequisition(requisition);
+                }
+                else
+                {
+                    ErrorMessage("Approval of Requisition Failed");
                 }
             }
             catch (Exception)
@@ -146,6 +171,10 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
+        /// <summary>
+        /// Approve all the pending requisitions and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
         public void ApproveRequisition(List<Requisition> requisitions)
         {
             try
@@ -160,11 +189,19 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
+        /// <summary>
+        /// Cancel a new requisition and persist with database
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
         public void CancelRequisition(Requisition requisition)
         {
             if (ValidateRequisition(requisition, RequisitionMethod.Cancel))
             {
                 requisitionDAO.CancelRequisition(requisition);
+            }
+            else
+            {
+                ErrorMessage("Cancel Requisition Failed.");
             }
         }
 
@@ -174,22 +211,67 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns></returns>
         public List<Requisition> GetAllRequisition()
         {
-            return requisitionDAO.GetAllRequisition();
+            List<Requisition> temp = requisitionDAO.GetAllRequisition();
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found.");
+            return null;
         }
 
+        /// <summary>
+        /// Get requisition List by category
+        /// </summary>
+        /// <param name="category">category object</param>
+        /// <param name="requisitionSearchDTO">RequisitionSearchDTO object</param>
+        /// <returns>List of VW_RequisitionsByCategory</returns>
         public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
-            return requisitionDAO.GetRequisitionByCategoryID(category, requisitionSearchDTO);
+            List<VW_RequisitionsByCategory> temp = requisitionDAO.GetRequisitionByCategoryID(category, requisitionSearchDTO);
+            if (temp != null)
+            {
+                return temp;
+            }
+            else
+            {
+                ErrorMessage("Result Not Found");
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Get requisition List by department
+        /// </summary>
+        /// <param name="department">department object</param>
+        /// <param name="requisitionSearchDTO">RequisitionSearchDTO object</param>
+        /// <returns>List of VW_RequisitionsByDepartment</returns>
         public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
-            return requisitionDAO.GetRequisitionByDepartmentID(department, requisitionSearchDTO);
+            List<VW_RequisitionsByDepartment> temp = requisitionDAO.GetRequisitionByDepartmentID(department, requisitionSearchDTO);
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found");
+            return null;
         }
 
+        /// <summary>
+        /// Get requisition List by employeeId
+        /// </summary>
+        /// <param name="user">user object</param>
+        /// <param name="requisitionSearchDTO">RequisitionSearchDTO object</param>
+        /// <returns>List of VW_RequisitionsByEmployee</returns>
         public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
-            return requisitionDAO.GetRequisitionByEmployeeID(user, requisitionSearchDTO);
+            List<VW_RequisitionsByEmployee> temp = requisitionDAO.GetRequisitionByEmployeeID(user, requisitionSearchDTO);
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found");
+            return null;
         }
 
         /// <summary>
@@ -199,8 +281,15 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns></returns>
         public List<Requisition> FindRequisitionByCriteria(RequisitionSearchDTO requisitioinSearchDTO)
         {
-            return requisitionDAO.FindRequisitionByCriteria(requisitioinSearchDTO);
+            List<Requisition> temp = requisitionDAO.FindRequisitionByCriteria(requisitioinSearchDTO);
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found");
+            return null;
         }
+
         /// <summary>
         /// Generate the requisitionID for each requisition
         /// </summary>
@@ -211,6 +300,12 @@ namespace SA33.Team12.SSIS.BLL
             return requisitionDAO.GetRequisitionNumber(requisition);
         }
 
+        /// <summary>
+        /// Validate Requisition
+        /// </summary>
+        /// <param name="requisition">Requisition object</param>
+        /// <param name="requisitionMethod">enum requisitionMethod</param>
+        /// <returns>boolean</returns>
         private bool ValidateRequisition(Requisition requisition, RequisitionMethod requisitionMethod)
         {
             try
@@ -253,10 +348,10 @@ namespace SA33.Team12.SSIS.BLL
                             }
                             catch (Exception)
                             {
-                                
+
                                 throw;
                             }
-                           
+
                         }
                     }
 
@@ -283,7 +378,138 @@ namespace SA33.Team12.SSIS.BLL
                 throw new RequisitionException("Create Requisition failed. Please try again later");
             }
         }
+        #endregion
 
+        #region RequisitionItem
+        /// <summary>
+        /// Create a new requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void CreateRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                if (requisitionItem != null && ValidateRequisitionItem(requisitionItem, RequisitionMethod.Create))
+                {
+                    requisitionDAO.CreateRequisitionItem(requisitionItem);
+                }
+                else
+                {
+                    ErrorMessage("Add item failed");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Update the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void UpdateRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                if (temp != null && ValidateRequisitionItem(temp, RequisitionMethod.Update))
+                {
+                    temp.Stationery = requisitionItem.Stationery;
+                    temp.QuantityRequested = requisitionItem.QuantityRequested;
+                    temp.Price = requisitionItem.Price;
+                    requisitionDAO.UpdateRequisitionItem(temp);
+                }
+                else
+                {
+                    ErrorMessage("Update item failed");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete the requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        public void DeleteRequisitionItem(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                if (temp != null)
+                {
+                    requisitionDAO.DeleteRequisitionItem(temp);
+                }
+                else
+                {
+                    ErrorMessage("Delete item failed");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All RequisitionItems in the requisition form
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public List<RequisitionItem> GetAllRequisitionItems(Requisition requisition)
+        {
+            try
+            {
+                List<RequisitionItem> temp = requisitionDAO.GetAllRequisitionItems(requisition);
+                if (temp != null)
+                    return temp;
+
+                ErrorMessage("Result Not Found");
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get RequisitionItems by primary key
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <returns></returns>
+        public RequisitionItem GetRequisitionItemsByID(RequisitionItem requisitionItem)
+        {
+            try
+            {
+                var temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                if (temp != null)
+                    return temp;
+
+                ErrorMessage("Result Not Found");
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Validate RequisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <param name="requisitionMethod">enum requisitionMethod</param>
+        /// <returns>boolean</returns>
         private bool ValidateRequisitionItem(RequisitionItem requisitionItem, RequisitionMethod requisitionMethod)
         {
             try
@@ -325,7 +551,145 @@ namespace SA33.Team12.SSIS.BLL
                 throw;
             }
         }
+        #endregion
 
+        #region SpecialRequisitionItem
+        /// <summary>
+        /// Create a new specialRequisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void CreateSpecialSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                if (specialRequisitionItem != null && ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Create))
+                {
+                    requisitionDAO.CreateSpecialSpecialRequisitionItem(specialRequisitionItem);
+                }
+                else
+                {
+                    ErrorMessage("Create Special Requisition Item Failed");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Update the special requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void UpdateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+
+                if (temp != null)
+                {
+                    temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
+                    temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
+                    temp.Price = specialRequisitionItem.Price;
+                    requisitionDAO.UpdateSpecialRequisitionItem(temp);
+                }
+                else
+                {
+                    ErrorMessage("Update special requisition failed");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete the special requisitionItem
+        /// </summary>
+        /// <param name="requisitionItem">specialRequisitionItem object</param>
+        public void DeleteSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+
+                if (temp != null && ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Delete))
+                {
+                    requisitionDAO.DeleteSpecialRequisitionItem(temp);
+                }
+                else
+                {
+                    ErrorMessage("Delete special requisition failed");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All special RequisitionItems in the requisition form
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns></returns>
+        public List<SpecialRequisitionItem> GetAllSpecialRequisitionItems(Requisition requisition)
+        {
+            try
+            {
+                List<SpecialRequisitionItem> temp = requisitionDAO.GetAllSpecialRequisitionItems(requisition);
+                if (temp != null)
+                {
+                    return temp;
+                }
+                else
+                {
+                    ErrorMessage("Result not found");
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get special RequisitionItems by primary key
+        /// </summary>
+        /// <param name="requisitionItem">requisitionItem object</param>
+        /// <returns></returns>
+        public SpecialRequisitionItem GetSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
+        {
+            try
+            {
+                var temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
+                if (temp != null)
+                {
+                    return temp;
+                }
+                ErrorMessage("Result Not Found");
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Validate SpecialRequisitionItem
+        /// </summary>
+        /// <param name="specialRequisitionItem">specialRequisitionItem object</param>
+        /// <param name="requisitionMethod">enum requisitionMethod</param>
+        /// <returns>boolean</returns>
         private bool ValidateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem, RequisitionMethod requisitionMethod)
         {
             try
@@ -368,218 +732,6 @@ namespace SA33.Team12.SSIS.BLL
                 throw;
             }
         }
-
-        #endregion
-
-        #region RequisitionItem
-        /// <summary>
-        /// Create a new requisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
-        public void CreateRequisitionItem(RequisitionItem requisitionItem)
-        {
-            try
-            {
-                if (requisitionItem != null && ValidateRequisitionItem(requisitionItem, RequisitionMethod.Create))
-                {
-                    requisitionDAO.CreateRequisitionItem(requisitionItem);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        /// <summary>
-        /// Update the requisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
-        public void UpdateRequisitionItem(RequisitionItem requisitionItem)
-        {
-            try
-            {
-                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
-                if (temp != null && ValidateRequisitionItem(temp, RequisitionMethod.Update))
-                {
-                    temp.Stationery = requisitionItem.Stationery;
-                    temp.QuantityRequested = requisitionItem.QuantityRequested;
-                    temp.Price = requisitionItem.Price;
-                    requisitionDAO.UpdateRequisitionItem(temp);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Delete the requisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
-        public void DeleteRequisitionItem(RequisitionItem requisitionItem)
-        {
-            try
-            {
-                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
-                if (temp != null)
-                {
-                    requisitionDAO.DeleteRequisitionItem(temp);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Get All RequisitionItems in the requisition form
-        /// </summary>
-        /// <param name="requisition"></param>
-        /// <returns></returns>
-        public List<RequisitionItem> GetAllRequisitionItems(Requisition requisition)
-        {
-            try
-            {
-                return requisitionDAO.GetAllRequisitionItems(requisition);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Get RequisitionItems by primary key
-        /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
-        /// <returns></returns>
-        public RequisitionItem GetRequisitionItemsByID(RequisitionItem requisitionItem)
-        {
-            try
-            {
-                return requisitionDAO.GetRequisitionItemsByID(requisitionItem);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        #endregion
-
-        #region SpecialRequisitionItem
-        /// <summary>
-        /// Create a new specialRequisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">specialRequisitionItem object</param>
-        public void CreateSpecialSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
-        {
-            try
-            {
-                if (specialRequisitionItem != null)
-                {
-                    requisitionDAO.CreateSpecialSpecialRequisitionItem(specialRequisitionItem);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        /// <summary>
-        /// Update the special requisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">specialRequisitionItem object</param>
-        public void UpdateSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
-        {
-            try
-            {
-                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
-
-                if (temp != null)
-                {
-                    temp.SpecialStationery = specialRequisitionItem.SpecialStationery;
-                    temp.QuantityRequested = specialRequisitionItem.QuantityRequested;
-                    temp.Price = specialRequisitionItem.Price;
-                    requisitionDAO.UpdateSpecialRequisitionItem(temp);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Delete the special requisitionItem
-        /// </summary>
-        /// <param name="requisitionItem">specialRequisitionItem object</param>
-        public void DeleteSpecialRequisitionItem(SpecialRequisitionItem specialRequisitionItem)
-        {
-            try
-            {
-                SpecialRequisitionItem temp = requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
-
-                if (temp != null && ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Delete))
-                {
-                    requisitionDAO.DeleteSpecialRequisitionItem(temp);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Get All special RequisitionItems in the requisition form
-        /// </summary>
-        /// <param name="requisition"></param>
-        /// <returns></returns>
-        public List<SpecialRequisitionItem> GetAllSpecialRequisitionItems(Requisition requisition)
-        {
-            try
-            {
-                return requisitionDAO.GetAllSpecialRequisitionItems(requisition);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Get special RequisitionItems by primary key
-        /// </summary>
-        /// <param name="requisitionItem">requisitionItem object</param>
-        /// <returns></returns>
-        public SpecialRequisitionItem GetSpecialRequisitionItemsByID(SpecialRequisitionItem specialRequisitionItem)
-        {
-            try
-            {
-                return requisitionDAO.GetSpecialRequisitionItemsByID(specialRequisitionItem);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         #endregion
 
         #region Status
@@ -594,6 +746,10 @@ namespace SA33.Team12.SSIS.BLL
                 if (status != null)
                 {
                     requisitionDAO.CreateStatus(status);
+                }
+                else
+                {
+                    ErrorMessage("Create staus failed");
                 }
             }
             catch (Exception)
@@ -621,6 +777,7 @@ namespace SA33.Team12.SSIS.BLL
                     requisitionDAO.UpdateStatus(st);
                     return true;
                 }
+                ErrorMessage("Update status record failed");
                 return false;
             }
             catch (Exception)
@@ -643,6 +800,7 @@ namespace SA33.Team12.SSIS.BLL
                     requisitionDAO.DeleteStatus(status);
                     return true;
                 }
+                ErrorMessage("Delete status record failed");
                 return false;
             }
             catch (Exception)
@@ -658,7 +816,12 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>List of status objects</returns>
         public List<Status> GetAllStatuses()
         {
-            return requisitionDAO.GetAllStatuses();
+            List<Status> temp = requisitionDAO.GetAllStatuses();
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
         }
 
         /// <summary>
@@ -668,7 +831,13 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>status object</returns>
         public Status GetStatusByID(Status status)
         {
-            return requisitionDAO.GetStatusByID(status);
+            var temp = requisitionDAO.GetStatusByID(status);
+
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
         }
 
         /// <summary>
@@ -678,7 +847,13 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>List of status objects</returns>
         public Status GetStatusByName(StatusSearchDTO statusSearchDTO)
         {
-            return requisitionDAO.GetStatusByName(statusSearchDTO);
+            var temp = requisitionDAO.GetStatusByName(statusSearchDTO);
+
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
         }
 
         /// <summary>
@@ -688,7 +863,13 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>List of status objects</returns>
         public List<Status> GetStatusByCriteria(StatusSearchDTO statusSearchDTO)
         {
-            return requisitionDAO.GetStatusByCriteria(statusSearchDTO);
+            List<Status> temp = requisitionDAO.GetStatusByCriteria(statusSearchDTO);
+
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
         }
         #endregion
 
@@ -704,6 +885,10 @@ namespace SA33.Team12.SSIS.BLL
                 if (urgency != null)
                 {
                     requisitionDAO.CreateUrgency(urgency);
+                }
+                else
+                {
+                    ErrorMessage("Create urgency record failed");
                 }
             }
             catch (Exception)
@@ -729,6 +914,7 @@ namespace SA33.Team12.SSIS.BLL
                     requisitionDAO.UpdateUrgency(ur);
                     return true;
                 }
+                ErrorMessage("Update urgency record failed");
                 return false;
             }
             catch (Exception)
@@ -751,6 +937,7 @@ namespace SA33.Team12.SSIS.BLL
                     requisitionDAO.DeleteUrgency(urgency);
                     return true;
                 }
+                ErrorMessage("Delete urgency record failed");
                 return false;
             }
             catch (Exception)
@@ -766,7 +953,12 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>List of Urgency objects</returns>
         public List<Urgency> GetAllUrgencies()
         {
-            return requisitionDAO.GetAllUrgencies();
+            List<Urgency> temp = requisitionDAO.GetAllUrgencies();
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
         }
 
         /// <summary>
@@ -776,7 +968,13 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>Urgency object</returns>
         public Urgency GetUrgencyByID(Urgency urgency)
         {
-            return requisitionDAO.GetUrgencyByID(urgency);
+            Urgency temp = requisitionDAO.GetUrgencyByID(urgency);
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
+
         }
 
         /// <summary>
@@ -786,7 +984,31 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns>List of Urgency objects</returns>
         public List<Urgency> GetUrgencyByCriteria(UrgencySearchDTO urgencySearchDTO)
         {
-            return requisitionDAO.GetUrgencyByCriteria(urgencySearchDTO);
+            var temp = requisitionDAO.GetUrgencyByCriteria(urgencySearchDTO);
+            if (temp != null)
+                return temp;
+
+            ErrorMessage("Result not found");
+            return null;
+        }
+        #endregion
+
+        #region Error
+        /// <summary>
+        /// Validation error message
+        /// </summary>
+        /// <param name="message">message string</param>
+        private static void ErrorMessage(string message)
+        {
+            try
+            {
+                throw new RequisitionException(message);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
     }
