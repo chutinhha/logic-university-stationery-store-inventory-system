@@ -35,7 +35,7 @@ namespace SA33.Team12.SSIS.Test
             RequisitionItem rqi = new RequisitionItem()
             {
                 RequisitionID = r.RequisitionID,
-                StationeryID = cat.GetAllStationery().FirstOrDefault<Stationery>().StationeryID,
+                StationeryID = cat.GetAllStationeries().FirstOrDefault<Stationery>().StationeryID,
                 QuantityRequested = 10,
                 QuantityIssued = 10,
                 Price = 5                
@@ -47,7 +47,7 @@ namespace SA33.Team12.SSIS.Test
             SpecialRequisitionItem spi = new SpecialRequisitionItem()
             {
                 RequisitionID = r.RequisitionID,
-                SpeicalStationeryID = 1,
+                SpecialStationeryID = 1,
                 QuantityRequested = 10,
                 QuantityIssued = 10,
                 Price = 5,

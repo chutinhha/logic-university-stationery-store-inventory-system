@@ -20,21 +20,17 @@ namespace SA33.Team12.SSIS.Test
         {
             requisitionManager = new RequisitionManager();
             catalogDAO = new CatalogDAO();
-            userdao = new UserDAO();
+            userdao = new UserDAO();         
+        }
 
-
-            if (ViewState["requisition"] != null)
-            {
-                requisition = (Requisition)ViewState["requisition"];
-            }
-            else
-            {
-                requisition = new Requisition();
-                requisition.DateRequested = DateTime.Now.Date;
-                requisition.CreatedByUser = userdao.GetUserByID(1);
-                requisition.Department = userdao.GetUserByID(1).Department;
-                requisition.RequisitionForm = requisitionManager.GetRequisitionNumber(requisition);
-            }
+        private Requisition CreateNewRequisition()
+        {
+            Requisition requisition = new Requisition();
+            requisition.DateRequested = DateTime.Now.Date;
+            requisition.CreatedByUser = userdao.GetUserByID(1);
+            requisition.Department = userdao.GetUserByID(1).Department;
+            requisition.RequisitionForm = requisitionManager.GetRequisitionNumber(requisition);
+            return requisition;
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -50,8 +46,18 @@ namespace SA33.Team12.SSIS.Test
 
             ViewState.Add("requisition", requisition);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (ViewState["requisition"] != null)
+            {
+                requisition = (Requisition)ViewState["requisition"];
+            }
+            else
+            {
+                requisition = CreateNewRequisition();
+            }
+
             if (!IsPostBack)
             {
                 PopulateFields();
