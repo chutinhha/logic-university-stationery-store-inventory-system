@@ -141,7 +141,7 @@ namespace SA33.Team12.SSIS.DAL
                     tempDisbursementItem.StationeryRetrievalFormItemByDeptID = disbursementItem.StationeryRetrievalFormItemByDeptID;
                     tempDisbursementItem.AdjustmentVoucherID = disbursementItem.AdjustmentVoucherID;
                     tempDisbursementItem.StationeryID = disbursementItem.StationeryID;
-                    tempDisbursementItem.SpeicalStationeryID = disbursementItem.SpeicalStationeryID;
+                    tempDisbursementItem.SpecialStationeryID = disbursementItem.SpecialStationeryID;
                     tempDisbursementItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
                     tempDisbursementItem.QuantityDamaged = disbursementItem.QuantityDamaged;
                     tempDisbursementItem.Reason = disbursementItem.Reason;
@@ -203,7 +203,7 @@ namespace SA33.Team12.SSIS.DAL
                 && d.StationeryRetrievalFormItemByDeptID == (criteria.StationeryRetrievalFormItemByDeptID == 0 ? d.StationeryRetrievalFormItemByDeptID : criteria.StationeryRetrievalFormItemByDeptID)
                 && d.AdjustmentVoucherID == (criteria.AdjustmentVoucherID == 0 ? d.AdjustmentVoucherID : criteria.AdjustmentVoucherID)
                 && d.StationeryID == (criteria.StationeryID == 0 ? d.StationeryID : criteria.StationeryID)
-                && d.SpeicalStationeryID == (criteria.SpecialStationeryID == 0 ? d.SpeicalStationeryID : criteria.SpecialStationeryID)
+                && d.SpecialStationeryID == (criteria.SpecialStationeryID == 0 ? d.SpecialStationeryID : criteria.SpecialStationeryID)
                 && d.QuantityDisbursed == (criteria.QuantityDisbursed == 0 ? d.QuantityDisbursed : criteria.QuantityDisbursed)
                 && d.QuantityDamaged == (criteria.QuantityDamaged == 0 ? d.QuantityDamaged : criteria.QuantityDamaged)
                 && d.Reason == (criteria.Reason == null || criteria.Reason == "" ? d.Reason : criteria.Reason)

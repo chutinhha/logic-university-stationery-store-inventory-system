@@ -8,6 +8,7 @@ using System.Web;
 using System.ComponentModel;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using System.Collections.Generic;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -18,6 +19,11 @@ namespace SA33.Team12.SSIS.BLL
         public DisbursementManager()
         {
             disbursementDAO = new DisbursementDAO();
+        }
+
+        public List<Disbursement> GetAllDisbursement()
+        {
+           return disbursementDAO.GetAllDisbursement();
         }
 
         public void CreateDisbursement(Disbursement disbursement)
