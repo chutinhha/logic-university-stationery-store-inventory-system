@@ -5811,7 +5811,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_ApprovedBy", "User")]
-        public User User
+        public User ApprovedByUser
         {
             get
             {
@@ -5827,7 +5827,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<User> ApprovedByUserReference
         {
             get
             {
@@ -5893,7 +5893,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "User")]
-        public User User1
+        public User CreatedByUser
         {
             get
             {
@@ -5909,7 +5909,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User1Reference
+        public EntityReference<User> CreatedByUserReference
         {
             get
             {
@@ -5931,7 +5931,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_ModifiedBy", "User")]
-        public User User2
+        public User ModifiedByUser
         {
             get
             {
@@ -5947,7 +5947,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User2Reference
+        public EntityReference<User> ModifiedByUserReference
         {
             get
             {

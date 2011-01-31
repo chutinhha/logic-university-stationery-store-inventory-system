@@ -2655,11 +2655,11 @@
           <NavigationProperty Name="DisbursementItems" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_DisbursementItems_FK1" FromRole="SpecialStationery" ToRole="DisbursementItem" />
           <NavigationProperty Name="PurchaseOrderItems" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_PurchaseOrderItems_FK1" FromRole="SpecialStationery" ToRole="PurchaseOrderItem" />
           <NavigationProperty Name="SpecialRequisitionItems" Relationship="SA33.Team12.SSIS.Model.SpecialRequisitionItems_In_SpecialStationeries" FromRole="SpecialStationery" ToRole="SpecialRequisitionItem" />
-          <NavigationProperty Name="User" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_ApprovedBy" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="ApprovedByUser" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_ApprovedBy" FromRole="SpecialStationery" ToRole="User" />
           <NavigationProperty Name="StationeryRetrievalFormItems" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_StationeryRetrievalFormItems_FK1" FromRole="SpecialStationery" ToRole="StationeryRetrievalFormItem" />
           <NavigationProperty Name="StockLogs" Relationship="SA33.Team12.SSIS.Model.SpecialStationeries_StockLogs_FK1" FromRole="SpecialStationery" ToRole="StockLog" />
-          <NavigationProperty Name="User1" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy" FromRole="SpecialStationery" ToRole="User" />
-          <NavigationProperty Name="User2" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_ModifiedBy" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="CreatedByUser" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_CreatedBy" FromRole="SpecialStationery" ToRole="User" />
+          <NavigationProperty Name="ModifiedByUser" Relationship="SA33.Team12.SSIS.Model.SpecialStationery_ModifiedBy" FromRole="SpecialStationery" ToRole="User" />
         </EntityType>
         <Association Name="Categories_SpecialStationeries_FK1">
           <End Type="SA33.Team12.SSIS.Model.Category" Role="Category" Multiplicity="1" />
