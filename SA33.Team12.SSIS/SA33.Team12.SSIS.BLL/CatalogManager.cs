@@ -1,5 +1,5 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A)
+ * Author: Naing Myo Aung (A0076803A), Victor Tong(A0066920E)
  * Initial Implementation: 23/Jan/2011
  ***/
 
@@ -7,8 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SA33.Team12.SSIS.BLL;
+using System.Transactions;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.BLL;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -21,28 +23,10 @@ namespace SA33.Team12.SSIS.BLL
             catalogDAO = new CatalogDAO();
         }
 
-        public List<Category> GetAllCategory()
+        #region Categories
+        public List<Category> GetAllCategories()
         {
-            return catalogDAO.GetAllCategory();
-        }
-
-        public int CategoryCount()
-        {
-            return catalogDAO.CategoryCount();
-        }
-
-        public void CreateCategory(Category category){
-            catalogDAO.CreateCategory(category);
-        }
-
-        public void UpdateCategory(Category category)
-        {
-            catalogDAO.UpdateCategory(category);
-        }
-
-        public void DeleteCategory(Category category)
-        {
-            catalogDAO.DeleteCategory(category);
+            return catalogDAO.GetAllCategories();
         }
 
         public Category GetCategoryByID(int CategoryID)
@@ -50,9 +34,69 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetCategoryByID(CategoryID);
         }
 
-        public List<Stationery> GetAllStationery()
+        public List<Category> FindCategoriesByCriteria(CategorySearchDTO criteria)
         {
-            return catalogDAO.GetAllStationery();
+            return catalogDAO.FindCategoriesByCriteria(criteria);
+        }
+
+        public int GetCategoryCount()
+        {   
+            return catalogDAO.GetCategoryCount();
+        }
+
+        public Category CreateCategory(Category category)
+        {
+            try
+            {
+                catalogDAO.CreateCategory(category);
+            }
+            catch (Exception)
+            { 
+            throw new Exceptions.UserException("Catalog category creation failed.");
+            }
+            return category;
+        }
+
+        public Category UpdateCategory(Category category)
+        {
+            try
+            {
+                catalogDAO.UpdateCategory(category);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog category updating failed.");
+            }
+            return category;
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            try
+            {
+                catalogDAO.DeleteCategory(category);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog category deletion failed.");
+            }
+        }
+        #endregion
+
+        #region Stationeries
+        public List<Stationery> GetAllStationeries()
+        {
+            return catalogDAO.GetAllStationeries();
+        }
+
+        public Stationery FindStationeryByID(int id)
+        {
+            return catalogDAO.GetStationeryByID(id);
+        }
+
+        public List<Stationery> FindStationeriesByCriteria(StationerySearchDTO criteria)
+        {
+            return catalogDAO.FindStationeriesByCriteria(criteria);
         }
 
         public int GetStationeryCount()
@@ -60,24 +104,284 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetStationeryCount();
         }
 
-        public void CreateStationery(Stationery stationery)
+        public Stationery CreateStationery(Stationery stationery)
         {
-            catalogDAO.CreateStationery(stationery);
+            try
+            {
+                catalogDAO.CreateStationery(stationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery creation failed.");
+            }
+            return stationery;
         }
 
-        public void UpdateStationery(Stationery stationery)
+        public Stationery UpdateStationery(Stationery stationery)
         {
-            catalogDAO.UpdateStationery(stationery);
+            try
+            {
+                catalogDAO.UpdateStationery(stationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery updating failed.");
+            }
+            return stationery;
+
         }
 
         public void DeleteStationery(Stationery stationery)
         {
-            catalogDAO.DeleteStationery(stationery);
+            try
+            {
+                catalogDAO.DeleteStationery(stationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery deletion failed.");
+            }
+        }
+        #endregion
+
+        #region SpecialStationeries
+        public List<SpecialStationery> GetAllSpecialStationeries()
+        {
+            return catalogDAO.GetAllSpecialStationeries();
         }
 
-        public Stationery FindStationeryByID(int id)
+        public SpecialStationery GetSpecialStationeryByID(int SpecialStationeryID)
         {
-            return catalogDAO.GetStationeryByID(id);
+            return catalogDAO.GetSpecialStationeryByID(SpecialStationeryID);
         }
+
+        public List<SpecialStationery> FindSpecialStationeriesByCriteria(SpecialStationerySearchDTO criteria)
+        {
+            return catalogDAO.FindSpecialStationeriesByCriteria(criteria);
+        }
+
+        public int GetSpecialStationeryCount()
+        {
+            return catalogDAO.GetSpecialStationeryCount();
+        }
+
+        public SpecialStationery CreateSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                catalogDAO.CreateSpecialStationery(specialStationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog special stationery item creation failed.");
+            }
+            return specialStationery;
+        }
+
+        public SpecialStationery UpdateSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                catalogDAO.UpdateSpecialStationery(specialStationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog special stationery item updating failed.");
+            }
+            return specialStationery;
+        }
+
+        public void DeleteSpecialStationery(SpecialStationery specialStationery)
+        {
+            try
+            {
+                catalogDAO.DeleteSpecialStationery(specialStationery);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog special stationery item deletion failed.");
+            }
+        }
+        #endregion
+
+        #region Locations
+        public List<Location> GetAllLocations()
+        {
+            return catalogDAO.GetAllLocations();
+        }
+
+        public Location GetLocationByID(int LocationID)
+        {
+            return catalogDAO.GetLocationByID(LocationID);
+        }
+
+        public List<Location> FindLocationsByCriteria(LocationSearchDTO criteria)
+        {
+            return catalogDAO.FindLocationsByCriteria(criteria);
+        }
+
+        public int GetLocationCount()
+        {
+            return catalogDAO.GetLocationCount();
+        }
+
+        public Location CreateLocation(Location location)
+        {
+            try
+            {
+                catalogDAO.CreateLocation(location);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog item location creation failed.");
+            }
+            return location;
+        }
+
+        public Location UpdateLocation(Location location)
+        {
+            try
+            {
+                catalogDAO.UpdateLocation(location);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog item location updating failed.");
+            }
+            return location;
+        }
+
+        public void DeleteLocation(Location location)
+        {
+            try
+            {
+                catalogDAO.DeleteLocation(location);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog item location deletion failed.");
+            }
+        }
+        #endregion
+
+        #region StationeryPrices
+        public List<StationeryPrice> GetAllStationeryPrices()
+        {
+            return catalogDAO.GetAllStationeryPrices();
+        }
+
+        public StationeryPrice GetStationeryPriceByID(int StationeryPriceID)
+        {
+            return catalogDAO.GetStationeryPriceByID(StationeryPriceID);
+        }
+
+        public List<StationeryPrice> FindStationeryPricesByCriteria(StationeryPriceSearchDTO criteria)
+        {
+            return catalogDAO.FindStationeryPricesByCriteria(criteria);
+        }
+
+        public int GetStationeryPriceCount()
+        {
+            return catalogDAO.GetStationeryPriceCount();
+        }
+
+        public StationeryPrice CreateStationeryPrice(StationeryPrice stationeryPrice)
+        {
+            try
+            {
+                catalogDAO.CreateStationeryPrice(stationeryPrice);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery item price creation failed.");
+            }
+            return stationeryPrice;
+        }
+
+        public StationeryPrice UpdateStationeryPrice(StationeryPrice stationeryPrice)
+        {
+            try
+            {
+                catalogDAO.UpdateStationeryPrice(stationeryPrice);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery item price updating failed.");
+            }
+            return stationeryPrice;
+        }
+
+        public void DeleteStationeryPrice(StationeryPrice stationeryPrice)
+        {
+            try
+            {
+                catalogDAO.DeleteStationeryPrice(stationeryPrice);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog stationery item price deletion failed.");
+            }
+        }
+        #endregion
+
+        #region Suppliers
+        public List<Supplier> GetAllSuppliers()
+        {
+            return catalogDAO.GetAllSuppliers();
+        }
+
+        public Supplier GetSupplierByID(int SupplierID)
+        {
+            return catalogDAO.GetSupplierByID(SupplierID);
+        }
+
+        public List<Supplier> FindSuppliersByCriteria(SupplierSearchDTO criteria)
+        {
+            return catalogDAO.FindSuppliersByCriteria(criteria);
+        }
+
+        public int GetSupplierCount()
+        {
+            return catalogDAO.GetSupplierCount();
+        }
+
+        public Supplier CreateSupplier(Supplier supplier)
+        {
+            try
+            {
+                catalogDAO.CreateSupplier(supplier);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog supplier creation failed.");
+            }
+            return supplier;
+        }
+
+        public Supplier UpdateSupplier(Supplier supplier)
+        {
+            try
+            {
+                catalogDAO.UpdateSupplier(supplier);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog upplier updating failed.");
+            }
+            return supplier;
+        }
+
+        public void DeleteSupplier(Supplier supplier)
+        {
+            try
+            {
+                catalogDAO.DeleteSupplier(supplier);
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Catalog supplier deletion failed.");
+            }
+        }
+        #endregion
     }
 }
