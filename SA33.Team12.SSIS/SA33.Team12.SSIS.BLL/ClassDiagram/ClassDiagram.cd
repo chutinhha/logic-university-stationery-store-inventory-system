@@ -4,71 +4,64 @@
     <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAICAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BLL\BusinessLogic.cs</FileName>
+      <FileName>BusinessLogic.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.CatalogManager" Collapsed="true">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAICAgAAAAABIAQAQAAAAABAAAAAAAAAAQg=</HashCode>
-      <FileName>BLL\CatalogManager.cs</FileName>
+      <HashCode>ICGgBMQIAEpCAqAQKAEJIAAKAAOAAABAgkoAAAYAEQw=</HashCode>
+      <FileName>CatalogManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.AdjustmentVoucherManager" Collapsed="true">
     <Position X="0.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAQAIAAAAAAAAAAABAAA=</HashCode>
-      <FileName>BLL\AdjustmentVoucherManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SA33.Team12.SSIS.DTO.AdjustmentVoucherSearchDTO" Collapsed="true">
-    <Position X="4.5" Y="1.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAEAAAAA=</HashCode>
-      <FileName>DTO\AdjustmentVoucherSearchDTO.cs</FileName>
+      <HashCode>AAAQECAEgAAAACCAAAAAQIAIAQCEACAEAAAAAQgBAQA=</HashCode>
+      <FileName>AdjustmentVoucherManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.RequisitionManager" Collapsed="true">
-    <Position X="0.5" Y="2.75" Width="1.75" />
+    <Position X="0.5" Y="2.75" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="SA33.Team12.SSIS.BLL.RequisitionManager.RequisitionMethod" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RequisitionManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAIIAAAAAAAAAAACACAQAAAQIAAA=</HashCode>
-      <FileName>BLL\RequisitionManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SA33.Team12.SSIS.DTO.RequisitioinSearchDTO" Collapsed="true">
-    <Position X="6.25" Y="1.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
-      <FileName>DTO\RequisitioinSearchDTO.cs</FileName>
+      <HashCode>AQYCAAAEABIAACBYAZKAAAkCQjAACEKgCJQAIASIAAA=</HashCode>
+      <FileName>RequisitionManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.StationeryRetrievalManager" Collapsed="true">
-    <Position X="2.75" Y="2.75" Width="2.25" />
+    <Position X="3.5" Y="2.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAAAAgAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BLL\StationeryRetrievalManager.cs</FileName>
+      <HashCode>AAAEAAAAAAABAAAAAAAgAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StationeryRetrievalManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.DisbursementManager" Collapsed="true">
     <Position X="2.75" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIgAAAAACAAAAAIAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BLL\DisbursementManager.cs</FileName>
+      <HashCode>QAAAAAAAAAAAAAIgAAABACAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DisbursementManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.PurchaseOrderManager" Collapsed="true">
     <Position X="4.75" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>BBAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BLL\PurchaseOrderManager.cs</FileName>
+      <HashCode>BAAEAAQAQAAAkAAAEAoAYAAAAAgBIAAAEAAAAAAAAAA=</HashCode>
+      <FileName>PurchaseOrderManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SA33.Team12.SSIS.BLL.UserManager" Collapsed="true">
     <Position X="2.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAQAACAAEAAAgAAAAAQAAAAAAABEAAAAAAAA=</HashCode>
-      <FileName>BLL\UserManager.cs</FileName>
+      <HashCode>AAAAAAACAQAAAAAEAAAgAAAAAQAIAAAAAQAIABEAAAA=</HashCode>
+      <FileName>UserManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
