@@ -74,7 +74,7 @@ namespace SA33.Team12.SSIS.UserAdministration
                 {
                     if (item.Selected) roles += item.Value + ",";
                 }
-                e.NewValues.Add("Role");
+                e.NewValues["Role"] = roles;
             }
         }
 
