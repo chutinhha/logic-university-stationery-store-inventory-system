@@ -10,6 +10,17 @@ namespace SA33.Team12.SSIS.Utilities
 {
     public static class Membership
     {
+        private static void AddUserToRoles(string userName, string[] roles)
+        {
+            string[] allRoles = WebSecurity.Roles.GetAllRoles();
+            foreach (string role in roles)
+            {
+                if(WebSecurity.Roles.IsUserInRole(userName, role))
+                    WebSecurity.Roles.RemoveUserFromRole(userName, role);
+            }
+            WebSecurity.Roles.AddUserToRoles(userName, roles);
+        }
+
         public static User GetCurrentLoggedInUser()
         {
             WebSecurity.MembershipUser membershipUser  = WebSecurity.Membership.GetUser();
@@ -33,7 +44,7 @@ namespace SA33.Team12.SSIS.Utilities
                 throw new Exceptions.UserException("No current logged in user.");
             }
         }
-
+        
         public static DAL.User CreateUser(DAL.User user)
         {
             try
@@ -48,10 +59,12 @@ namespace SA33.Team12.SSIS.Utilities
                             WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
                         Guid ProviderKey = (Guid)membershipUser.ProviderUserKey;
                         user.MembershipProviderKey = ProviderKey;
-                        string[] roles = user.Role.Split(',');
-                        if (roles.Length > 0)
+                        if(user.Role.Trim() != "")
                         {
-                            
+                             string[] roles 
+                                 = user.Role.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                            if(roles.Length > 0)
+                                AddUserToRoles(user.UserName, roles);
                         }
                         um.CreateUser(user);
                     }
@@ -84,6 +97,9 @@ namespace SA33.Team12.SSIS.Utilities
                     {
                         if (oldUser.UserName != user.UserName)
                             throw new Exceptions.UserException("Changing user name is not allowed.");
+                        string[] roles = user.Role.Split(',');
+                        if (roles.Length > 0)
+                            AddUserToRoles(user.UserName, roles);
                         user = um.UpdateUser(user);
                     }
                     else
