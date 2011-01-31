@@ -13,8 +13,7 @@ namespace SA33.Team12.SSIS.Exceptions
 {
     [Serializable]
     public class RequisitionException : ExceptionBase
-    {
-        private string p;
+    {        
 
         public RequisitionException()
             : base()
