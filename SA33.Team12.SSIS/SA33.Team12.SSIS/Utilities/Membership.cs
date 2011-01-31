@@ -20,7 +20,12 @@ namespace SA33.Team12.SSIS.Utilities
                     List<User> users =
                         userManager.FindUsersByCriteria(
                             new UserSearchDTO() {UserName = membershipUser.UserName});
-                    if (users.Count > 0) return users[0];
+                    if (users.Count > 0) 
+                        return users[0];
+                    else
+                    {
+                        throw new Exceptions.UserException("No current logged in user.");
+                    }
                 }
             }
             else
