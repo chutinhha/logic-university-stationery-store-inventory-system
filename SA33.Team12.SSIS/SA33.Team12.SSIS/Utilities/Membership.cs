@@ -48,7 +48,7 @@ namespace SA33.Team12.SSIS.Utilities
                             WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
                         Guid ProviderKey = (Guid)membershipUser.ProviderUserKey;
                         user.MembershipProviderKey = ProviderKey;
-                        string[] roles = user.Role.Split(",");
+                        string[] roles = user.Role.Split(',');
                         if (roles.Length > 0)
                         {
                             
