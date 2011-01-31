@@ -61,8 +61,7 @@ namespace SA33.Team12.SSIS.BLL
                     }
 
                     if (isTestOK)
-                    {
-                       
+                    {                       
                         requisitionDAO.CreateRequisition(requisition);
                     }
                 }
@@ -204,7 +203,7 @@ namespace SA33.Team12.SSIS.BLL
                         if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
                             (requisition.DepartmentID != 0 || requisition.Department != null) &&
                             (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
-                            (requisition.StatusID != 0 || requisition.Status != null) &&
+                            //(requisition.StatusID != 0 || requisition.Status != null) &&
                             (requisition.UrgencyID != 0 || requisition.Urgency != null) &&
                             (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() == DateTime.Now.Date.ToShortDateString()) &&
                             (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
