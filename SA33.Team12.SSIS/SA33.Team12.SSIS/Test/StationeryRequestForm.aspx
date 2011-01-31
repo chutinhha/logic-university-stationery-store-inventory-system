@@ -5,6 +5,10 @@
         {
             width: 181px;
         }
+        .style2
+        {
+            width: 606px;
+        }
     </style>
 
 </asp:Content>
@@ -119,4 +123,32 @@
     <br />
     <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
+    <br />
+    <table style="width:100%;">
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+            <td>
+                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Button" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td class="style2">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
 </asp:Content>

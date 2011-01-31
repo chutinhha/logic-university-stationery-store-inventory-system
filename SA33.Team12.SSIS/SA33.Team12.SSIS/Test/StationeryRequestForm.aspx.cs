@@ -13,7 +13,7 @@ namespace SA33.Team12.SSIS.Test
     {
         RequisitionManager requisitionManager;
         Requisition requisition;
-        CatalogDAO catalogDAO;       
+        CatalogDAO catalogDAO;
         UserDAO userdao;
 
         protected void Page_Init(object sender, EventArgs e)
@@ -21,15 +21,19 @@ namespace SA33.Team12.SSIS.Test
             requisitionManager = new RequisitionManager();
             catalogDAO = new CatalogDAO();
             userdao = new UserDAO();
-            requisition = new Requisition();
-            
-            if (!IsPostBack)
+
+
+            if (ViewState["requisition"] != null)
             {
+                requisition = (Requisition)ViewState["requisition"];
+            }
+            else
+            {
+                requisition = new Requisition();
                 requisition.DateRequested = DateTime.Now.Date;
                 requisition.CreatedByUser = userdao.GetUserByID(1);
-                requisition.ApprovedByUser = userdao.GetUserByID(2);
                 requisition.Department = userdao.GetUserByID(1).Department;
-                requisition.RequisitionForm = requisitionManager.GetRequisitionNumber(requisition);                
+                requisition.RequisitionForm = requisitionManager.GetRequisitionNumber(requisition);
             }
         }
 
@@ -39,13 +43,19 @@ namespace SA33.Team12.SSIS.Test
             {
                 ItemCodeLiteral.Text = catalogDAO.GetStationeryByID(int.Parse(StationeryDDL.Text)).ItemCode;
             }
+            if (UrgencyDDL.SelectedValue != string.Empty)
+            {
+                requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
+            }
+
+            ViewState.Add("requisition", requisition);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 PopulateFields();
-            }            
+            }
         }
 
         private void PopulateFields()
@@ -64,16 +74,21 @@ namespace SA33.Team12.SSIS.Test
             {
                 RequisitionID = requisition.RequisitionID,
                 StationeryID = Convert.ToInt32(StationeryDDL.Text),
-                QuantityRequested = Convert.ToInt32(QuantityTextBox.Text),                                
+                QuantityRequested = Convert.ToInt32(QuantityTextBox.Text),
             };
 
             requisition.RequisitionItems.Add(item);
-            
+
             if (requisition.RequisitionItems.Count > 0)
             {
                 GridView1.DataSource = requisition.RequisitionItems;
                 DataBind();
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            requisitionManager.CreateRequisition(requisition);
         }
     }
 }
