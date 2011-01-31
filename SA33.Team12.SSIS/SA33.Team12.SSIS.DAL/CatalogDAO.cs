@@ -17,7 +17,7 @@ namespace SA33.Team12.SSIS.DAL
     public class CatalogDAO:DALLogic
     {
         #region Categories
-        public List<Category> FindCategoryByCriteria(DTO.CategorySearchDTO criteria)
+        public List<Category> FindCategoriesByCriteria(DTO.CategorySearchDTO criteria)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }   
 
-        public List<Category> GetAllCategory()
+        public List<Category> GetAllCategories()
         {
                 return (from c in context.Categories
                         select c).ToList();
@@ -60,7 +60,7 @@ namespace SA33.Team12.SSIS.DAL
             return category;
         }
 
-        public int CategoryCount()
+        public int GetCategoryCount()
         {
             return this.context.Categories.Count();
         }
@@ -138,7 +138,7 @@ namespace SA33.Team12.SSIS.DAL
         #endregion
 
         # region Stationeries
-        public List<Stationery> FindStationeryByCriteria(DTO.StationerySearchDTO criteria)
+        public List<Stationery> FindStationeriesByCriteria(DTO.StationerySearchDTO criteria)
         {
             try
             {
@@ -175,7 +175,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         
-        public List<Stationery> GetAllStationery()
+        public List<Stationery> GetAllStationeries()
         {
             return (from s in context.Stationeries
                     select s).ToList();
@@ -191,7 +191,7 @@ namespace SA33.Team12.SSIS.DAL
 
         public List<Stationery> GetStationeriesByCategory(int CategoryID)
         {
-            return GetAllStationery().Where(x => x.CategoryID == CategoryID).ToList<Stationery>();
+            return GetAllStationeries().Where(x => x.CategoryID == CategoryID).ToList<Stationery>();
         }
 
         public int GetStationeryCount()
@@ -278,7 +278,7 @@ namespace SA33.Team12.SSIS.DAL
         # endregion
 
         # region SpecialStationeries
-        public List<SpecialStationery> FindSpecialStationeryByCriteria(DTO.SpecialStationerySearchDTO criteria)
+        public List<SpecialStationery> FindSpecialStationeriesByCriteria(DTO.SpecialStationerySearchDTO criteria)
         {
             try
             {
@@ -312,7 +312,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<SpecialStationery> GetAllSpecialStationery()
+        public List<SpecialStationery> GetAllSpecialStationeries()
         {
             return (from ss in context.SpecialStationeries
                     select ss).ToList();
@@ -407,7 +407,7 @@ namespace SA33.Team12.SSIS.DAL
         # endregion
 
         # region Locations
-        public List<Location> FindLocationByCriteria(DTO.LocationSearchDTO criteria)
+        public List<Location> FindLocationsByCriteria(DTO.LocationSearchDTO criteria)
         {
             try
             {
@@ -429,7 +429,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<Location> GetAllLocation()
+        public List<Location> GetAllLocations()
         {
             return (from l in context.Locations
                     select l).ToList();
@@ -516,7 +516,7 @@ namespace SA33.Team12.SSIS.DAL
         # endregion
 
         # region StationeryPrices
-        public List<StationeryPrice> FindStationeryPriceByCriteria(DTO.StationeryPriceSearchDTO criteria)
+        public List<StationeryPrice> FindStationeryPricesByCriteria(DTO.StationeryPriceSearchDTO criteria)
         {
             try
             {
@@ -536,7 +536,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<StationeryPrice> GetAllStationeryPrice()
+        public List<StationeryPrice> GetAllStationeryPrices()
         {
             return (from p in context.StationeryPrices
                     select p).ToList();
@@ -623,7 +623,7 @@ namespace SA33.Team12.SSIS.DAL
         # endregion
 
         #region Suppliers
-        public List<Supplier> FindSupplierByCriteria(DTO.SupplierSearchDTO criteria)
+        public List<Supplier> FindSuppliersByCriteria(DTO.SupplierSearchDTO criteria)
         {
             try
             {
@@ -646,7 +646,7 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
-        public List<Supplier> GetAllSupplier()
+        public List<Supplier> GetAllSuppliers()
         {
             return (from r in context.Suppliers
                     select r).ToList();
@@ -660,7 +660,7 @@ namespace SA33.Team12.SSIS.DAL
             return supplier;
         }
 
-        public int SupplierCount()
+        public int GetSupplierCount()
         {
             return this.context.Suppliers.Count();
         }

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/***
+ * Author: Victor Tong(A0066920E)
+ * Initial Implementation: 26/Jan/2011
+ ***/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
