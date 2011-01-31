@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.designer.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>
