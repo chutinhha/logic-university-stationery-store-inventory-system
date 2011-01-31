@@ -162,7 +162,7 @@ namespace SA33.Team12.SSIS.BLL
             return purchaseOrderDAO.GetAllPurchaseOrderItem();
         }
 
-        // puchase order reorder automation
+        // puchase order reorder automation, will handle both standard stationery and special stationery
         public int GetQuantityToOrder(PurchaseOrderItem item)
         {
             int orderQuantity = 0;
