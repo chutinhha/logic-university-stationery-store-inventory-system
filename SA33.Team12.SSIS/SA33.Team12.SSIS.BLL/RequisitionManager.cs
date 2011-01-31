@@ -23,7 +23,7 @@ namespace SA33.Team12.SSIS.BLL
         private RequisitionDAO requisitionDAO;
         private enum RequisitionMethod
         {
-            Create, Update, Approve, Cancel, UpdateStatus, Delete
+            Create, Update, Approve, Reject, Cancel, UpdateStatus, Delete
         };
 
         #region Requisition
@@ -172,20 +172,56 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         /// <summary>
-        /// Approve all the pending requisitions and persist with database
+        /// Approve all the requisitions
+        /// </summary>
+        /// <param name="requisitions">requisition collection</param>
+        public void ApproveRequisition(List<Requisition> requisitions)
+        {
+            if (requisitions != null)
+            {
+                foreach (Requisition tempReq in requisitions)
+                {
+                    ApproveRequisition(tempReq);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reject single requisition and persist with database
         /// </summary>
         /// <param name="requisition">requisition object</param>
-        public void ApproveRequisition(List<Requisition> requisitions)
+        public void RejectRequisition(Requisition requisition)
         {
             try
             {
-                foreach (Requisition req in requisitions)
-                    requisitionDAO.ApproveRequisition(req);
+                if (ValidateRequisition(requisition, RequisitionMethod.Reject))
+                {
+                    requisitionDAO.RejectRequisition(requisition);
+                }
+                else
+                {
+                    ErrorMessage("Approval of Requisition Failed");
+                }
             }
             catch (Exception)
             {
 
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Reject all the requisitions
+        /// </summary>
+        /// <param name="requisitions">requisition collection</param>
+        public void RejectRequisition(List<Requisition> requisitions)
+        {
+            if (requisitions != null)
+            {
+                foreach (Requisition tempReq in requisitions)
+                {
+                    RejectRequisition(tempReq);
+                }
             }
         }
 
@@ -202,6 +238,21 @@ namespace SA33.Team12.SSIS.BLL
             else
             {
                 ErrorMessage("Cancel Requisition Failed.");
+            }
+        }
+
+        /// <summary>
+        /// Cancel all the requisitions
+        /// </summary>
+        /// <param name="requisitions">requisition collection</param>
+        public void CancelRequisition(List<Requisition> requisitions)
+        {
+            if (requisitions != null)
+            {
+                foreach (Requisition tempReq in requisitions)
+                {
+                    CancelRequisition(tempReq);
+                }
             }
         }
 
@@ -993,7 +1044,7 @@ namespace SA33.Team12.SSIS.BLL
         }
         #endregion
 
-        #region Error
+        #region ErrorMessage
         /// <summary>
         /// Validation error message
         /// </summary>
