@@ -60,7 +60,7 @@ namespace SA33.Team12.SSIS.Test
             newItem.StationeryRetrievalFormItemByDeptID = disbursementItem.StationeryRetrievalFormItemByDeptID;
             newItem.AdjustmentVoucherID = disbursementItem.AdjustmentVoucherID;
             newItem.StationeryID = disbursementItem.StationeryID;
-            newItem.SpeicalStationeryID = disbursementItem.SpeicalStationeryID;
+            newItem.SpecialStationeryID = disbursementItem.SpecialStationeryID;
             newItem.QuantityDisbursed = disbursementItem.QuantityDisbursed;
             newItem.QuantityDamaged = disbursementItem.QuantityDamaged;
             newItem.Reason = disbursementItem.Reason;
