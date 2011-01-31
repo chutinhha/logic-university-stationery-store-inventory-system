@@ -276,7 +276,7 @@ div.accountInfo
     color: white;
 }
 
-.failureNotification
+.failureNotification, .DDControl DDValidator
 {
     font-size: 1.2em;
     color: Red;

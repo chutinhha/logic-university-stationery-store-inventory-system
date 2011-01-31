@@ -14,8 +14,7 @@
     ID="UserGridView" AutoGenerateColumns="False" 
         DataSourceID="UserObjectDataSource" DataKeyNames="UserID" 
         onrowcommand="UserGridView_RowCommand" AllowPaging="True"
-        SelectedRowStyle-BackColor="Silver" 
-        onselectedindexchanged="UserGridView_SelectedIndexChanged">
+        SelectedRowStyle-BackColor="Silver">
     <Columns>
         <asp:BoundField DataField="UserName" HeaderText="UserName" 
             SortExpression="UserName" ReadOnly="True" />
@@ -45,16 +44,23 @@
 
 <asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True"
         DataSourceID="UserDetailObjectDataSource" 
-        ondatabinding="UserFormView_DataBinding" 
         oniteminserting="UserFormView_ItemInserting" 
-        onitemupdating="UserFormView_ItemUpdating">
+        onitemupdating="UserFormView_ItemUpdating" 
+        onitemcommand="UserFormView_ItemCommand" 
+        ondatabound="UserFormView_DataBound">
     <EmptyDataTemplate>
         Please select a user to view its detail.
-        &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" 
-            CommandName="New" Text="New" />
+        <br />
+        <asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" 
+            CommandName="New" Text="New" CssClass="button" />
     </EmptyDataTemplate>
     <EditItemTemplate>
+        <table style="width:100%;">
+            <tr>
+                <td>
         DepartmentID:
+                </td>
+                <td>
         <asp:DynamicControl ID="DynamicControl1" runat="server" 
             DataField="DepartmentID" Mode="Edit" Visible="false" />
 
@@ -68,33 +74,84 @@
             TypeName="SA33.Team12.SSIS.BLL.UserManager"
             SelectMethod="GetAllDepartments">
         </asp:ObjectDataSource>
+                </td>
+            </tr>
+            <tr>
+                <td>
         UserName:
+                </td>
+                <td>
         <asp:DynamicControl ID="UserNameDynamicControl" runat="server" 
             DataField="UserName" Mode="Edit" />
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
         FirstName:
+                </td>
+                <td>
         <asp:DynamicControl ID="FirstNameDynamicControl" runat="server" 
             DataField="FirstName" Mode="Edit" />
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
         LastName:
+                </td>
+                <td>
         <asp:DynamicControl ID="LastNameDynamicControl" runat="server" 
             DataField="LastName" Mode="Edit" />
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
         Email:
+                </td>
+                <td>
         <asp:DynamicControl ID="EmailDynamicControl" runat="server" DataField="Email" 
             Mode="Edit" />
-        <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
         Password:
+                </td>
+                <td>
         <asp:DynamicControl ID="PasswordDynamicControl" runat="server" 
             DataField="Password" Mode="Edit" />
-        <br />
-        IsEnabled:
-        <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
-            DataField="IsEnabled" Mode="Edit" />
-        <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-            CommandName="Update" Text="Update" />
-        &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
-            CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Role:
+                </td>
+                <td>
+                    <asp:RadioButtonList ID="MemebershipRoleRadioButtonList" runat="server">
+                    </asp:RadioButtonList>
+                    <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" runat="server" 
+                        SelectMethod="GetAllRoles" 
+                        TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
+                </td>
+            <tr>
+                <td>
+                    IsEnabled: &nbsp;&nbsp;</td>
+                <td>
+                    <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" 
+                        DataField="IsEnabled" Mode="Edit" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;</td>
+                <td>
+                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
+                        CommandName="Update" Text="Update" />
+                    <asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" 
+                        CommandName="Cancel" Text="Cancel" />
+                </td>
+            </tr>
+    </table>
+
     </EditItemTemplate>
     <InsertItemTemplate>
         DepartmentID:
@@ -193,7 +250,8 @@
 <asp:DynamicDataManager runat="server" ID="DynamicDataManager" >
 </asp:DynamicDataManager>
 
-<asp:ValidationSummary runat="server" ID="ValidationSummary" CssClass="failureNotification" />
+<asp:ValidationSummary runat="server" ID="ValidationSummary" 
+    CssClass="failureNotification" />
 
 
 </asp:Content>
