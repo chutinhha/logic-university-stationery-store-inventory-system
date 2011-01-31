@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Web.DynamicData;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
@@ -11,8 +12,6 @@ namespace SA33.Team12.SSIS.UserAdministration
 {
     public partial class Users : System.Web.UI.Page
     {
-        private DropDownList departmentDropDownList;
-
         protected void Page_Init(object sender, EventArgs e)
         {
             DynamicDataManager.RegisterControl(this.UserFormView);
@@ -47,33 +46,6 @@ namespace SA33.Team12.SSIS.UserAdministration
             }
         }
 
-        protected void UserGridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        protected void DepartmentDropDownList_Init(object sender, EventArgs e)
-        {
-            departmentDropDownList = sender as DropDownList;
-        }
-
-
-        protected void UserDetailView_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
-        {
-            var departmentID = Convert.ToInt32(departmentDropDownList.SelectedValue);
-            e.NewValues["DepartmentID"] = departmentID;
-        }
-
-        protected void UserDetailView_ItemInserting(object sender, DetailsViewInsertEventArgs e)
-        {
-            var departmentID = Convert.ToInt32(departmentDropDownList.SelectedValue);
-            e.Values["DepartmentID"] = departmentID;
-        }
-
-        protected void UserFormView_DataBinding(object sender, EventArgs e)
-        {
-
-        }
-
         protected void UserFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
         {
             FormView userFormView = sender as FormView;
@@ -94,8 +66,58 @@ namespace SA33.Team12.SSIS.UserAdministration
                 DropDownList departmentDropDownList =
                     userFormView.FindControl("DepartmentDropDownList") as DropDownList;
                 e.NewValues["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
+
+                RadioButtonList MemebershipRoleRadioButtonList =
+                  UserFormView.FindControl("MemebershipRoleRadioButtonList") as RadioButtonList;
+                string roles = string.Empty;
+                foreach (ListItem item in MemebershipRoleRadioButtonList.Items)
+                {
+                    if (item.Selected) roles += item.Value + ",";
+                }
+                e.NewValues.Add("Role");
             }
         }
+
+        protected void UserFormView_DataBound(object sender, EventArgs e)
+        {
+            if (UserFormView.CurrentMode == FormViewMode.Edit)
+            {
+                DataBindMemebershipRadioButtonList();
+            }
+        }
+
+        protected void DataBindMemebershipRadioButtonList()
+        {
+            RadioButtonList MemebershipRoleRadioButtonList =
+                UserFormView.FindControl("MemebershipRoleRadioButtonList") as RadioButtonList;
+            if (MemebershipRoleRadioButtonList != null)
+            {
+                MemebershipRoleRadioButtonList.DataSource = Roles.GetAllRoles();
+                MemebershipRoleRadioButtonList.DataBind();
+                MemebershipRoleRadioButtonList.Items[0].Selected = true;
+            }
+        }
+
+        protected void UserFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
+        {
+            switch (e.CommandArgument.ToString().ToLower())
+            {
+                case "new":
+                    break;
+                case "insert":
+                    break;
+                case "edit":
+                    break;
+                case "update":
+                    break;
+                case "delete":
+                    break;
+                case "cancel":
+                    break;
+                default: break;
+            }
+        }
+
 
     }
 }
