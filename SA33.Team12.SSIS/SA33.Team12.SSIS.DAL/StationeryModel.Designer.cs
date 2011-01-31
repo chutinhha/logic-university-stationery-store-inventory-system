@@ -9345,6 +9345,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Boolean _IsEnabled;
         partial void OnIsEnabledChanging(global::System.Boolean value);
         partial void OnIsEnabledChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Role
+        {
+            get
+            {
+                return _Role;
+            }
+            set
+            {
+                OnRoleChanging(value);
+                ReportPropertyChanging("Role");
+                _Role = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Role");
+                OnRoleChanged();
+            }
+        }
+        private global::System.String _Role;
+        partial void OnRoleChanging(global::System.String value);
+        partial void OnRoleChanged();
 
         #endregion
     
@@ -9769,7 +9793,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_ApprovedBy", "SpecialStationery")]
-        public EntityCollection<SpecialStationery> SpecialStationeries
+        public EntityCollection<SpecialStationery> ApprovedSpecialStationeries
         {
             get
             {
@@ -9791,7 +9815,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_CreatedBy", "SpecialStationery")]
-        public EntityCollection<SpecialStationery> SpecialStationeries1
+        public EntityCollection<SpecialStationery> CreatedBySpecialStationeries
         {
             get
             {
@@ -9813,7 +9837,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationery_ModifiedBy", "SpecialStationery")]
-        public EntityCollection<SpecialStationery> SpecialStationeries2
+        public EntityCollection<SpecialStationery> ModifiedSpecialStationeries
         {
             get
             {
