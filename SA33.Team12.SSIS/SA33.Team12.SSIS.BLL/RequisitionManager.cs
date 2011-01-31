@@ -1,5 +1,5 @@
 ﻿/***
- * Author: Naing Myo Aung (A0076803A)
+ * Author: Sundar Aravind (A0076790U)
  * Initial Implementation: 23/Jan/2011
  ***/
 
@@ -11,6 +11,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using SA33.Team12.SSIS.Exceptions;
 using System.Diagnostics;
+using System.Transactions;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -43,25 +44,36 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 bool isTestOK = false;
+                StatusSearchDTO sdto = new StatusSearchDTO() { Name = "Pending" };
+                Status status = requisitionDAO.GetStatusByName(sdto);
+                requisition.StatusID = status.StatusID;
+
                 if (ValidateRequisition(requisition, RequisitionMethod.Create))
-                {
-                    StatusSearchDTO sdto = new StatusSearchDTO() { Name = "Pending" };
-                    Status status = requisitionDAO.GetStatusByName(sdto);
-                    requisitionDAO.UpdateRequisitionStatus(requisition, status);
+                {                   
+
                     if (requisition.RequisitionItems.Count > 0 || requisition.SpecialRequisitionItems.Count > 0)
                     {
                         foreach (RequisitionItem requisitionItem in requisition.RequisitionItems)
-                        {
+                        {                            
                             isTestOK = ValidateRequisitionItem(requisitionItem, RequisitionMethod.Create);
+                            if (!isTestOK)
+                            {
+                                break;
+                            }
                         }
                         foreach (SpecialRequisitionItem specialRequisitionItem in requisition.SpecialRequisitionItems)
                         {
                             isTestOK = ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Create);
+                            if (!isTestOK)
+                            {
+                                break;
+                            }
+                                
                         }
                     }
 
                     if (isTestOK)
-                    {                       
+                    {
                         requisitionDAO.CreateRequisition(requisition);
                     }
                 }
@@ -77,16 +89,24 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                bool isTrue=false;
+                bool isTrue = false;
                 if (ValidateRequisition(requisition, RequisitionMethod.Update))
-                {                    
+                {
                     foreach (RequisitionItem item in requisition.RequisitionItems)
                     {
                         isTrue = ValidateRequisitionItem(item, RequisitionMethod.Update);
+                        if (!isTrue)
+                        {
+                            break;
+                        }
                     }
                     foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
                     {
                         isTrue = ValidateSpecialRequisitionItem(splItem, RequisitionMethod.Update);
+                        if (!isTrue)
+                        {
+                            break;
+                        }
                     }
 
                     if (isTrue)
@@ -157,19 +177,19 @@ namespace SA33.Team12.SSIS.BLL
             return requisitionDAO.GetAllRequisition();
         }
 
-        public void GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByCategory> GetRequisitionByCategory(Category category, RequisitionSearchDTO requisitionSearchDTO)
         {
-            //requisitionDAO.GetRequisitionByCategory(category, requisitionSearchDTO);
+            return requisitionDAO.GetRequisitionByCategoryID(category, requisitionSearchDTO);
         }
 
-        public void GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByDepartment> GetRequisitionByDepartment(Department department, RequisitionSearchDTO requisitionSearchDTO)
         {
-            //requisitionDAO.GetRequisitionByDepartment(department, requisitionSearchDTO);
+            return requisitionDAO.GetRequisitionByDepartmentID(department, requisitionSearchDTO);
         }
 
-        public void GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
         {
-            //requisitionDAO.GetRequisitionByEmployee(user, requisitionSearchDTO);
+            return requisitionDAO.GetRequisitionByEmployeeID(user, requisitionSearchDTO);
         }
 
         /// <summary>
@@ -203,7 +223,7 @@ namespace SA33.Team12.SSIS.BLL
                         if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
                             (requisition.DepartmentID != 0 || requisition.Department != null) &&
                             (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
-                            //(requisition.StatusID != 0 || requisition.Status != null) &&
+                            (requisition.StatusID != 0 || requisition.Status != null) &&
                             (requisition.UrgencyID != 0 || requisition.Urgency != null) &&
                             (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() == DateTime.Now.Date.ToShortDateString()) &&
                             (requisition.ApprovedByUser == null) && (requisition.DateApproved == null))
@@ -218,12 +238,25 @@ namespace SA33.Team12.SSIS.BLL
                         if ((requisition.CreatedBy != 0 || requisition.CreatedByUser != null) &&
                            (requisition.DepartmentID != 0 || requisition.Department != null) &&
                            (requisition.RequisitionForm != string.Empty || requisition.RequisitionForm != null) &&
-                           (requisition.StatusID != 0 || requisition.Status != null) &&
+                           (requisition.StatusID == 2 || requisition.Status != null) &&
                            (requisition.UrgencyID != 0 || requisition.Urgency != null) &&
                            (requisition.DateRequested != null && requisition.DateRequested.Date.ToShortDateString() != string.Empty) &&
                            (requisition.ApprovedBy != 0))
-                        {                         
+                        {
                             return true;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                throw new RequisitionException("Update Requisition Failed");
+                            }
+                            catch (Exception)
+                            {
+                                
+                                throw;
+                            }
+                           
                         }
                     }
 
@@ -302,7 +335,7 @@ namespace SA33.Team12.SSIS.BLL
                     if (requisitionMethod == RequisitionMethod.Create)
                     {
                         if ((specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
-                           (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpeicalStationeryID != null) &&
+                           (specialRequisitionItem.SpecialStationeryID != 0 || specialRequisitionItem.SpecialStationeryID != null) &&
                            (specialRequisitionItem.QuantityRequested > 0))
                         {
                             return true;
@@ -312,7 +345,7 @@ namespace SA33.Team12.SSIS.BLL
                     if (requisitionMethod == RequisitionMethod.Update)
                     {
                         if ((specialRequisitionItem.RequisitionID != 0 || specialRequisitionItem.Requisition != null) &&
-                         (specialRequisitionItem.SpeicalStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
+                         (specialRequisitionItem.SpecialStationeryID != 0 || specialRequisitionItem.SpecialStationery != null) &&
                          (specialRequisitionItem.SpecialStationery.IsApproved == false) &&
                          (specialRequisitionItem.QuantityRequested > 0))
                         {
