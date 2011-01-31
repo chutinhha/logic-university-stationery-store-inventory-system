@@ -165,12 +165,17 @@ namespace SA33.Team12.SSIS.BLL
         // puchase order reorder automation
         public int GetQuantityToOrder(PurchaseOrderItem item)
         {
-            int orderQuantity;
-            using (CatalogManager cm = new CatalogManager())
+            int orderQuantity = 0;
+            bool special = false;
+            int id = 0;
+            if (item.SpecialStationeryID == 0 && item.StationeryID != 0)
+                id = item.StationeryID;
+            else if (item.SpecialStationeryID != 0 && item.StationeryID == 0)
             {
-                Stationery stationeryToOrder = cm.FindStationeryByID(item.StationeryID);
-                orderQuantity = stationeryToOrder.ReorderLevel - stationeryToOrder.QuantityInHand + stationeryToOrder.ReorderQuantity;
+                id = (int)item.SpecialStationeryID;
+                special = true;
             }
+
             // get all the requisitions/requisition items that are appoved by temp department head
 
             RequisitionSearchDTO criteria = new RequisitionSearchDTO();
@@ -178,16 +183,34 @@ namespace SA33.Team12.SSIS.BLL
             using (RequisitionManager rm = new RequisitionManager())
             {
                 List<Requisition> requisitions = rm.FindRequisitionByCriteria(criteria);
-                List<RequisitionItem> items = new List<RequisitionItem>();
                 foreach (Requisition r in requisitions)
                 {
-                    foreach (RequisitionItem ri in r.RequisitionItems)
+                    if (special)
                     {
-                        if (ri.StationeryID == item.StationeryID)
+                        foreach (SpecialRequisitionItem ri in r.SpecialRequisitionItems)
                         {
-                            orderQuantity += ri.QuantityRequested;
+                            if (ri.SpecialStationeryID == id)
+                            {
+                                orderQuantity += ri.QuantityRequested;
+                            }
                         }
                     }
+                    else
+                    {
+                        foreach (RequisitionItem ri in r.RequisitionItems)
+                        {
+                            if (ri.StationeryID == id)
+                            {
+                                orderQuantity += ri.QuantityRequested;
+                            }
+                        }
+                        using (CatalogManager cm = new CatalogManager())
+                        {
+                            Stationery stationeryToOrder = cm.FindStationeryByID(id);
+                            orderQuantity += stationeryToOrder.ReorderLevel - stationeryToOrder.QuantityInHand + stationeryToOrder.ReorderQuantity;
+                        }
+                    }
+
                 }
             }
             return orderQuantity;
@@ -196,7 +219,7 @@ namespace SA33.Team12.SSIS.BLL
         // validate puchase order
         private bool ValidatePurchaseOrder(PurchaseOrder purchaseOrder, PurchaseOrderMethod purchaseOrderMethod)
         {
-            string errMsg = ""; 
+            string errMsg = "";
             try
             {
                 if (purchaseOrder != null)
@@ -249,7 +272,7 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         errMsg = "Create Purchase Order item failed. Please try again later";
                         if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
-                            (item.StationeryID != 0 || item.Stationery != null) &&
+                            ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
                             (item.QuantityToOrder != 0))
                         {
                             return true;
@@ -259,7 +282,7 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         errMsg = "Update Purchase Order item failed. Please try again later";
                         if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
-                             (item.StationeryID != 0 || item.Stationery != null) &&
+                             ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
                              (item.QuantityToOrder != 0))
                         {
                             return true;
