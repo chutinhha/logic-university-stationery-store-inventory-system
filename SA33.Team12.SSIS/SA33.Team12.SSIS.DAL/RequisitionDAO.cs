@@ -138,6 +138,49 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
+        /// Reject of the requisition
+        /// </summary>
+        /// <param name="requisition">requisition object</param>
+        public void RejectRequisition(Requisition requisition)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var tempRequisition = (from p in context.Requisitions
+                                           where p.RequisitionID == requisition.RequisitionID
+                                           select p).FirstOrDefault<Requisition>();
+
+
+                    var status = (from s in context.Statuses where s.Name == "Rejected" select s).FirstOrDefault<Status>();
+
+                    //requisition status will be changed to "Rejected"
+                    UpdateRequisitionStatus(tempRequisition, status);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw new RequisitionException("Reject request Failed.");
+            }
+        }
+
+        /// <summary>
+        /// Reject all the requisitions
+        /// </summary>
+        /// <param name="requisitions">requisition collection</param>
+        public void RejectRequisition(List<Requisition> requisitions)
+        {
+            if (requisitions != null)
+            {
+                foreach (Requisition tempReq in requisitions)
+                {
+                    RejectRequisition(tempReq);
+                }
+            }
+        }
+
+        /// <summary>
         /// Cancel the requisition before approval
         /// </summary>
         /// <param name="cancelRequisition">requisition object</param>
@@ -161,6 +204,21 @@ namespace SA33.Team12.SSIS.DAL
             {
 
                 throw new RequisitionException("Approval Failed");
+            }
+        }
+
+        /// <summary>
+        /// Cancel all the requisitions
+        /// </summary>
+        /// <param name="requisitions">requisition collection</param>
+        public void CancelRequisition(List<Requisition> requisitions)
+        {
+            if (requisitions != null)
+            {
+                foreach (Requisition tempReq in requisitions)
+                {
+                    CancelRequisition(tempReq);
+                }
             }
         }
 
