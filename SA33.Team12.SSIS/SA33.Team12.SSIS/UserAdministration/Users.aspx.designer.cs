@@ -40,13 +40,13 @@ namespace SA33.Team12.SSIS.UserAdministration {
         protected global::System.Web.UI.WebControls.ObjectDataSource UserObjectDataSource;
         
         /// <summary>
-        /// UserDetailView control.
+        /// UserFormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView UserDetailView;
+        protected global::System.Web.UI.WebControls.FormView UserFormView;
         
         /// <summary>
         /// UserDetailObjectDataSource control.
@@ -65,5 +65,14 @@ namespace SA33.Team12.SSIS.UserAdministration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.DynamicData.DynamicDataManager DynamicDataManager;
+        
+        /// <summary>
+        /// ValidationSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
     }
 }
