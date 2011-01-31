@@ -28,7 +28,7 @@ namespace SA33.Team12.SSIS.BLL
 
         #region Requisition
         /// <summary>
-        /// Constructor
+        /// Requisition Manager Constructor
         /// </summary>
         public RequisitionManager()
         {
