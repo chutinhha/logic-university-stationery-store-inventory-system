@@ -121,6 +121,11 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetStationeriesByQuantityInHandLessThanReorderLevel();
         }
 
+        public List<Stationery> GetStationeriesByCategory(int CategoryID)
+        {
+            return catalogDAO.GetStationeriesByCategory(CategoryID);
+        }
+
         public Stationery CreateStationery(Stationery stationery)
         {
             try
