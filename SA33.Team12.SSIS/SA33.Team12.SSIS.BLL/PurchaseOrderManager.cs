@@ -162,7 +162,7 @@ namespace SA33.Team12.SSIS.BLL
             return purchaseOrderDAO.GetAllPurchaseOrderItem();
         }
 
-        // puchase order reorder automation, will handle both standard stationery and special stationery
+        // purchase order reorder automation, will give recommended reorder quantity for standard stationery to satisfy pending requisition
         public int GetQuantityToOrder(Stationery item)
         {
             int orderQuantity = 0;
@@ -193,7 +193,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             return orderQuantity;
         }
-
+        // purchase order reorder automation, will give recommended reorder quantity for specialstationery to satisfy pending requisition 
         public int GetQuantityToOrderSpecial(SpecialStationery item)
         {
 
