@@ -56,8 +56,7 @@ namespace SA33.Team12.SSIS.Test
                 PopulateFields();
             }
 
-            GridView1.DataSource = requisition.RequisitionItems;
-            DataBind();
+          
         }
 
         private void PopulateFields()
@@ -68,23 +67,12 @@ namespace SA33.Team12.SSIS.Test
         protected void Button1_Click(object sender, EventArgs e)
         {
             RequisitionItem item = new RequisitionItem()
-            {               
+            {
                 QuantityRequested = 45
             };
 
             requisition.RequisitionItems.Add(item);
             Session["requisition"] = requisition;
-            Response.Write(requisition.RequisitionItems.Count);
-        }
-
-        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-           
-        }
-
-        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridView1.EditIndex = -1;
         }
     }
 }

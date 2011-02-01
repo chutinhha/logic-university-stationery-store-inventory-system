@@ -265,6 +265,7 @@
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Membership.cs" />
+    <Compile Include="Utilities\RequisitionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Approval\" />
