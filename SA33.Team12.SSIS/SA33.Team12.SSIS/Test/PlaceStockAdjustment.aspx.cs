@@ -170,9 +170,9 @@ namespace SA33.Team12.SSIS.Test
                     //int z = r..Cells[0].Text;
 
                     item.StationeryID = Convert.ToInt32(r.Cells[1].Text);
-                    item.Type = Convert.ToInt32(r.Cells[1].Text.ToString());
-                    item.Quantity = Convert.ToInt32(r.Cells[2].Text);
-                    item.Reason = r.Cells[1].Text;
+                    item.Type = Convert.ToInt32(r.Cells[2].Text.ToString());
+                    item.Quantity = Convert.ToInt32(r.Cells[3].Text);
+                    item.Reason = r.Cells[4].Text;
 
                     adjustmentVoucherManager.CreateStockLogTransaction(item);
 
