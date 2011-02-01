@@ -69,6 +69,14 @@
         {
             height: 2px;
         }
+        .style16
+        {
+            width: 80px;
+        }
+        .style17
+        {
+            width: 762px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -147,5 +155,20 @@
         <SortedDescendingHeaderStyle BackColor="#3E3277" />
     </asp:GridView>
     <br />
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <td class="style17">
+                    &nbsp;</td>
+                <td class="style16">
+                    <asp:Button ID="btnSubmit" runat="server" 
+                        style="margin-left: 50px; margin-right: 3px" Text="Submit" />
+                </td>
+                <td>
+                    <asp:Button ID="btnBack" runat="server" Text="Back" />
+                </td>
+            </tr>
+        </table>
+    </div>
     <br />
     </asp:Content>
