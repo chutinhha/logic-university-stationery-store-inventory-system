@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="GenericErrorPage.aspx" />
+    <Content Include="Stock\PlacePurchaseOrder.aspx" />
     <Content Include="Test\DisbursementBLLTest.aspx" />
     <Content Include="Test\DisbursementItemTest.aspx" />
     <Content Include="Test\DisbursementTest.aspx" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="GenericErrorPage.aspx.designer.cs">
       <DependentUpon>GenericErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\PlacePurchaseOrder.aspx.cs">
+      <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stock\PlacePurchaseOrder.aspx.designer.cs">
+      <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\DisbursementBLLTest.aspx.cs">
       <DependentUpon>DisbursementBLLTest.aspx</DependentUpon>
@@ -253,7 +261,6 @@
     <Folder Include="Notification\" />
     <Folder Include="Print\" />
     <Folder Include="Request Stationery\" />
-    <Folder Include="Stock\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
