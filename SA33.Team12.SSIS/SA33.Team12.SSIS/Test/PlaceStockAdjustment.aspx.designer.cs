@@ -31,6 +31,15 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.Label lblStationeryID;
         
         /// <summary>
+        /// lblType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblType;
+        
+        /// <summary>
         /// lblQuantity control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
         
         /// <summary>
+        /// ddlType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlType;
+        
+        /// <summary>
         /// txtQuantity control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace SA33.Team12.SSIS.Test {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltDescription;
+        
+        /// <summary>
+        /// ltStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltStock;
         
         /// <summary>
         /// ltQuantity control.
