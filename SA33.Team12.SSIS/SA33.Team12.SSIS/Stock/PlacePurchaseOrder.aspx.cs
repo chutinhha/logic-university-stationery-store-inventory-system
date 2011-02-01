@@ -72,17 +72,20 @@ namespace SA33.Team12.SSIS.Stock
                         StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
                         criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("DropDownList2")).SelectedValue.ToString());
                         criteria.StationeryID = item.StationeryID;
-                        item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;  
+                        item.Price = (decimal) 88.88;
+               //         item.Price = cm.FindStationeryPricesByCriteria(criteria).Price;    
+                // the above command encounterd nullreference exception
+
                         // record supplier ID for the PO
                         suppID = criteria.SupplierID;
                     }
                     pom.CreatePurchaseOrderItem(item);
                 }
-     //           purchaseOrder.PONumber = "";
+                purchaseOrder.PONumber = "88888";
                 purchaseOrder.SupplierID = suppID;
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-                purchaseOrder.CreatedBy = 1; //testing 
+                purchaseOrder.CreatedBy = 1; //testing purpose only
                 purchaseOrder.IsDelivered = false;
                 purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
 
