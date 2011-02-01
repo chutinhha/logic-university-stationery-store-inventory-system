@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Test\PlaceStockAdjustment.aspx.cs">
       <DependentUpon>PlaceStockAdjustment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test\PlaceStockAdjustment.aspx.designer.cs">
       <DependentUpon>PlaceStockAdjustment.aspx</DependentUpon>
