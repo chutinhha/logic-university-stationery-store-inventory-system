@@ -38,7 +38,12 @@ namespace SA33.Team12.SSIS.Test
             myDataColumn.ColumnName = "StationeryID";
             myDataTable.Columns.Add(myDataColumn);
             myDataTable.PrimaryKey = new DataColumn[] { myDataTable.Columns["StationeryID"] };
-           
+
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "Type";
+            myDataTable.Columns.Add(myDataColumn);
+
             myDataColumn = new DataColumn();
             myDataColumn.DataType = Type.GetType("System.Int32");
             myDataColumn.ColumnName = "Quantity";
@@ -53,13 +58,14 @@ namespace SA33.Team12.SSIS.Test
         }
 
         //Insert data into datatable.
-        private void AddDataToTable(int stationeryID, int quantity, string reason, DataTable myTable)
+        private void AddDataToTable(int stationeryID, int type, int quantity, string reason, DataTable myTable)
         {
             DataRow row;
 
             row = myTable.NewRow();
 
             row["StationeryID"] = stationeryID;
+            row["Type"] = type;
             row["Quantity"] = quantity;
             row["Reason"] = reason;
 
@@ -110,6 +116,7 @@ namespace SA33.Team12.SSIS.Test
             else
             {
                 int stationeryID = Convert.ToInt32(this.ddlStationeryID.Text.ToString());
+                int type = Convert.ToInt32(this.ddlType.Text.ToString());
                 int quantity = Convert.ToInt32(this.txtQuantity.Text.ToString().Trim());
                 String reason = this.txtReason.Text.Trim();
 
@@ -117,7 +124,7 @@ namespace SA33.Team12.SSIS.Test
                 {
                     DataRow foundRow = ((DataTable)Session["myDatatable"]).Rows.Find(stationeryID);
                     int rowNum = Convert.ToInt32(foundRow);
-                    AddDataToTable(stationeryID, quantity, reason, (DataTable)Session["myDatatable"]);
+                    AddDataToTable(stationeryID, type, quantity, reason, (DataTable)Session["myDatatable"]);
 
                     this.GridView1.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
                     this.GridView1.DataBind();
