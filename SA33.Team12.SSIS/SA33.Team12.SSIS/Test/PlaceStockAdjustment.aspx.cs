@@ -169,27 +169,36 @@ namespace SA33.Team12.SSIS.Test
         //To write the data in the table into database
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            using (AdjustmentVoucherManager adjustmentVoucherManager = new AdjustmentVoucherManager())
+            if (ltMessage.Text != "")
             {
-                AdjustmentVoucherTransaction adjustmentVoucherTransaction = new AdjustmentVoucherTransaction();
-
-                foreach (GridViewRow r in GridView1.Rows)
+                ltMessage.Text = "Data saved already saved. No further action taken";
+            }
+            if (ltMessage.Text == "")
+            {
+                using (AdjustmentVoucherManager adjustmentVoucherManager = new AdjustmentVoucherManager())
                 {
-                    StockLogTransaction item = new StockLogTransaction();
-                    item.AdjustmentVoucherTransactionID = adjustmentVoucherTransaction.AdjustmentVoucherTransactionID;
-                    item.StationeryID = Convert.ToInt32(r.Cells[1].Text);
-                    item.Type = Convert.ToInt32(r.Cells[3].Text.ToString());
-                    item.Quantity = Convert.ToInt32(r.Cells[4].Text);
-                    item.Reason = r.Cells[5].Text;
+                    AdjustmentVoucherTransaction adjustmentVoucherTransaction = new AdjustmentVoucherTransaction();
 
-                    adjustmentVoucherManager.CreateStockLogTransaction(item);
+                    foreach (GridViewRow r in GridView1.Rows)
+                    {
+                        StockLogTransaction item = new StockLogTransaction();
+                        item.AdjustmentVoucherTransactionID = adjustmentVoucherTransaction.AdjustmentVoucherTransactionID;
+                        item.StationeryID = Convert.ToInt32(r.Cells[1].Text);
+                        item.Type = Convert.ToInt32(r.Cells[3].Text.ToString());
+                        item.Quantity = Convert.ToInt32(r.Cells[4].Text);
+                        item.Reason = r.Cells[5].Text;
 
-                    adjustmentVoucherTransaction.DateIssued = DateTime.Now;
-                    adjustmentVoucherTransaction.VoucherNumber = "ME001"; //Must be unique system generated number
-                    adjustmentVoucherTransaction.CreatedBy = 1; //Must be the userid of the person who creates it
+                        adjustmentVoucherManager.CreateStockLogTransaction(item);
 
-                    AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+                        adjustmentVoucherTransaction.DateIssued = DateTime.Now;
+                        adjustmentVoucherTransaction.VoucherNumber = "ME001"; //Must be unique system generated number
+                        adjustmentVoucherTransaction.CreatedBy = 1; //Must be the userid of the person who creates it
 
+                        AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+
+                        //Clear the screen
+                        ltMessage.Text = "Data saved";
+                    }
 
                 }
             }
