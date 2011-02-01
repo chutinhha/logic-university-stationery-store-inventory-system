@@ -74,7 +74,7 @@
     <Compile Include="DisbursementDAO.cs" />
     <Compile Include="DTO\AdjustmentVoucherSearchDTO.cs" />
     <Compile Include="DTO\BlackListLogSearchDTO.cs" />
-    <Compile Include="DTO\CollectionPoint.cs" />
+    <Compile Include="DTO\CollectionPointSearchDTO.cs" />
     <Compile Include="DTO\DepartmentSearchDTO.cs" />
     <Compile Include="DTO\PurchaseOrderSearchDTO.cs" />
     <Compile Include="DTO\RequisitionSearchDTO.cs" />
