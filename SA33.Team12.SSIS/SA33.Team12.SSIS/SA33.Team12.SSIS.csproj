@@ -73,6 +73,7 @@
     <Content Include="Test\DisbursementBLLTest.aspx" />
     <Content Include="Test\DisbursementItemTest.aspx" />
     <Content Include="Test\DisbursementTest.aspx" />
+    <Content Include="Test\PlaceStockAdjustment.aspx" />
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
@@ -168,6 +169,12 @@
     </Compile>
     <Compile Include="Test\DisbursementTest.aspx.designer.cs">
       <DependentUpon>DisbursementTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\PlaceStockAdjustment.aspx.cs">
+      <DependentUpon>PlaceStockAdjustment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\PlaceStockAdjustment.aspx.designer.cs">
+      <DependentUpon>PlaceStockAdjustment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\poItemTest.aspx.cs">
       <DependentUpon>poItemTest.aspx</DependentUpon>
