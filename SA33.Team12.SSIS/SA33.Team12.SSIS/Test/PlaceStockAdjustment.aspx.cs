@@ -21,7 +21,7 @@ namespace SA33.Team12.SSIS.Test
                 DataTable myDt = new DataTable();
                 myDt = CreateDataTable();
                 Session["myDatatable"] = myDt;
-               this.GridView1.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
+                this.GridView1.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
                 this.GridView1.DataBind();
             }
         }
@@ -38,6 +38,11 @@ namespace SA33.Team12.SSIS.Test
             myDataColumn.ColumnName = "StationeryID";
             myDataTable.Columns.Add(myDataColumn);
             myDataTable.PrimaryKey = new DataColumn[] { myDataTable.Columns["StationeryID"] };
+
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = Type.GetType("System.String");
+            myDataColumn.ColumnName = "Description";
+            myDataTable.Columns.Add(myDataColumn);
 
             myDataColumn = new DataColumn();
             myDataColumn.DataType = Type.GetType("System.Int32");
@@ -58,13 +63,14 @@ namespace SA33.Team12.SSIS.Test
         }
 
         //Insert data into datatable.
-        private void AddDataToTable(int stationeryID, int type, int quantity, string reason, DataTable myTable)
+        private void AddDataToTable(int stationeryID, string description, int type, int quantity, string reason, DataTable myTable)
         {
             DataRow row;
 
             row = myTable.NewRow();
 
             row["StationeryID"] = stationeryID;
+            row["Description"] = description;
             row["Type"] = type;
             row["Quantity"] = quantity;
             row["Reason"] = reason;
@@ -122,10 +128,12 @@ namespace SA33.Team12.SSIS.Test
 
                 try
                 {
+                    CatalogDAO cat = new CatalogDAO();
+                    String description = cat.GetStationeryByID(stationeryID).Description;
                     DataRow foundRow = ((DataTable)Session["myDatatable"]).Rows.Find(stationeryID);
                     int rowNum = Convert.ToInt32(foundRow);
-                    AddDataToTable(stationeryID, type, quantity, reason, (DataTable)Session["myDatatable"]);
-
+                    AddDataToTable(stationeryID, description, type, quantity, reason, (DataTable)Session["myDatatable"]);
+                    
                     this.GridView1.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
                     this.GridView1.DataBind();
 
@@ -167,9 +175,9 @@ namespace SA33.Team12.SSIS.Test
                     StockLogTransaction item = new StockLogTransaction();
                     item.AdjustmentVoucherTransactionID = adjustmentVoucherTransaction.AdjustmentVoucherTransactionID;
                     item.StationeryID = Convert.ToInt32(r.Cells[1].Text);
-                    item.Type = Convert.ToInt32(r.Cells[2].Text.ToString());
-                    item.Quantity = Convert.ToInt32(r.Cells[3].Text);
-                    item.Reason = r.Cells[4].Text;
+                    item.Type = Convert.ToInt32(r.Cells[3].Text.ToString());
+                    item.Quantity = Convert.ToInt32(r.Cells[4].Text);
+                    item.Reason = r.Cells[5].Text;
 
                     adjustmentVoucherManager.CreateStockLogTransaction(item);
 
