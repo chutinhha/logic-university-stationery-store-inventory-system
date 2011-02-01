@@ -126,8 +126,10 @@
         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="GetAllCategories"
         TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
-    <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
+    <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" 
+        AutoGenerateColumns="False" DataKeyNames="StationeryID">
         <Columns>
+            <asp:DynamicField DataField="StationeryID" HeaderText="StationeryID" />
             <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
             <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
@@ -141,6 +143,14 @@
                     <asp:TextBox ID="TextBox2" runat="server" Height="23px" Width="117px" 
                         DataSourceID="ObjectDataSource3" Text='<%# Bind("ReorderQuantity", "{0}") %>'></asp:TextBox>
                     <br />
+                    <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
+                        SelectMethod="GetQuantityToOrder" 
+                        TypeName="SA33.Team12.SSIS.BLL.PurchaseOrderManager">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="gvPOItems" Name="stationeryId" 
+                                PropertyName="SelectedValue" Type="Int32" />
+                        </SelectParameters>
+                    </asp:ObjectDataSource>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Supplier">
@@ -159,10 +169,12 @@
             <td class="style8">
                 Attention To</td>
             <td class="style7">
-                <asp:DropDownList ID="DropDownList3" runat="server" 
-                    DataSourceID="ObjectDataSource3">
+                <asp:DropDownList ID="ddlAttentionTo" runat="server" 
+                    DataSourceID="ObjectDataSource3" DataTextField="FirstName" 
+                    DataValueField="UserID">
                 </asp:DropDownList>
-                <asp:ObjectDataSource ID="ObjectDataSource3" runat="server">
+                <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" 
+                    SelectMethod="GetAllUsers" TypeName="SA33.Team12.SSIS.BLL.UserManager">
                 </asp:ObjectDataSource>
             </td>
             <td>
@@ -172,10 +184,11 @@
             <td class="style8">
                 Date To Supply</td>
             <td class="style7">
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDateToSupply" runat="server"></asp:TextBox>
 &nbsp;(dd/mm/yyyy)</td>
             <td>
-                &nbsp;</td>
+                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+            </td>
         </tr>
         <tr>
             <td class="style8">
@@ -186,8 +199,7 @@
             </td>
             <td>
                 &nbsp;
-                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
-            </td>
+                </td>
         </tr>
     </table>
 </asp:Content>

@@ -33,13 +33,13 @@ namespace SA33.Team12.SSIS.Stock
             //}
             //gvPOItems.DataSource = stationeryToOrder;
             //gvPOItems.DataBind();
-            //lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().LastName + " " + Membership.GetCurrentLoggedInUser().FirstName;
+      //      lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName ;
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             StationerySearchDTO sdto = new StationerySearchDTO();
-            sdto.CategoryID = Convert.ToInt32(ddlCategory.SelectedValue) ;
+            sdto.CategoryID = Convert.ToInt32(ddlCategory.SelectedValue);
             using (CatalogManager cm = new CatalogManager())
             {
                 List<Stationery> stationeries = cm.FindStationeriesByCriteria(sdto);
@@ -48,8 +48,38 @@ namespace SA33.Team12.SSIS.Stock
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            PurchaseOrder purchaseOrder = new PurchaseOrder();
+            int suppID = -1;
+            using (PurchaseOrderManager pom = new PurchaseOrderManager())
+            {
+                PurchaseOrder purchaseOrder = new PurchaseOrder();
 
+                foreach (GridViewRow r in gvPOItems.Rows)
+                {
+                    PurchaseOrderItem item = new PurchaseOrderItem();
+                    item.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
+                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text);
+                    item.QuantityToOrder = Convert.ToInt32(r.Cells[6].Text);
+                    using (CatalogManager cm = new CatalogManager())
+                    {
+                        StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
+                        criteria.SupplierID = Convert.ToInt32(r.Cells[7].Text);
+                        criteria.StationeryID = item.StationeryID;
+                        item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;  
+                        // record supplier ID for the PO
+                        suppID = criteria.SupplierID;
+                    }
+                    pom.CreatePurchaseOrderItem(item);
+                }
+
+                purchaseOrder.SupplierID = suppID;
+                purchaseOrder.DateOfOrder = DateTime.Now;
+                purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
+   //             purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
+                purchaseOrder.IsDelivered = false;
+                purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
+
+                PurchaseOrder newOrder = pom.CreatePurchaseOrder(purchaseOrder);
+            }
         }
 
     }
