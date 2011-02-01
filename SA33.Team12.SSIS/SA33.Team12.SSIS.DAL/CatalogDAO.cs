@@ -189,6 +189,13 @@ namespace SA33.Team12.SSIS.DAL
             return stationery;
         }
 
+        public List<Stationery> GetStationeriesByQuantityInHandLessThanReorderLevel()
+        {
+            return (from s in context.Stationeries
+                    where s.QuantityInHand < s.ReorderLevel
+                    select s).ToList();
+        }
+
         public List<Stationery> GetStationeriesByCategory(int CategoryID)
         {
             return GetAllStationeries().Where(x => x.CategoryID == CategoryID).ToList<Stationery>();
