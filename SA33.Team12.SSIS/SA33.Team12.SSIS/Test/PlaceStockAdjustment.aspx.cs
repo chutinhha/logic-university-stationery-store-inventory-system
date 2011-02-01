@@ -196,12 +196,16 @@ namespace SA33.Team12.SSIS.Test
 
                         AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
 
-                        //Clear the screen
                         ltMessage.Text = "Data saved";
                     }
-
                 }
             }
+        }
+
+        //To clear all data in GridView
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            //myDt.Dispose();
         }
     }
 }

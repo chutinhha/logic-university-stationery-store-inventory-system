@@ -182,7 +182,7 @@
                         style="margin-left: 50px; margin-right: 3px" Text="Submit" />
                 </td>
                 <td>
-                    <asp:Button ID="btnBack" runat="server" Text="Back" />
+                    <asp:Button ID="btnBack" runat="server" Text="Back" onclick="btnBack_Click" />
                 </td>
             </tr>
         </table>
