@@ -35,66 +35,56 @@ namespace SA33.Team12.SSIS.Test
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (StationeryDDL.Text != string.Empty)
-            {
-                ItemCodeLiteral.Text = catalogDAO.GetStationeryByID(int.Parse(StationeryDDL.Text)).ItemCode;
-            }
-            if (UrgencyDDL.SelectedValue != string.Empty)
-            {
-                requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
-            }
-
-            ViewState.Add("requisition", requisition);
+           
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (ViewState["requisition"] != null)
+            if (Session["requisition"] != null)
             {
-                requisition = (Requisition)ViewState["requisition"];
+                requisition = (Requisition)Session["requisition"];                
             }
             else
             {
                 requisition = CreateNewRequisition();
+                Session["requisition"] = requisition;
+
             }
 
             if (!IsPostBack)
             {
                 PopulateFields();
             }
+
+            GridView1.DataSource = requisition.RequisitionItems;
+            DataBind();
         }
 
         private void PopulateFields()
         {
-            RequisitionDateLiteral.Text = requisition.DateRequested.Date.ToShortDateString();
-            DepartmentNameLiteral.Text = requisition.Department.Code;
-            DepartmentCodeLiteral.Text = requisition.Department.Name;
-            EmployeeNameLiteral.Text = requisition.CreatedByUser.FirstName;
-            EmployeeNumberLiteral.Text = requisition.CreatedByUser.UserName;
-            EmployeeEmailLiteral.Text = requisition.CreatedByUser.Email;
-        }
 
-        protected void AddButton_Click(object sender, EventArgs e)
-        {
-            RequisitionItem item = new RequisitionItem()
-            {
-                RequisitionID = requisition.RequisitionID,
-                StationeryID = Convert.ToInt32(StationeryDDL.Text),
-                QuantityRequested = Convert.ToInt32(QuantityTextBox.Text),
-            };
-
-            requisition.RequisitionItems.Add(item);
-
-            if (requisition.RequisitionItems.Count > 0)
-            {
-                GridView1.DataSource = requisition.RequisitionItems;
-                DataBind();
-            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            requisitionManager.CreateRequisition(requisition);
+            RequisitionItem item = new RequisitionItem()
+            {               
+                QuantityRequested = 45
+            };
+
+            requisition.RequisitionItems.Add(item);
+            Session["requisition"] = requisition;
+            Response.Write(requisition.RequisitionItems.Count);
+        }
+
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+           
+        }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView1.EditIndex = -1;
         }
     }
 }
