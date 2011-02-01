@@ -128,9 +128,10 @@ namespace SA33.Team12.SSIS.Test
 
                 try
                 {
-                    //Query the stationery description
+                    //Start Query the stationery description
                     CatalogDAO cat = new CatalogDAO();
                     String description = cat.GetStationeryByID(stationeryID).Description;
+                    //End Query
 
                     DataRow foundRow = ((DataTable)Session["myDatatable"]).Rows.Find(stationeryID);
                     int rowNum = Convert.ToInt32(foundRow);
