@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="SA33.Team12.SSIS.Catalog.Categories" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategoriesTestV.aspx.cs" Inherits="SA33.Team12.SSIS.Catalog.CategoriesTestV" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -37,7 +37,7 @@
 
     <asp:DynamicDataManager ID="DynamicDataManager" runat="server" />
 
-    <asp:ValidationSummary runat="server" DisplayMode="BulletList" 
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="BulletList" 
         CssClass="failureNotification" />
     <asp:GridView runat="server" ID="StationeryGridView"
         AutoGenerateColumns="true">

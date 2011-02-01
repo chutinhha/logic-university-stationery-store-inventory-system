@@ -34,7 +34,7 @@
 
     <asp:ObjectDataSource runat="server" ID="StationeryObjectDataSource" 
         DataObjectTypeName="SA33.Team12.SSIS.DAL.Stationery" DeleteMethod="Delete" 
-        InsertMethod="Insert" SelectMethod="GetAll" 
+        InsertMethod="Insert" SelectMethod="GetAllStationery" 
         TypeName="SA33.Team12.SSIS.BLL.StationeryManager" UpdateMethod="Update">
     </asp:ObjectDataSource>
 
