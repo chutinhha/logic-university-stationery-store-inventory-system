@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdjustmentVoucherException.cs" />
+    <Compile Include="CatalogException.cs" />
     <Compile Include="DepartmentException.cs" />
     <Compile Include="DisbursementException.cs" />
     <Compile Include="DisbursementItemException.cs" />

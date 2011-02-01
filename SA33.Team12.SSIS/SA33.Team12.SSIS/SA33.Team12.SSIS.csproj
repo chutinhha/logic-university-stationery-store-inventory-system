@@ -63,6 +63,11 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\aspnetdb_log.LDF">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
+    <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
     <Content Include="Test\DisbursementBLLTest.aspx" />
@@ -121,6 +126,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\CategoriesTestV.aspx.cs">
+      <DependentUpon>CategoriesTestV.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\CategoriesTestV.aspx.designer.cs">
+      <DependentUpon>CategoriesTestV.aspx</DependentUpon>
     </Compile>
     <Compile Include="GenericErrorPage.aspx.cs">
       <DependentUpon>GenericErrorPage.aspx</DependentUpon>
@@ -256,7 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Approval\" />
-    <Folder Include="App_Data\" />
     <Folder Include="Handle Request\" />
     <Folder Include="Notification\" />
     <Folder Include="Print\" />
