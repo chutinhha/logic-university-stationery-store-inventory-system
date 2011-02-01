@@ -468,7 +468,7 @@ namespace SA33.Team12.SSIS.BLL
                 {
                     temp.Stationery = requisitionItem.Stationery;
                     temp.QuantityRequested = requisitionItem.QuantityRequested;
-                    temp.Price = requisitionItem.Price;
+                    //temp.Price = requisitionItem.Price;
                     requisitionDAO.UpdateRequisitionItem(temp);
                 }
                 else
