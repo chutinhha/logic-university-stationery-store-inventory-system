@@ -64,19 +64,13 @@ namespace SA33.Team12.SSIS.Stock
                 {
                     PurchaseOrderItem item = new PurchaseOrderItem();
 
-                    //HiddenField StationeryIDHiddenField = r.FindControl("StationeryIDHiddenField") as HiddenField;
-                    //if (StationeryIDHiddenField != null)
-                    //{
-                    //        // StationeryIDHiddenField.Value;
-                    //}
-
                     item.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
                     item.StationeryID = Convert.ToInt32(r.Cells[0].Text.ToString());
-                    item.QuantityToOrder = Convert.ToInt32(r.Cells[6].Text);
+                    item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("TextBox2")).Text.ToString());
                     using (CatalogManager cm = new CatalogManager())
                     {
                         StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
-                        criteria.SupplierID = Convert.ToInt32(r.Cells[7].Text);
+                        criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("DropDownList2")).SelectedValue.ToString());
                         criteria.StationeryID = item.StationeryID;
                         item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;  
                         // record supplier ID for the PO
