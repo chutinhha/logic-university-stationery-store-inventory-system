@@ -9896,11 +9896,13 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="itemCode">Initial value of the ItemCode property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        public static VW_RequisitionsByCategory CreateVW_RequisitionsByCategory(global::System.String itemCode, global::System.String description)
+        /// <param name="unitOfMeasure">Initial value of the UnitOfMeasure property.</param>
+        public static VW_RequisitionsByCategory CreateVW_RequisitionsByCategory(global::System.String itemCode, global::System.String description, global::System.String unitOfMeasure)
         {
             VW_RequisitionsByCategory vW_RequisitionsByCategory = new VW_RequisitionsByCategory();
             vW_RequisitionsByCategory.ItemCode = itemCode;
             vW_RequisitionsByCategory.Description = description;
+            vW_RequisitionsByCategory.UnitOfMeasure = unitOfMeasure;
             return vW_RequisitionsByCategory;
         }
 
@@ -10033,7 +10035,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String UnitOfMeasure
         {
@@ -10045,7 +10047,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnUnitOfMeasureChanging(value);
                 ReportPropertyChanging("UnitOfMeasure");
-                _UnitOfMeasure = StructuralObject.SetValidValue(value, true);
+                _UnitOfMeasure = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("UnitOfMeasure");
                 OnUnitOfMeasureChanged();
             }

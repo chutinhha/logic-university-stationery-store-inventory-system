@@ -2564,7 +2564,7 @@
           <Property Type="Int32" Name="TotalQuantity" />
           <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
           <Property Type="String" Name="Name" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UnitOfMeasure" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UnitOfMeasure" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Type="Int32" Name="CategoryID" />
         </EntityType>
         <EntityType Name="VW_RequisitionsByDepartment">
