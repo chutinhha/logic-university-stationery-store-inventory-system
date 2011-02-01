@@ -158,37 +158,31 @@ namespace SA33.Team12.SSIS.Test
         //To write the data in the table into database
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            //            int suppID = -1;
-            //using (AdjustmentVoucherManager adjustmentVoucherManager = new AdjustmentVoucherManager())
-            //{
-            //    AdjustmentVoucherTransaction adjustmentVoucherTransaction = new AdjustmentVoucherTransaction();
+            using (AdjustmentVoucherManager adjustmentVoucherManager = new AdjustmentVoucherManager())
+            {
+                AdjustmentVoucherTransaction adjustmentVoucherTransaction = new AdjustmentVoucherTransaction();
 
-            //    foreach (GridViewRow r in GridView1.Rows)
-            //    {
-            //        StockLogTransaction item = new StockLogTransaction();
-            //        item.AdjustmentVoucherTransactionID = adjustmentVoucherTransaction.AdjustmentVoucherTransactionID;
-            //        item.StationeryID = Convert.ToInt32(r.Cells[0].Text);
-            //        item.QuantityToOrder = Convert.ToInt32(r.Cells[6].Text);
-            //        using (CatalogManager cm = new CatalogManager())
-            //        {
-            //            StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
-            //            criteria.SupplierID = Convert.ToInt32(r.Cells[7].Text);
-            //            criteria.StationeryID = item.StationeryID;
-            //            item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;  
-            //            // record supplier ID for the PO
-            //            suppID = criteria.SupplierID;
-            //        }
-            //        pom.CreatePurchaseOrderItem(item);
-            //    }
+                foreach (GridViewRow r in GridView1.Rows)
+                {
+                    StockLogTransaction item = new StockLogTransaction();
+                    item.AdjustmentVoucherTransactionID = adjustmentVoucherTransaction.AdjustmentVoucherTransactionID;
+                    //item.StationeryID = Convert.ToInt32(r.Cells[0].ToString());
+                    //int z = r..Cells[0].Text;
 
-            //    purchaseOrder.SupplierID = suppID;
-            //    purchaseOrder.DateOfOrder = DateTime.Now;
-            //    purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-            //    purchaseOrder.CreatedBy = 1;
-            //    purchaseOrder.IsDelivered = false;
-            //    purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
+                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text);
+                    item.Type = Convert.ToInt32(r.Cells[1].Text.ToString());
+                    item.Quantity = Convert.ToInt32(r.Cells[2].Text);
+                    item.Reason = r.Cells[1].Text;
 
-            //    PurchaseOrder newOrder = pom.CreatePurcha
-        } 
-   }
+                    adjustmentVoucherManager.CreateStockLogTransaction(item);
+
+                    adjustmentVoucherTransaction.DateIssued = DateTime.Now;
+                    adjustmentVoucherTransaction.VoucherNumber = "ME001"; //Must be unique system generated number
+                    adjustmentVoucherTransaction.CreatedBy = 1; //Must be the userid of the person who creates it
+
+                    AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+                }
+            }
+        }
+    }
 }
