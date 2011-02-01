@@ -1704,19 +1704,17 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="categoryID">Initial value of the CategoryID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="unitOfMeasure">Initial value of the UnitOfMeasure property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="dateModified">Initial value of the DateModified property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="approvedBy">Initial value of the ApprovedBy property.</param>
-        public static Category CreateCategory(global::System.Int32 categoryID, global::System.String name, global::System.String unitOfMeasure, global::System.Boolean isApproved, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy)
+        public static Category CreateCategory(global::System.Int32 categoryID, global::System.String name, global::System.Boolean isApproved, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy)
         {
             Category category = new Category();
             category.CategoryID = categoryID;
             category.Name = name;
-            category.UnitOfMeasure = unitOfMeasure;
             category.IsApproved = isApproved;
             category.DateCreated = dateCreated;
             category.DateModified = dateModified;
@@ -1779,30 +1777,6 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String UnitOfMeasure
-        {
-            get
-            {
-                return _UnitOfMeasure;
-            }
-            set
-            {
-                OnUnitOfMeasureChanging(value);
-                ReportPropertyChanging("UnitOfMeasure");
-                _UnitOfMeasure = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UnitOfMeasure");
-                OnUnitOfMeasureChanged();
-            }
-        }
-        private global::System.String _UnitOfMeasure;
-        partial void OnUnitOfMeasureChanging(global::System.String value);
-        partial void OnUnitOfMeasureChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5386,7 +5360,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        public static SpecialStationery CreateSpecialStationery(global::System.Int32 specialStationeryID, global::System.Int32 categoryID, global::System.String itemCode, global::System.String description, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Boolean isApproved)
+        /// <param name="unitOfMeasure">Initial value of the UnitOfMeasure property.</param>
+        public static SpecialStationery CreateSpecialStationery(global::System.Int32 specialStationeryID, global::System.Int32 categoryID, global::System.String itemCode, global::System.String description, global::System.Int32 quantity, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Boolean isApproved, global::System.String unitOfMeasure)
         {
             SpecialStationery specialStationery = new SpecialStationery();
             specialStationery.SpecialStationeryID = specialStationeryID;
@@ -5399,6 +5374,7 @@ namespace SA33.Team12.SSIS.DAL
             specialStationery.CreatedBy = createdBy;
             specialStationery.ModifiedBy = modifiedBy;
             specialStationery.IsApproved = isApproved;
+            specialStationery.UnitOfMeasure = unitOfMeasure;
             return specialStationery;
         }
 
@@ -5695,6 +5671,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Boolean _IsApproved;
         partial void OnIsApprovedChanging(global::System.Boolean value);
         partial void OnIsApprovedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UnitOfMeasure
+        {
+            get
+            {
+                return _UnitOfMeasure;
+            }
+            set
+            {
+                OnUnitOfMeasureChanging(value);
+                ReportPropertyChanging("UnitOfMeasure");
+                _UnitOfMeasure = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UnitOfMeasure");
+                OnUnitOfMeasureChanged();
+            }
+        }
+        private global::System.String _UnitOfMeasure;
+        partial void OnUnitOfMeasureChanging(global::System.String value);
+        partial void OnUnitOfMeasureChanged();
 
         #endregion
     
@@ -5992,7 +5992,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
         /// <param name="approvedBy">Initial value of the ApprovedBy property.</param>
         /// <param name="isApproved">Initial value of the IsApproved property.</param>
-        public static Stationery CreateStationery(global::System.Int32 stationeryID, global::System.Int32 categoryID, global::System.Int32 locationID, global::System.String itemCode, global::System.String description, global::System.Int32 reorderLevel, global::System.Int32 reorderQuantity, global::System.Int32 quantityInHand, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy, global::System.Boolean isApproved)
+        /// <param name="unitOfMeasure">Initial value of the UnitOfMeasure property.</param>
+        public static Stationery CreateStationery(global::System.Int32 stationeryID, global::System.Int32 categoryID, global::System.Int32 locationID, global::System.String itemCode, global::System.String description, global::System.Int32 reorderLevel, global::System.Int32 reorderQuantity, global::System.Int32 quantityInHand, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy, global::System.Boolean isApproved, global::System.String unitOfMeasure)
         {
             Stationery stationery = new Stationery();
             stationery.StationeryID = stationeryID;
@@ -6009,6 +6010,7 @@ namespace SA33.Team12.SSIS.DAL
             stationery.ModifiedBy = modifiedBy;
             stationery.ApprovedBy = approvedBy;
             stationery.IsApproved = isApproved;
+            stationery.UnitOfMeasure = unitOfMeasure;
             return stationery;
         }
 
@@ -6377,6 +6379,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.DateTime> _DateApproved;
         partial void OnDateApprovedChanging(Nullable<global::System.DateTime> value);
         partial void OnDateApprovedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UnitOfMeasure
+        {
+            get
+            {
+                return _UnitOfMeasure;
+            }
+            set
+            {
+                OnUnitOfMeasureChanging(value);
+                ReportPropertyChanging("UnitOfMeasure");
+                _UnitOfMeasure = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UnitOfMeasure");
+                OnUnitOfMeasureChanged();
+            }
+        }
+        private global::System.String _UnitOfMeasure;
+        partial void OnUnitOfMeasureChanging(global::System.String value);
+        partial void OnUnitOfMeasureChanged();
 
         #endregion
     
