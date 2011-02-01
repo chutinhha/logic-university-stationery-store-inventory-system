@@ -25,7 +25,11 @@
         }
         .style7
         {
-            width: 777px;
+            width: 396px;
+        }
+        .style8
+        {
+            width: 324px;
         }
     </style>
 </asp:Content>
@@ -152,7 +156,29 @@
     </asp:GridView>
     <table style="width: 100%;">
         <tr>
+            <td class="style8">
+                Attention To</td>
+            <td class="style7">
+                <asp:DropDownList ID="DropDownList3" runat="server" 
+                    DataSourceID="ObjectDataSource3">
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="ObjectDataSource3" runat="server">
+                </asp:ObjectDataSource>
+            </td>
             <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style8">
+                Date To Supply</td>
+            <td class="style7">
+                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+&nbsp;(dd/mm/yyyy)</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style8">
                 &nbsp;
             </td>
             <td class="style7">
