@@ -227,7 +227,7 @@ namespace SA33.Team12.SSIS.DAL
         #endregion
 
         #region CollectionPoints
-        public List<CollectionPoint> FindCollectionPointsByCriteria(DTO.CollectionPoint criteria)
+        public List<CollectionPoint> FindCollectionPointsByCriteria(DTO.CollectionPointSearchDTO criteria)
         {
             var Query = from cp in context.CollectionPoints
                         where cp.CollectionPointID == (criteria.CollectionPointID == 0 
