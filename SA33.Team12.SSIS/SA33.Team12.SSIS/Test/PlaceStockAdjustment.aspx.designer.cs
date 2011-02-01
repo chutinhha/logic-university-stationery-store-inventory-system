@@ -85,13 +85,13 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.TextBox txtQuantity;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtReason;
         
         /// <summary>
         /// btnAdd control.
@@ -103,13 +103,31 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// ddlCategoryID control.
+        /// ltDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoryID;
+        protected global::System.Web.UI.WebControls.Literal ltDescription;
+        
+        /// <summary>
+        /// ltQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltQuantity;
+        
+        /// <summary>
+        /// ltReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltReason;
         
         /// <summary>
         /// GridView1 control.
