@@ -14,7 +14,6 @@ namespace SA33.Team12.SSIS.Test
 {
     public partial class PlaceStockAdjustment : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -75,7 +74,7 @@ namespace SA33.Team12.SSIS.Test
             myTable.Rows[rowNum].Delete();
         }
         
-        //Add data to datatable which we have created 
+        //Add data to session datatable 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             if (txtQuantity.Text.Trim() == "")
@@ -119,13 +118,19 @@ namespace SA33.Team12.SSIS.Test
             }
         }
 
+        //To delete a datarow in session datatable
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int stationeryID = Convert.ToInt32(this.ddlStationeryID.Text.ToString());
-            //((DataTable)Session["myDatatable"])
             DeleteDataFromTable(0, (DataTable)Session["myDatatable"]);
             this.GridView1.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
             this.GridView1.DataBind();
+        }
+
+        //To write the data in the table into database
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+
         } 
    }
 }
