@@ -85,13 +85,13 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.GridView gvPOItems;
         
         /// <summary>
-        /// DropDownList3 control.
+        /// ddlAttentionTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAttentionTo;
         
         /// <summary>
         /// ObjectDataSource3 control.
@@ -103,13 +103,13 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource3;
         
         /// <summary>
-        /// TextBox3 control.
+        /// txtDateToSupply control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtDateToSupply;
         
         /// <summary>
         /// btnSubmit control.
