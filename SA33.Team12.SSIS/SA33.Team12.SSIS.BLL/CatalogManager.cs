@@ -328,7 +328,7 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetStationeryPriceByID(StationeryPriceID);
         }
 
-        public List<StationeryPrice> FindStationeryPricesByCriteria(StationeryPriceSearchDTO criteria)
+        public StationeryPrice FindStationeryPricesByCriteria(StationeryPriceSearchDTO criteria)
         {
             return catalogDAO.FindStationeryPricesByCriteria(criteria);
         }
