@@ -96,7 +96,9 @@
             </td>
             <td class="style6">
                 &nbsp;
-                <asp:DropDownList ID="ddlDescription" runat="server">
+                <asp:DropDownList ID="ddlDescription" runat="server" 
+                    DataSourceID="ObjectDataSource4" DataTextField="Description" 
+                    DataValueField="StationeryID">
                 </asp:DropDownList>
             </td>
             <td class="style4">
@@ -126,6 +128,14 @@
         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="GetAllCategories"
         TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
+        SelectMethod="GetStationeriesByCategory" 
+        TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlCategory" Name="CategoryID" 
+                PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
     <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
         <Columns>
             <asp:DynamicField DataField="StationeryID" HeaderText="StationeryID" />
