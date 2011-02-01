@@ -90,6 +90,9 @@
                 <td class="style2">
                     <asp:Label ID="lblStationeryID" runat="server" Text="Description"></asp:Label>
                 </td>
+                <td class="style2">
+                    <asp:Label ID="lblType" runat="server" Text="Type"></asp:Label>
+                </td>
                 <td class="style5">
                     <asp:Label ID="lblQuantity" runat="server" Text="Quantity"></asp:Label>
                 </td>
@@ -112,11 +115,21 @@
                         SelectMethod="GetAllStationeries" TypeName="SA33.Team12.SSIS.DAL.CatalogDAO">
                     </asp:ObjectDataSource>
                 </td>
+                <td class="style7">
+        <asp:DropDownList ID="ddlType" runat="server" Height="19px" 
+                        style="margin-left: 0px" Width="92px">
+            <asp:ListItem></asp:ListItem>
+            <asp:ListItem Value="1">Add Stock</asp:ListItem>
+            <asp:ListItem Value="2">Deduct Stock</asp:ListItem>
+            <asp:ListItem Value="3">Consumption</asp:ListItem>
+            <asp:ListItem Value="4">Damage</asp:ListItem>
+        </asp:DropDownList>
+                </td>
                 <td class="style8">
                     <asp:TextBox ID="txtQuantity" runat="server" Width="71px"></asp:TextBox>
                 </td>
                 <td class="style9">
-                    <asp:TextBox ID="txtReason" runat="server" Width="421px"></asp:TextBox>
+                    <asp:TextBox ID="txtReason" runat="server" Width="389px"></asp:TextBox>
                 </td>
                 <td class="style10">
                     <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
@@ -127,6 +140,9 @@
                     </td>
                 <td class="style12">
                     <asp:Literal ID="ltDescription" runat="server"></asp:Literal>
+                </td>
+                <td class="style12">
+                    <asp:Literal ID="ltStock" runat="server"></asp:Literal>
                 </td>
                 <td class="style13">
                     <asp:Literal ID="ltQuantity" runat="server"></asp:Literal>
