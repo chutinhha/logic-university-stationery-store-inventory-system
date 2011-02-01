@@ -25,7 +25,6 @@ namespace SA33.Team12.SSIS.DAL
                     from c in context.Categories
                     where c.CategoryID == (criteria.CategoryID == 0 ? c.CategoryID : criteria.CategoryID)
                     && c.Name.Contains((criteria.Name == null || criteria.Name == "" ? c.Name : criteria.Name))
-                    && c.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? c.UnitOfMeasure : criteria.UnitOfMeasure)
                     && c.IsApproved == (criteria.IsApproved == null ? c.IsApproved : criteria.IsApproved)
                     && (EntityFunctions.DiffDays(c.DateCreated, (criteria.StartDateCreated == null || criteria.StartDateCreated == DateTime.MinValue ? c.DateCreated : criteria.StartDateCreated)) <= 0
                       && EntityFunctions.DiffDays(c.DateCreated, (criteria.EndDateCreated == null || criteria.EndDateCreated == DateTime.MinValue ? c.DateCreated : criteria.EndDateCreated)) >= 0)
@@ -92,7 +91,6 @@ namespace SA33.Team12.SSIS.DAL
                                          select s).First<Category>();
                 
                 tempCategory.Name = category.Name;
-                tempCategory.UnitOfMeasure = category.UnitOfMeasure;
                 tempCategory.IsApproved = category.IsApproved;
                 tempCategory.DateCreated = category.DateCreated;
                 tempCategory.DateModified = category.DateModified;
@@ -165,6 +163,7 @@ namespace SA33.Team12.SSIS.DAL
                     && s.ModifiedBy == (criteria.ModifiedBy == null ? s.ModifiedBy : criteria.ModifiedBy)
                     && s.ApprovedBy == (criteria.ApprovedBy == null ? s.ApprovedBy : criteria.ApprovedBy)
                     && s.IsApproved == (criteria.IsApproved == null ? s.IsApproved : criteria.IsApproved)
+                    && s.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? s.UnitOfMeasure : criteria.UnitOfMeasure)
                     select s;
                 List<Stationery> stationeries = Query.ToList<Stationery>();
                 return stationeries;
@@ -246,6 +245,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempStationery.ModifiedByUser = stationery.ModifiedByUser;
                 tempStationery.ApprovedByUser = stationery.ApprovedByUser;
                 tempStationery.IsApproved = stationery.IsApproved;
+                tempStationery.UnitOfMeasure = stationery.UnitOfMeasure;
 
                 using (TransactionScope ts = new TransactionScope())
                 {
@@ -309,6 +309,7 @@ namespace SA33.Team12.SSIS.DAL
                     && ss.ModifiedBy == (criteria.ModifiedBy == null ? ss.ModifiedBy : criteria.ModifiedBy)
                     && ss.ApprovedBy == (criteria.ApprovedBy == null ? ss.ApprovedBy : criteria.ApprovedBy)
                     && ss.IsApproved == (criteria.IsApproved == null ? ss.IsApproved : criteria.IsApproved)
+                    && ss.UnitOfMeasure == (criteria.UnitOfMeasure == null || criteria.UnitOfMeasure == "" ? ss.UnitOfMeasure : criteria.UnitOfMeasure)
                     select ss;
                 List<SpecialStationery> specialStationeries = Query.ToList<SpecialStationery>();
                 return specialStationeries;
@@ -375,6 +376,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempSpecialStationery.ModifiedByUser = specialStationery.ModifiedByUser;
                 tempSpecialStationery.ApprovedByUser = specialStationery.ApprovedByUser;
                 tempSpecialStationery.IsApproved = specialStationery.IsApproved;
+                tempSpecialStationery.UnitOfMeasure = specialStationery.UnitOfMeasure;
 
                 using (TransactionScope ts = new TransactionScope())
                 {

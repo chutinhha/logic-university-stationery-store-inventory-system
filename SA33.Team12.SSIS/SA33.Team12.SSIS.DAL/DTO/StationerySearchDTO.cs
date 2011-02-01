@@ -33,5 +33,6 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public int ModifiedBy { get; set; }
         public int ApprovedBy { get; set; }
         public bool IsApproved { get; set; }
+        public string UnitOfMeasure { get; set; }
     }
 }
