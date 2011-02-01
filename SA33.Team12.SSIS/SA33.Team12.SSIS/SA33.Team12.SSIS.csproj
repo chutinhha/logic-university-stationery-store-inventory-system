@@ -63,10 +63,6 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\aspnetdb_log.LDF">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
@@ -276,6 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Approval\" />
+    <Folder Include="App_Data\" />
     <Folder Include="Handle Request\" />
     <Folder Include="Notification\" />
     <Folder Include="Print\" />

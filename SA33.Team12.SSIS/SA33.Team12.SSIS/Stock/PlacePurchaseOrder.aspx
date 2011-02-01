@@ -106,7 +106,7 @@
                 <asp:TextBox ID="txtOrderQuantity" runat="server"></asp:TextBox>
             </td>
             <td>
-                <asp:Button ID="btnAdd" runat="server" Text="Add" />
+                <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
             </td>
         </tr>
         <tr>
@@ -139,6 +139,11 @@
     <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
         <Columns>
             <asp:DynamicField DataField="StationeryID" HeaderText="StationeryID" />
+           <%-- <asp:TemplateField Visible=false>
+                <ItemTemplate>
+                    <asp:HiddenField runat="server" ID="StationeryIDHiddenField" Value='<%# Eval("StationeryID") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>--%>
             <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
             <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />

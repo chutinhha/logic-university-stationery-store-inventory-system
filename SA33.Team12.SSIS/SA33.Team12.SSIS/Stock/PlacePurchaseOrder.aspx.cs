@@ -29,20 +29,10 @@ namespace SA33.Team12.SSIS.Stock
         //populate all the stationeries whose current quantity in hand are less than reorder level
         protected void Page_Load(object sender, EventArgs e)
         {
-            //using (CatalogManager cm = new CatalogManager())
-            //{
-            //    List<Stationery> stationeries = cm.GetAllStationeries();
-
-            //    foreach (Stationery s in stationeries)
-            //    {
-            //        if (s.QuantityInHand <= s.ReorderLevel)
-            //        {
-            //            stationeryToOrder.Add(s);
-            //        }
-            //    }
-            //}
-            //gvPOItems.DataSource = stationeryToOrder;
-            //gvPOItems.DataBind();
+            foreach (GridViewRow r in gvPOItems.Rows)
+            {
+                Control control =  (TextBox)r.FindControl("TextBox2");
+            }
       //      lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName ;
         }
 
@@ -73,8 +63,15 @@ namespace SA33.Team12.SSIS.Stock
                 foreach (GridViewRow r in gvPOItems.Rows)
                 {
                     PurchaseOrderItem item = new PurchaseOrderItem();
+
+                    //HiddenField StationeryIDHiddenField = r.FindControl("StationeryIDHiddenField") as HiddenField;
+                    //if (StationeryIDHiddenField != null)
+                    //{
+                    //        // StationeryIDHiddenField.Value;
+                    //}
+
                     item.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
-                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text);
+                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text.ToString());
                     item.QuantityToOrder = Convert.ToInt32(r.Cells[6].Text);
                     using (CatalogManager cm = new CatalogManager())
                     {
@@ -87,7 +84,7 @@ namespace SA33.Team12.SSIS.Stock
                     }
                     pom.CreatePurchaseOrderItem(item);
                 }
-
+     //           purchaseOrder.PONumber = "";
                 purchaseOrder.SupplierID = suppID;
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
@@ -97,6 +94,11 @@ namespace SA33.Team12.SSIS.Stock
 
                 PurchaseOrder newOrder = pom.CreatePurchaseOrder(purchaseOrder);
             }
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

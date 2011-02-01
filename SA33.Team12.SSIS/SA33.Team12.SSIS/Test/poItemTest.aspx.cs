@@ -59,7 +59,6 @@ namespace SA33.Team12.SSIS.Test
                 newItem.DeliveryRemarks = item.DeliveryRemarks;
                 PurchaseOrderItem newItem1 = pom.CreatePurchaseOrderItem(newItem);
             }
-          
         }
 
         protected void ButtonDelete_Click(object sender, EventArgs e)
