@@ -19,10 +19,6 @@
         {
             width: 462px;
         }
-        .style6
-        {
-            width: 182px;
-        }
         .style7
         {
             width: 396px;
@@ -30,6 +26,10 @@
         .style8
         {
             width: 324px;
+        }
+        .style9
+        {
+            width: 330px;
         }
     </style>
 </asp:Content>
@@ -76,7 +76,7 @@
             <td class="style2">
                 &nbsp; Category
             </td>
-            <td class="style6">
+            <td class="style9">
                 &nbsp; Item Description
             </td>
             <td class="style4">
@@ -94,7 +94,7 @@
                     AutoPostBack="True">
                 </asp:DropDownList>
             </td>
-            <td class="style6">
+            <td class="style9">
                 &nbsp;
                 <asp:DropDownList ID="ddlDescription" runat="server" 
                     DataSourceID="ObjectDataSource4" DataTextField="Description" 
@@ -113,7 +113,7 @@
             <td class="style2">
                 &nbsp;
             </td>
-            <td class="style6">
+            <td class="style9">
                 &nbsp;
             </td>
             <td class="style4">
@@ -138,17 +138,13 @@
     </asp:ObjectDataSource>
     <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
         <Columns>
-            <asp:DynamicField DataField="StationeryID" HeaderText="StationeryID" />
-           <%-- <asp:TemplateField Visible=false>
-                <ItemTemplate>
-                    <asp:HiddenField runat="server" ID="StationeryIDHiddenField" Value='<%# Eval("StationeryID") %>' />
-                </ItemTemplate>
-            </asp:TemplateField>--%>
+            <asp:BoundField DataField="StationeryID" HeaderText="StationeryID" 
+                SortExpression="StationeryID" />
             <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
             <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+            <asp:BoundField DataField="QuantityInHand" HeaderText="QuantityInHand" SortExpression="QuantityInHand" />
             <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
             <asp:BoundField DataField="ReorderQuantity" HeaderText="ReorderQuantity" SortExpression="ReorderQuantity" />
-            <asp:BoundField DataField="QuantityInHand" HeaderText="QuantityInHand" SortExpression="QuantityInHand" />
             <asp:TemplateField HeaderText="QuantityToOrder">
                 <HeaderTemplate>
                     QuantityToOrder
