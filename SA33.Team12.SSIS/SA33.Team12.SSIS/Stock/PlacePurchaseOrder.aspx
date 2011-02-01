@@ -126,8 +126,7 @@
         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="GetAllCategories"
         TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
-    <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" 
-        AutoGenerateColumns="False" DataKeyNames="StationeryID">
+    <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
         <Columns>
             <asp:DynamicField DataField="StationeryID" HeaderText="StationeryID" />
             <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
@@ -143,14 +142,6 @@
                     <asp:TextBox ID="TextBox2" runat="server" Height="23px" Width="117px" 
                         DataSourceID="ObjectDataSource3" Text='<%# Bind("ReorderQuantity", "{0}") %>'></asp:TextBox>
                     <br />
-                    <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
-                        SelectMethod="GetQuantityToOrder" 
-                        TypeName="SA33.Team12.SSIS.BLL.PurchaseOrderManager">
-                        <SelectParameters>
-                            <asp:ControlParameter ControlID="gvPOItems" Name="stationeryId" 
-                                PropertyName="SelectedValue" Type="Int32" />
-                        </SelectParameters>
-                    </asp:ObjectDataSource>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Supplier">
@@ -193,6 +184,7 @@
         <tr>
             <td class="style8">
                 &nbsp;
+                <asp:DynamicDataManager ID="DynamicDataManager" runat="server" />
             </td>
             <td class="style7">
                 &nbsp;
