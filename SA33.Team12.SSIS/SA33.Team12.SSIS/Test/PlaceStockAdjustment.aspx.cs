@@ -169,7 +169,7 @@ namespace SA33.Team12.SSIS.Test
                     //item.StationeryID = Convert.ToInt32(r.Cells[0].ToString());
                     //int z = r..Cells[0].Text;
 
-                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text);
+                    item.StationeryID = Convert.ToInt32(r.Cells[1].Text);
                     item.Type = Convert.ToInt32(r.Cells[1].Text.ToString());
                     item.Quantity = Convert.ToInt32(r.Cells[2].Text);
                     item.Reason = r.Cells[1].Text;
