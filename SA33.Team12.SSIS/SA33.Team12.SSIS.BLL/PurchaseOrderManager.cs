@@ -163,18 +163,9 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         // puchase order reorder automation, will handle both standard stationery and special stationery
-        public int GetQuantityToOrder(PurchaseOrderItem item)
+        public int GetQuantityToOrder(Stationery item)
         {
             int orderQuantity = 0;
-            bool special = false;
-            int id = 0;
-            if (item.SpecialStationeryID == 0 && item.StationeryID != 0)
-                id = item.StationeryID;
-            else if (item.SpecialStationeryID != 0 && item.StationeryID == 0)
-            {
-                id = (int)item.SpecialStationeryID;
-                special = true;
-            }
 
             // get all the requisitions/requisition items that are appoved by temp department head
 
@@ -185,37 +176,45 @@ namespace SA33.Team12.SSIS.BLL
                 List<Requisition> requisitions = rm.FindRequisitionByCriteria(criteria);
                 foreach (Requisition r in requisitions)
                 {
-                    if (special)
-                    {
-                        foreach (SpecialRequisitionItem ri in r.SpecialRequisitionItems)
-                        {
-                            if (ri.SpecialStationeryID == id)
-                            {
-                                orderQuantity += ri.QuantityRequested;
-                            }
-                        }
-                    }
-                    else
-                    {
+                 
                         foreach (RequisitionItem ri in r.RequisitionItems)
                         {
-                            if (ri.StationeryID == id)
+                            if (ri.StationeryID == item.StationeryID)
                             {
                                 orderQuantity += ri.QuantityRequested;
                             }
                         }
                         using (CatalogManager cm = new CatalogManager())
                         {
-                            Stationery stationeryToOrder = cm.FindStationeryByID(id);
+                            Stationery stationeryToOrder = cm.FindStationeryByID(item.StationeryID);
                             orderQuantity += stationeryToOrder.ReorderLevel - stationeryToOrder.QuantityInHand + stationeryToOrder.ReorderQuantity;
                         }
                     }
-
-                }
             }
             return orderQuantity;
         }
 
+        public int GetQuantityToOrderSpecial(SpecialStationery item)
+        {
+            int orderQuantity = 0;
+            RequisitionSearchDTO criteria = new RequisitionSearchDTO();
+            criteria.StatusID = 1;  // respoding to the status "Approved & pending"
+            using (RequisitionManager rm = new RequisitionManager())
+            {
+                List<Requisition> requisitions = rm.FindRequisitionByCriteria(criteria);
+                foreach (Requisition r in requisitions)
+                {
+                    foreach (SpecialRequisitionItem ri in r.SpecialRequisitionItems)
+                    {
+                        if (ri.SpecialStationeryID == item.SpecialStationeryID)
+                        {
+                            orderQuantity += ri.QuantityRequested;
+                        }
+                    }
+                }
+            }
+            return orderQuantity;
+        }
         // validate puchase order
         private bool ValidatePurchaseOrder(PurchaseOrder purchaseOrder, PurchaseOrderMethod purchaseOrderMethod)
         {
