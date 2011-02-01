@@ -14,6 +14,7 @@ namespace SA33.Team12.SSIS.Test
 {
     public partial class PlaceStockAdjustment : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -205,7 +206,7 @@ namespace SA33.Team12.SSIS.Test
         //To clear all data in GridView
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            //myDt.Dispose();
+            //No idea on how to clear the gridview data
         }
     }
 }
