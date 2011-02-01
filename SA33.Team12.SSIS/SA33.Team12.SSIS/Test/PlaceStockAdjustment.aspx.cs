@@ -82,6 +82,18 @@ namespace SA33.Team12.SSIS.Test
                 this.ltQuantity.Text = "Required";
                 return;
             }
+            if (txtQuantity.Text.Trim() != "")
+            {
+                try
+                {
+                    int i = Convert.ToInt32(txtQuantity.Text.ToString().Trim());
+                }
+                catch
+                {
+                    this.ltQuantity.Text = "Numeric!";
+                    return;
+                }
+            }
             if (txtReason.Text.Trim() == "")
             {
                 this.ltQuantity.Text = "";
