@@ -128,8 +128,10 @@ namespace SA33.Team12.SSIS.Test
 
                 try
                 {
+                    //Query the stationery description
                     CatalogDAO cat = new CatalogDAO();
                     String description = cat.GetStationeryByID(stationeryID).Description;
+
                     DataRow foundRow = ((DataTable)Session["myDatatable"]).Rows.Find(stationeryID);
                     int rowNum = Convert.ToInt32(foundRow);
                     AddDataToTable(stationeryID, description, type, quantity, reason, (DataTable)Session["myDatatable"]);
@@ -186,6 +188,8 @@ namespace SA33.Team12.SSIS.Test
                     adjustmentVoucherTransaction.CreatedBy = 1; //Must be the userid of the person who creates it
 
                     AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+
+
                 }
             }
         }
