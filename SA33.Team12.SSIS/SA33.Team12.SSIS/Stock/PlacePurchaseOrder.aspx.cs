@@ -16,6 +16,11 @@ namespace SA33.Team12.SSIS.Stock
         List<PurchaseOrderItem> purchaseOrderItems = new List<PurchaseOrderItem>();
         List<Stationery> stationeryToOrder = new List<Stationery>();
 
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            this.DynamicDataManager.RegisterControl(this.gvPOItems);
+            this.gvPOItems.EnableDynamicData(typeof(Stationery));
+        }
         //populate all the stationeries whose current quantity in hand are less than reorder level
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,6 +48,11 @@ namespace SA33.Team12.SSIS.Stock
             using (CatalogManager cm = new CatalogManager())
             {
                 List<Stationery> stationeries = cm.FindStationeriesByCriteria(sdto);
+                ddlDescription.DataSource = stationeries;
+                ddlDescription.DataBind();
+
+                ddlDescription.DataTextField = "Description";
+                ddlDescription.DataValueField = "StationeryID";
             }
         }
 
@@ -74,7 +84,7 @@ namespace SA33.Team12.SSIS.Stock
                 purchaseOrder.SupplierID = suppID;
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-   //             purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
+                purchaseOrder.CreatedBy = 1;
                 purchaseOrder.IsDelivered = false;
                 purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
 
