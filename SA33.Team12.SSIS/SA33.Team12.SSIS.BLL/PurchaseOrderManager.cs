@@ -163,7 +163,7 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         // purchase order reorder automation, will give recommended reorder quantity for standard stationery to satisfy pending requisition
-        public int GetQuantityToOrder(Stationery item)
+        public int GetQuantityToOrder(int stationeryId)
         {
             int orderQuantity = 0;
 
@@ -179,14 +179,14 @@ namespace SA33.Team12.SSIS.BLL
                  
                         foreach (RequisitionItem ri in r.RequisitionItems)
                         {
-                            if (ri.StationeryID == item.StationeryID)
+                            if (ri.StationeryID == stationeryId)
                             {
                                 orderQuantity += ri.QuantityRequested;
                             }
                         }
                         using (CatalogManager cm = new CatalogManager())
                         {
-                            Stationery stationeryToOrder = cm.FindStationeryByID(item.StationeryID);
+                            Stationery stationeryToOrder = cm.FindStationeryByID(stationeryId);
                             orderQuantity += stationeryToOrder.ReorderLevel - stationeryToOrder.QuantityInHand + stationeryToOrder.ReorderQuantity;
                         }
                     }
