@@ -175,7 +175,8 @@
         <table style="width:100%;">
             <tr>
                 <td class="style17">
-                    &nbsp;</td>
+                    <asp:Literal ID="ltMessage" runat="server"></asp:Literal>
+                </td>
                 <td class="style16">
                     <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
                         style="margin-left: 50px; margin-right: 3px" Text="Submit" />
