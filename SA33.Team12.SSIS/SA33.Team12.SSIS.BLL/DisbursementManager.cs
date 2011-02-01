@@ -11,6 +11,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace SA33.Team12.SSIS.BLL
 {
     public class DisbursementManager : SA33.Team12.SSIS.BLL.BusinessLogic
@@ -18,7 +19,7 @@ namespace SA33.Team12.SSIS.BLL
         private DisbursementDAO disbursementDAO;
         private enum DisbursementMethod
         {
-            Create, Update
+            Create, Update, CreateBySRF
         };
 
         public DisbursementManager()
@@ -53,6 +54,30 @@ namespace SA33.Team12.SSIS.BLL
             }
             return newDisbursement;
         }
+
+        public Disbursement CreateDisbursementBySRF(StationeryRetrievalForm SRF)
+        {
+            Disbursement newDisbursement = new Disbursement();
+            Disbursement createdDisbursement = new Disbursement();
+            
+            try
+            {
+                if (ValidateStationeryRetrievalForm(SRF, DisbursementMethod.CreateBySRF))
+                {
+                    newDisbursement.DateCreated = Convert.ToDateTime(DateTime.Now.Date.ToShortDateString());
+                    newDisbursement.StationeryRetrievalFormID = SRF.StationeryRetrievalFormID;
+                    newDisbursement.CreatedBy = 0;
+                    createdDisbursement = disbursementDAO.CreateDisbursement(newDisbursement);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return createdDisbursement;
+        }
+
+
 
         public Disbursement UpdateDisbursement(Disbursement disbursement)
         {
@@ -223,7 +248,33 @@ namespace SA33.Team12.SSIS.BLL
                 }
                 return false;
             }
+            catch (Exception)
+            {
+                throw new Exceptions.DisbursmentException(errMsg);
+            }
+        }
 
+        //validate SRF
+        private bool ValidateStationeryRetrievalForm(StationeryRetrievalForm SRF, DisbursementMethod SRFMethod)
+        {
+            string errMsg = "";
+            try
+            {
+                if (SRF != null)
+                {
+                    if (SRFMethod == DisbursementMethod.CreateBySRF)
+                    {
+                        errMsg = "Create disbursement By SRF failed. Please try again later";
+                        if ((SRF.StationeryRetrievalNumber != null || SRF.StationeryRetrievalNumber != "") &&
+                            (SRF.RetrievedBy != 0 || SRF.User != null) &&
+                            (SRF.DateRetrieved != null))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
             catch (Exception)
             {
                 throw new Exceptions.DisbursmentException(errMsg);
