@@ -1849,7 +1849,7 @@
           <Property Name="DateModified" Type="DateTime" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedBy" Type="Int32" />
           <Property Name="IsApproved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="SA33.Team12.SSIS.Model.Categories_Stationeries_FK1" FromRole="Stationeries" ToRole="Categories" />
           <NavigationProperty Name="DisbursementItems" Relationship="SA33.Team12.SSIS.Model.Stationeries_DisbursementItems_FK1" FromRole="Stationeries" ToRole="DisbursementItems" />
