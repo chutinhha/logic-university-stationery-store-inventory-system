@@ -21,6 +21,11 @@ namespace SA33.Team12.SSIS.Stock
             this.DynamicDataManager.RegisterControl(this.gvPOItems);
             this.gvPOItems.EnableDynamicData(typeof(Stationery));
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+
+        }
         //populate all the stationeries whose current quantity in hand are less than reorder level
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,18 +48,20 @@ namespace SA33.Team12.SSIS.Stock
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StationerySearchDTO sdto = new StationerySearchDTO();
-            sdto.CategoryID = Convert.ToInt32(ddlCategory.SelectedValue);
-            using (CatalogManager cm = new CatalogManager())
-            {
-                List<Stationery> stationeries = cm.FindStationeriesByCriteria(sdto);
-                ddlDescription.DataSource = stationeries;
-                ddlDescription.DataBind();
+            //StationerySearchDTO sdto = new StationerySearchDTO();
+            //sdto.CategoryID = Convert.ToInt32(ddlCategory.SelectedValue);
+            //using (CatalogManager cm = new CatalogManager())
+            //{
+            //    List<Stationery> stationeries = cm.FindStationeriesByCriteria(sdto);
+            //    ddlDescription.DataSource = stationeries;
+            //    ddlDescription.DataBind();
 
-                ddlDescription.DataTextField = "Description";
-                ddlDescription.DataValueField = "StationeryID";
-            }
+            //    ddlDescription.DataTextField = "Description";
+            //    ddlDescription.DataValueField = "StationeryID";
+            //}
         }
+
+
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -84,7 +91,7 @@ namespace SA33.Team12.SSIS.Stock
                 purchaseOrder.SupplierID = suppID;
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-                purchaseOrder.CreatedBy = 1;
+                purchaseOrder.CreatedBy = 1; //testing 
                 purchaseOrder.IsDelivered = false;
                 purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
 
