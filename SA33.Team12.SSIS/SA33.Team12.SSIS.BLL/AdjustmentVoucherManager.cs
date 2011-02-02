@@ -23,9 +23,10 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         #region AdjustmentVoucherTransaction(Temporary Table) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
- 
-        public void CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+
+        public AdjustmentVoucherTransaction CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
         {
+
             try
             {
                 adjustmentVoucherDAO.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
@@ -34,6 +35,7 @@ namespace SA33.Team12.SSIS.BLL
             {
                 throw new Exception("Adjustment Voucher Transaction Creation Failed" + ex.Message);
             }
+            return adjustmentVoucherTransaction;
         }
 
         public void ApproveAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
