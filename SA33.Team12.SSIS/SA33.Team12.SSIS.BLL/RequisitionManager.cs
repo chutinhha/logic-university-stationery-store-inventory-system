@@ -270,6 +270,38 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         /// <summary>
+        /// Get Requistion By ID
+        /// </summary>
+        /// <returns></returns>
+        public Requisition GetRequisitionByID(int RequisitionID)
+        {
+            Requisition temp = requisitionDAO.GetRequisitionByID(RequisitionID);
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found.");
+            return null;
+        }
+
+        /// <summary>
+        /// Get All Approved Requistions
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> GetAllUnApprovedRequisitionByDepartmentID(int departmentID)
+        {
+            var result = requisitionDAO.GetAllUnApprovedRequisitionByDepartmentID(departmentID);
+           
+            if (result!= null)
+            {
+                return result;
+            }
+            ErrorMessage("Result Not Found.");
+            return null;
+           
+        }
+
+        /// <summary>
         /// Get requisition List by category
         /// </summary>
         /// <param name="category">category object</param>
@@ -414,7 +446,7 @@ namespace SA33.Team12.SSIS.BLL
 
                     if (requisitionMethod == RequisitionMethod.Approve || requisitionMethod == RequisitionMethod.Cancel)
                     {
-                        if (requisition.ApprovedBy == 0 && requisition.ApprovedByUser == null && requisition.DateApproved == null)
+                        if (requisition.ApprovedBy != 0 && requisition.ApprovedByUser.Role == "DepartmentHeads")
                         {
                             return true;
                         }
