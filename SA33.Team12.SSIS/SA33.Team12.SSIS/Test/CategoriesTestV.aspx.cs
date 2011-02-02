@@ -10,9 +10,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
-
-using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
+using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Catalog
 {
@@ -69,6 +69,26 @@ namespace SA33.Team12.SSIS.Catalog
                 ctx.ApprovalAudits.DeleteObject(audit);
                 ctx.SaveChanges();
                 ts.Complete();
+            }
+        }
+
+        protected void CategoryGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int UserID = (int)DataBinder.Eval(e.Row.DataItem, "CreatedBy");
+                if (UserID != 0)
+                {
+                    Literal userid = e.Row.FindControl("CreatedByLiteral") as Literal;
+                    if (userid != null)
+                    {
+                        using (UserManager um = new UserManager())
+                        {
+                            User user = um.GetUserByID(UserID);
+                            if (user != null) userid.Text = user.UserName;
+                        }
+                    }
+                }
             }
         }
     }
