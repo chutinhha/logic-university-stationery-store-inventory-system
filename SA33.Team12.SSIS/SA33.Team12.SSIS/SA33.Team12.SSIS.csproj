@@ -66,7 +66,6 @@
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
-    <Content Include="Test\StationeryRequest.aspx" />
     <Content Include="Test\DisbursementBLLTest.aspx" />
     <Content Include="Test\DisbursementItemTest.aspx" />
     <Content Include="Test\DisbursementTest.aspx" />
@@ -74,6 +73,7 @@
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
+    <Content Include="Test\StationeryRequest.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
@@ -145,13 +145,6 @@
     <Compile Include="Stock\PlacePurchaseOrder.aspx.designer.cs">
       <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test\StationeryRequest.aspx.cs">
-      <DependentUpon>StationeryRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test\StationeryRequest.aspx.designer.cs">
-      <DependentUpon>StationeryRequest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Test\DisbursementBLLTest.aspx.cs">
       <DependentUpon>DisbursementBLLTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -200,6 +193,13 @@
     </Compile>
     <Compile Include="Test\Stationeries.aspx.designer.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\StationeryRequest.aspx.cs">
+      <DependentUpon>StationeryRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\StationeryRequest.aspx.designer.cs">
+      <DependentUpon>StationeryRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>

@@ -82,6 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseOrderDAO.cs" />
     <Compile Include="RequisitionDAO.cs" />
+    <Compile Include="RequisitionItem.cs" />
     <Compile Include="Stationery.cs" />
     <Compile Include="StationeryDAO.cs" />
     <Compile Include="StationeryModel.Designer.cs">
