@@ -280,7 +280,7 @@ namespace SA33.Team12.SSIS.BLL
             {
                 return temp;
             }
-            ErrorMessage("Result Not Found.");
+            
             return null;
         }
 
