@@ -568,12 +568,12 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="requisitionItem">requisitionItem object</param>
         /// <returns></returns>
-        public RequisitionItem GetRequisitionItemsByID(RequisitionItem requisitionItem)
+        public RequisitionItem GetRequisitionItemsByID(int requisitionItemID)
         {
             try
             {
                 return (from ri in context.RequisitionItems
-                        where ri.RequisitionItemID == requisitionItem.RequisitionItemID
+                        where ri.RequisitionItemID == requisitionItemID
                         select ri).FirstOrDefault<RequisitionItem>();
             }
             catch (Exception)

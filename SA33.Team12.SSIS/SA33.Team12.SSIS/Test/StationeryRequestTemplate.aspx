@@ -8,7 +8,17 @@
         Width="282px" AutoGenerateRows="False" DataSourceID="RequisitionDetailsDS">
         <Fields>
             <asp:BoundField HeaderText="Requisition Form Number" DataField="RequisitionForm" />
-            <asp:BoundField HeaderText="Employee Name" DataField="CreatedBy" />
+            <asp:TemplateField HeaderText="Employee Name">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:TextBox>
+                </InsertItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField HeaderText="Department" DataField="DepartmentID" />
             <asp:BoundField HeaderText="Urgency" DataField="UrgencyID" />
             <asp:BoundField HeaderText="Date Requested" DataField="DateRequested" />
@@ -16,7 +26,7 @@
             <asp:BoundField HeaderText="Date Approved" DataField="DateApproved" />
         </Fields>
     </asp:DetailsView>
-    <asp:ObjectDataSource ID="RequisitionDetailsDS" runat="server" 
+    &nbsp;<asp:ObjectDataSource ID="RequisitionDetailsDS" runat="server" 
         SelectMethod="GetRequisitionByID" 
         TypeName="SA33.Team12.SSIS.BLL.RequisitionManager">
         <SelectParameters>
@@ -27,12 +37,37 @@
     <br />
     <h2>Items</h2>
     <asp:GridView ID="RequestItemGridView" runat="server" 
-        AutoGenerateColumns="False">
+        AutoGenerateColumns="False" AutoGenerateEditButton="True" 
+        onrowcancelingedit="RequestItemGridView_RowCancelingEdit" 
+        onrowediting="RequestItemGridView_RowEditing" 
+        onrowupdating="RequestItemGridView_RowUpdating">
         <Columns>
-            <asp:BoundField HeaderText="StationeryID" DataField="StationeryID" />
-            <asp:BoundField HeaderText="ItemCode" DataField="StationeryID" />
-            <asp:BoundField HeaderText="Description" DataField="StationeryID" />
-            <asp:BoundField HeaderText="Quantity Needed" DataField="QuantityRequested" />
+            <asp:TemplateField HeaderText="RequisitionItemID">
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("RequisitionItemID") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" 
+                        Text='<%# Bind("RequisitionItemID") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="StationeryID">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("StationeryID") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("StationeryID") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Quantity Needed">
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" 
+                        Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <h2>Special Items</h2>
