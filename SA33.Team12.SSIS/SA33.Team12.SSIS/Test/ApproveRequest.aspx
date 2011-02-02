@@ -13,8 +13,15 @@
             DataKeyNames="RequisitionID" 
             onrowcommand="GridView1_RowCommand">
             <Columns>
-                <asp:BoundField DataField="RequisitionID" HeaderText="RequisitionID" 
-                    SortExpression="RequisitionID" />
+                <asp:TemplateField HeaderText="RequisitionID" SortExpression="RequisitionID">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton2" runat="server" 
+                            Text='<%# Eval("RequisitionID") %>'></asp:LinkButton>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("RequisitionID") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="RequisitionForm" HeaderText="RequisitionForm" 
                     SortExpression="RequisitionForm" />
                 <asp:BoundField DataField="CreatedBy" HeaderText="CreatedBy" 
