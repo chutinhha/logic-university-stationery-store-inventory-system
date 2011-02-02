@@ -195,7 +195,7 @@ namespace SA33.Team12.SSIS.Test
                         adjustmentVoucherTransaction.VoucherNumber = "ME001"; //Must be unique system generated number
                         adjustmentVoucherTransaction.CreatedBy = 1; //Must be the userid of the person who creates it
 
-                        AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+               //         AdjustmentVoucherTransaction newAdjustmentVoucherTransaction = adjustmentVoucherManager.CreateAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
 
                         ltMessage.Text = "Data saved";
                     }
