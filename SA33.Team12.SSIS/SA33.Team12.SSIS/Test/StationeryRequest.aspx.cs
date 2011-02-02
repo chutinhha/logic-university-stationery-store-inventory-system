@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
+using System.Data;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -14,20 +15,29 @@ namespace SA33.Team12.SSIS.Test
         private Requisition requisition;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["Requistion"] != null)
+            if (!Page.IsPostBack)
             {
-                requisition = (Requisition)Session["Requistion"];
-            }
-            else
-            {
-                requisition = new Requisition();
-                Session["Requistion"] = requisition;
+                DataTable myDt = new DataTable();
+                myDt = CreateDataTable();
+                Session["myDatatable"] = myDt;
+                this.RequisitionItemGridView.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
+                this.RequisitionItemGridView.DataBind();
             }
 
-            RequisitionItemGridView.DataSource = requisition.RequisitionItems;
-            //RequisitionItemGridView.DataKeyNames = new string[] { "StationeryID" };
-            SpecialRequisitionItemGridView.DataSource = requisition.SpecialRequisitionItems;
+
+            //if (Session["Requistion"] != null)
+            //{
+            //    requisition = (Requisition)Session["Requistion"];
+            //}
+            //else
+            //{
+            //    requisition = new Requisition();
+            //    Session["Requistion"] = requisition;
+            //}
+
+            //RequisitionItemGridView.DataSource = requisition.RequisitionItems;
+            ////RequisitionItemGridView.DataKeyNames = new string[] { "StationeryID" };
+            //SpecialRequisitionItemGridView.DataSource = requisition.SpecialRequisitionItems;
 
 
             if (!IsPostBack)
@@ -71,14 +81,20 @@ namespace SA33.Team12.SSIS.Test
 
         protected void AddSpecialReqitem(SpecialStationery splStationery, SpecialRequisitionItem item)
         {
+            SpecialStationery specialStationery = null;
             if (splStationery != null)
             {
                 CatalogDAO d = new CatalogDAO();
-                d.CreateSpecialStationery(splStationery);
+                specialStationery = d.CreateSpecialStationery(splStationery);
             }
-            if (item != null)
+            if (item != null && specialStationery != null)
             {
+                item.SpecialStationeryID = specialStationery.SpecialStationeryID;
                 ((Requisition)Session["Requistion"]).SpecialRequisitionItems.Add(item);
+            }
+            else
+            {
+                
             }
         }
 
@@ -111,21 +127,7 @@ namespace SA33.Team12.SSIS.Test
         {               
             e.NewValues["StatusID"] = ((TextBox)RequisitionItemGridView.FindControl("StationeryIDTextBox")).Text;
             e.NewValues["QuantityRequested"] = ((TextBox)RequisitionItemGridView.FindControl("QuantityRequestedTextBox")).Text;
-        }
-
-        protected void RequisitionItemGridView_DataBound(object sender, EventArgs e)
-        {
-            
-                
-        }
-
-        protected void RequisitionItemGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {            
-            RequisitionItem temp = requisition.RequisitionItems.Where(r => r.StationeryID == Convert.ToInt32(((TextBox)RequisitionItemGridView.FindControl("StationeryID")).Text)).First<RequisitionItem>();
-
-            if (temp != null)
-                requisition.RequisitionItems.Remove(temp);
-        }
+        }     
 
         protected void AddSpecialItemButton_Click(object sender, EventArgs e)
         {
@@ -170,5 +172,64 @@ namespace SA33.Team12.SSIS.Test
             requisition.UrgencyID = 2;
             reqManager.CreateRequisition(requisition);
         }
+
+        private DataTable CreateDataTable()
+        {
+            DataTable requisitionItemsDT = new DataTable();
+            DataColumn myDataColumn;
+
+            myDataColumn = new DataColumn();
+
+            myDataColumn.DataType = Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "CategoryID";
+            requisitionItemsDT.Columns.Add(myDataColumn);           
+
+
+            myDataColumn.DataType = Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "StationeryID";
+            requisitionItemsDT.Columns.Add(myDataColumn);
+            requisitionItemsDT.PrimaryKey = new DataColumn[] { requisitionItemsDT.Columns["StationeryID"] };
+
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "QuantityNeeded";
+            requisitionItemsDT.Columns.Add(myDataColumn);
+
+            return requisitionItemsDT;
+        }
+
+        //Insert data into datatable.
+        private void AddDataToTable(int categoryID, int stationeryID,int quantity, DataTable myTable)
+        {
+            DataRow row;
+
+            row = myTable.NewRow();
+
+            row["CategoryID"] = categoryID;
+            row["StationeryID"] = stationeryID;           
+            row["Quantity"] = quantity;            
+
+            myTable.Rows.Add(row);
+        }
+
+        //Delete data from datatable.
+        private void DeleteDataFromTable(int stationeryID, DataTable myTable)
+        {
+            DataRow foundRow = myTable.Rows.Find(stationeryID);
+            int rowNum = Convert.ToInt32(foundRow);
+            myTable.Rows[rowNum].Delete();
+        }
+
+        //To delete a datarow in session datatable
+        protected void RequisitionItemGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int stationeryID = Convert.ToInt32(this.StationeryDDL.Text.ToString());
+            DeleteDataFromTable(0, (DataTable)Session["myDatatable"]);
+            this.RequisitionItemGridView.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
+            this.RequisitionItemGridView.DataBind();
+        }
+
+        
+
     }
 }

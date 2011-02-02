@@ -76,6 +76,7 @@
     <Content Include="Test\POTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="Test\StationeryRequest.aspx" />
+    <Content Include="Test\StationeryRequestTemplate.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
@@ -216,6 +217,13 @@
     </Compile>
     <Compile Include="Test\StationeryRequest.aspx.designer.cs">
       <DependentUpon>StationeryRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\StationeryRequestTemplate.aspx.cs">
+      <DependentUpon>StationeryRequestTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\StationeryRequestTemplate.aspx.designer.cs">
+      <DependentUpon>StationeryRequestTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>
