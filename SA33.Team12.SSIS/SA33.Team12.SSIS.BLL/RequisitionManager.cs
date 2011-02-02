@@ -495,7 +495,7 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem.RequisitionItemID);
                 if (temp != null && ValidateRequisitionItem(temp, RequisitionMethod.Update))
                 {
                     temp.Stationery = requisitionItem.Stationery;
@@ -522,7 +522,7 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem.RequisitionItemID);
                 if (temp != null)
                 {
                     requisitionDAO.DeleteRequisitionItem(temp);
@@ -567,15 +567,17 @@ namespace SA33.Team12.SSIS.BLL
         /// </summary>
         /// <param name="requisitionItem">requisitionItem object</param>
         /// <returns></returns>
-        public RequisitionItem GetRequisitionItemsByID(RequisitionItem requisitionItem)
+        public RequisitionItem GetRequisitionItemsByID(int requisitionItemID)
         {
             try
             {
-                var temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem);
+                var temp = requisitionDAO.GetRequisitionItemsByID(requisitionItemID);
                 if (temp != null)
+                {
                     return temp;
+                }
 
-                ErrorMessage("Result Not Found");
+               // ErrorMessage("Result Not Found");
                 return null;
             }
             catch (Exception)
@@ -611,7 +613,7 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         if ((requisitionItem.RequisitionID != 0 || requisitionItem.Requisition != null) &&
                          (requisitionItem.StationeryID != 0 || requisitionItem.Stationery != null) &&
-                         (requisitionItem.QuantityRequested > 0 && requisitionItem.QuantityRequested < requisitionItem.QuantityRequested))
+                         (requisitionItem.QuantityRequested > 0))
                         {
                             return true;
                         }

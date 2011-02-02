@@ -71,6 +71,7 @@ namespace SA33.Team12.SSIS.Test
                 if (reqItems.Count > 0)
                 {
                     RequestItemGridView.DataSource = reqItems;
+                    RequestItemGridView.DataKeyNames = new string[] { "RequisitionItemID" };
                 }
 
                 if (splReqItems.Count > 0)
@@ -81,6 +82,36 @@ namespace SA33.Team12.SSIS.Test
             }
 
             DataBind();
+        }
+
+        protected void RequestItemGridView_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            RequestItemGridView.EditIndex = e.NewEditIndex;
+            RequestItemGridView.DataBind();
+        }
+
+        protected void RequestItemGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {  
+            
+            RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
+            GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
+
+            
+            if (reqItem != null)
+            {
+                reqItem.StationeryID = Convert.ToInt32(((TextBox)row.FindControl("TextBox1")).Text);
+                reqItem.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("TextBox2")).Text);
+                
+            }
+            requisitionManager.UpdateRequisitionItem(reqItem);
+            RequestItemGridView.EditIndex = -1;
+            RequestItemGridView.DataBind();
+        }
+
+        protected void RequestItemGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            RequestItemGridView.EditIndex = -1;
+            RequestItemGridView.DataBind();
         }
     }
 }
