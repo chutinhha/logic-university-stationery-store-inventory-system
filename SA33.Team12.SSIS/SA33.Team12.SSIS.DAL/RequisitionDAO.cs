@@ -243,6 +243,40 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         /// <summary>
+        /// Get Requistion by primary key
+        /// </summary>
+        /// <returns></returns>
+        public Requisition GetRequisitionByID(int RequisitionID)
+        {
+            try
+            {
+                return GetAllRequisition().Where(t => t.RequisitionID == RequisitionID).FirstOrDefault<Requisition>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get All Approved Requistions
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> GetAllUnApprovedRequisitionByDepartmentID(int departmentID)
+        {
+            try
+            {
+                return GetAllRequisition().Where(t => (t.ApprovedBy == 0 || t.ApprovedByUser == null) && t.DepartmentID == departmentID).ToList<Requisition>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Get All Requistions by category
         /// </summary>
         /// <returns></returns>
