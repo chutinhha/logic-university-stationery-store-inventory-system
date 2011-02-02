@@ -29,6 +29,8 @@
                 SortExpression="DateCreated" />
             <asp:BoundField DataField="DateModified" HeaderText="DateModified" 
                 SortExpression="DateModified" />
+            <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" 
+                SortExpression="UnitOfMeasure" />
         </Columns>
     </asp:GridView>
 
