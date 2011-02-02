@@ -36,5 +36,10 @@ namespace SA33.Team12.SSIS.DAL
 
         [Required(ErrorMessage = "Please select location.")]
         public int LocationID { get; set; }
+
+        [Required(ErrorMessage = "Unit of measure name cannot be blank!")]
+        [StringLength(255, ErrorMessage = "Unit of measure cannot be longer than 255 characters")]
+        public string UnitOfMeasure { get; set; }
+
     }
 }
