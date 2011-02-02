@@ -25,6 +25,11 @@ namespace SA33.Team12.SSIS.Test
                 GridView1.DataSource = requisitions;
                 DataBind();
             }
+            if(requisitions.Count == 0)
+            {
+                Button1.Visible = false;
+                Response.Write("No pending requests for approval.");
+            }
 
            // ApproveSingleRequest();
         }
