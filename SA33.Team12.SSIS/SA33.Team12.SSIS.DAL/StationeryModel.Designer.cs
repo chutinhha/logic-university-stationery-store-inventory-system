@@ -46,7 +46,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "PurchaseOrders_CreatedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "PurchaseOrders", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "RequisitionItems_Of_Requisitions", "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), "RequisitionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.RequisitionItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_RequisitionItems_FK1", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "RequisitionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.RequisitionItem), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisition_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisition_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisition_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisition_Status", "Statuses", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Status), "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Requisitions_StationeryRetrievalFormByRequisitions_FK1", "Requisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), "StationeryRetrievalFormByRequisitions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormByRequisition), true)]
@@ -4235,18 +4235,16 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="requisitionID">Initial value of the RequisitionID property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="departmentID">Initial value of the DepartmentID property.</param>
-        /// <param name="approvedBy">Initial value of the ApprovedBy property.</param>
         /// <param name="requisitionForm">Initial value of the RequisitionForm property.</param>
         /// <param name="statusID">Initial value of the StatusID property.</param>
         /// <param name="urgencyID">Initial value of the UrgencyID property.</param>
         /// <param name="dateRequested">Initial value of the DateRequested property.</param>
-        public static Requisition CreateRequisition(global::System.Int32 requisitionID, global::System.Int32 createdBy, global::System.Int32 departmentID, global::System.Int32 approvedBy, global::System.String requisitionForm, global::System.Int32 statusID, global::System.Int32 urgencyID, global::System.DateTime dateRequested)
+        public static Requisition CreateRequisition(global::System.Int32 requisitionID, global::System.Int32 createdBy, global::System.Int32 departmentID, global::System.String requisitionForm, global::System.Int32 statusID, global::System.Int32 urgencyID, global::System.DateTime dateRequested)
         {
             Requisition requisition = new Requisition();
             requisition.RequisitionID = requisitionID;
             requisition.CreatedBy = createdBy;
             requisition.DepartmentID = departmentID;
-            requisition.ApprovedBy = approvedBy;
             requisition.RequisitionForm = requisitionForm;
             requisition.StatusID = statusID;
             requisition.UrgencyID = urgencyID;
@@ -4335,9 +4333,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 ApprovedBy
+        public Nullable<global::System.Int32> ApprovedBy
         {
             get
             {
@@ -4352,8 +4350,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnApprovedByChanged();
             }
         }
-        private global::System.Int32 _ApprovedBy;
-        partial void OnApprovedByChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _ApprovedBy;
+        partial void OnApprovedByChanging(Nullable<global::System.Int32> value);
         partial void OnApprovedByChanged();
     
         /// <summary>
