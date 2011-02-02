@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
 using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -42,7 +43,9 @@ namespace SA33.Team12.SSIS.Test
 
             if (requisition.RequisitionID != 0 && requisition != null)
             {
+
                 PopulateData(requisition);
+
             }
             else
             {
@@ -72,16 +75,20 @@ namespace SA33.Team12.SSIS.Test
                 {
                     RequestItemGridView.DataSource = reqItems;
                     RequestItemGridView.DataKeyNames = new string[] { "RequisitionItemID" };
+                    
                 }
 
                 if (splReqItems.Count > 0)
                 {
                     SpecialRequestItemGridView.DataSource = splReqItems;
+                    
                 }
+                DetailsView1.DataSource = reqItems;
 
+                DataBind();
             }
 
-            DataBind();
+            
         }
 
         protected void RequestItemGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -95,11 +102,13 @@ namespace SA33.Team12.SSIS.Test
             
             RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
             GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
-
-            
+            DropDownList t = (DropDownList)row.FindControl("DropDownList1");
+            Debug.WriteLine(t.Text);
+            Debug.WriteLine(e.OldValues["StationeryID"]);
+            Debug.WriteLine(e.NewValues["StationeryID"]);
             if (reqItem != null)
             {
-                reqItem.StationeryID = Convert.ToInt32(((TextBox)row.FindControl("TextBox1")).Text);
+                reqItem.StationeryID = Convert.ToInt32(t.Text);
                 reqItem.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("TextBox2")).Text);
                 
             }
@@ -112,6 +121,26 @@ namespace SA33.Team12.SSIS.Test
         {
             RequestItemGridView.EditIndex = -1;
             RequestItemGridView.DataBind();
+        }
+
+        protected void RequestItemGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+        protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+
+            RequisitionItem item = new RequisitionItem()
+            {
+                StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue),
+                QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox2")).Text),
+                
+            };
+
+            requisition.RequisitionItems.Add(item);
+            DataBind();
+            
         }
     }
 }
