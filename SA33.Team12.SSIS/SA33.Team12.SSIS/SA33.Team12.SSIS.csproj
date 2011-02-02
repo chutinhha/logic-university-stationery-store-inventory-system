@@ -63,6 +63,7 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Handle Request\Disbursement.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
@@ -123,6 +124,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handle Request\Disbursement.aspx.cs">
+      <DependentUpon>Disbursement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Handle Request\Disbursement.aspx.designer.cs">
+      <DependentUpon>Disbursement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\CategoriesTestV.aspx.cs">
       <DependentUpon>CategoriesTestV.aspx</DependentUpon>
@@ -273,7 +281,6 @@
   <ItemGroup>
     <Folder Include="Approval\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Handle Request\" />
     <Folder Include="Notification\" />
     <Folder Include="Print\" />
     <Folder Include="Request Stationery\" />
