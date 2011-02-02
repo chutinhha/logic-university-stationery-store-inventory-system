@@ -31,6 +31,15 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.ObjectDataSource RequisitionDetailsDS;
         
         /// <summary>
+        /// DetailsView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+        
+        /// <summary>
         /// RequestItemGridView control.
         /// </summary>
         /// <remarks>
