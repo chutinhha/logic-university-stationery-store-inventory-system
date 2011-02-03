@@ -67,6 +67,15 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
         
         /// <summary>
+        /// CategoryDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource CategoryDataSource;
+        
+        /// <summary>
         /// ddlDescription control.
         /// </summary>
         /// <remarks>
@@ -92,15 +101,6 @@ namespace SA33.Team12.SSIS.Stock {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAdd;
-        
-        /// <summary>
-        /// ObjectDataSource2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource2;
         
         /// <summary>
         /// ObjectDataSource4 control.

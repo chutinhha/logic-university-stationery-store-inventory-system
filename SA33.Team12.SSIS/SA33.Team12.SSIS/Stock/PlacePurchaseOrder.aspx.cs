@@ -35,43 +35,49 @@ namespace SA33.Team12.SSIS.Stock
             lblDate.Text = DateTime.Now.ToShortDateString();
         }
 
+        // create Purchase Order and together with Purchase Order Items
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            int suppID = -1;
             using (PurchaseOrderManager pom = new PurchaseOrderManager())
             {
                 PurchaseOrder purchaseOrder = new PurchaseOrder();
+
+                purchaseOrder.PONumber = "88888";
+                purchaseOrder.DateOfOrder = DateTime.Now;
+                purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
+                purchaseOrder.CreatedBy = 1; //testing purpose only
+                purchaseOrder.IsDelivered = false;
+                purchaseOrder.DateToSupply = DateTime.Now;
+                //      purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);  //dont know working or not
 
                 foreach (GridViewRow r in gvPOItems.Rows)
                 {
                     PurchaseOrderItem item = new PurchaseOrderItem();
 
-                    item.PurchaseOrderID = purchaseOrder.PurchaseOrderID;
-                    item.StationeryID = Convert.ToInt32(r.Cells[0].Text.ToString());
-                    item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("TextBox2")).Text.ToString());
+                    item.PurchaseOrder = purchaseOrder;
+                    item.StationeryID = (int) gvPOItems.DataKeys[r.RowIndex].Value;
+                    item.QuantityToOrder = 5;
+              //      item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
                     using (CatalogManager cm = new CatalogManager())
                     {
                         StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
-                        criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("DropDownList2")).SelectedValue.ToString());
+                        criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("ddlSupplier")).SelectedValue.ToString());
                         criteria.StationeryID = item.StationeryID;
-                        item.Price = (decimal) 88.88;
-               //         item.Price = cm.FindStationeryPricesByCriteria(criteria).Price;    
-                // the above command encounterd nullreference exception
+                        item.Price = (decimal)88.88;
+                        //         item.Price = cm.FindStationeryPricesByCriteria(criteria).Price;    
+                        // the above command encounterd nullreference exception
 
                         // record supplier ID for the PO
-                        suppID = criteria.SupplierID;
+                        purchaseOrder.SupplierID = criteria.SupplierID;
                     }
-                    pom.CreatePurchaseOrderItem(item);
+             //       purchaseOrderDAO.CreatePurchaseOrderItem(item);
+                   pom.CreatePurchaseOrderItem(item);
                 }
-                purchaseOrder.PONumber = "88888";
-                purchaseOrder.SupplierID = suppID;
-                purchaseOrder.DateOfOrder = DateTime.Now;
-                purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-                purchaseOrder.CreatedBy = 1; //testing purpose only
-                purchaseOrder.IsDelivered = false;
-                purchaseOrder.DateToSupply = Convert.ToDateTime( txtDateToSupply.Text);  //dont know working or not
+                
+       
 
-                PurchaseOrder newOrder = pom.CreatePurchaseOrder(purchaseOrder);
+          //      purchaseOrderDAO.CreatePurchaseOrder(purchaseOrder);
+                pom.CreatePurchaseOrder(purchaseOrder);
             }
         }
 
@@ -80,9 +86,33 @@ namespace SA33.Team12.SSIS.Stock
 
         }
 
+        // to show recommended order quantity
         protected void gvPOItems_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    int StationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
+            //    if (StationeryID != 0)
+            //    {
+            //        TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
+            //        DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
+            //        if (tb != null)
+            //        {
+            //            using (PurchaseOrderManager pom = new PurchaseOrderManager())
+            //            {
+            //                tb.Text = pom.GetQuantityToOrder(StationeryID).ToString();
+            //            }
+            //        }
+            //        if (supplier != null)
+            //        {
+            //            using (CatalogManager cm = new CatalogManager())
+            //            {
+            //                //supplier.DataSource = cm.FindSuppliersByCriteria(new SupplierSearchDTO {  = });
+            //            }
+            //        }
+            //    }
+                
+            //}
         }
 
     }
