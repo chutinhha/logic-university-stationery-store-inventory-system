@@ -64,6 +64,8 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Handle Request\Disbursement.aspx" />
+    <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
+    <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="Test\ApproveRequest.aspx" />
@@ -82,6 +84,7 @@
     <Content Include="Test\StockLogTransactionTest.aspx" />
     <Content Include="Test\TestByMichael.aspx" />
     <Content Include="Test\TestMichaelDetail.aspx" />
+    <Content Include="Test\TestStationeryPrices.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
     <Content Include="UserAdministration\UserAdd.aspx" />
@@ -137,6 +140,20 @@
     </Compile>
     <Compile Include="Handle Request\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StationeryRetrieval\StationeryRetrievalForm.aspx.cs">
+      <DependentUpon>StationeryRetrievalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StationeryRetrieval\StationeryRetrievalForm.aspx.designer.cs">
+      <DependentUpon>StationeryRetrievalForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StationeryRetrieval\StationeryRetrievalList.aspx.cs">
+      <DependentUpon>StationeryRetrievalList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StationeryRetrieval\StationeryRetrievalList.aspx.designer.cs">
+      <DependentUpon>StationeryRetrievalList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock\PurchaseOrderDetail.aspx.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
@@ -252,15 +269,24 @@
     </Compile>
     <Compile Include="Test\TestByMichael.aspx.cs">
       <DependentUpon>TestByMichael.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test\TestByMichael.aspx.designer.cs">
       <DependentUpon>TestByMichael.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\TestMichaelDetail.aspx.cs">
       <DependentUpon>TestMichaelDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test\TestMichaelDetail.aspx.designer.cs">
       <DependentUpon>TestMichaelDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestStationeryPrices.aspx.cs">
+      <DependentUpon>TestStationeryPrices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\TestStationeryPrices.aspx.designer.cs">
+      <DependentUpon>TestStationeryPrices.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\TestStationeryRequest.aspx.cs">
       <DependentUpon>TestStationeryRequest.aspx</DependentUpon>

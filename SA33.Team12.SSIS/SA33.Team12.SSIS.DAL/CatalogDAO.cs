@@ -526,7 +526,7 @@ namespace SA33.Team12.SSIS.DAL
 
         # region StationeryPrices
         // changed by Wang Pinyi on Feb 1st, 2011
-        public StationeryPrice FindStationeryPricesByCriteria(DTO.StationeryPriceSearchDTO criteria)
+        public List<StationeryPrice> FindStationeryPricesByCriteria(DTO.StationeryPriceSearchDTO criteria)
         {
             try
             {
@@ -535,10 +535,10 @@ namespace SA33.Team12.SSIS.DAL
                     where p.StationeryPriceID == (criteria.StationeryPriceID == 0 ? p.StationeryPriceID : criteria.StationeryPriceID)
                     && p.StationeryID == (criteria.StationeryID == 0 ? p.StationeryID : criteria.StationeryID)
                     && p.SupplierID == (criteria.SupplierID == 0 ? p.SupplierID : criteria.SupplierID)
-                    && p.Price == (criteria.Price == null ? p.Price : criteria.Price)
+                    && p.Price == (criteria.Price == 0 ? p.Price : criteria.Price)
                     select p;
-                StationeryPrice stationeryPrice = Query.FirstOrDefault<StationeryPrice>();
-                return stationeryPrice;
+                List<StationeryPrice> stationeryPrices = Query.ToList<StationeryPrice>();
+                return stationeryPrices;
             }
             catch (Exception)
             {
