@@ -41,7 +41,7 @@ namespace SA33.Team12.SSIS.Test
                 requisition = requisitionManager.GetRequisitionByID(Convert.ToInt32(val));
             }
 
-            if (requisition.RequisitionID != 0 && requisition != null)
+            if (requisition.RequisitionID > 0 && requisition != null)
             {
 
                 PopulateData(requisition);
@@ -56,6 +56,7 @@ namespace SA33.Team12.SSIS.Test
         private Requisition CreateRequisition()
         {
             Requisition req = new Requisition();
+            req.RequisitionID = 0;
             req.DepartmentID = 1;
             req.DateRequested = DateTime.Now.Date;
             req.UrgencyID = 1;
@@ -66,26 +67,48 @@ namespace SA33.Team12.SSIS.Test
 
         protected void PopulateData(Requisition requisition)
         {
-            if (requisition.RequisitionID != 0)
+            List<RequisitionItem> reqItems = null;
+            List<SpecialRequisitionItem> splReqItems = null;
+            if (requisition.RequisitionID > 0)
             {
-                List<RequisitionItem> reqItems = requisitionManager.GetAllRequisitionItems(requisition);
-                List<SpecialRequisitionItem> splReqItems = requisitionManager.GetAllSpecialRequisitionItems(requisition);
+                reqItems = requisitionManager.GetAllRequisitionItems(requisition);
+                splReqItems = requisitionManager.GetAllSpecialRequisitionItems(requisition);
 
                 if (reqItems.Count > 0)
                 {
                     RequestItemGridView.DataSource = reqItems;
                     RequestItemGridView.DataKeyNames = new string[] { "RequisitionItemID" };
-                    
+
                 }
 
                 if (splReqItems.Count > 0)
                 {
                     SpecialRequestItemGridView.DataSource = splReqItems;
-                    
+
                 }
                 DetailsView1.DataSource = reqItems;
 
                 DataBind();
+            }
+
+            if(requisition.RequisitionID == 0)
+            {
+                reqItems = requisition.RequisitionItems.ToList<RequisitionItem>();
+                splReqItems = requisition.SpecialRequisitionItems.ToList<SpecialRequisitionItem>();
+
+                if (reqItems.Count > 0)
+                {
+                    RequestItemGridView.DataSource = reqItems;
+                    RequestItemGridView.DataKeyNames = new string[] { "RequisitionItemID" };
+
+                }
+
+                if (splReqItems.Count > 0)
+                {
+                    SpecialRequestItemGridView.DataSource = splReqItems;
+
+                }
+                DetailsView1.DataSource = reqItems;
             }
 
             
@@ -103,9 +126,6 @@ namespace SA33.Team12.SSIS.Test
             RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
             GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
             DropDownList t = (DropDownList)row.FindControl("DropDownList1");
-            Debug.WriteLine(t.Text);
-            Debug.WriteLine(e.OldValues["StationeryID"]);
-            Debug.WriteLine(e.NewValues["StationeryID"]);
             if (reqItem != null)
             {
                 reqItem.StationeryID = Convert.ToInt32(t.Text);
@@ -138,9 +158,21 @@ namespace SA33.Team12.SSIS.Test
                 
             };
 
+            if (Session["Requisition"] != null)
+            {
+                requisition = (Requisition)Session["Requisition"];
+            }
+            else
+            {
+                requisition = CreateRequisition();
+                Session["Requisition"] = requisition;
+            }
+
             requisition.RequisitionItems.Add(item);
+            PopulateData(requisition);
             DataBind();
             
         }
+
     }
 }

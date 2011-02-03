@@ -37,8 +37,9 @@
     <br />
     <br />
     <asp:DetailsView ID="DetailsView1" runat="server" 
-        AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert" 
-        Height="50px" oniteminserting="DetailsView1_ItemInserting" Width="125px">
+        AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert"
+        Height="50px" oniteminserting="DetailsView1_ItemInserting" Width="125px" 
+        EnableViewState="False">
         <Fields>
             <asp:TemplateField HeaderText="Stationery">
                 <ItemTemplate>
