@@ -162,7 +162,10 @@ namespace SA33.Team12.SSIS.Test
             RequisitionItem item = new RequisitionItem();
 
             item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue);
-            item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox5")).Text);
+            if (((TextBox)DetailsView1.FindControl("TextBox5")).Text != string.Empty)
+            {
+                item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox5")).Text);
+            }
 
 
             if (Session["Requisition"] != null)
@@ -175,18 +178,30 @@ namespace SA33.Team12.SSIS.Test
                 Session["Requisition"] = requisition;
             }
 
-
-            foreach(var req in requisition.RequisitionItems)
+            if (requisition.RequisitionItems.Count < 1)
             {
-                if (item.StationeryID == req.StationeryID)
-                {
-                    req.QuantityRequested += item.QuantityRequested;
-                    break;
-                }              
+                requisition.RequisitionItems.Add(item);
             }
 
-            requisition.RequisitionItems.Add(item);
-           
+            else
+            {
+                foreach (var req in requisition.RequisitionItems)
+                {
+                    if (item.StationeryID == req.StationeryID)
+                    {
+                        item.QuantityRequested += req.QuantityRequested;
+                        requisition.RequisitionItems.Remove(req);
+                        requisition.RequisitionItems.Add(item);
+                        break;
+                    }
+                    else
+                    {
+                        requisition.RequisitionItems.Add(item);
+                        break;
+                    }
+                }
+            }
+
             PopulateData(requisition);
             DataBind();
 
