@@ -113,7 +113,7 @@ namespace SA33.Team12.SSIS.BLL
             PurchaseOrderItem poItem = new PurchaseOrderItem();
             try
             {
-                if (item != null && ValidatePurchaseOrderItem(item, PurchaseOrderMethod.Create))
+                if (ValidatePurchaseOrderItem(item, PurchaseOrderMethod.Create))
                 {
                     poItem = purchaseOrderDAO.CreatePurchaseOrderItem(item);
                 }
@@ -271,8 +271,8 @@ namespace SA33.Team12.SSIS.BLL
                     if (purchaseOrderItemMethod == PurchaseOrderMethod.Create)
                     {
                         errMsg = "Create Purchase Order item failed. Please try again later";
-                        if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
-                            ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
+                        if (//(item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
+                            ((item.StationeryID != 0 && item.SpecialStationeryID == null) || ((item.StationeryID == null && item.SpecialStationeryID != 0))) &&
                             (item.QuantityToOrder != 0))
                         {
                             return true;
@@ -281,7 +281,7 @@ namespace SA33.Team12.SSIS.BLL
                     if (purchaseOrderItemMethod == PurchaseOrderMethod.Update)
                     {
                         errMsg = "Update Purchase Order item failed. Please try again later";
-                        if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
+                        if (//(item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
                              ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
                              (item.QuantityToOrder != 0))
                         {
