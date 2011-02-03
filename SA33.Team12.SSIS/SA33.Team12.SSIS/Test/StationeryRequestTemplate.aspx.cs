@@ -42,12 +42,17 @@ namespace SA33.Team12.SSIS.Test
             {
                 requisition = requisitionManager.GetRequisitionByID(Convert.ToInt32(val));
             }
-            
+
 
             if (requisition.RequisitionID >= 0 && requisition != null)
             {
                 PopulateData(requisition);
-            }            
+            }
+
+            if (requisition.ApprovedBy > 0)
+            {
+                Panel1.Visible = false;
+            }
         }
 
         private Requisition CreateRequisition()
@@ -88,7 +93,7 @@ namespace SA33.Team12.SSIS.Test
                 DataBind();
             }
 
-            if(requisition.RequisitionID == 0)
+            if (requisition.RequisitionID == 0)
             {
                 reqItems = requisition.RequisitionItems.ToList<RequisitionItem>();
                 splReqItems = requisition.SpecialRequisitionItems.ToList<SpecialRequisitionItem>();
@@ -108,7 +113,7 @@ namespace SA33.Team12.SSIS.Test
                 DetailsView1.DataSource = reqItems;
             }
 
-            
+
         }
 
         protected void RequestItemGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -118,8 +123,8 @@ namespace SA33.Team12.SSIS.Test
         }
 
         protected void RequestItemGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {  
-            
+        {
+
             RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
             GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
             DropDownList t = (DropDownList)row.FindControl("DropDownList1");
@@ -127,7 +132,7 @@ namespace SA33.Team12.SSIS.Test
             {
                 reqItem.StationeryID = Convert.ToInt32(t.Text);
                 reqItem.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("TextBox2")).Text);
-                
+
             }
             requisitionManager.UpdateRequisitionItem(reqItem);
             RequestItemGridView.EditIndex = -1;
@@ -145,7 +150,7 @@ namespace SA33.Team12.SSIS.Test
             if (Session["Requisition"] != null)
             {
                 requisition = (Requisition)Session["Requisition"];
-            }          
+            }
 
             PopulateData(requisition);
             DataBind();
@@ -154,11 +159,11 @@ namespace SA33.Team12.SSIS.Test
         protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
         {
 
-            RequisitionItem item = new RequisitionItem()
-            {                
-                StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue),
-                QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox2")).Text)                
-            };
+            RequisitionItem item = new RequisitionItem();
+
+            item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue);
+            item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox5")).Text);
+
 
             if (Session["Requisition"] != null)
             {
@@ -170,10 +175,21 @@ namespace SA33.Team12.SSIS.Test
                 Session["Requisition"] = requisition;
             }
 
+
+            foreach(var req in requisition.RequisitionItems)
+            {
+                if (item.StationeryID == req.StationeryID)
+                {
+                    req.QuantityRequested += item.QuantityRequested;
+                    break;
+                }              
+            }
+
             requisition.RequisitionItems.Add(item);
+           
             PopulateData(requisition);
             DataBind();
-            
+
         }
 
     }
