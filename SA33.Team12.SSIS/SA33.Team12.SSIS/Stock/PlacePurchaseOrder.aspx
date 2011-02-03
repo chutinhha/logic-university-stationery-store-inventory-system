@@ -80,10 +80,10 @@
     <table style="width: 100%;">
         <tr>
             <td class="style2">
-                &nbsp; Category
+                Category
             </td>
             <td class="style9">
-                &nbsp; Item Description
+                Item Description 
             </td>
             <td class="style4">
                 &nbsp; Order Quantity
@@ -94,16 +94,16 @@
         </tr>
         <tr>
             <td class="style2">
-                &nbsp;
-                <asp:DropDownList ID="ddlCategory" runat="server" DataSourceID="ObjectDataSource2"
+                <asp:DropDownList ID="ddlCategory" runat="server" DataSourceID="CategoryDataSource"
                     DataTextField="Name" DataValueField="CategoryID" 
-                    OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" 
                     AutoPostBack="True">
                 </asp:DropDownList>
+                <asp:ObjectDataSource ID="CategoryDataSource" runat="server" 
+                    SelectMethod="GetAllCategories" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+                </asp:ObjectDataSource>
             </td>
             <td class="style9">
-                &nbsp;
-                <asp:DropDownList ID="ddlDescription" runat="server" 
+                &nbsp;<asp:DropDownList ID="ddlDescription" runat="server" 
                     DataSourceID="ObjectDataSource4" DataTextField="Description" 
                     DataValueField="StationeryID">
                 </asp:DropDownList>
@@ -119,8 +119,6 @@
         </table>
     </fieldset>
     
-    <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="GetAllCategories"
-        TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
         SelectMethod="GetStationeriesByCategory" 
         TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
@@ -132,7 +130,7 @@
     <fieldset>
     <legend>Items To Order</legend>
     <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False" 
-            onrowdatabound="gvPOItems_RowDataBound">
+            onrowdatabound="gvPOItems_RowDataBound" DataKeyNames="StationeryID">
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Description" HeaderText="Item Description" />
