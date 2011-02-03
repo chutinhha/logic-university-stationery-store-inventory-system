@@ -13,45 +13,27 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class PlacePurchaseOrder : System.Web.UI.Page
     {
-        List<PurchaseOrderItem> purchaseOrderItems = new List<PurchaseOrderItem>();
-        List<Stationery> stationeryToOrder = new List<Stationery>();
 
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            this.DynamicDataManager.RegisterControl(this.gvPOItems);
-            this.gvPOItems.EnableDynamicData(typeof(Stationery));
-        }
-
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-
-        }
         //populate all the stationeries whose current quantity in hand are less than reorder level
         protected void Page_Load(object sender, EventArgs e)
         {
-            foreach (GridViewRow r in gvPOItems.Rows)
+            if (!Page.IsPostBack)
             {
-                Control control =  (TextBox)r.FindControl("TextBox2");
+                Populate();
             }
-      //      lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName ;
         }
 
-        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+        protected void Populate()
         {
-            //StationerySearchDTO sdto = new StationerySearchDTO();
-            //sdto.CategoryID = Convert.ToInt32(ddlCategory.SelectedValue);
-            //using (CatalogManager cm = new CatalogManager())
-            //{
-            //    List<Stationery> stationeries = cm.FindStationeriesByCriteria(sdto);
-            //    ddlDescription.DataSource = stationeries;
-            //    ddlDescription.DataBind();
-
-            //    ddlDescription.DataTextField = "Description";
-            //    ddlDescription.DataValueField = "StationeryID";
-            //}
+            using (CatalogManager cm = new CatalogManager())
+            {
+                List<Stationery> stationeries = cm.GetStationeriesByQuantityInHandLessThanReorderLevel();
+                this.gvPOItems.DataSource = stationeries;
+                this.gvPOItems.DataBind();
+            }
+            //          lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName ;
+            lblDate.Text = DateTime.Now.ToShortDateString();
         }
-
-
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -94,6 +76,11 @@ namespace SA33.Team12.SSIS.Stock
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvPOItems_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
         }

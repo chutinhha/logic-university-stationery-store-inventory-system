@@ -17,7 +17,7 @@
         }
         .style5
         {
-            width: 462px;
+            width: 175px;
         }
         .style7
         {
@@ -31,23 +31,18 @@
         {
             width: 330px;
         }
+        .style10
+        {
+            width: 141px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>
-        Stationery Purchase Order</h1>
+    <h1> Stationery Purchase Order</h1>
+    <fieldset>
+
+    <legend> Information </legend>
     <table style="width: 100%;">
-        <tr>
-            <td class="style1">
-                &nbsp;
-            </td>
-            <td class="style5">
-                &nbsp;
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
         <tr>
             <td class="style1">
                 Created By:
@@ -55,22 +50,33 @@
             <td class="style5">
                 <asp:Label ID="lblCreatedBy" runat="server" Text="Label"></asp:Label>
             </td>
+            <td class="style10">
+                Attention To:</td>
             <td>
-                &nbsp;
+                <asp:DropDownList ID="ddlAttentionTo" runat="server" 
+                    DataSourceID="UserDataSource" DataTextField="UserName" DataValueField="UserID">
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="UserDataSource" runat="server" 
+                    SelectMethod="GetAllUsers" TypeName="SA33.Team12.SSIS.BLL.UserManager">
+                </asp:ObjectDataSource>
             </td>
         </tr>
         <tr>
             <td class="style1">
-                &nbsp;
-            </td>
+                Date:</td>
             <td class="style5">
-                &nbsp;
+                <asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label>
             </td>
+            <td class="style10">
+                Supply By</td>
             <td>
-                &nbsp;
-            </td>
+                <asp:TextBox ID="txtDateToSupply" runat="server"></asp:TextBox>
+&nbsp;(dd/mm/yyyy)</td>
         </tr>
     </table>
+    </fieldset>
+    <fieldset> 
+    <legend> Add New Purchase Order Item</legend>
     <table style="width: 100%;">
         <tr>
             <td class="style2">
@@ -90,7 +96,8 @@
             <td class="style2">
                 &nbsp;
                 <asp:DropDownList ID="ddlCategory" runat="server" DataSourceID="ObjectDataSource2"
-                    DataTextField="Name" DataValueField="CategoryID" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged"
+                    DataTextField="Name" DataValueField="CategoryID" 
+                    OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" 
                     AutoPostBack="True">
                 </asp:DropDownList>
             </td>
@@ -109,23 +116,9 @@
                 <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
             </td>
         </tr>
-        <tr>
-            <td class="style2">
-                &nbsp;
-            </td>
-            <td class="style9">
-                &nbsp;
-            </td>
-            <td class="style4">
-                &nbsp;
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-    </table>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetStationeriesByQuantityInHandLessThanReorderLevel"
-        TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
+        </table>
+    </fieldset>
+    
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="GetAllCategories"
         TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
@@ -136,73 +129,48 @@
                 PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:GridView ID="gvPOItems" runat="server" DataSourceID="ObjectDataSource1" AutoGenerateColumns="False">
+    <fieldset>
+    <legend>Items To Order</legend>
+    <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False" 
+            onrowdatabound="gvPOItems_RowDataBound">
         <Columns>
-            <asp:BoundField DataField="StationeryID" HeaderText="StationeryID" 
-                SortExpression="StationeryID" />
-            <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
-            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-            <asp:BoundField DataField="QuantityInHand" HeaderText="QuantityInHand" SortExpression="QuantityInHand" />
-            <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
-            <asp:BoundField DataField="ReorderQuantity" HeaderText="ReorderQuantity" SortExpression="ReorderQuantity" />
-            <asp:TemplateField HeaderText="QuantityToOrder">
-                <HeaderTemplate>
-                    QuantityToOrder
-                </HeaderTemplate>
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Height="23px" Width="117px" 
-                        DataSourceID="ObjectDataSource3" Text='<%# Bind("ReorderQuantity", "{0}") %>'></asp:TextBox>
-                    <br />
-                </ItemTemplate>
-            </asp:TemplateField>
+            <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
+            <asp:BoundField DataField="Description" HeaderText="Item Description" />
+            <asp:BoundField DataField="QuantityInHand" HeaderText="Current Stock" />
+            <asp:BoundField DataField="ReorderLevel" HeaderText="Reorder Level" 
+                ReadOnly="True" SortExpression="ReorderLevel" />
+            <asp:BoundField DataField="ReorderQuantity" HeaderText="Reorder Quantity" 
+                ReadOnly="True" SortExpression="ReorderQuantity" />
             <asp:TemplateField HeaderText="Supplier">
                 <ItemTemplate>
-                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="ObjectDataSource1"
-                        DataTextField="CompanyName" DataValueField="SupplierID">
+                    <asp:DropDownList ID="ddlSupplier" runat="server" 
+                        DataSourceID="SupplierDataSource" DataTextField="CompanyName" 
+                        DataValueField="SupplierID">
                     </asp:DropDownList>
-                    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllSuppliers"
-                        TypeName="SA33.Team12.SSIS.DAL.CatalogDAO"></asp:ObjectDataSource>
+                    <asp:ObjectDataSource ID="SupplierDataSource" runat="server" 
+                        SelectMethod="GetAllSuppliers" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+                    </asp:ObjectDataSource>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Recommended Reorder Quantity">
+                <ItemTemplate>
+                    <asp:TextBox ID="txtRecommend" runat="server"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    </fieldset>
+    
     <table style="width: 100%;">
         <tr>
             <td class="style8">
-                Attention To</td>
-            <td class="style7">
-                <asp:DropDownList ID="ddlAttentionTo" runat="server" 
-                    DataSourceID="ObjectDataSource3" DataTextField="FirstName" 
-                    DataValueField="UserID">
-                </asp:DropDownList>
-                <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" 
-                    SelectMethod="GetAllUsers" TypeName="SA33.Team12.SSIS.BLL.UserManager">
-                </asp:ObjectDataSource>
-            </td>
-            <td>
                 &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style8">
-                Date To Supply</td>
             <td class="style7">
-                <asp:TextBox ID="txtDateToSupply" runat="server"></asp:TextBox>
-&nbsp;(dd/mm/yyyy)</td>
+                &nbsp;</td>
             <td>
-                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" 
+                    Text="Submit" Height="44px" Width="98px" />
             </td>
         </tr>
-        <tr>
-            <td class="style8">
-                &nbsp;
-                <asp:DynamicDataManager ID="DynamicDataManager" runat="server" />
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td>
-                &nbsp;
-                </td>
-        </tr>
-    </table>
+        </table>
 </asp:Content>
