@@ -80,6 +80,8 @@
     <Content Include="Test\StationeryRequest.aspx" />
     <Content Include="Test\StationeryRequestTemplate.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
+    <Content Include="Test\TestByMichael.aspx" />
+    <Content Include="Test\TestMichaelDetail.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
     <Content Include="UserAdministration\UserAdd.aspx" />
@@ -138,12 +140,14 @@
     </Compile>
     <Compile Include="Stock\PurchaseOrderDetail.aspx.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock\PurchaseOrderDetail.aspx.designer.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock\ViewPurchaseOrder.aspx.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock\ViewPurchaseOrder.aspx.designer.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
@@ -245,6 +249,18 @@
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.designer.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestByMichael.aspx.cs">
+      <DependentUpon>TestByMichael.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestByMichael.aspx.designer.cs">
+      <DependentUpon>TestByMichael.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestMichaelDetail.aspx.cs">
+      <DependentUpon>TestMichaelDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestMichaelDetail.aspx.designer.cs">
+      <DependentUpon>TestMichaelDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\TestStationeryRequest.aspx.cs">
       <DependentUpon>TestStationeryRequest.aspx</DependentUpon>
