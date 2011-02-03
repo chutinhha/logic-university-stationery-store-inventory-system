@@ -225,6 +225,13 @@ input.textEntry
     border: 1px solid #ccc;
 }
 
+input.numericEntry
+{
+    text-align: right;
+    width: 150px;
+    border: 1px solid #ccc;
+}
+
 input.passwordEntry 
 {
     width: 320px;

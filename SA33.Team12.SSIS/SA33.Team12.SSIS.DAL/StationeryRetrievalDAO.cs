@@ -10,6 +10,7 @@ using System.Linq;
 using SA33.Team12.SSIS.DAL;
 using System.Collections.Generic;
 using System.Data.Objects;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -156,7 +157,7 @@ namespace SA33.Team12.SSIS.DAL
         /// Update the Stationery Retrieval FormItem
         /// </summary>
         /// <param name="stationeryRetrievalFormItem">stationeryRetrievalFormItem object</param>
-        public void UpdateStationeryRetrievalFormItem(StationeryRetrievalFormItem stationeryRetrievalFormItem)
+        public StationeryRetrievalFormItem UpdateStationeryRetrievalFormItem(StationeryRetrievalFormItem stationeryRetrievalFormItem)
         {
             try
             {
@@ -167,6 +168,7 @@ namespace SA33.Team12.SSIS.DAL
                 temp.QuantityRetrieved = stationeryRetrievalFormItem.QuantityRetrieved;
 
                 context.SaveChanges();
+                return temp;
             }
             catch (Exception)
             {
@@ -211,6 +213,26 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         } 
+
+        public List<StationeryRetrievalFormItem> FindStationeryRetrievalFormItemsByCriteria(StationeryRetrievalFormItemSearchDTO criteria)
+        {
+            var Query = from srfi in context.StationeryRetrievalFormItems
+                        where
+                            srfi.StationeryRetrievalFormID ==
+                            (criteria.StationeryRetrievalFormID == 0
+                                 ? srfi.StationeryRetrievalFormID
+                                 : criteria.StationeryRetrievalFormID)
+                            &&
+                            srfi.StationeryRetrievalFormItemID ==
+                            (criteria.StationeryRetrievalFormItemID == 0
+                                 ? srfi.StationeryRetrievalFormItemID
+                                 : criteria.StationeryRetrievalFormItemID)
+                            &&
+                            srfi.StationeryID ==
+                            (criteria.StationeryID == 0 ? srfi.StationeryID : criteria.StationeryID)
+                        select srfi;
+            return Query.ToList<StationeryRetrievalFormItem>();
+        }
         #endregion
 
         #region StationeryRetrievalFormItemByDept
