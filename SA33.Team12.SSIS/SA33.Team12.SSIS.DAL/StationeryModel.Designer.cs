@@ -7123,7 +7123,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Stationery_RetrievedBy", "Users")]
-        public User User
+        public User RetrievedByUser
         {
             get
             {
@@ -7139,7 +7139,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<User> RetrievedByUserReference
         {
             get
             {
