@@ -26,6 +26,7 @@ namespace SA33.Team12.SSIS.Test
             else
             {
                 requisition = CreateRequisition();
+                Session["Requisition"] = requisition;
             }
 
             NameValueCollection nv = Request.QueryString;
@@ -36,21 +37,17 @@ namespace SA33.Team12.SSIS.Test
                 key = nv.GetKey(0);
                 val = nv.Get(0);
             }
+
             if (key == "RequestID")
             {
                 requisition = requisitionManager.GetRequisitionByID(Convert.ToInt32(val));
             }
+            
 
-            if (requisition.RequisitionID > 0 && requisition != null)
+            if (requisition.RequisitionID >= 0 && requisition != null)
             {
-
                 PopulateData(requisition);
-
-            }
-            else
-            {
-                Response.Write("Requested item not found");
-            }
+            }            
         }
 
         private Requisition CreateRequisition()
@@ -145,17 +142,22 @@ namespace SA33.Team12.SSIS.Test
 
         protected void RequestItemGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            if (Session["Requisition"] != null)
+            {
+                requisition = (Requisition)Session["Requisition"];
+            }          
 
+            PopulateData(requisition);
+            DataBind();
         }
 
         protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
         {
 
             RequisitionItem item = new RequisitionItem()
-            {
+            {                
                 StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue),
-                QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox2")).Text),
-                
+                QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox2")).Text)                
             };
 
             if (Session["Requisition"] != null)
