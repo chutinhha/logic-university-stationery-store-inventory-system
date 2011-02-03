@@ -34,8 +34,8 @@
                 QueryStringField="RequestID" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <br />
-    <br />
+    <h2>
+        Add Items</h2>
     <asp:DetailsView ID="DetailsView1" runat="server" 
         AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert"
         Height="50px" oniteminserting="DetailsView1_ItemInserting" Width="125px" 
@@ -85,7 +85,8 @@
         onrowcancelingedit="RequestItemGridView_RowCancelingEdit" 
         onrowdeleting="RequestItemGridView_RowDeleting" 
         onrowediting="RequestItemGridView_RowEditing" 
-        onrowupdating="RequestItemGridView_RowUpdating">
+        onrowupdating="RequestItemGridView_RowUpdating" 
+        DataKeyNames="StationeryID">
         <Columns>
             <asp:TemplateField HeaderText="RequisitionItemID">
                 <ItemTemplate>
