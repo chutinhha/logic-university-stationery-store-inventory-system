@@ -20,19 +20,12 @@ namespace SA33.Team12.SSIS.BLL
 
         public void CreateStationeryRetrievalForm(List<Requisition> requisitions)
         {
-            List<Stationery> stationeries = new List<Stationery>();
+          
+        }
 
-
-            // Get all the requisition items from the requisitions
-            List<RequisitionItem> requisitionItems = new List<RequisitionItem>();
-            foreach (Requisition requisition in requisitions)
-            {
-                foreach(RequisitionItem requisitionItem in requisition.RequisitionItems)
-                {
-                    requisitionItems.Add(requisitionItem);
-                }
-            }
-
+        public List<StationeryRetrievalForm> GetAllStationeryRetrievalForms()
+        {
+            return stationeryRetrievalDAO.GetAllStationeryRetrievalForms();
         }
 
         public void CreateStationeryRetrievalForm(StationeryRetrievalForm stationeryRetrievalForm)
