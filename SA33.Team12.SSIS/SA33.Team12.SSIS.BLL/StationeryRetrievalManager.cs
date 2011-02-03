@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -46,6 +47,11 @@ namespace SA33.Team12.SSIS.BLL
         public void UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
             stationeryRetrievalDAO.UpdateActualQuantity(stationeryRetrievalForm);
+        }
+
+        public List<StationeryRetrievalFormItem> FindStationeryRetrievalFormItemsByCriteria(StationeryRetrievalFormItemSearchDTO criteria)
+        {
+            return stationeryRetrievalDAO.FindStationeryRetrievalFormItemsByCriteria(criteria);
         }
     }
 }
