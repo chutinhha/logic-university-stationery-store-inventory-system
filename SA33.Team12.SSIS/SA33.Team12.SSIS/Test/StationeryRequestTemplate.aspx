@@ -34,49 +34,51 @@
                 QueryStringField="RequestID" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <h2>
-        Add Items</h2>
-    <asp:DetailsView ID="DetailsView1" runat="server" 
+    <asp:Panel ID="Panel1" runat="server">
+        <h2>
+            Add Items</h2>
+        <asp:DetailsView ID="DetailsView1" runat="server" 
         AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert"
         Height="50px" oniteminserting="DetailsView1_ItemInserting" Width="125px" 
         EnableViewState="False">
-        <Fields>
-            <asp:TemplateField HeaderText="Stationery">
-                <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server"></asp:Label>
-                </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:DropDownList ID="DropDownList2" runat="server" 
-                        DataSourceID="StationeryItemDS" DataTextField="Description" 
+            <Fields>
+                <asp:TemplateField HeaderText="Stationery">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server"></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="DropDownList2" runat="server" 
+                        DataSourceID="StationeryItemDS0" DataTextField="Description" 
                         DataValueField="StationeryID">
-                    </asp:DropDownList>
-                    <asp:ObjectDataSource ID="StationeryItemDS" runat="server" 
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="StationeryItemDS" runat="server" 
                         SelectMethod="GetAllStationeries" 
                         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
-                </EditItemTemplate>
-                <InsertItemTemplate>
-                    <asp:DropDownList ID="DropDownList3" runat="server" 
-                        DataSourceID="StationeryItemDS" DataTextField="Description" 
+                    </EditItemTemplate>
+                    <InsertItemTemplate>
+                        <asp:DropDownList ID="DropDownList3" runat="server" 
+                        DataSourceID="StationeryItemDS0" DataTextField="Description" 
                         DataValueField="StationeryID" SelectedValue='<%# Bind("StationeryID") %>'>
-                    </asp:DropDownList>
-                    <asp:ObjectDataSource ID="StationeryItemDS" runat="server" 
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="StationeryItemDS0" runat="server" 
                         SelectMethod="GetAllStationeries" 
                         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
-                </InsertItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Quantity">
-                <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server"></asp:Label>
-                </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                </EditItemTemplate>
-                <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                </InsertItemTemplate>
-            </asp:TemplateField>
-        </Fields>
-    </asp:DetailsView>
+                    </InsertItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Quantity">
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server"></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                    </EditItemTemplate>
+                    <InsertItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                    </InsertItemTemplate>
+                </asp:TemplateField>
+            </Fields>
+        </asp:DetailsView>
+    </asp:Panel>
     <br />
     <h2>Items</h2>
     <asp:GridView ID="RequestItemGridView" runat="server" 
