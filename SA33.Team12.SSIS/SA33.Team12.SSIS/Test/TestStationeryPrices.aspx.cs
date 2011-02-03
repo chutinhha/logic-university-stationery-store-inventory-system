@@ -37,7 +37,7 @@ namespace SA33.Team12.SSIS.Test
                 DropDownList SupplierDrowDownList = e.Row.FindControl("SupplierDrowDownList") as DropDownList;
                 using (CatalogManager cm = new CatalogManager())
                 {
-
+                    List<Supplier> suppliers = cm.GetSuppliersByStationeryID(stationeryID);
                     SupplierDrowDownList.DataSource = suppliers;
                     SupplierDrowDownList.DataBind();
                 }
