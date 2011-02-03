@@ -3423,11 +3423,10 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="dateOfOrder">Initial value of the DateOfOrder property.</param>
         /// <param name="attentionTo">Initial value of the AttentionTo property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
-        /// <param name="dateReceived">Initial value of the DateReceived property.</param>
         /// <param name="supplierID">Initial value of the SupplierID property.</param>
         /// <param name="isDelivered">Initial value of the IsDelivered property.</param>
         /// <param name="dateToSupply">Initial value of the DateToSupply property.</param>
-        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.DateTime dateReceived, global::System.Int32 supplierID, global::System.Boolean isDelivered, global::System.DateTime dateToSupply)
+        public static PurchaseOrder CreatePurchaseOrder(global::System.Int32 purchaseOrderID, global::System.String pONumber, global::System.DateTime dateOfOrder, global::System.Int32 attentionTo, global::System.Int32 createdBy, global::System.Int32 supplierID, global::System.Boolean isDelivered, global::System.DateTime dateToSupply)
         {
             PurchaseOrder purchaseOrder = new PurchaseOrder();
             purchaseOrder.PurchaseOrderID = purchaseOrderID;
@@ -3435,7 +3434,6 @@ namespace SA33.Team12.SSIS.DAL
             purchaseOrder.DateOfOrder = dateOfOrder;
             purchaseOrder.AttentionTo = attentionTo;
             purchaseOrder.CreatedBy = createdBy;
-            purchaseOrder.DateReceived = dateReceived;
             purchaseOrder.SupplierID = supplierID;
             purchaseOrder.IsDelivered = isDelivered;
             purchaseOrder.DateToSupply = dateToSupply;
@@ -3595,9 +3593,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateReceived
+        public Nullable<global::System.DateTime> DateReceived
         {
             get
             {
@@ -3612,8 +3610,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnDateReceivedChanged();
             }
         }
-        private global::System.DateTime _DateReceived;
-        partial void OnDateReceivedChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _DateReceived;
+        partial void OnDateReceivedChanging(Nullable<global::System.DateTime> value);
         partial void OnDateReceivedChanged();
     
         /// <summary>

@@ -10,25 +10,25 @@
 namespace SA33.Team12.SSIS.Test {
     
     
-    public partial class Users {
+    public partial class TestByMichael {
         
         /// <summary>
-        /// FirstNameTextBox control.
+        /// CreatedByDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FirstNameTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList CreatedByDropDownList;
         
         /// <summary>
-        /// LastNameTextBox control.
+        /// CreatedByDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LastNameTextBox;
+        protected global::System.Web.UI.WebControls.ObjectDataSource CreatedByDataSource;
         
         /// <summary>
         /// SearchButton control.
@@ -40,39 +40,30 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.Button SearchButton;
         
         /// <summary>
-        /// ShowAllButton control.
+        /// DisbursementGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ShowAllButton;
+        protected global::System.Web.UI.WebControls.GridView DisbursementGridView;
         
         /// <summary>
-        /// UserGridView control.
+        /// DisbursementDetailView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UserGridView;
+        protected global::System.Web.UI.WebControls.DetailsView DisbursementDetailView;
         
         /// <summary>
-        /// GridView1 control.
+        /// DisbursementItemGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// ObjectDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+        protected global::System.Web.UI.WebControls.GridView DisbursementItemGridView;
     }
 }

@@ -1771,7 +1771,7 @@
           <Property Name="AttentionTo" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="DONumber" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="DateReceived" Type="DateTime" Nullable="false" />
+          <Property Name="DateReceived" Type="DateTime" />
           <Property Name="ReceivedBy" Type="Int32" />
           <NavigationProperty Name="PurchaseOrderItems" Relationship="SA33.Team12.SSIS.Model.PurchaseOrders_PurchaseOrderItems_FK1" FromRole="PurchaseOrders" ToRole="PurchaseOrderItems" />
           <NavigationProperty Name="ApprovedByUser" Relationship="SA33.Team12.SSIS.Model.PurchaseOrder_ApprovedBY" FromRole="PurchaseOrders" ToRole="Users" />
