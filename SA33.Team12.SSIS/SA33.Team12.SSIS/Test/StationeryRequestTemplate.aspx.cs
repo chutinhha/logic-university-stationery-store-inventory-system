@@ -285,7 +285,7 @@ namespace SA33.Team12.SSIS.Test
                 CatalogManager cManager = new CatalogManager();
                 foreach (var item in requisition.SpecialRequisitionItems)
                 {
-                    SpecialStationery temp = cManager.CreateSpecialStationery(new SpecialStationery()
+                    SpecialStationery temp = new SpecialStationery()
                     {
                         ItemCode = "s001",
                       Description = item.Name,
@@ -296,9 +296,9 @@ namespace SA33.Team12.SSIS.Test
                       DateCreated = DateTime.Now.Date,
                       UnitOfMeasure = "box",
                       IsApproved = false
-                    }
-                );
+                    };
 
+                    item.SpecialStationery = temp;
                     //item.SpecialStationeryID = temp.SpecialStationeryID;
                 }
 
