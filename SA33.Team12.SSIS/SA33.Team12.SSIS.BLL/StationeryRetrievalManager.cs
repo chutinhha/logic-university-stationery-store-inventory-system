@@ -18,14 +18,19 @@ namespace SA33.Team12.SSIS.BLL
             stationeryRetrievalDAO = new StationeryRetrievalDAO();
         }
 
-        public void CreateStationeryRetrievalForm(List<Requisition> requisitions)
+        public StationeryRetrievalForm CreateStationeryRetrievalForm(List<Requisition> requisitions)
         {
-          
+            return null;
         }
 
         public List<StationeryRetrievalForm> GetAllStationeryRetrievalForms()
         {
             return stationeryRetrievalDAO.GetAllStationeryRetrievalForms();
+        }
+
+        public StationeryRetrievalForm GetStationeryRetrievalFormByID(int stationeryRetrievalFormID)
+        {
+            return stationeryRetrievalDAO.GetStationeryRetrievalFormByID(stationeryRetrievalFormID);
         }
 
         public void CreateStationeryRetrievalForm(StationeryRetrievalForm stationeryRetrievalForm)

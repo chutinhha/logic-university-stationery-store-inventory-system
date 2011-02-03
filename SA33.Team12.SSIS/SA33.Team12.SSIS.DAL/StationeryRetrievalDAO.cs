@@ -98,7 +98,6 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -108,16 +107,15 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
         /// <returns>stationeryRetrievalForm object</returns>
-        public List<StationeryRetrievalForm> GetStationeryRetrievalFormByID(StationeryRetrievalForm stationeryRetrievalForm)
+        public StationeryRetrievalForm GetStationeryRetrievalFormByID(int stationeryRetrievalFormID)
         {
             try
             {
                 return GetAllStationeryRetrievalForms().
-                    Where(srf => srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID).ToList<StationeryRetrievalForm>();
+                    Where(srf => srf.StationeryRetrievalFormID == stationeryRetrievalFormID).FirstOrDefault<StationeryRetrievalForm>();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -128,9 +126,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns>stationeryRetrievalForm object</returns>
         public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria(DTO.StationeryRetrievalFormSearchDTO stationeryRetrievalFormSearchDTO)
         {
-            return GetStationeryRetrievalFormByID(new StationeryRetrievalForm() { StationeryRetrievalFormID = stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID });
-                //.Where(r => r.StationeryRetrievalFormID == (stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID == 0 ? r.StationeryRetrievalFormID : stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID)
-                   
+            return GetAllStationeryRetrievalForms();
+            //.Where(r => r.StationeryRetrievalFormID == (stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID == 0 ? r.StationeryRetrievalFormID : stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID)
+
 
         }
         #endregion
