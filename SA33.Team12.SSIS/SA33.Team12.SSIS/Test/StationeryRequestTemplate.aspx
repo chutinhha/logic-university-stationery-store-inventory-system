@@ -3,7 +3,6 @@
 </asp:Content> 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h2>Stationery Request Form</h2>
-<br />
     <asp:DetailsView ID="RequestDetailsView" runat="server" Height="50px" 
         Width="282px" AutoGenerateRows="False" DataSourceID="RequisitionDetailsDS">
         <Fields>
