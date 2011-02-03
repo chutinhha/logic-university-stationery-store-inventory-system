@@ -266,7 +266,7 @@ namespace SA33.Team12.SSIS.BLL
                     {
                         errMsg = "Create disbursement By SRF failed. Please try again later";
                         if ((SRF.StationeryRetrievalNumber != null || SRF.StationeryRetrievalNumber != "") &&
-                            (SRF.RetrievedBy != 0 || SRF.User != null) &&
+                            (SRF.RetrievedBy != 0 || SRF.RetrievedByUser != null) &&
                             (SRF.DateRetrieved != null))
                         {
                             return true;
