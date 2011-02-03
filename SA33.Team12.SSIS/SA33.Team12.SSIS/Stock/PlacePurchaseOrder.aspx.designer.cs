@@ -22,6 +22,42 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.Label lblCreatedBy;
         
         /// <summary>
+        /// ddlAttentionTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAttentionTo;
+        
+        /// <summary>
+        /// UserDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource UserDataSource;
+        
+        /// <summary>
+        /// lblDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDate;
+        
+        /// <summary>
+        /// txtDateToSupply control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateToSupply;
+        
+        /// <summary>
         /// ddlCategory control.
         /// </summary>
         /// <remarks>
@@ -58,15 +94,6 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// ObjectDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
-        
-        /// <summary>
         /// ObjectDataSource2 control.
         /// </summary>
         /// <remarks>
@@ -94,33 +121,6 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.GridView gvPOItems;
         
         /// <summary>
-        /// ddlAttentionTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAttentionTo;
-        
-        /// <summary>
-        /// ObjectDataSource3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource3;
-        
-        /// <summary>
-        /// txtDateToSupply control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateToSupply;
-        
-        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>
@@ -128,14 +128,5 @@ namespace SA33.Team12.SSIS.Stock {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
-        /// <summary>
-        /// DynamicDataManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.DynamicData.DynamicDataManager DynamicDataManager;
     }
 }

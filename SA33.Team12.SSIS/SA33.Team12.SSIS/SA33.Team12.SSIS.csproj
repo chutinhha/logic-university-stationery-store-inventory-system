@@ -64,6 +64,8 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Handle Request\Disbursement.aspx" />
+    <Content Include="Stock\PurchaseOrderDetail.aspx" />
+    <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="Test\ApproveRequest.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
@@ -133,6 +135,18 @@
     </Compile>
     <Compile Include="Handle Request\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\PurchaseOrderDetail.aspx.cs">
+      <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\PurchaseOrderDetail.aspx.designer.cs">
+      <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ViewPurchaseOrder.aspx.cs">
+      <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ViewPurchaseOrder.aspx.designer.cs">
+      <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
