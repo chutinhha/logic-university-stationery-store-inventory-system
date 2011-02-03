@@ -72,7 +72,14 @@
                         <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
                     </EditItemTemplate>
                     <InsertItemTemplate>
-                        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox5" runat="server" ValidationGroup="QuantityNeeded"></asp:TextBox>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                            ControlToValidate="TextBox5" Display="Dynamic" ErrorMessage="Invalid Quantity" 
+                            MaximumValue="10000" MinimumValue="1" Type="Integer" 
+                            ValidationGroup="QuantityNeeded"></asp:RangeValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                            ControlToValidate="TextBox5" Display="Dynamic" 
+                            ErrorMessage="Quantity is needed" ValidationGroup="QuantityNeeded"></asp:RequiredFieldValidator>
                     </InsertItemTemplate>
                 </asp:TemplateField>
             </Fields>
@@ -123,18 +130,118 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:Panel ID="Panel2" runat="server">
+        <h2>
+            ADD Special items</h2>
+        <p>
+            <asp:DetailsView ID="DetailsView2" runat="server" 
+                AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert" 
+                Height="50px" oniteminserting="DetailsView2_ItemInserting" Width="125px">
+                <Fields>
+                    <asp:TemplateField HeaderText="Item Name">
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Description">
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Quantity Needed">
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Reason">
+                        <ItemTemplate>
+                            <asp:Label ID="Label4" runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Unit Of Measure">
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server"></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
+                </Fields>
+            </asp:DetailsView>
+        </p>
+    </asp:Panel>
     <h2>Special Items</h2>
     <asp:GridView ID="SpecialRequestItemGridView" runat="server" 
-        AutoGenerateColumns="False">
+        AutoGenerateColumns="False" style="margin-right: 0px">
         <Columns>
-            <asp:BoundField HeaderText="SpecialStationeryID" 
-                DataField="SpecialStationeryID" />
-            <asp:BoundField HeaderText="Item Name" DataField="SpecialStationeryID" />
-            <asp:BoundField HeaderText="Description" DataField="SpecialStationeryID" />
-            <asp:BoundField HeaderText="Reason" DataField="RemarkByRequester" >
-            <ItemStyle Width="200px" />
-            </asp:BoundField>
-            <asp:BoundField HeaderText="Quantity Needed" DataField="QuantityRequested" />
+            <asp:TemplateField HeaderText="Item Name">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" 
+                        Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Description">
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" 
+                        Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Reason">
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("RemarkByRequester") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" 
+                        Text='<%# Bind("RemarkByRequester") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemStyle Width="200px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Quantity Needed">
+                <ItemTemplate>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox4" runat="server" 
+                        Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <br />
+    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
+        Text="Submit Request" />
+    <br />
 </asp:Content>

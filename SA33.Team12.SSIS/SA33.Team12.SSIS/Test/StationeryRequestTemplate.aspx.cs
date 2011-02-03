@@ -52,6 +52,7 @@ namespace SA33.Team12.SSIS.Test
             if (requisition.ApprovedBy > 0)
             {
                 Panel1.Visible = false;
+                Panel2.Visible = false;
             }
         }
 
@@ -62,6 +63,7 @@ namespace SA33.Team12.SSIS.Test
             req.DepartmentID = 1;
             req.DateRequested = DateTime.Now.Date;
             req.UrgencyID = 1;
+            req.CreatedBy = 1;
             req.RequisitionForm = requisitionManager.GetRequisitionNumber(req);
 
             return req;
@@ -86,10 +88,11 @@ namespace SA33.Team12.SSIS.Test
                 if (splReqItems.Count > 0)
                 {
                     SpecialRequestItemGridView.DataSource = splReqItems;
+                    SpecialRequestItemGridView.DataKeyNames = new string[] { "SpecialStationeryID" };
 
                 }
                 DetailsView1.DataSource = reqItems;
-
+                DetailsView2.DataSource = splReqItems;
                 DataBind();
             }
 
@@ -187,7 +190,6 @@ namespace SA33.Team12.SSIS.Test
 
         protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
         {
-
             RequisitionItem item = new RequisitionItem();
 
             item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue);
@@ -234,6 +236,81 @@ namespace SA33.Team12.SSIS.Test
             PopulateData(requisition);
             DataBind();
 
+        }
+
+        protected void DetailsView2_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            SpecialRequisitionItem item = new SpecialRequisitionItem();            
+
+            if (((TextBox)DetailsView2.FindControl("TextBox1")).Text != string.Empty)
+            {
+                item.Name = ((TextBox)DetailsView2.FindControl("TextBox1")).Text;
+            }
+
+            if (((TextBox)DetailsView2.FindControl("TextBox2")).Text != string.Empty)
+            {
+                item.Description = ((TextBox)DetailsView2.FindControl("TextBox2")).Text;
+            }
+
+            if (((TextBox)DetailsView2.FindControl("TextBox3")).Text != string.Empty)
+            {
+                item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView2.FindControl("TextBox3")).Text);
+            }
+
+            if (((TextBox)DetailsView2.FindControl("TextBox4")).Text != string.Empty)
+            {
+                item.RemarkByRequester = ((TextBox)DetailsView2.FindControl("TextBox4")).Text;
+            }
+
+            if (Session["Requisition"] != null)
+            {
+                requisition = (Requisition)Session["Requisition"];
+            }
+            else
+            {
+                requisition = CreateRequisition();
+                Session["Requisition"] = requisition;
+            }
+
+            requisition.SpecialRequisitionItems.Add(item);
+
+            PopulateData(requisition);
+            DataBind();
+        }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CatalogManager cManager = new CatalogManager();
+                foreach (var item in requisition.SpecialRequisitionItems)
+                {
+                    SpecialStationery temp = cManager.CreateSpecialStationery(new SpecialStationery()
+                    {
+                        ItemCode = "s001",
+                      Description = item.Name,
+                      Quantity = item.QuantityRequested,
+                      CreatedBy = 1,
+                      ModifiedBy = 1,
+                      CategoryID = 1,
+                      DateCreated = DateTime.Now.Date,
+                      UnitOfMeasure = "box",
+                      IsApproved = false
+                    }
+                );
+
+                    //item.SpecialStationeryID = temp.SpecialStationeryID;
+                }
+
+
+                requisitionManager.CreateRequisition(requisition);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
     }
