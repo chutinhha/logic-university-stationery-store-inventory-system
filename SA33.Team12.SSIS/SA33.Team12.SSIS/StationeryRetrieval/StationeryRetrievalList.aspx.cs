@@ -30,18 +30,6 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 int UserID = (int)DataBinder.Eval(e.Row.DataItem, "RetrievedBy");
-                if (UserID != 0)
-                {
-                    Literal aa = e.Row.FindControl("RetrievedByLiteral") as Literal;
-                    if (aa != null)
-                    {
-                        using (UserManager um = new UserManager())
-                        {
-                            User user = um.GetUserByID(UserID);
-                            if (user != null) aa.Text = user.UserName;
-                        }
-                    }
-                }
             }
         }
     }

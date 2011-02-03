@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StationeryRetrievalList.aspx.cs" Inherits="SA33.Team12.SSIS.StationeryRetrieval.StationeryRetrievalList" %>
+<%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -18,7 +19,8 @@
             SortExpression="StationeryRetrievalNumber" />
         <asp:TemplateField HeaderText="RetrievedBy" SortExpression="RetrievedBy">
             <ItemTemplate>
-                <asp:Literal runat="server" ID="RetrievedByLiteral" />
+                <%# DBNull.Value.Equals(Eval("RetrievedByUser"))
+                                                            ? "" : ((User)Eval("RetrievedByUser")).UserName%>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:BoundField DataField="DateRetrieved" HeaderText="DateRetrieved" 
