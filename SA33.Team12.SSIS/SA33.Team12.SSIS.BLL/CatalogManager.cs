@@ -402,6 +402,20 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.FindSuppliersByCriteria(criteria);
         }
 
+        public List<Supplier> GetSuppliersByStationeryID(int stationeryID)
+        {
+            List<StationeryPrice> stationeryPrices
+                = catalogDAO.FindStationeryPricesByCriteria(
+                    new StationeryPriceSearchDTO() { StationeryID = stationeryID });
+            List<Supplier> suppliers = new List<Supplier>();
+            foreach (StationeryPrice stationeryPrice in stationeryPrices)
+            {
+                suppliers.Add(stationeryPrice.Supplier);
+            }
+            return suppliers;
+        }
+
+
         public int GetSupplierCount()
         {
             return catalogDAO.GetSupplierCount();

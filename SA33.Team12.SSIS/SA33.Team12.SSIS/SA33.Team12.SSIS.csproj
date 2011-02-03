@@ -68,6 +68,7 @@
     <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
+    <Content Include="TestPOandPOitems.aspx" />
     <Content Include="Test\ApproveRequest.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
@@ -168,6 +169,13 @@
     </Compile>
     <Compile Include="Stock\ViewPurchaseOrder.aspx.designer.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPOandPOitems.aspx.cs">
+      <DependentUpon>TestPOandPOitems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPOandPOitems.aspx.designer.cs">
+      <DependentUpon>TestPOandPOitems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
