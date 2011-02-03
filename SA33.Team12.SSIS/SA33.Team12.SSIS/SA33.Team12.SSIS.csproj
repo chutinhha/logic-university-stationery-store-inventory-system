@@ -69,7 +69,7 @@
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="TestPOandPOitems.aspx" />
-    <Content Include="Test\ApproveRequest.aspx" />
+    <Content Include="Request Stationery\ApproveRequest.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
@@ -177,11 +177,11 @@
     <Compile Include="TestPOandPOitems.aspx.designer.cs">
       <DependentUpon>TestPOandPOitems.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test\ApproveRequest.aspx.cs">
+    <Compile Include="Request Stationery\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test\ApproveRequest.aspx.designer.cs">
+    <Compile Include="Request Stationery\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\CategoriesTestV.aspx.cs">
@@ -363,7 +363,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Notification\" />
     <Folder Include="Print\" />
-    <Folder Include="Request Stationery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
