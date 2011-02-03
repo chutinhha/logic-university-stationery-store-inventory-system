@@ -47,7 +47,14 @@ namespace SA33.Team12.SSIS.Test
             po.DateReceived = t2;
             po.IsDelivered = false;
 
-            poDAO.CreatePurchaseOrder(po);
+            PurchaseOrderItem poitem1 = new PurchaseOrderItem();
+
+            po.PurchaseOrderItems.Add(poitem1);
+
+            PurchaseOrder savedPO = poDAO.CreatePurchaseOrder(po);
+            //savedPO.PurchaseOrderID
+            List<PurchaseOrderItem> poitems = savedPO.PurchaseOrderItems.ToList<PurchaseOrderItem>();
+            //poitems[0].PurchaseOrderItemID
         }
 
         protected void ButtonFind_Click(object sender, EventArgs e)
