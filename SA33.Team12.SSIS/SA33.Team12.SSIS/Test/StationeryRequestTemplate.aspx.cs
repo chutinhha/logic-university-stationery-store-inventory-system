@@ -132,10 +132,24 @@ namespace SA33.Team12.SSIS.Test
             {
                 reqItem.StationeryID = Convert.ToInt32(t.Text);
                 reqItem.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("TextBox2")).Text);
-
+                requisitionManager.UpdateRequisitionItem(reqItem);
             }
-            requisitionManager.UpdateRequisitionItem(reqItem);
+            else
+            {
+                foreach (var req in requisition.RequisitionItems)
+                {
+                    if (reqItem.StationeryID == req.StationeryID)
+                    {
+                        reqItem.QuantityRequested = reqItem.QuantityRequested;
+                        requisition.RequisitionItems.Remove(req);
+                        requisition.RequisitionItems.Add(reqItem);
+                        break;
+                    }
+
+                }
+            }
             RequestItemGridView.EditIndex = -1;
+            PopulateData(requisition);
             RequestItemGridView.DataBind();
         }
 
@@ -157,7 +171,7 @@ namespace SA33.Team12.SSIS.Test
                 Session["Requisition"] = requisition;
             }
             RequestItemGridView.DataKeyNames = new string[] { "StationeryID" };
-         //   Label id = (Label)RequestItemGridView.Rows[e.RowIndex].FindControl("Label1");
+            //   Label id = (Label)RequestItemGridView.Rows[e.RowIndex].FindControl("Label1");
             foreach (var req in requisition.RequisitionItems)
             {
                 //if (req.StationeryID == Convert.ToInt32(id))
@@ -166,7 +180,7 @@ namespace SA33.Team12.SSIS.Test
                 //    break;
                 //}               
             }
-            
+
             PopulateData(requisition);
             DataBind();
         }
