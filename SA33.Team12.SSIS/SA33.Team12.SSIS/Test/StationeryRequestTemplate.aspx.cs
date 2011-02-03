@@ -151,7 +151,22 @@ namespace SA33.Team12.SSIS.Test
             {
                 requisition = (Requisition)Session["Requisition"];
             }
-
+            else
+            {
+                requisition = CreateRequisition();
+                Session["Requisition"] = requisition;
+            }
+            RequestItemGridView.DataKeyNames = new string[] { "StationeryID" };
+         //   Label id = (Label)RequestItemGridView.Rows[e.RowIndex].FindControl("Label1");
+            foreach (var req in requisition.RequisitionItems)
+            {
+                //if (req.StationeryID == Convert.ToInt32(id))
+                //{                    
+                //    requisition.RequisitionItems.Remove(req);                    
+                //    break;
+                //}               
+            }
+            
             PopulateData(requisition);
             DataBind();
         }
