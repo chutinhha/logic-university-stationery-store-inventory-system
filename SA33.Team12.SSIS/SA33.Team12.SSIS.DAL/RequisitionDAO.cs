@@ -286,7 +286,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return GetAllRequisition().Where(t => (t.ApprovedBy == 0 || t.ApprovedByUser == null) && t.DepartmentID == departmentID).ToList<Requisition>();
+                return GetAllRequisition().Where(t => (t.ApprovedBy == 0 || t.ApprovedByUser == null) && t.DepartmentID == departmentID && t.Status.Name != "Cancelled").ToList<Requisition>();
             }
             catch (Exception)
             {
