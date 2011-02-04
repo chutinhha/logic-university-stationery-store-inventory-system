@@ -115,8 +115,6 @@ namespace SA33.Team12.SSIS.Test
                 }
                 DetailsView1.DataSource = reqItems;
             }
-
-
         }
 
         protected void RequestItemGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -127,7 +125,6 @@ namespace SA33.Team12.SSIS.Test
 
         protected void RequestItemGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-
             RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
             GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
             DropDownList t = (DropDownList)row.FindControl("DropDownList1");
@@ -139,20 +136,20 @@ namespace SA33.Team12.SSIS.Test
             }
             else
             {
-                foreach (var req in requisition.RequisitionItems)
+                foreach (var req in ((Requisition)Session["Requisition"]).RequisitionItems)
                 {
                     if (reqItem.StationeryID == req.StationeryID)
                     {
-                        reqItem.QuantityRequested = reqItem.QuantityRequested;
-                        requisition.RequisitionItems.Remove(req);
-                        requisition.RequisitionItems.Add(reqItem);
+                        reqItem.QuantityRequested += req.QuantityIssued;
+                        ((Requisition)Session["Requisition"]).RequisitionItems.Remove(req);
+                        ((Requisition)Session["Requisition"]).RequisitionItems.Add(reqItem);
                         break;
                     }
 
                 }
             }
             RequestItemGridView.EditIndex = -1;
-            PopulateData(requisition);
+            PopulateData(((Requisition)Session["Requisition"]));
             RequestItemGridView.DataBind();
         }
 

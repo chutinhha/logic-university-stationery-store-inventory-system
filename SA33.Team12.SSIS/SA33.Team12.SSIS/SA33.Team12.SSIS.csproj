@@ -69,7 +69,7 @@
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="TestPOandPOitems.aspx" />
-    <Content Include="Request Stationery\ApproveRequest.aspx" />
+    <Content Include="Approval\ApproveRequest.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
@@ -87,6 +87,7 @@
     <Content Include="Test\TestMichaelDetail.aspx" />
     <Content Include="Test\TestStationeryPrices.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
+    <Content Include="Test\TestWebForm1.aspx" />
     <Content Include="Test\Users.aspx" />
     <Content Include="Test\UserAdd.aspx" />
     <Content Include="Catalog\Categories.aspx" />
@@ -177,11 +178,11 @@
     <Compile Include="TestPOandPOitems.aspx.designer.cs">
       <DependentUpon>TestPOandPOitems.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Request Stationery\ApproveRequest.aspx.cs">
+    <Compile Include="Approval\ApproveRequest.aspx.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Request Stationery\ApproveRequest.aspx.designer.cs">
+    <Compile Include="Approval\ApproveRequest.aspx.designer.cs">
       <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\CategoriesTestV.aspx.cs">
@@ -303,6 +304,13 @@
     <Compile Include="Test\TestStationeryRequest.aspx.designer.cs">
       <DependentUpon>TestStationeryRequest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test\TestWebForm1.aspx.cs">
+      <DependentUpon>TestWebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\TestWebForm1.aspx.designer.cs">
+      <DependentUpon>TestWebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -359,10 +367,10 @@
     <Compile Include="Utilities\Membership.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Approval\" />
     <Folder Include="App_Data\" />
     <Folder Include="Notification\" />
     <Folder Include="Print\" />
+    <Folder Include="Request Stationery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
