@@ -556,6 +556,8 @@ namespace SA33.Team12.SSIS.DAL
                             select ri).FirstOrDefault<RequisitionItem>();
 
                 context.RequisitionItems.DeleteObject(temp);
+
+                context.SaveChanges();
             }
             catch (Exception)
             {
