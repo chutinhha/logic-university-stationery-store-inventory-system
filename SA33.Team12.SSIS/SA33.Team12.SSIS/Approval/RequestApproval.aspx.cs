@@ -70,6 +70,7 @@ namespace SA33.Team12.SSIS.Approval
             Requisition r = requisitionManager.GetRequisitionByID(reqID);
             r.ApprovedBy = 6;
             requisitionManager.ApproveRequisition(r);
+            //UtilityFunctions.SendEmail(r.RequisitionID + " - Your Request has been approved", "Dear " + r.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", new List<DAL.User>());
             Response.Redirect("RequestApproval.aspx");
         }
 
