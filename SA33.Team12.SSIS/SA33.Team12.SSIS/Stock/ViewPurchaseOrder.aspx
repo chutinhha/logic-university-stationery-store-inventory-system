@@ -68,14 +68,18 @@
     <asp:GridView ID="gvPurchaseOrder" runat="server" AutoGenerateColumns="False" 
         onselectedindexchanged="gvPurchaseOrder_SelectedIndexChanged">
         <Columns>
-            <asp:BoundField DataField="PONumber" HeaderText="PO Number" />
+            <asp:TemplateField HeaderText="PO Number">
+            <ItemTemplate>
+                <a href='PurchaseOrderDetail.aspx?ID=<%# Eval("PurchaseOrderID") %>'>
+                 <%# Eval("PONumber")%></a>
+            </ItemTemplate>
+        </asp:TemplateField>
             <asp:BoundField DataField="IsDelivered" HeaderText="Delivered" 
                 SortExpression="IsDelivered" />
             <asp:BoundField DataField="DateOfOrder" HeaderText="Order Date" 
                 SortExpression="DateOfOrder" />
             <asp:BoundField DataField="DateToSupply" HeaderText="Supply By" 
                 SortExpression="DateToSupply" />
-            <asp:CommandField ShowSelectButton="True" HeaderText="Action" />
         </Columns>
     </asp:GridView>
     </fieldset>
