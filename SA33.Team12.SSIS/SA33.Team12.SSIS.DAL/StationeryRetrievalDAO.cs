@@ -26,7 +26,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="createdBy">User who is creating the Stationery Retrieval</param>
         /// <param name="requisitions">List of requisitions Id separated by comma</param>
         /// <returns></returns>
-        public StationeryRetrievalForm CreateStationeryRetrievalForm(User createdBy, String requisitions)
+        public StationeryRetrievalForm CreateStationeryRetrievalForm(User createdBy, bool allRequisition, String requisitions)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace SA33.Team12.SSIS.DAL
                 ObjectParameter message = new ObjectParameter("Message", typeof(string));
 
                 int errorCode = context.CreateStationeryRetrievalFormByAllRequisitions(
-                    createdBy.UserID, true, requisitions, newSRFId, message);
+                    createdBy.UserID, allRequisition, requisitions, newSRFId, message);
                 
                 if (errorCode == -1)
                     throw new Exceptions.StationeryRetrievalException(message.Value.ToString());

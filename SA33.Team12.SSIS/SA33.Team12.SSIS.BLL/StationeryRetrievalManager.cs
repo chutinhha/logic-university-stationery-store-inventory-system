@@ -19,6 +19,11 @@ namespace SA33.Team12.SSIS.BLL
             stationeryRetrievalDAO = new StationeryRetrievalDAO();
         }
 
+        public StationeryRetrievalForm CreateStationeryRetrievalFormByAllRequisitions(User createdBy)
+        {
+            return stationeryRetrievalDAO.CreateStationeryRetrievalForm(createdBy, true, "");
+        }
+
         public StationeryRetrievalForm CreateStationeryRetrievalForm(List<Requisition> requisitions)
         {
             return null;
