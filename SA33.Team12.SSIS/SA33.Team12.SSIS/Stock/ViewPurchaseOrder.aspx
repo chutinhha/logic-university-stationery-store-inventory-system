@@ -13,6 +13,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h1>View Purchase Order</h1>
+    <fieldset>
+    <legend>Filter</legend>
+
     <table style="width:100%;">
         <tr>
             <td class="style1">
@@ -57,12 +60,24 @@
             </td>
         </tr>
     </table>
+    </fieldset>
+    
+
+    <fieldset>
+    <legend>Purchase Orders</legend>
     <asp:GridView ID="gvPurchaseOrder" runat="server" AutoGenerateColumns="False" 
         onselectedindexchanged="gvPurchaseOrder_SelectedIndexChanged">
         <Columns>
             <asp:BoundField DataField="PONumber" HeaderText="PO Number" />
-            <asp:CommandField ShowSelectButton="True" />
-            <asp:HyperLinkField DataTextField="PONumber" HeaderText="PO Number" />
+            <asp:BoundField DataField="IsDelivered" HeaderText="Delivered" 
+                SortExpression="IsDelivered" />
+            <asp:BoundField DataField="DateOfOrder" HeaderText="Order Date" 
+                SortExpression="DateOfOrder" />
+            <asp:BoundField DataField="DateToSupply" HeaderText="Supply By" 
+                SortExpression="DateToSupply" />
+            <asp:CommandField ShowSelectButton="True" HeaderText="Action" />
         </Columns>
     </asp:GridView>
+    </fieldset>
+    
     </asp:Content>
