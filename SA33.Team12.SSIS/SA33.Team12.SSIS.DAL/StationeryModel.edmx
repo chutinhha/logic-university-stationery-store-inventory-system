@@ -550,6 +550,9 @@
           <Property Name="StationeryRetrievalNumber" Type="varchar" Nullable="false" MaxLength="12" />
           <Property Name="RetrievedBy" Type="int" Nullable="false" />
           <Property Name="DateRetrieved" Type="datetime" Nullable="false" />
+          <Property Name="IsRetrieved" Type="bit" />
+          <Property Name="IsCollected" Type="bit" />
+          <Property Name="IsDistributed" Type="bit" />
         </EntityType>
         <EntityType Name="Statuses">
           <Key>
@@ -1931,6 +1934,9 @@
           <NavigationProperty Name="StationeryRetrievalFormItems" Relationship="SA33.Team12.SSIS.Model.StationeryRetrievalForms_StationeryRetrievalFormItems_FK1" FromRole="StationeryRetrievalForms" ToRole="StationeryRetrievalFormItems" />
           <NavigationProperty Name="RetrievedByUser" Relationship="SA33.Team12.SSIS.Model.Stationery_RetrievedBy" FromRole="StationeryRetrievalForms" ToRole="Users" />
           <NavigationProperty Name="Disbursements" Relationship="SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1" FromRole="StationeryRetrievalForm" ToRole="Disbursement" />
+          <Property Type="Boolean" Name="IsRetrieved" />
+          <Property Type="Boolean" Name="IsCollected" />
+          <Property Type="Boolean" Name="IsDistributed" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -2958,7 +2964,10 @@
             <ScalarProperty Name="QuantityRetrieved" ColumnName="QuantityRetrieved" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="StationeryRetrievalForms"><EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.StationeryRetrievalForm"><MappingFragment StoreEntitySet="StationeryRetrievalForms">
-            <ScalarProperty Name="StationeryRetrievalFormID" ColumnName="StationeryRetrievalFormID" />
+            <ScalarProperty Name="IsDistributed" ColumnName="IsDistributed" />
+                <ScalarProperty Name="IsCollected" ColumnName="IsCollected" />
+                <ScalarProperty Name="IsRetrieved" ColumnName="IsRetrieved" />
+                <ScalarProperty Name="StationeryRetrievalFormID" ColumnName="StationeryRetrievalFormID" />
             <ScalarProperty Name="StationeryRetrievalNumber" ColumnName="StationeryRetrievalNumber" />
             <ScalarProperty Name="RetrievedBy" ColumnName="RetrievedBy" />
             <ScalarProperty Name="DateRetrieved" ColumnName="DateRetrieved" />

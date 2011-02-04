@@ -10,7 +10,7 @@
 namespace SA33.Team12.SSIS.StationeryRetrieval {
     
     
-    public partial class StationeryRetrievalForm {
+    public partial class UpdateStationeryRetrievalForm {
         
         /// <summary>
         /// StationeryRetrievalFormView control.
@@ -22,6 +22,15 @@ namespace SA33.Team12.SSIS.StationeryRetrieval {
         protected global::System.Web.UI.WebControls.FormView StationeryRetrievalFormView;
         
         /// <summary>
+        /// BackButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BackButton;
+        
+        /// <summary>
         /// UpdateButton control.
         /// </summary>
         /// <remarks>
@@ -29,14 +38,5 @@ namespace SA33.Team12.SSIS.StationeryRetrieval {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button UpdateButton;
-        
-        /// <summary>
-        /// ods control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ods;
     }
 }

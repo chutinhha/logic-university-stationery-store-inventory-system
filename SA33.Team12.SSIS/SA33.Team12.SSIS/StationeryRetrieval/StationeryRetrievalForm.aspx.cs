@@ -9,20 +9,43 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.StationeryRetrieval
 {
-    public partial class StationeryRetrievalForm : System.Web.UI.Page
+    public partial class UpdateStationeryRetrievalForm : System.Web.UI.Page
     {
+        private bool isUpdatable = false;
+        public bool IsUpdatable
+        {
+            get { return isUpdatable; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["ID"] == null)
+                if (Convert.ToInt32(Request.QueryString["ID"]) == 0)
                     Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+                if (Request.QueryString["ID"].Trim() == "")
+                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+
+                int srfsID = Convert.ToInt32(Request.QueryString["ID"]);
+                using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
+                {
+                    List<StationeryRetrievalForm> srfs = new List<StationeryRetrievalForm>();
+                    StationeryRetrievalForm stationeryRetrievalForm 
+                        = sm.GetStationeryRetrievalFormByID(srfsID);
+
+                    isUpdatable = (Convert.ToInt32(stationeryRetrievalForm.RetrievedBy) == 0);
+                    this.UpdateButton.Visible = isUpdatable;
+
+                    srfs.Add(stationeryRetrievalForm);
+                    this.StationeryRetrievalFormView.DataSource = srfs;
+                    this.StationeryRetrievalFormView.DataBind();
+                }
             }
         }
 
         protected void StationeryRetrievalFormView_DataBound(object sender, EventArgs e)
         {
-            if(this.StationeryRetrievalFormView.CurrentMode == FormViewMode.ReadOnly)
+            if (this.StationeryRetrievalFormView.CurrentMode == FormViewMode.ReadOnly)
             {
 
                 GridView StationeryRetrievalFormItemGridView =
@@ -49,7 +72,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             if (StationeryRetrievalFormItemGridView != null)
             {
                 int srfID = Convert.ToInt32(this.StationeryRetrievalFormView.DataKey.Value);
-                using(StationeryRetrievalManager srm = new StationeryRetrievalManager())
+                using (StationeryRetrievalManager srm = new StationeryRetrievalManager())
                 {
                     DAL.StationeryRetrievalForm srf = srm.GetStationeryRetrievalFormByID(srfID);
                     List<StationeryRetrievalFormItem> srfis = srf.StationeryRetrievalFormItems.ToList();
@@ -70,6 +93,11 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 
             }
 
+        }
+
+        protected void BackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
         }
     }
 }

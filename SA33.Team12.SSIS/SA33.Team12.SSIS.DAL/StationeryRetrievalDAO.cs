@@ -4,6 +4,7 @@
  ***/
 
 using System;
+using System.Transactions;
 using System.Web;
 using System.ComponentModel;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                ObjectParameter newSRFId = new ObjectParameter("SRFID", typeof(int));
+                ObjectParameter newSRFId = new ObjectParameter("NewSRFID", typeof(int));
                 ObjectParameter message = new ObjectParameter("Message", typeof(string));
 
                 int errorCode = context.CreateStationeryRetrievalFormByAllRequisitions(
@@ -74,18 +75,24 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                var temp = (from srf in context.StationeryRetrievalForms
-                            where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
-                            select srf).FirstOrDefault<StationeryRetrievalForm>();
-
-                foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    UpdateStationeryRetrievalFormItem(srfi);
+                    var temp = (from srf in context.StationeryRetrievalForms
+                                where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
+                                select srf).FirstOrDefault<StationeryRetrievalForm>();
+                    temp.IsRetrieved = true;
+                    foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
+                    {
+                        UpdateStationeryRetrievalFormItem(srfi);
+                    }
+                    context.SaveChanges();
+                    ts.Complete();
                 }
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -97,22 +104,26 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                var temp = (from srf in context.StationeryRetrievalForms
-                            where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
-                            select srf).FirstOrDefault<StationeryRetrievalForm>();
-
-                foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    foreach (StationeryRetrievalFormItemByDept srfid in srfi.StationeryRetrievalFormItemByDepts)
+                    var temp = (from srf in context.StationeryRetrievalForms
+                                where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
+                                select srf).FirstOrDefault<StationeryRetrievalForm>();
+                    temp.IsCollected = true;
+                    foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
                     {
-                        UpdateStationeryRetrievalFormItemByDept(srfid);
+                        foreach (StationeryRetrievalFormItemByDept srfid in srfi.StationeryRetrievalFormItemByDepts)
+                        {
+                            UpdateStationeryRetrievalFormItemByDept(srfid);
+                        }
                     }
+                    ts.Complete(); ;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
         }
 
