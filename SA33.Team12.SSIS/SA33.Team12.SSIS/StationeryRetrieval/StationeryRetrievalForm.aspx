@@ -8,8 +8,7 @@
 
     <asp:FormView runat="server" ID="StationeryRetrievalFormView" 
         DataSourceID="ods" DataKeyNames="StationeryRetrievalFormID"
-        AllowPaging="true" ondatabound="StationeryRetrievalFormView_DataBound" 
-        onitemcommand="StationeryRetrievalFormView_ItemCommand">
+        AllowPaging="true" ondatabound="StationeryRetrievalFormView_DataBound">
         <ItemTemplate>
             StationeryRetrievalFormID:
             <asp:Label ID="StationeryRetrievalFormIDLabel" runat="server" 
@@ -38,6 +37,11 @@
         <asp:GridView runat="server" ID="StationeryRetrievalFormItemGridView" 
         AutoGenerateColumns="False" DataKeyNames="StationeryRetrievalFormItemID">
             <Columns>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <%# Container.DataItemIndex + 1 %>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="StationeryID" 
                     SortExpression="StationeryID">
                     <ItemTemplate>
