@@ -7133,6 +7133,78 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.DateTime _DateRetrieved;
         partial void OnDateRetrievedChanging(global::System.DateTime value);
         partial void OnDateRetrievedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsRetrieved
+        {
+            get
+            {
+                return _IsRetrieved;
+            }
+            set
+            {
+                OnIsRetrievedChanging(value);
+                ReportPropertyChanging("IsRetrieved");
+                _IsRetrieved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsRetrieved");
+                OnIsRetrievedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsRetrieved;
+        partial void OnIsRetrievedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsRetrievedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsCollected
+        {
+            get
+            {
+                return _IsCollected;
+            }
+            set
+            {
+                OnIsCollectedChanging(value);
+                ReportPropertyChanging("IsCollected");
+                _IsCollected = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsCollected");
+                OnIsCollectedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsCollected;
+        partial void OnIsCollectedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsCollectedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsDistributed
+        {
+            get
+            {
+                return _IsDistributed;
+            }
+            set
+            {
+                OnIsDistributedChanging(value);
+                ReportPropertyChanging("IsDistributed");
+                _IsDistributed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDistributed");
+                OnIsDistributedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsDistributed;
+        partial void OnIsDistributedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsDistributedChanged();
 
         #endregion
     

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StationeryRetrievalForm.aspx.cs" Inherits="SA33.Team12.SSIS.StationeryRetrieval.StationeryRetrievalForm" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StationeryRetrievalForm.aspx.cs" Inherits="SA33.Team12.SSIS.StationeryRetrieval.UpdateStationeryRetrievalForm" %>
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -7,7 +7,7 @@
 
 
     <asp:FormView runat="server" ID="StationeryRetrievalFormView" 
-        DataSourceID="ods" DataKeyNames="StationeryRetrievalFormID"
+        DataKeyNames="StationeryRetrievalFormID"
         AllowPaging="true" ondatabound="StationeryRetrievalFormView_DataBound">
         <ItemTemplate>
         <table>
@@ -70,27 +70,25 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="QuantityNeeded" HeaderText="QuantityNeeded" 
                     SortExpression="QuantityNeeded" />
-                <asp:BoundField DataField="QuantityRetrieved" HeaderText="QuantityRetrieved" 
-                    SortExpression="QuantityRetrieved" />
                 <asp:TemplateField HeaderText="Quantity Retrieved">
                     <ItemTemplate>
                         <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField"
                             Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
                         <asp:TextBox 
-                            runat="server"
+                            runat="server" Visible='<%# this.IsUpdatable %>'
                             ID="QuantityRetrievedTextBox" Text="1" CssClass="numericEntry">
                         </asp:TextBox>
+                        <asp:Label runat="server" ID="QuantityRetrievedLabel" 
+                            Visible='<%# !this.IsUpdatable %>' Text='<%# Eval("QuantityRetrieved") %>'>
+                        </asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>        
     </ItemTemplate>
     </asp:FormView>
+    <asp:Button runat="server" ID="BackButton"
+        Text="Back" onclick="BackButton_Click" />
     <asp:Button runat="server" ID="UpdateButton" 
-        Text="Update" onclick="UpdateButton_Click" />    
-
-    <asp:ObjectDataSource runat="server" ID="ods" 
-        SelectMethod="GetAllStationeryRetrievalForms" 
-        TypeName="SA33.Team12.SSIS.BLL.StationeryRetrievalManager">
-    </asp:ObjectDataSource>
+        Text="Update" onclick="UpdateButton_Click" />
 </asp:Content>

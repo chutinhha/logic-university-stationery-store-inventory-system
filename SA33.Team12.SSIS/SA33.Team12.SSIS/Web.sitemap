@@ -15,7 +15,7 @@
     </siteMapNode>
     <siteMapNode url="~/StationeryRetrieval/StationeryRetrievalList.aspx"
                  title="Stationery Retrieval Forms" description="Stationery Retrieval Forms">
-      <siteMapNode url="~/StationeryRetrieval/StationeryRetrievalForm.aspx"
+      <siteMapNode url="~/StationeryRetrieval/UpdateStationeryRetrievalForm.aspx"
                    title="Stationery Retrieval Form" description="Stationery Retrieval Form" />
     </siteMapNode>
    

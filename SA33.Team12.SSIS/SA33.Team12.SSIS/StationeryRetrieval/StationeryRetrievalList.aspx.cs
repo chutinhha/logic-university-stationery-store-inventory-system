@@ -32,5 +32,21 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                 int UserID = (int)DataBinder.Eval(e.Row.DataItem, "RetrievedBy");
             }
         }
+
+        protected void CreateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
+                {
+                    DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
+                    sm.CreateStationeryRetrievalFormByAllRequisitions(loggedInUser);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ErrorMessage.Text = exception.Message;
+            }
+        }
     }
 }
