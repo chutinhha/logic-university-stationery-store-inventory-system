@@ -382,8 +382,8 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception)
             {
-                
-                throw;
+
+                throw new RequisitionException("No Data Found");
             }            
         }
 
