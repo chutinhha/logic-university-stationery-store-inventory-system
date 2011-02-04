@@ -11,10 +11,22 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 {
     public partial class UpdateStationeryRetrievalForm : System.Web.UI.Page
     {
-        private bool isUpdatable = false;
-        public bool IsUpdatable
+        private bool isRetrieved = false;
+        public bool IsRetrieved
         {
-            get { return isUpdatable; }
+            get { return isRetrieved; }
+        }
+
+        private bool isCollected = false;
+        public bool IsCollected
+        {
+            get { return isCollected; }
+        }
+
+        private int stationeryRetrievalFormID = 0;
+        public int StationeryRetrievalFormID
+        {
+            get { return stationeryRetrievalFormID; }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -25,21 +37,27 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                     Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
                 if (Request.QueryString["ID"].Trim() == "")
                     Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+                DataBindStationeryRetrievalFormView();
+            }
+        }
 
-                int srfsID = Convert.ToInt32(Request.QueryString["ID"]);
-                using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
-                {
-                    List<StationeryRetrievalForm> srfs = new List<StationeryRetrievalForm>();
-                    StationeryRetrievalForm stationeryRetrievalForm 
-                        = sm.GetStationeryRetrievalFormByID(srfsID);
+        protected void DataBindStationeryRetrievalFormView()
+        {
+            stationeryRetrievalFormID = Convert.ToInt32(Request.QueryString["ID"]);
+            using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
+            {
+                List<StationeryRetrievalForm> srfs = new List<StationeryRetrievalForm>();
+                StationeryRetrievalForm stationeryRetrievalForm
+                    = sm.GetStationeryRetrievalFormByID(this.StationeryRetrievalFormID);
 
-                    isUpdatable = (Convert.ToInt32(stationeryRetrievalForm.RetrievedBy) == 0);
-                    this.UpdateButton.Visible = isUpdatable;
+                isRetrieved = (bool) stationeryRetrievalForm.IsRetrieved;
+                isCollected = (bool) stationeryRetrievalForm.IsCollected;
 
-                    srfs.Add(stationeryRetrievalForm);
-                    this.StationeryRetrievalFormView.DataSource = srfs;
-                    this.StationeryRetrievalFormView.DataBind();
-                }
+                this.UpdateButton.Visible = (!IsRetrieved || !isCollected);
+
+                srfs.Add(stationeryRetrievalForm);
+                this.StationeryRetrievalFormView.DataSource = srfs;
+                this.StationeryRetrievalFormView.DataBind();
             }
         }
 
@@ -48,20 +66,35 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             if (this.StationeryRetrievalFormView.CurrentMode == FormViewMode.ReadOnly)
             {
 
-                GridView StationeryRetrievalFormItemGridView =
-    StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemGridView") as GridView;
+                if (!this.IsRetrieved)
+                {
+                    GridView StationeryRetrievalFormItemGridView =
+                        StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemGridView") as GridView;
+                    EntityCollection<StationeryRetrievalFormItem> items =
+                       DataBinder.Eval(this.StationeryRetrievalFormView.DataItem, "StationeryRetrievalFormItems") as EntityCollection<StationeryRetrievalFormItem>;
 
-                EntityCollection<StationeryRetrievalFormItem> items =
-                   DataBinder.Eval(this.StationeryRetrievalFormView.DataItem, "StationeryRetrievalFormItems") as EntityCollection<StationeryRetrievalFormItem>;
-
-                StationeryRetrievalFormItemGridView.DataSource = items;
-                StationeryRetrievalFormItemGridView.DataBind();
+                    StationeryRetrievalFormItemGridView.DataSource = items;
+                    StationeryRetrievalFormItemGridView.DataBind();
+                }
+                else if (!this.IsCollected)
+                {
+                    GridView StationeryRetrievalFormItemByDeptGridView =
+                        StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemByDeptGridView") as GridView;
+                    using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
+                    {
+                        List<vw_GetStationeryRetrievalFormItemByDept> srfiByDept =
+                            sm.GetVwStationeryRetrievalFormItemByDeptsByFormID(this.StationeryRetrievalFormID);
+                        StationeryRetrievalFormItemByDeptGridView.DataSource = srfiByDept;
+                        StationeryRetrievalFormItemByDeptGridView.DataBind();
+                    }
+                }
             }
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             UpdateStationeryRetrievalFormView();
+            DataBindStationeryRetrievalFormView();
         }
 
         protected void UpdateStationeryRetrievalFormView()
@@ -87,7 +120,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                                                             select s).FirstOrDefault();
                         srfi.QuantityRetrieved = Convert.ToInt32(QtyRetrieved.Text);
                     }
-                    srm.UpdateReceivedQuantity(srf);
+                    StationeryRetrievalForm newSRF = srm.UpdateReceivedQuantity(srf);
                 }
 
 

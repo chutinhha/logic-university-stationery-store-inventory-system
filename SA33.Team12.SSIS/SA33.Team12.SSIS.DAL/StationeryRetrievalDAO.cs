@@ -4,6 +4,7 @@
  ***/
 
 using System;
+using System.Data;
 using System.Transactions;
 using System.Web;
 using System.ComponentModel;
@@ -71,7 +72,7 @@ namespace SA33.Team12.SSIS.DAL
         /// Update Received Quantity in stationery retrieval form
         /// </summary>
         /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
-        public void UpdateReceivedQuantity(StationeryRetrievalForm stationeryRetrievalForm)
+        public StationeryRetrievalForm UpdateReceivedQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
             try
             {
@@ -81,12 +82,14 @@ namespace SA33.Team12.SSIS.DAL
                                 where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
                                 select srf).FirstOrDefault<StationeryRetrievalForm>();
                     temp.IsRetrieved = true;
+                    context.ObjectStateManager.ChangeObjectState(temp, EntityState.Modified);
+                    context.SaveChanges();
                     foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
                     {
                         UpdateStationeryRetrievalFormItem(srfi);
                     }
-                    context.SaveChanges();
                     ts.Complete();
+                    return temp;
                 }
 
             }
@@ -352,6 +355,26 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         } 
+
+        public List<StationeryRetrievalFormItemByDept> GetStationeryRetrievalFormItemByDeptByFormID(int stationeryRetrievalFormID)
+        {
+            var result = from dept in context.StationeryRetrievalFormItemByDepts
+                         where
+                             context.StationeryRetrievalFormItems.Any(
+                                 item =>
+                                 item.StationeryRetrievalFormItemID ==
+                                 dept.StationeryRetrievalFormItem.StationeryRetrievalFormItemID &&
+                                 item.StationeryRetrievalFormID == stationeryRetrievalFormID)
+                         select dept;
+            return result.ToList<StationeryRetrievalFormItemByDept>();
+        }
+
+        public List<vw_GetStationeryRetrievalFormItemByDept> GetVwStationeryRetrievalFormItemByDeptByFormID(int stationeryRetrievalFormID)
+        {
+            return (from d in context.vw_GetStationeryRetrievalFormItemByDept
+                    where d.StationeryRetrievalFormID == stationeryRetrievalFormID
+                    select d).ToList();
+        }        
         #endregion
 
         #region StationeryRetrievalFormByRequisition

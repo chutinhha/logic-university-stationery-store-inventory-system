@@ -51,9 +51,9 @@ namespace SA33.Team12.SSIS.BLL
             stationeryRetrievalDAO.CreateStationeryRetrievalForm(stationeryRetrievalForm);
         }
 
-        public void UpdateReceivedQuantity(StationeryRetrievalForm stationeryRetrievalForm)
+        public StationeryRetrievalForm UpdateReceivedQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
-            stationeryRetrievalDAO.UpdateReceivedQuantity(stationeryRetrievalForm);
+            return stationeryRetrievalDAO.UpdateReceivedQuantity(stationeryRetrievalForm);
         }
 
         public void UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
@@ -64,6 +64,15 @@ namespace SA33.Team12.SSIS.BLL
         public List<StationeryRetrievalFormItem> FindStationeryRetrievalFormItemsByCriteria(StationeryRetrievalFormItemSearchDTO criteria)
         {
             return stationeryRetrievalDAO.FindStationeryRetrievalFormItemsByCriteria(criteria);
+        }
+
+        public List<StationeryRetrievalFormItemByDept> GetStationeryRetrievalFormItemByDeptsByFormID(int stationeryRetrievalFormID)
+        {
+            return stationeryRetrievalDAO.GetStationeryRetrievalFormItemByDeptByFormID(stationeryRetrievalFormID);
+        }
+        public List<vw_GetStationeryRetrievalFormItemByDept> GetVwStationeryRetrievalFormItemByDeptsByFormID(int stationeryRetrievalFormID)
+        {
+            return stationeryRetrievalDAO.GetVwStationeryRetrievalFormItemByDeptByFormID(stationeryRetrievalFormID);
         }
     }
 }
