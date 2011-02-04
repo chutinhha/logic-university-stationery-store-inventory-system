@@ -66,6 +66,7 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Approval\RequestApproval.aspx" />
     <Content Include="HandleRequest\Disbursement.aspx" />
     <Content Include="Print\PrintRequestByIndividualEmployee.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
@@ -74,7 +75,6 @@
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="TestPOandPOitems.aspx" />
-    <Content Include="Approval\ApproveRequest.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Stock\PlacePurchaseOrder.aspx" />
@@ -141,6 +141,13 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Approval\RequestApproval.aspx.cs">
+      <DependentUpon>RequestApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval\RequestApproval.aspx.designer.cs">
+      <DependentUpon>RequestApproval.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HandleRequest\Disbursement.aspx.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,13 +203,6 @@
     </Compile>
     <Compile Include="TestPOandPOitems.aspx.designer.cs">
       <DependentUpon>TestPOandPOitems.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Approval\ApproveRequest.aspx.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Approval\ApproveRequest.aspx.designer.cs">
-      <DependentUpon>ApproveRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\CategoriesTestV.aspx.cs">
       <DependentUpon>CategoriesTestV.aspx</DependentUpon>
