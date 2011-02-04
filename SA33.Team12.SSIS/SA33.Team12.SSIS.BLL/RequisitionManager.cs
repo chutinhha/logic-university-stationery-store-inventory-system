@@ -463,9 +463,17 @@ namespace SA33.Team12.SSIS.BLL
                         }
                     }
 
-                    if (requisitionMethod == RequisitionMethod.Approve || requisitionMethod == RequisitionMethod.Cancel)
+                    if (requisitionMethod == RequisitionMethod.Approve)
                     {
                         if (requisition.ApprovedBy != 0 && requisition.ApprovedByUser.Role == "DepartmentHeads")
+                        {
+                            return true;
+                        }
+                    }
+
+                    if (requisitionMethod == RequisitionMethod.Cancel)
+                    {
+                        if (requisition.ApprovedBy == 0 || requisition.ApprovedBy == null)
                         {
                             return true;
                         }
