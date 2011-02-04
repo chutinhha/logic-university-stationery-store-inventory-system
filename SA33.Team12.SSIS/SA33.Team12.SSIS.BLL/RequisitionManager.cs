@@ -359,9 +359,9 @@ namespace SA33.Team12.SSIS.BLL
         /// <param name="user">user object</param>
         /// <param name="requisitionSearchDTO">RequisitionSearchDTO object</param>
         /// <returns>List of VW_RequisitionsByEmployee</returns>
-        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee(User user, RequisitionSearchDTO requisitionSearchDTO)
+        public List<VW_RequisitionsByEmployee> GetRequisitionByEmployee()
         {
-            List<VW_RequisitionsByEmployee> temp = requisitionDAO.GetRequisitionByEmployeeID(user, requisitionSearchDTO);
+            List<VW_RequisitionsByEmployee> temp = requisitionDAO.GetAllRequisitionByEmployee();
             if (temp != null)
             {
                 return temp;
