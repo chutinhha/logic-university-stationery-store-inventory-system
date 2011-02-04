@@ -40,7 +40,10 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                 using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
                 {
                     DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
-                    sm.CreateStationeryRetrievalFormByAllRequisitions(loggedInUser);
+                    StationeryRetrievalForm srf 
+                        = sm.CreateStationeryRetrievalFormByAllRequisitions(loggedInUser);
+                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalForm.aspx?ID=" 
+                        + srf.StationeryRetrievalFormID);
                 }
             }
             catch (Exception exception)

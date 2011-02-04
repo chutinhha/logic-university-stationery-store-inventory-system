@@ -75,18 +75,70 @@
                         <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField"
                             Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
                         <asp:TextBox 
-                            runat="server" Visible='<%# this.IsUpdatable %>'
+                            runat="server" Visible='<%# !this.IsRetrieved || !this.IsCollected %>'
                             ID="QuantityRetrievedTextBox" Text="1" CssClass="numericEntry">
                         </asp:TextBox>
                         <asp:Label runat="server" ID="QuantityRetrievedLabel" 
-                            Visible='<%# !this.IsUpdatable %>' Text='<%# Eval("QuantityRetrieved") %>'>
+                            Visible='<%# this.IsRetrieved %>' Text='<%# Eval("QuantityRetrieved") %>'>
                         </asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
-        </asp:GridView>        
+        </asp:GridView>    
+    <asp:GridView runat="server" ID="StationeryRetrievalFormItemByDeptGridView" 
+        AutoGenerateColumns="False">
+                <Columns>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <%# Container.DataItemIndex + 1 %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="StationeryID" 
+                    SortExpression="StationeryID">
+                    <ItemTemplate>
+                        <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "" : ((Stationery) Eval("Stationery")).ItemCode  %>
+                        <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 ? "" : ((SpecialStationery)Eval("SpecialStationery")).ItemCode%>
+
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Department" 
+                    SortExpression="DepartmentID">
+                    <ItemTemplate>
+                        <%# Convert.ToInt32(Eval("DepartmentID")) == 0 ? "" : ((Department) Eval("Department")).Name %>
+                    </ItemTemplate>
+                </asp:TemplateField>                <asp:BoundField DataField="QuantityNeeded" HeaderText="QuantityNeeded" 
+                    SortExpression="QuantityNeeded" />
+                <asp:TemplateField HeaderText="Quantity Retrieved">
+                    <ItemTemplate>
+                        <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField"
+                            Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
+                        <asp:Label runat="server" ID="QuantityRetrievedLabel" 
+                            Text='<%# Eval("QuantityRetrieved") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Quantity Recommended">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="QuantityRetrievedLabel" 
+                            Text='<%# Eval("QuantityRecommended") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Quantity Actual">
+                    <ItemTemplate>
+                        <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField"
+                            Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
+                        <asp:Label runat="server" ID="QuantityRetrievedLabel" 
+                            Text='<%# Eval("QuantityActual") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+</asp:GridView>   
     </ItemTemplate>
     </asp:FormView>
+ 
+
     <asp:Button runat="server" ID="BackButton"
         Text="Back" onclick="BackButton_Click" />
     <asp:Button runat="server" ID="UpdateButton" 
