@@ -28,7 +28,7 @@ namespace SA33.Team12.SSIS.Approval
             if (requisitions.Count == 0)
             {
                 Button1.Visible = false;
-                Response.Write("No pending requests for approval.");
+                Label1.Text = "No pending requests for approval.";
             }
 
             // ApproveSingleRequest();
