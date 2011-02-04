@@ -57,6 +57,7 @@
     <Compile Include="StationeryManager.cs" />
     <Compile Include="StationeryRetrievalManager.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="UtilityFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SA33.Team12.SSIS.DAL\SA33.Team12.SSIS.DAL.csproj">
