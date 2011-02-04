@@ -36,4 +36,8 @@
     </Columns>
 </asp:GridView>
 </fieldset>
+<fieldset>
+<legend>Create a new stationery retrieval form form all pending and partially fulfilled requisitions</legend>
+<asp:Button runat="server" Text="Create A New Stationery Retrieval Form" ID="CreateButton" />
+</fieldset>
 </asp:Content>

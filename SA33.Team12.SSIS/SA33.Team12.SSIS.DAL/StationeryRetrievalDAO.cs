@@ -21,6 +21,35 @@ namespace SA33.Team12.SSIS.DAL
     {
         #region StationeryRetrievalForm
         /// <summary>
+        /// Create Stationery from all requisitions that need to be processed
+        /// </summary>
+        /// <param name="createdBy">User who is creating the Stationery Retrieval</param>
+        /// <param name="requisitions">List of requisitions Id separated by comma</param>
+        /// <returns></returns>
+        public StationeryRetrievalForm CreateStationeryRetrievalForm(User createdBy, String requisitions)
+        {
+            try
+            {
+                ObjectParameter newSRFId = new ObjectParameter("SRFID", typeof(int));
+                ObjectParameter message = new ObjectParameter("Message", typeof(string));
+
+                int errorCode = context.CreateStationeryRetrievalFormByAllRequisitions(
+                    createdBy.UserID, true, requisitions, newSRFId, message);
+                
+                if (errorCode == -1)
+                    throw new Exceptions.StationeryRetrievalException(message.Value.ToString());
+                else
+                {
+                    return GetStationeryRetrievalFormByID((int) newSRFId.Value);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
         /// Create a new stationery retrieval form
         /// </summary>
         /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
