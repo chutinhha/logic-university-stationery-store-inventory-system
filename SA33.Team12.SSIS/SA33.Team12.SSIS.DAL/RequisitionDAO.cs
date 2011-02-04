@@ -234,13 +234,30 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return context.Requisitions.ToList<Requisition>();
+                return (from r in context.Requisitions select r).ToList<Requisition>();
             }
             catch (Exception)
             {
                 
                 throw;
             }            
+        }
+
+        /// <summary>
+        /// Get All Requistions by Employee ID
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> GetAllRequisition(int EmployeeID)
+        {
+            try
+            {
+                return GetAllRequisition().Where(x => x.CreatedBy == EmployeeID).ToList<Requisition>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -382,13 +399,15 @@ namespace SA33.Team12.SSIS.DAL
             {
                 return GetAllRequisitionByEmployee().
                   Where(re => re.DateRequested.Month == (requisitionSearchDTO.ExactDateRequested.Month == 0 ? re.DateRequested.Month : requisitionSearchDTO.ExactDateRequested.Month)
-                  && re.DateRequested.Year == (requisitionSearchDTO.ExactDateRequested.Year == 0 ? re.DateRequested.Year : requisitionSearchDTO.ExactDateRequested.Year))
+                  && re.DateRequested.Year == (requisitionSearchDTO.ExactDateRequested.Year == 0 ? re.DateRequested.Year : requisitionSearchDTO.ExactDateRequested.Year)
+                  && re.UserName == (user.UserName == "" ? re.UserName : user.UserName)
+                  )
             .ToList<VW_RequisitionsByEmployee>();
             }
             catch (Exception)
             {
                 
-                throw;
+                throw new RequisitionException("No Data Found");
             }      
             
         }

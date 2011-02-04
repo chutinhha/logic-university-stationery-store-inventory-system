@@ -270,6 +270,21 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         /// <summary>
+        /// Find All Requistions by EmpID
+        /// </summary>
+        /// <returns></returns>
+        public List<Requisition> GetAllRequisition(int EmployeeID)
+        {
+            List<Requisition> temp = requisitionDAO.GetAllRequisition(EmployeeID);
+            if (temp != null)
+            {
+                return temp;
+            }
+            ErrorMessage("Result Not Found.");
+            return null;
+        }
+
+        /// <summary>
         /// Get Requistion By ID
         /// </summary>
         /// <returns></returns>
