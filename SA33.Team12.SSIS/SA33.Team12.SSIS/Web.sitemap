@@ -17,7 +17,10 @@
       <siteMapNode url="~/StationeryRetrieval/StationeryRetrievalForm.aspx"
                    title="Stationery Retrieval Form" description="Stationery Retrieval Form" />
       </siteMapNode>
-    
+    <siteMapNode url="~/Approval/ApproveRequest.aspx" title="Approve Stationery Request" description="Approve Stationery Request">      
+    </siteMapNode>
+    <siteMapNode url="~/Print/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee"></siteMapNode>
+    <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>
 </siteMap>

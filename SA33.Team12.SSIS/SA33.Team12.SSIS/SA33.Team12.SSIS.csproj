@@ -66,9 +66,9 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
-    <Content Include="Handle Request\Disbursement.aspx" />
+    <Content Include="HandleRequest\Disbursement.aspx" />
     <Content Include="Print\PrintRequestByIndividualEmployee.aspx" />
-    <Content Include="Request Stationery\ViewRequestHistory.aspx" />
+    <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
@@ -141,11 +141,11 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Handle Request\Disbursement.aspx.cs">
+    <Compile Include="HandleRequest\Disbursement.aspx.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Handle Request\Disbursement.aspx.designer.cs">
+    <Compile Include="HandleRequest\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.cs">
@@ -155,11 +155,11 @@
     <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.designer.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Request Stationery\ViewRequestHistory.aspx.cs">
+    <Compile Include="RequestStationery\ViewRequestHistory.aspx.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Request Stationery\ViewRequestHistory.aspx.designer.cs">
+    <Compile Include="RequestStationery\ViewRequestHistory.aspx.designer.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="StationeryRetrieval\StationeryRetrievalForm.aspx.cs">
