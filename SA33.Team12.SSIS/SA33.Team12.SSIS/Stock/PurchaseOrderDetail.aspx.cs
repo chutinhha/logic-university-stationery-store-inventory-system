@@ -17,9 +17,29 @@ namespace SA33.Team12.SSIS.Stock
         {
             if (!IsPostBack)
             {
-                lblPONumber.Text = ((PurchaseOrder)Session["PurchaseOrderSelected"]).PONumber;
-                lblOrderDate.Text = ((PurchaseOrder)Session["PurchaseOrderSelected"]).DateOfOrder.ToShortDateString();
-                lblDateToSupply.Text = ((PurchaseOrder)Session["PurchaseOrderSelected"]).DateToSupply.ToShortDateString();
+                Populate();
+            }
+        }
+
+        protected void Populate()
+        {
+            if (Request.QueryString["ID"] != "")
+            {
+                int purchaseOrderID = int.Parse(Request.QueryString["ID"]);
+                using (PurchaseOrderManager pom = new PurchaseOrderManager())
+                {
+                    PurchaseOrder po = pom.FindPurchaseOrderByID(purchaseOrderID);
+                    lblPONumber.Text = po.PONumber;
+                    lblOrderDate.Text = po.DateOfOrder.ToShortDateString();
+                    lblDateToSupply.Text = po.DateToSupply.ToShortDateString();
+                    //               List<PurchaseOrderItem> items = po.PurchaseOrderItems.ToList<PurchaseOrderItem>();
+                    //              not working ?!?!!?!
+                    PurchaseOrderItemSearchDTO criteria = new PurchaseOrderItemSearchDTO();
+                    criteria.PurchaseOrderID = purchaseOrderID;
+                    List<PurchaseOrderItem> items = pom.FindPurchaseOrderItemByCriteria(criteria);
+                    this.gvPODetails.DataSource = items;
+                    this.gvPODetails.DataBind();
+                }
             }
         }
     }
