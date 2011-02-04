@@ -39,7 +39,7 @@ namespace SA33.Team12.SSIS.BLL
         /// Create a new requisition and persist with database
         /// </summary>
         /// <param name="requisition">requisition object</param>
-        public void CreateRequisition(Requisition requisition)
+        public Requisition CreateRequisition(Requisition requisition)
         {
             try
             {
@@ -73,17 +73,21 @@ namespace SA33.Team12.SSIS.BLL
                     if (isTestOK)
                     {
                         requisitionDAO.CreateRequisition(requisition);
+                        return requisition;
                     }
+
                     else
                     {
                         ErrorMessage("Create Requisition Failed. Please check the input.");
                     }
                 }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+            return null;
 
         }
 

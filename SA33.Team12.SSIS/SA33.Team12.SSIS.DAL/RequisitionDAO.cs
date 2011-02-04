@@ -43,6 +43,7 @@ namespace SA33.Team12.SSIS.DAL
                     //Notify Transaction completed
                     ts.Complete();
                 }
+                
             }
             catch (Exception ex)
             {
@@ -495,7 +496,7 @@ namespace SA33.Team12.SSIS.DAL
         public string GetRequisitionNumber(Requisition requisition)
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
-            return department.Name + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
+            return department.Name.Substring(0,3) + "/" + DateTime.Now.Day + DateTime.Now.Month + "/" + DateTime.Now.Year;
         }
         #endregion
 
