@@ -12,7 +12,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="RequisitionID" SortExpression="RequisitionID">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" 
+                        <asp:LinkButton ID="LinkButton2" runat="server" CommandName="RequestID" CommandArgument='<%# Eval("RequisitionID") %>'
                             Text='<%# Eval("RequisitionID") %>'></asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
@@ -34,7 +34,7 @@
                 <asp:TemplateField HeaderText="Approve" ShowHeader="False">
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" 
-                            CommandName="test" CommandArgument='<%# Eval("RequisitionID") %>' Text="Approve"></asp:LinkButton>
+                            CommandName="Approve" CommandArgument='<%# Eval("RequisitionID") %>' Text="Approve"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
