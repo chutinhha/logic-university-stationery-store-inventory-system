@@ -40,7 +40,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Location_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Location), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Locations_Stationeries_FK1", "Locations", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Location), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "PurchaseOrders_PurchaseOrderItems_FK1", "PurchaseOrders", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), "PurchaseOrderItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrderItem), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_PurchaseOrderItems", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "PurchaseOrderItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrderItem), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_PurchaseOrderItems", "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "PurchaseOrderItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrderItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "PurchaseOrder_ApprovedBY", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "PurchaseOrders", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "PurchaseOrders_AttentionTo", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "PurchaseOrders", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "PurchaseOrders_CreatedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "PurchaseOrders", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
@@ -871,6 +871,52 @@ namespace SA33.Team12.SSIS.DAL
         public void AddToSpecialStationeries(SpecialStationery specialStationery)
         {
             base.AddObject("SpecialStationeries", specialStationery);
+        }
+
+        #endregion
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userId">No Metadata Documentation available.</param>
+        /// <param name="processAllRequisitions">No Metadata Documentation available.</param>
+        /// <param name="requisitionIDs">No Metadata Documentation available.</param>
+        /// <param name="newSRFID">No Metadata Documentation available.</param>
+        /// <param name="message">No Metadata Documentation available.</param>
+        public int CreateStationeryRetrievalFormByAllRequisitions(Nullable<global::System.Int32> userId, Nullable<global::System.Boolean> processAllRequisitions, global::System.String requisitionIDs, ObjectParameter newSRFID, ObjectParameter message)
+        {
+            ObjectParameter userIdParameter;
+            if (userId.HasValue)
+            {
+                userIdParameter = new ObjectParameter("UserId", userId);
+            }
+            else
+            {
+                userIdParameter = new ObjectParameter("UserId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter processAllRequisitionsParameter;
+            if (processAllRequisitions.HasValue)
+            {
+                processAllRequisitionsParameter = new ObjectParameter("ProcessAllRequisitions", processAllRequisitions);
+            }
+            else
+            {
+                processAllRequisitionsParameter = new ObjectParameter("ProcessAllRequisitions", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter requisitionIDsParameter;
+            if (requisitionIDs != null)
+            {
+                requisitionIDsParameter = new ObjectParameter("RequisitionIDs", requisitionIDs);
+            }
+            else
+            {
+                requisitionIDsParameter = new ObjectParameter("RequisitionIDs", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("CreateStationeryRetrievalFormByAllRequisitions", userIdParameter, processAllRequisitionsParameter, requisitionIDsParameter, newSRFID, message);
         }
 
         #endregion
@@ -3905,16 +3951,14 @@ namespace SA33.Team12.SSIS.DAL
         /// Create a new PurchaseOrderItem object.
         /// </summary>
         /// <param name="purchaseOrderItemID">Initial value of the PurchaseOrderItemID property.</param>
-        /// <param name="stationeryID">Initial value of the StationeryID property.</param>
         /// <param name="purchaseOrderID">Initial value of the PurchaseOrderID property.</param>
         /// <param name="quantityToOrder">Initial value of the QuantityToOrder property.</param>
         /// <param name="price">Initial value of the Price property.</param>
         /// <param name="deliveryRemarks">Initial value of the DeliveryRemarks property.</param>
-        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 stationeryID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price, global::System.String deliveryRemarks)
+        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price, global::System.String deliveryRemarks)
         {
             PurchaseOrderItem purchaseOrderItem = new PurchaseOrderItem();
             purchaseOrderItem.PurchaseOrderItemID = purchaseOrderItemID;
-            purchaseOrderItem.StationeryID = stationeryID;
             purchaseOrderItem.PurchaseOrderID = purchaseOrderID;
             purchaseOrderItem.QuantityToOrder = quantityToOrder;
             purchaseOrderItem.Price = price;
@@ -3955,9 +3999,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 StationeryID
+        public Nullable<global::System.Int32> StationeryID
         {
             get
             {
@@ -3972,8 +4016,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnStationeryIDChanged();
             }
         }
-        private global::System.Int32 _StationeryID;
-        partial void OnStationeryIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _StationeryID;
+        partial void OnStationeryIDChanging(Nullable<global::System.Int32> value);
         partial void OnStationeryIDChanged();
     
         /// <summary>

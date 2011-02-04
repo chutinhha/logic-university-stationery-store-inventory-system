@@ -10,29 +10,47 @@
         DataSourceID="ods" DataKeyNames="StationeryRetrievalFormID"
         AllowPaging="true" ondatabound="StationeryRetrievalFormView_DataBound">
         <ItemTemplate>
-            StationeryRetrievalFormID:
-            <asp:Label ID="StationeryRetrievalFormIDLabel" runat="server" 
-                Text='<%# Bind("StationeryRetrievalFormID") %>' />
-            <br />
-            StationeryRetrievalNumber:
-            <asp:Label ID="StationeryRetrievalNumberLabel" runat="server" 
-                Text='<%# Bind("StationeryRetrievalNumber") %>' />
-            <br />
-            RetrievedBy:
-            <asp:Label ID="RetrievedByLabel" runat="server" 
-                Text='<%# Bind("RetrievedBy") %>' />
-            <br />
-            DateRetrieved:
-            <asp:Label ID="DateRetrievedLabel" runat="server" 
-                Text='<%# Bind("DateRetrieved") %>' />
-            <br />
-            StationeryRetrievalFormItems:
-            <asp:Label ID="StationeryRetrievalFormItemsLabel" runat="server" 
-                Text='<%# Bind("StationeryRetrievalFormItems") %>' />
-            <br />
-            RetrievedByUser:
-            <asp:Label ID="RetrievedByUserLabel" runat="server" 
-                Text='<%# Bind("RetrievedByUser") %>' />
+        <table>
+           <tr>
+            <th align="left">StationeryRetrievalFormID :</th>
+            <td>
+                <asp:Label ID="StationeryRetrievalFormIDLabel" runat="server" 
+                    Text='<%# Bind("StationeryRetrievalFormID") %>' />
+               </td>
+           </tr>
+            <tr>
+                <th align="left">
+                    StationeryRetrievalNumber :</th>
+                <td>
+                    <asp:Label ID="StationeryRetrievalNumberLabel" runat="server" 
+                        Text='<%# Bind("StationeryRetrievalNumber") %>' />
+                </td>
+            </tr>
+            <tr>
+                <th align="left">
+                    RetrievedBy :</th>
+                <td>
+                    <asp:Label ID="RetrievedByLabel" runat="server" 
+                        Text='<%# Bind("RetrievedBy") %>' />
+                </td>
+            </tr>
+            <tr>
+                <th align="left">
+                    DateRetrieved :</th>
+                <td>
+                    <asp:Label ID="DateRetrievedLabel" runat="server" 
+                        Text='<%# Bind("DateRetrieved") %>' />
+                </td>
+            </tr>
+            <tr>
+                <th align="left">
+                    RetrievedByUser :</th>
+                <td>
+                    <asp:Label ID="RetrievedByUserLabel" runat="server" 
+                        Text='<%# Convert.ToInt32(Eval("RetrievedBy")) == 0 ? "" : ((User) Eval("RetrievedByUser")).UserName %>' />
+                </td>
+            </tr>
+        </table>
             <br />
         <asp:GridView runat="server" ID="StationeryRetrievalFormItemGridView" 
         AutoGenerateColumns="False" DataKeyNames="StationeryRetrievalFormItemID">
@@ -68,8 +86,8 @@
         </asp:GridView>        
     </ItemTemplate>
     </asp:FormView>
-    <asp:Button runat="server" ID="UpdateButton" Text="Update" onclick="UpdateButton_Click"
-        />    
+    <asp:Button runat="server" ID="UpdateButton" 
+        Text="Update" onclick="UpdateButton_Click" />    
 
     <asp:ObjectDataSource runat="server" ID="ods" 
         SelectMethod="GetAllStationeryRetrievalForms" 

@@ -62,7 +62,7 @@ namespace SA33.Team12.SSIS.Stock
                     {
                         StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
                         criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("ddlSupplier")).SelectedValue.ToString());
-                        criteria.StationeryID = item.StationeryID;
+                        criteria.StationeryID = (int) item.StationeryID;
                         item.Price = (decimal)88.88;
                         //         item.Price = cm.FindStationeryPricesByCriteria(criteria).Price;    
                         // the above command encounterd nullreference exception
