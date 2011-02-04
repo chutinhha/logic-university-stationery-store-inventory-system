@@ -85,8 +85,7 @@
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
-    <Content Include="Test\StationeryRequest.aspx" />
-    <Content Include="Test\StationeryRequestTemplate.aspx" />
+    <Content Include="RequestStationery\StationeryRequest.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
     <Content Include="Test\TestByMichael.aspx" />
     <Content Include="Test\TestMichaelDetail.aspx" />
@@ -274,19 +273,12 @@
     <Compile Include="Test\Stationeries.aspx.designer.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test\StationeryRequest.aspx.cs">
+    <Compile Include="RequestStationery\StationeryRequest.aspx.cs">
       <DependentUpon>StationeryRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test\StationeryRequest.aspx.designer.cs">
+    <Compile Include="RequestStationery\StationeryRequest.aspx.designer.cs">
       <DependentUpon>StationeryRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test\StationeryRequestTemplate.aspx.cs">
-      <DependentUpon>StationeryRequestTemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test\StationeryRequestTemplate.aspx.designer.cs">
-      <DependentUpon>StationeryRequestTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\StockLogTransactionTest.aspx.cs">
       <DependentUpon>StockLogTransactionTest.aspx</DependentUpon>

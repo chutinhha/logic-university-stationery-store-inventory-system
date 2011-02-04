@@ -7,6 +7,7 @@
       <siteMapNode url="~/Catalog/Categories.aspx"
                   title="Category Listing" description="Category Listing" />
     </siteMapNode>
+    <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
     </siteMapNode>
