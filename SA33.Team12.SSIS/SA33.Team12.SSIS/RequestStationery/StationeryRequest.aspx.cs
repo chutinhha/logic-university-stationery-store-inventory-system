@@ -173,8 +173,13 @@ namespace SA33.Team12.SSIS.Test
         {
 
             RequisitionItem reqItem = null;
-            GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
-            Label t = (Label)row.FindControl("Label3");
+            Label t = null;
+            GridViewRow row = null;
+            if (e.RowIndex != 0)
+            {
+                row = RequestItemGridView.Rows[e.RowIndex];
+                t = (Label)row.FindControl("Label3");
+            }
             if (t != null)
             {
                 reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(t.Text));
@@ -187,7 +192,7 @@ namespace SA33.Team12.SSIS.Test
             {
                 foreach (var req in ((Requisition)Session["Requisition"]).RequisitionItems)
                 {
-                    if (reqItem.RequisitionItemID == req.RequisitionItemID)
+                    if (Convert.ToInt32(t.Text) == req.RequisitionItemID)
                     {
                         requisitionManager.DeleteRequisitionItem(reqItem);
                     }
