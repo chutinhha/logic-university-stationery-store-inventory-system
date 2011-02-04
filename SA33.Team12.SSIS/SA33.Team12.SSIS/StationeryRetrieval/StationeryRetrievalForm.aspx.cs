@@ -13,7 +13,11 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                if (Request.QueryString["ID"] == null)
+                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+            }
         }
 
         protected void StationeryRetrievalFormView_DataBound(object sender, EventArgs e)
@@ -34,7 +38,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
-
+            UpdateStationeryRetrievalFormView();
         }
 
         protected void UpdateStationeryRetrievalFormView()

@@ -88,7 +88,7 @@
     <Content Include="Test\TestStationeryPrices.aspx" />
     <Content Include="Test\TestStationeryRequest.aspx" />
     <Content Include="Test\Users.aspx" />
-    <Content Include="UserAdministration\UserAdd.aspx" />
+    <Content Include="Test\UserAdd.aspx" />
     <Content Include="Catalog\Categories.aspx" />
     <Content Include="Catalog\Stationeries.aspx" />
     <Content Include="Styles\Site.css" />
@@ -310,11 +310,11 @@
     <Compile Include="Test\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UserAdministration\UserAdd.aspx.cs">
+    <Compile Include="Test\UserAdd.aspx.cs">
       <DependentUpon>UserAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserAdministration\UserAdd.aspx.designer.cs">
+    <Compile Include="Test\UserAdd.aspx.designer.cs">
       <DependentUpon>UserAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="Catalog\Categories.aspx.cs">

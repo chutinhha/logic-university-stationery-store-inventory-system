@@ -12,11 +12,19 @@
         onrowdatabound="StationeryRetrievalFormGridView_RowDataBound">
     <Columns>
         <asp:BoundField DataField="StationeryRetrievalFormID" 
-            HeaderText="StationeryRetrievalFormID" 
+            HeaderText="ID" 
             SortExpression="StationeryRetrievalFormID" />
-        <asp:BoundField DataField="StationeryRetrievalNumber" 
-            HeaderText="StationeryRetrievalNumber" 
-            SortExpression="StationeryRetrievalNumber" />
+        <asp:TemplateField 
+            HeaderText="Form No." 
+            SortExpression="StationeryRetrievalNumber">
+            <ItemTemplate>
+                <a href='StationeryRetrievalForm.aspx?ID=<%# Eval("StationeryRetrievalFormID")%>'>
+                <%# Eval("StationeryRetrievalNumber")%>
+                </a>
+            </ItemTemplate>
+            
+            </asp:TemplateField>
+
         <asp:TemplateField HeaderText="RetrievedBy" SortExpression="RetrievedBy">
             <ItemTemplate>
                 <%# DBNull.Value.Equals(Eval("RetrievedByUser"))
