@@ -55,9 +55,13 @@ namespace SA33.Team12.SSIS.Approval
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "test")
+            if (e.CommandName == "Approve")
             {
                 ApproveSingleReq(Convert.ToInt32(e.CommandArgument));
+            }
+            if (e.CommandName == "RequestID")
+            {
+                Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + e.CommandArgument);
             }
         }
 
@@ -66,7 +70,7 @@ namespace SA33.Team12.SSIS.Approval
             Requisition r = requisitionManager.GetRequisitionByID(reqID);
             r.ApprovedBy = 6;
             requisitionManager.ApproveRequisition(r);
-            Response.Redirect("ApproveRequest.aspx");
+            Response.Redirect("RequestApproval.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
