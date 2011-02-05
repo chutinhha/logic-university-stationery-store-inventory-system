@@ -13,11 +13,13 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class PurchaseOrderDetail : System.Web.UI.Page
     {
+        static string prevPage = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Populate();
+                prevPage = Request.UrlReferrer.ToString();
             }
         }
 
@@ -32,15 +34,25 @@ namespace SA33.Team12.SSIS.Stock
                     lblPONumber.Text = po.PONumber;
                     lblOrderDate.Text = po.DateOfOrder.ToShortDateString();
                     lblDateToSupply.Text = po.DateToSupply.ToShortDateString();
-                    //               List<PurchaseOrderItem> items = po.PurchaseOrderItems.ToList<PurchaseOrderItem>();
-                    //              not working ?!?!!?!
-                    PurchaseOrderItemSearchDTO criteria = new PurchaseOrderItemSearchDTO();
-                    criteria.PurchaseOrderID = purchaseOrderID;
-                    List<PurchaseOrderItem> items = pom.FindPurchaseOrderItemByCriteria(criteria);
+                    lblStatus.Text = (po.IsDelivered  ? "Delivered" : "Outstanding");
+                    List<PurchaseOrderItem> items = po.PurchaseOrderItems.ToList<PurchaseOrderItem>();
                     this.gvPODetails.DataSource = items;
                     this.gvPODetails.DataBind();
+
+                    // enable this button to go to replenish stock page when this PO has not yet been delivered
+                    btnReplenish.Enabled = (po.IsDelivered ? false : true);
                 }
             }
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(prevPage);
+        }
+
+        protected void btnReplenish_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("");
         }
     }
 }

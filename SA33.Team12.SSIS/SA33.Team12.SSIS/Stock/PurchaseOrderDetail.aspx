@@ -7,6 +7,14 @@
         {
             width: 203px;
         }
+        .style2
+        {
+            width: 271px;
+        }
+        .style3
+        {
+            width: 118px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -17,36 +25,28 @@
                 <td class="style1">
                     PO Number:
                 </td>
-                <td>
+                <td class="style2">
                     <asp:Label ID="lblPONumber" runat="server" Text="Label"></asp:Label>
                 </td>
-                <td>
-                    &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td class="style1">
-                    Order Date
-                </td>
+                <td class="style3">
+                    Order Date:</td>
                 <td>
                     <asp:Label ID="lblOrderDate" runat="server" Text="Label"></asp:Label>
                 </td>
-                <td>
-                    &nbsp;
-                </td>
             </tr>
             <tr>
                 <td class="style1">
-                    Supply By
+                    Status:</td>
+                <td class="style2">
+                    <asp:Label ID="lblStatus" runat="server" Text="Label"></asp:Label>
                 </td>
+                <td class="style3">
+                    Supply By:</td>
                 <td>
                     <asp:Label ID="lblDateToSupply" runat="server" Text="Label"></asp:Label>
                 </td>
-                <td>
-                    &nbsp;
-                </td>
             </tr>
-        </table>
+            </table>
     </fieldset>
     <fieldset>
         <legend>PO Items</legend>
@@ -57,4 +57,21 @@
             </Columns>
         </asp:GridView>
     </fieldset>
+    <table style="width: 100%;">
+        <tr>
+            <td>
+                &nbsp;
+                <asp:Button ID="btnBack" runat="server" onclick="btnBack_Click" Text="Back" />
+            </td>
+            <td>
+                &nbsp;
+                <asp:Button ID="btnPrint" runat="server" Text="Print" />
+            </td>
+            <td>
+                &nbsp;
+                <asp:Button ID="btnReplenish" runat="server" Enabled="False" 
+                    onclick="btnReplenish_Click" Text="Replenish" />
+            </td>
+        </tr>
+    </table>
 </asp:Content>
