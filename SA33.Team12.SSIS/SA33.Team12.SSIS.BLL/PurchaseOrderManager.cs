@@ -70,7 +70,7 @@ namespace SA33.Team12.SSIS.BLL
                 {
                     foreach (PurchaseOrderItem item in po.PurchaseOrderItems)
                     {
-                        isValid = ValidatePurchaseOrderItem(item, PurchaseOrderMethod.Create);
+                        isValid = ValidatePurchaseOrderItem(item, PurchaseOrderMethod.Update);
                         if (!isValid)
                             break;
                     }
@@ -281,8 +281,9 @@ namespace SA33.Team12.SSIS.BLL
                     if (purchaseOrderItemMethod == PurchaseOrderMethod.Update)
                     {
                         errMsg = "Update Purchase Order item failed. Please try again later";
-                        if (//(item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
-                             ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
+                        if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
+                            // comment off because of current test database error
+                       //      ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
                              (item.QuantityToOrder != 0))
                         {
                             return true;
