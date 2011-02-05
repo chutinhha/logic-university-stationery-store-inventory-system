@@ -9,6 +9,7 @@
     </siteMapNode>
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
+      <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
     </siteMapNode>
     <siteMapNode url="~/StationeryRetrieval/StationeryRetrievalList.aspx"
