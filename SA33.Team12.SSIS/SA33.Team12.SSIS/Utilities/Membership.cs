@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Transactions;
+using System.Web.Security;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
@@ -13,9 +14,9 @@ namespace SA33.Team12.SSIS.Utilities
         private static void AddUserToRoles(string userName, string[] roles)
         {
             string[] allRoles = WebSecurity.Roles.GetAllRoles();
-            foreach (string role in roles)
+            foreach (string role in allRoles)
             {
-                if(WebSecurity.Roles.IsUserInRole(userName, role))
+                if (WebSecurity.Roles.IsUserInRole(userName, role))
                     WebSecurity.Roles.RemoveUserFromRole(userName, role);
             }
             WebSecurity.Roles.AddUserToRoles(userName, roles);
@@ -23,15 +24,15 @@ namespace SA33.Team12.SSIS.Utilities
 
         public static User GetCurrentLoggedInUser()
         {
-            WebSecurity.MembershipUser membershipUser  = WebSecurity.Membership.GetUser();
-            if(membershipUser != null)
+            WebSecurity.MembershipUser membershipUser = WebSecurity.Membership.GetUser();
+            if (membershipUser != null)
             {
-                using (UserManager userManager  = new UserManager())
+                using (UserManager userManager = new UserManager())
                 {
                     List<User> users =
                         userManager.FindUsersByCriteria(
-                            new UserSearchDTO() {UserName = membershipUser.UserName});
-                    if (users.Count > 0) 
+                            new UserSearchDTO() { UserName = membershipUser.UserName });
+                    if (users.Count > 0)
                         return users[0];
                     else
                     {
@@ -44,7 +45,7 @@ namespace SA33.Team12.SSIS.Utilities
                 throw new Exceptions.UserException("No current logged in user.");
             }
         }
-        
+
         public static string[] GetCurrentLoggedInUserRole()
         {
             return WebSecurity.Roles.GetRolesForUser();
@@ -64,11 +65,11 @@ namespace SA33.Team12.SSIS.Utilities
                             WebSecurity.Membership.CreateUser(user.UserName, user.Password, user.Email);
                         Guid ProviderKey = (Guid)membershipUser.ProviderUserKey;
                         user.MembershipProviderKey = ProviderKey;
-                        if(user.Role.Trim() != "")
+                        if (user.Role.Trim() != "")
                         {
-                             string[] roles 
-                                 = user.Role.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
-                            if(roles.Length > 0)
+                            string[] roles
+                                = user.Role.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (roles.Length > 0)
                                 AddUserToRoles(user.UserName, roles);
                         }
                         um.CreateUser(user);
@@ -95,24 +96,31 @@ namespace SA33.Team12.SSIS.Utilities
         {
             try
             {
-                using (BLL.UserManager um = new BLL.UserManager())
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    DAL.User oldUser = um.GetUserByID(user.UserID);
-                    if (oldUser != null)
+                    using (BLL.UserManager um = new BLL.UserManager())
                     {
-                        if (oldUser.UserName != user.UserName)
-                            throw new Exceptions.UserException("Changing user name is not allowed.");
-                        string[] roles = user.Role.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
-                        if (roles.Length > 0)
-                            AddUserToRoles(user.UserName, roles);
-                        user = um.UpdateUser(user);
+                        DAL.User oldUser = um.GetUserByID(user.UserID);
+                        if (oldUser != null)
+                        {
+                            if (oldUser.UserName != user.UserName)
+                                throw new Exceptions.UserException("Changing user name is not allowed.");
+                            string[] roles = user.Role.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (roles.Length > 0)
+                                AddUserToRoles(user.UserName, roles);
+                            MembershipUser mUser = WebSecurity.Membership.GetUser(user.UserName);
+                            user.MembershipProviderKey = (Guid)mUser.ProviderUserKey;
+                            user = um.UpdateUser(user);
+                        }
+                        else
+                        {
+                            throw new Exceptions.UserException("No user found to update.");
+                        }
                     }
-                    else
-                    {
-                        throw new Exceptions.UserException("No user found to update.");
-                    }
+                    ts.Complete();
+                    return user;
                 }
-                return user;
+
             }
             catch (Exceptions.UserException userex)
             {
@@ -135,6 +143,7 @@ namespace SA33.Team12.SSIS.Utilities
                         WebSecurity.Membership.DeleteUser(user.UserName);
                         um.DeleteUser(user);
                     }
+                    ts.Complete();
                 }
             }
             catch (Exception)
@@ -184,10 +193,8 @@ namespace SA33.Team12.SSIS.Utilities
                         = WebSecurity.Membership.GetUser(user.UserName);
                     membershipUser.IsApproved = false;
                     WebSecurity.Membership.UpdateUser(membershipUser);
-                    using (BLL.UserManager um = new BLL.UserManager())
-                    {
-                        um.DisableUser(user);
-                    }
+                    user.IsEnabled = false;
+                    Utilities.Membership.UpdateUser(user);
                     ts.Complete();
                 }
                 return user;
@@ -199,6 +206,33 @@ namespace SA33.Team12.SSIS.Utilities
             catch (Exception)
             {
                 throw new Exceptions.UserException("Disabling user failed.");
+            }
+        }
+
+        public static DAL.User EnableUser(DAL.User user)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    WebSecurity.MembershipUser membershipUser
+                        = WebSecurity.Membership.GetUser(user.UserName);
+                    membershipUser.UnlockUser();
+                    membershipUser.IsApproved = true;
+                    WebSecurity.Membership.UpdateUser(membershipUser);
+                    user.IsEnabled = true;
+                    Utilities.Membership.UpdateUser(user);
+                    ts.Complete();
+                }
+                return user;
+            }
+            catch (NullReferenceException)
+            {
+                throw new Exceptions.UserException("User account is not found.");
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.UserException("Enabling user failed.");
             }
         }
     }
