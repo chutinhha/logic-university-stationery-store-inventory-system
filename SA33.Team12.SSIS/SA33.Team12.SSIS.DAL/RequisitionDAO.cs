@@ -89,6 +89,7 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 requisition.StatusID = status.StatusID;
+                requisition.DateApproved = DateTime.Now;                
             }
             catch (Exception)
             {

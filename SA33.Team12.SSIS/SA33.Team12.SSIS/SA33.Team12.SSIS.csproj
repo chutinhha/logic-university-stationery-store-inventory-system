@@ -403,7 +403,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Approval\Web.config" />
     <None Include="ClassDiagram1.cd" />
+    <Content Include="RequestStationery\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

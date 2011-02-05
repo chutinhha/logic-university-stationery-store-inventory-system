@@ -1,67 +1,89 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StationeryRequest.aspx.cs" Inherits="SA33.Team12.SSIS.Test.StationeryRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="StationeryRequest.aspx.cs" Inherits="SA33.Team12.SSIS.Test.StationeryRequest" %>
+
+<%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-</asp:Content> 
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<h2>Stationery Request Form</h2>
-    <asp:DetailsView ID="RequestDetailsView" runat="server" Height="50px" 
-        Width="282px" AutoGenerateRows="False" DataSourceID="RequisitionDetailsDS">
+    <h2>
+        Stationery Request Form</h2>
+    <asp:DetailsView ID="RequestDetailsView" runat="server" Height="50px" Width="282px"
+        AutoGenerateRows="False" DataSourceID="RequisitionDetailsDS">
         <Fields>
             <asp:BoundField HeaderText="Requisition Form Number" DataField="RequisitionForm" />
             <asp:TemplateField HeaderText="Employee Name">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:Label>
+                    <%# ((User) Eval("CreatedByUser")).UserName %>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:TextBox>
+                    <%# ((User) Eval("CreatedByUser")).UserName %>
                 </EditItemTemplate>
-                <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CreatedBy") %>'></asp:TextBox>
-                </InsertItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField HeaderText="Department" DataField="DepartmentID" />
-            <asp:BoundField HeaderText="Urgency" DataField="UrgencyID" />
+            <asp:TemplateField HeaderText="Department">
+                <ItemTemplate>
+                    <%# ((Department) Eval("Department")).Name %>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <%# ((Department) Eval("Department")).Name %>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Urgency">
+                <ItemTemplate>
+                    <%# ((Urgency) Eval("Urgency")).Name  %>
+                </ItemTemplate>
+                <EditItemTemplate>
+                   <%# ((Urgency) Eval("Urgency")).Name  %>                
+                </EditItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField HeaderText="Date Requested" DataField="DateRequested" />
-            <asp:BoundField HeaderText="Approved By" DataField="ApprovedBy" />
+            <asp:TemplateField HeaderText="Approved By">
+                <ItemTemplate>
+                    <%# ((User)Eval("ApprovedByUser")) == null ? "" : ((User)Eval("ApprovedByUser")).UserName %>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <%# ((User)Eval("ApprovedByUser")) == null ? "" : ((User)Eval("ApprovedByUser")).UserName %>
+                </EditItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField HeaderText="Date Approved" DataField="DateApproved" />
         </Fields>
     </asp:DetailsView>
-    &nbsp;<asp:ObjectDataSource ID="RequisitionDetailsDS" runat="server" 
-        SelectMethod="GetRequisitionByID" 
+    &nbsp;<asp:ObjectDataSource ID="RequisitionDetailsDS" runat="server" SelectMethod="GetRequisitionByID"
         TypeName="SA33.Team12.SSIS.BLL.RequisitionManager">
         <SelectParameters>
-            <asp:QueryStringParameter DefaultValue="0" Name="RequisitionID" 
-                QueryStringField="RequestID" Type="Int32" />
+            <asp:QueryStringParameter DefaultValue="0" Name="RequisitionID" QueryStringField="RequestID"
+                Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
+       <asp:Panel ID="Panel3" runat="server">
+           Urgency Level:
+           <asp:DropDownList ID="UrgencyDDL" runat="server">
+           </asp:DropDownList>
+    </asp:Panel>
+
     <asp:Panel ID="Panel1" runat="server">
         <h2>
             Add Items</h2>
-        <asp:DetailsView ID="DetailsView1" runat="server" 
-        AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert"
-        Height="50px" oniteminserting="DetailsView1_ItemInserting" Width="466px" 
-        EnableViewState="False">
+        <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateInsertButton="True"
+            AutoGenerateRows="False" DefaultMode="Insert" Height="50px" OnItemInserting="DetailsView1_ItemInserting"
+            Width="466px" EnableViewState="False">
             <Fields>
                 <asp:TemplateField HeaderText="Stationery">
                     <ItemTemplate>
                         <asp:Label ID="Label4" runat="server"></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList ID="DropDownList2" runat="server" 
-                        DataSourceID="StationeryItemDS0" DataTextField="Description" 
-                        DataValueField="StationeryID">
+                        <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="StationeryItemDS0"
+                            DataTextField="Description" DataValueField="StationeryID">
                         </asp:DropDownList>
-                        <asp:ObjectDataSource ID="StationeryItemDS" runat="server" 
-                        SelectMethod="GetAllStationeries" 
-                        TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
+                        <asp:ObjectDataSource ID="StationeryItemDS" runat="server" SelectMethod="GetAllStationeries"
+                            TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
                     </EditItemTemplate>
                     <InsertItemTemplate>
-                        <asp:DropDownList ID="DropDownList3" runat="server" 
-                        DataSourceID="StationeryItemDS0" DataTextField="Description" 
-                        DataValueField="StationeryID" SelectedValue='<%# Bind("StationeryID") %>'>
+                        <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="StationeryItemDS0"
+                            DataTextField="Description" DataValueField="StationeryID" SelectedValue='<%# Bind("StationeryID") %>'>
                         </asp:DropDownList>
-                        <asp:ObjectDataSource ID="StationeryItemDS0" runat="server" 
-                        SelectMethod="GetAllStationeries" 
-                        TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
+                        <asp:ObjectDataSource ID="StationeryItemDS0" runat="server" SelectMethod="GetAllStationeries"
+                            TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
                     </InsertItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Quantity">
@@ -73,27 +95,24 @@
                     </EditItemTemplate>
                     <InsertItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" ValidationGroup="QuantityNeeded"></asp:TextBox>
-                        <asp:RangeValidator ID="RangeValidator1" runat="server" 
-                            ControlToValidate="TextBox5" Display="Dynamic" ErrorMessage="Invalid Quantity" 
-                            MaximumValue="10000" MinimumValue="1" Type="Integer" 
-                            ValidationGroup="QuantityNeeded"></asp:RangeValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                            ControlToValidate="TextBox5" Display="Dynamic" 
-                            ErrorMessage="Quantity is needed" ValidationGroup="QuantityNeeded"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBox5"
+                            Display="Dynamic" ErrorMessage="Invalid Quantity" MaximumValue="10000" MinimumValue="1"
+                            Type="Integer" ValidationGroup="QuantityNeeded"></asp:RangeValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox5"
+                            Display="Dynamic" ErrorMessage="Quantity is needed" ValidationGroup="QuantityNeeded"></asp:RequiredFieldValidator>
                     </InsertItemTemplate>
                 </asp:TemplateField>
             </Fields>
         </asp:DetailsView>
     </asp:Panel>
     <br />
-    <h2>Items</h2>
+
+    <h2>
+        Items</h2>
     <asp:GridView ID="RequestItemGridView" runat="server" 
-        AutoGenerateColumns="False" AutoGenerateDeleteButton="True" 
-        AutoGenerateEditButton="True" EnableViewState="False" 
-        onrowcancelingedit="RequestItemGridView_RowCancelingEdit" 
-        onrowdeleting="RequestItemGridView_RowDeleting" 
-        onrowediting="RequestItemGridView_RowEditing" 
-        onrowupdating="RequestItemGridView_RowUpdating" 
+        AutoGenerateColumns="False" AutoGenerateEditButton="True" EnableViewState="False"
+        OnRowCancelingEdit="RequestItemGridView_RowCancelingEdit" OnRowDeleting="RequestItemGridView_RowDeleting"
+        OnRowEditing="RequestItemGridView_RowEditing" OnRowUpdating="RequestItemGridView_RowUpdating"
         DataKeyNames="StationeryID">
         <Columns>
             <asp:TemplateField HeaderText="RequisitionItemID">
@@ -101,18 +120,15 @@
                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("RequisitionItemID") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" 
-                        Text='<%# Bind("RequisitionItemID") %>'></asp:TextBox>
+                   <%# Eval("RequisitionItemID") %>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="StationeryID">
                 <EditItemTemplate>
-                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="StationeryDS" 
-                        DataTextField="Description" DataValueField="StationeryID" 
-                        SelectedValue='<%# Bind("StationeryID") %>'>
+                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="StationeryDS" DataTextField="Description"
+                        DataValueField="StationeryID" SelectedValue='<%# Bind("StationeryID") %>'>
                     </asp:DropDownList>
-                    <asp:ObjectDataSource ID="StationeryDS" runat="server" 
-                        SelectMethod="GetAllStationeries" 
+                    <asp:ObjectDataSource ID="StationeryDS" runat="server" SelectMethod="GetAllStationeries"
                         TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -124,8 +140,7 @@
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" 
-                        Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -134,9 +149,9 @@
         <h2>
             ADD Special items</h2>
         <p>
-            <asp:DetailsView ID="DetailsView2" runat="server" 
-                AutoGenerateInsertButton="True" AutoGenerateRows="False" DefaultMode="Insert" 
-                Height="50px" oniteminserting="DetailsView2_ItemInserting" Width="600px">
+            <asp:DetailsView ID="DetailsView2" runat="server" AutoGenerateInsertButton="True"
+                AutoGenerateRows="False" DefaultMode="Insert" Height="50px" OnItemInserting="DetailsView2_ItemInserting"
+                Width="600px">
                 <Fields>
                     <asp:TemplateField HeaderText="Item Name">
                         <ItemTemplate>
@@ -147,9 +162,8 @@
                         </EditItemTemplate>
                         <InsertItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="TextBox1" Display="Dynamic" 
-                                ErrorMessage="Item Name Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox1"
+                                Display="Dynamic" ErrorMessage="Item Name Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                         </InsertItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Description">
@@ -161,9 +175,8 @@
                         </EditItemTemplate>
                         <InsertItemTemplate>
                             <asp:TextBox ID="TextBox2" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="TextBox2" Display="Dynamic" 
-                                ErrorMessage="Description Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox2"
+                                Display="Dynamic" ErrorMessage="Description Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                         </InsertItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity Needed">
@@ -175,27 +188,24 @@
                         </EditItemTemplate>
                         <InsertItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                                ControlToValidate="TextBox3" Display="Dynamic" ErrorMessage="Quantity Required" 
-                                ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
-                            <asp:RangeValidator ID="RangeValidator2" runat="server" 
-                                ControlToValidate="TextBox3" Display="Dynamic" 
-                                ErrorMessage="Invalid Quantity Entered" MaximumValue="10000" MinimumValue="1" 
-                                Type="Integer" ValidationGroup="SplItemValidation"></asp:RangeValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox3"
+                                Display="Dynamic" ErrorMessage="Quantity Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TextBox3"
+                                Display="Dynamic" ErrorMessage="Invalid Quantity Entered" MaximumValue="10000"
+                                MinimumValue="1" Type="Integer" ValidationGroup="SplItemValidation"></asp:RangeValidator>
                         </InsertItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Reason">
                         <ItemTemplate>
-                            <span ID="idControl">DetailsView2</span> - Field[3] - Reason
+                            <span id="idControl">DetailsView2</span> - Field[3] - Reason
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <InsertItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                                ControlToValidate="TextBox4" Display="Dynamic" ErrorMessage="Reason required" 
-                                ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox4"
+                                Display="Dynamic" ErrorMessage="Reason required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                         </InsertItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Unit Of Measure">
@@ -207,26 +217,25 @@
                         </EditItemTemplate>
                         <InsertItemTemplate>
                             <asp:TextBox ID="TextBox5" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
-                                ControlToValidate="TextBox5" Display="Dynamic" 
-                                ErrorMessage="Unit of Measure Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox5"
+                                Display="Dynamic" ErrorMessage="Unit of Measure Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                         </InsertItemTemplate>
                     </asp:TemplateField>
                 </Fields>
             </asp:DetailsView>
         </p>
     </asp:Panel>
-    <h2>Special Items</h2>
-    <asp:GridView ID="SpecialRequestItemGridView" runat="server" 
-        AutoGenerateColumns="False" style="margin-right: 0px">
+    <h2>
+        Special Items</h2>
+    <asp:GridView ID="SpecialRequestItemGridView" runat="server" AutoGenerateColumns="False"
+        Style="margin-right: 0px">
         <Columns>
             <asp:TemplateField HeaderText="Item Name">
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" 
-                        Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Description">
@@ -234,8 +243,7 @@
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" 
-                        Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("SpecialStationeryID") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Reason">
@@ -243,8 +251,7 @@
                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("RemarkByRequester") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" 
-                        Text='<%# Bind("RemarkByRequester") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("RemarkByRequester") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemStyle Width="200px" />
             </asp:TemplateField>
@@ -253,16 +260,13 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" 
-                        Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("QuantityRequested") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <br />
-    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
-        Text="Submit Request" />
-    <asp:Button ID="CancelButton" runat="server" Text="Cancel Request" 
-        onclick="CancelButton_Click" />
+    <asp:Button ID="SubmitButton" runat="server" OnClick="SubmitButton_Click" Text="Submit Request" />
+    <asp:Button ID="CancelButton" runat="server" Text="Cancel Request" OnClick="CancelButton_Click" />
     <br />
 </asp:Content>
