@@ -945,6 +945,25 @@ namespace SA33.Team12.SSIS.DAL
     
             return base.ExecuteFunction("CreateStationeryRetrievalFormByAllRequisitions", userIdParameter, processAllRequisitionsParameter, requisitionIDsParameter, newSRFID, message);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="srfID">No Metadata Documentation available.</param>
+        public int SetRecommendedQuantity(Nullable<global::System.Int32> srfID)
+        {
+            ObjectParameter srfIDParameter;
+            if (srfID.HasValue)
+            {
+                srfIDParameter = new ObjectParameter("srfID", srfID);
+            }
+            else
+            {
+                srfIDParameter = new ObjectParameter("srfID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("SetRecommendedQuantity", srfIDParameter);
+        }
 
         #endregion
     }
@@ -10332,6 +10351,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _StationeryRetrievalFormID;
         partial void OnStationeryRetrievalFormIDChanging(Nullable<global::System.Int32> value);
         partial void OnStationeryRetrievalFormIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UrgencyLevel
+        {
+            get
+            {
+                return _UrgencyLevel;
+            }
+            set
+            {
+                OnUrgencyLevelChanging(value);
+                ReportPropertyChanging("UrgencyLevel");
+                _UrgencyLevel = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UrgencyLevel");
+                OnUrgencyLevelChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UrgencyLevel;
+        partial void OnUrgencyLevelChanging(Nullable<global::System.Int32> value);
+        partial void OnUrgencyLevelChanged();
 
         #endregion
     

@@ -53,7 +53,8 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                 isRetrieved = (bool)stationeryRetrievalForm.IsRetrieved;
                 isCollected = (bool)stationeryRetrievalForm.IsCollected;
 
-                this.UpdateButton.Visible = (!IsRetrieved || !isCollected);
+                this.UpdateRetrievedQuantityButton.Visible = (!IsRetrieved);
+                this.UpdateActualQuantityButton.Visible = (IsRetrieved && !IsCollected);
 
                 srfs.Add(stationeryRetrievalForm);
                 this.StationeryRetrievalFormView.DataSource = srfs;
@@ -76,7 +77,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                     StationeryRetrievalFormItemGridView.DataSource = items;
                     StationeryRetrievalFormItemGridView.DataBind();
                 }
-                else if (!this.IsCollected)
+                else
                 {
                     GridView StationeryRetrievalFormItemByDeptGridView =
                         StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemByDeptGridView") as GridView;
@@ -89,19 +90,13 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                     }
                     //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 3);
                     //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 2);
-                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 1);
+                    FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 1);
 
                 }
             }
         }
 
-        protected void UpdateButton_Click(object sender, EventArgs e)
-        {
-            UpdateStationeryRetrievalFormView();
-            DataBindStationeryRetrievalFormView();
-        }
-
-        protected void UpdateStationeryRetrievalFormView()
+        protected void UpdateRetrievedQuantity()
         {
             GridView StationeryRetrievalFormItemGridView =
                 StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemGridView") as GridView;
@@ -125,6 +120,52 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         srfi.QuantityRetrieved = Convert.ToInt32(QtyRetrieved.Text);
                     }
                     StationeryRetrievalForm newSRF = srm.UpdateReceivedQuantity(srf);
+                    newSRF = srm.SetRecommendedQuantity(newSRF.StationeryRetrievalFormID);
+                }
+
+
+            }
+
+        }
+
+        protected void UpdateActualQuantity()
+        {
+            GridView StationeryRetrievalFormItemByDeptGridView =
+                StationeryRetrievalFormView.FindControl("StationeryRetrievalFormItemByDeptGridView") as GridView;
+
+            if (StationeryRetrievalFormItemByDeptGridView != null)
+            {
+                int srfID = Convert.ToInt32(this.StationeryRetrievalFormView.DataKey.Value);
+                using (StationeryRetrievalManager srm = new StationeryRetrievalManager())
+                {
+                    StationeryRetrievalForm srf = srm.GetStationeryRetrievalFormByID(srfID);
+                    List<StationeryRetrievalFormItem> srfis = srf.StationeryRetrievalFormItems.ToList();
+                    List<StationeryRetrievalFormItemByDept> srfiByDepts
+                        = new List<StationeryRetrievalFormItemByDept>();
+
+                    foreach (StationeryRetrievalFormItem srfi in srfis)
+                    {
+                        srfiByDepts.AddRange(srfi.StationeryRetrievalFormItemByDepts);
+                    }
+
+                    foreach (GridViewRow row in StationeryRetrievalFormItemByDeptGridView.Rows)
+                    {
+                        HiddenField srfByDeptIDHiddenField =
+                            row.FindControl("srfByDeptIDHiddenField") as HiddenField;
+                        int srfiByDeptID = Convert.ToInt32(srfByDeptIDHiddenField.Value);
+
+                        TextBox ActualQty = row.FindControl("QuantityActualTextBox") as TextBox;
+
+                        StationeryRetrievalFormItemByDept srfiByDept
+                            = (from s in srfiByDepts
+                               where
+                                   s.StationeryRetrievalFormItemByDeptID ==
+                                   srfiByDeptID
+                               select s).FirstOrDefault();
+                        int qty = Convert.ToInt32(ActualQty.Text.Trim() == "" ? "0" : ActualQty.Text.Trim());
+                        srfiByDept.QuantityActual = qty;
+                    }
+                    StationeryRetrievalForm newSRF = srm.UpdateActualQuantity(srf);
                 }
 
 
@@ -139,6 +180,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 
         protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept, int cellIndex)
         {
+            bool odd = true;
             for (int i = 0; i < srfByDept.Rows.Count; i++)
             {
                 int rowToSpan = 1;
@@ -171,6 +213,10 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         {
                             rowToSpan++;
                             nextRow.Cells.RemoveAt(cellIndex);
+                            if (odd)
+                                nextRow.CssClass = "odd";
+                            else
+                                nextRow.CssClass = "";
                         }
                         else
                         {
@@ -179,9 +225,24 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         }
                     }
                 }
+                if (odd)
+                    currentRow.CssClass = "odd";
+                else
+                    currentRow.CssClass = "";
+                odd = !odd;
                 currentRow.Cells[cellIndex].RowSpan = rowToSpan;
 
             }
+        }
+
+        protected void UpdateButton_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName.ToLower() == "retrieved")
+                UpdateRetrievedQuantity();
+            else if (e.CommandName.ToLower() == "actual")
+                UpdateActualQuantity();
+
+            DataBindStationeryRetrievalFormView();
         }
     }
 }

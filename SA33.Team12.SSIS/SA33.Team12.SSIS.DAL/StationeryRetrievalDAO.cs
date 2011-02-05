@@ -51,6 +51,27 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public StationeryRetrievalForm SetRecommendedQuantity(int stationeryRetrievalFormID)
+        {
+            try
+            {
+                // ObjectParameter srfID = new ObjectParameter("srfID", typeof(int));
+
+                int errorCode = context.SetRecommendedQuantity(stationeryRetrievalFormID);
+
+                if (errorCode == -1)
+                    throw new Exceptions.StationeryRetrievalException();
+                else
+                {
+                    return GetStationeryRetrievalFormByID(stationeryRetrievalFormID);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         /// <summary>
         /// Create a new stationery retrieval form
         /// </summary>
@@ -103,7 +124,7 @@ namespace SA33.Team12.SSIS.DAL
         /// Update Actual Quantity in stationery retrieval form
         /// </summary>
         /// <param name="stationeryRetrievalForm">stationeryRetrievalForm object</param>
-        public void UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
+        public StationeryRetrievalForm UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
             try
             {
@@ -113,6 +134,7 @@ namespace SA33.Team12.SSIS.DAL
                                 where srf.StationeryRetrievalFormID == stationeryRetrievalForm.StationeryRetrievalFormID
                                 select srf).FirstOrDefault<StationeryRetrievalForm>();
                     temp.IsCollected = true;
+                    context.SaveChanges();
                     foreach (StationeryRetrievalFormItem srfi in temp.StationeryRetrievalFormItems)
                     {
                         foreach (StationeryRetrievalFormItemByDept srfid in srfi.StationeryRetrievalFormItemByDepts)
@@ -120,12 +142,12 @@ namespace SA33.Team12.SSIS.DAL
                             UpdateStationeryRetrievalFormItemByDept(srfid);
                         }
                     }
-                    ts.Complete(); ;
+                    ts.Complete();
+                    return temp;
                 }
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -399,6 +421,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             return (from d in context.vw_GetStationeryRetrievalFormItemByDept
                     where d.StationeryRetrievalFormID == stationeryRetrievalFormID
+                    orderby d.StationeryID, d.SpecialStationeryID, d.UrgencyLevel
                     select d).ToList();
         }        
         #endregion

@@ -115,8 +115,13 @@
                                 ? "" : ((Department) Eval("Department")).Name %>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Urgency" SortExpression="Urgency">
+                        <ItemTemplate>
+                            <%# Eval("Urgency") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="QuantityNeeded" 
-                        HeaderText="QuantityNeeded" SortExpression="QuantityNeeded" />
+                        HeaderText="Quantity Needed" SortExpression="QuantityNeeded" />
                     <asp:TemplateField HeaderText="Quantity Recommended">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="QuantityRetrievedLabel" Text='<%# Eval("QuantityRecommended") %>'>
@@ -125,9 +130,11 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity Actual">
                         <ItemTemplate>
-                            <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField" Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
-                            <asp:Label runat="server" ID="QuantityRetrievedLabel" Text='<%# Eval("QuantityActual") %>'>
-                            </asp:Label>
+                            <asp:HiddenField runat="server" ID="srfByDeptIDHiddenField" Value='<%# Eval("StationeryRetrievalFormItemByDeptID") %>' />
+                            <asp:TextBox runat="server" ID="QuantityActualTextBox"
+                                Text='<%# Eval("QuantityRecommended") %>'  Visible='<%# !this.IsCollected %>' />
+                            <asp:Label runat="server" ID="QuantityActualLabel"
+                                Text='<%# Eval("QuantityActual") %>' Visible='<%# this.IsCollected %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -135,5 +142,8 @@
         </ItemTemplate>
     </asp:FormView>
     <asp:Button runat="server" ID="BackButton" Text="Back" OnClick="BackButton_Click" />
-    <asp:Button runat="server" ID="UpdateButton" Text="Update" OnClick="UpdateButton_Click" />
+    <asp:Button runat="server" ID="UpdateRetrievedQuantityButton" Text="Update" 
+        oncommand="UpdateButton_Command" CommandName="Retrieved" />
+    <asp:Button runat="server" ID="UpdateActualQuantityButton" Text="Update" 
+        oncommand="UpdateButton_Command" CommandName="Actual" />
 </asp:Content>
