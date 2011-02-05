@@ -11298,24 +11298,24 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MonthOrdered
+        public global::System.String Month
         {
             get
             {
-                return _MonthOrdered;
+                return _Month;
             }
             set
             {
-                OnMonthOrderedChanging(value);
-                ReportPropertyChanging("MonthOrdered");
-                _MonthOrdered = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MonthOrdered");
-                OnMonthOrderedChanged();
+                OnMonthChanging(value);
+                ReportPropertyChanging("Month");
+                _Month = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Month");
+                OnMonthChanged();
             }
         }
-        private Nullable<global::System.Int32> _MonthOrdered;
-        partial void OnMonthOrderedChanging(Nullable<global::System.Int32> value);
-        partial void OnMonthOrderedChanged();
+        private global::System.String _Month;
+        partial void OnMonthChanging(global::System.String value);
+        partial void OnMonthChanged();
 
         #endregion
     
