@@ -39,7 +39,13 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -85,6 +91,7 @@
     <Content Include="Test\PlaceStockAdjustment.aspx" />
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
+    <Content Include="Test\ReportTest.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="RequestStationery\StationeryRequest.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
@@ -266,6 +273,13 @@
     </Compile>
     <Compile Include="Test\POTest.aspx.designer.cs">
       <DependentUpon>POTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\ReportTest.aspx.cs">
+      <DependentUpon>ReportTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\ReportTest.aspx.designer.cs">
+      <DependentUpon>ReportTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\Stationeries.aspx.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>

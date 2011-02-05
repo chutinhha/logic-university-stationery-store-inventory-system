@@ -34,6 +34,14 @@
           <EntitySet Name="Suppliers" EntityType="SA33.Team12.SSIS.Model.Store.Suppliers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Urgencies" EntityType="SA33.Team12.SSIS.Model.Store.Urgencies" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="SA33.Team12.SSIS.Model.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StationeryOrderedByCategory" EntityType="SA33.Team12.SSIS.Model.Store.StationeryOrderedByCategory" store:Type="Views" store:Schema="dbo" store:Name="StationeryOrderedByCategory">
+            <DefiningQuery>SELECT 
+      [StationeryOrderedByCategory].[Name] AS [Name], 
+      [StationeryOrderedByCategory].[Quantity] AS [Quantity], 
+      [StationeryOrderedByCategory].[TotalPrice] AS [TotalPrice], 
+      [StationeryOrderedByCategory].[MonthOrdered] AS [MonthOrdered]
+      FROM [dbo].[StationeryOrderedByCategory] AS [StationeryOrderedByCategory]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_GetStationeryRetrievalFormItemByDept" EntityType="SA33.Team12.SSIS.Model.Store.vw_GetStationeryRetrievalFormItemByDept" store:Type="Views" store:Schema="dbo" store:Name="vw_GetStationeryRetrievalFormItemByDept">
             <DefiningQuery>SELECT 
       [vw_GetStationeryRetrievalFormItemByDept].[StationeryRetrievalFormID] AS [StationeryRetrievalFormID], 
@@ -637,6 +645,18 @@
           <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
           <Property Name="Role" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SA33.Team12.SSIS.dbo.StationeryOrderedByCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="StationeryOrderedByCategory">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="MonthOrdered" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SA33.Team12.SSIS.dbo.vw_GetStationeryRetrievalFormItemByDept' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1687,8 +1707,9 @@
             <End Role="SpecialStationery" EntitySet="SpecialStationeries" />
           </AssociationSet>
           <FunctionImport Name="SetRecommendedQuantity">
-            <Parameter Name="srfID" Mode="In" Type="Int32" />
+          <Parameter Name="srfID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="StationeryOrderedByCategories" EntityType="SA33.Team12.SSIS.Model.StationeryOrderedByCategory" />
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
           <Key>
@@ -2908,6 +2929,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StationeryOrderedByCategory">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Quantity" />
+          <Property Type="Decimal" Name="TotalPrice" Precision="38" Scale="4" />
+          <Property Type="Int32" Name="MonthOrdered" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3223,6 +3253,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SetRecommendedQuantity" FunctionName="SA33.Team12.SSIS.Model.Store.sp_SetRecommendedQuantity" />
+          <EntitySetMapping Name="StationeryOrderedByCategories">
+            <EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.StationeryOrderedByCategory">
+              <MappingFragment StoreEntitySet="StationeryOrderedByCategory">
+                <ScalarProperty Name="MonthOrdered" ColumnName="MonthOrdered" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3862,6 +3902,7 @@
           <ConnectorPoint PointX="10.5353245078125" PointY="35.100403645833339" />
           <ConnectorPoint PointX="10.5353245078125" PointY="35.75" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.StationeryOrderedByCategory" Width="1.5" PointX="3.375" PointY="4.75" Height="1.7879850260416674" />
       </Diagram>
     </Diagrams>
   </Designer>

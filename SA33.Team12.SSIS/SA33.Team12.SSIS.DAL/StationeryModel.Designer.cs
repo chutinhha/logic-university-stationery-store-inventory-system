@@ -640,6 +640,22 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         private ObjectSet<vw_GetStationeryRetrievalFormItemByDept> _vw_GetStationeryRetrievalFormItemByDept;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<StationeryOrderedByCategory> StationeryOrderedByCategories
+        {
+            get
+            {
+                if ((_StationeryOrderedByCategories == null))
+                {
+                    _StationeryOrderedByCategories = base.CreateObjectSet<StationeryOrderedByCategory>("StationeryOrderedByCategories");
+                }
+                return _StationeryOrderedByCategories;
+            }
+        }
+        private ObjectSet<StationeryOrderedByCategory> _StationeryOrderedByCategories;
 
         #endregion
         #region AddTo Methods
@@ -898,6 +914,14 @@ namespace SA33.Team12.SSIS.DAL
         public void AddTovw_GetStationeryRetrievalFormItemByDept(vw_GetStationeryRetrievalFormItemByDept vw_GetStationeryRetrievalFormItemByDept)
         {
             base.AddObject("vw_GetStationeryRetrievalFormItemByDept", vw_GetStationeryRetrievalFormItemByDept);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the StationeryOrderedByCategories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStationeryOrderedByCategories(StationeryOrderedByCategory stationeryOrderedByCategory)
+        {
+            base.AddObject("StationeryOrderedByCategories", stationeryOrderedByCategory);
         }
 
         #endregion
@@ -6837,6 +6861,133 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="StationeryOrderedByCategory")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class StationeryOrderedByCategory : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new StationeryOrderedByCategory object.
+        /// </summary>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static StationeryOrderedByCategory CreateStationeryOrderedByCategory(global::System.String name)
+        {
+            StationeryOrderedByCategory stationeryOrderedByCategory = new StationeryOrderedByCategory();
+            stationeryOrderedByCategory.Name = name;
+            return stationeryOrderedByCategory;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (_Name != value)
+                {
+                    OnNameChanging(value);
+                    ReportPropertyChanging("Name");
+                    _Name = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Name");
+                    OnNameChanged();
+                }
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Quantity
+        {
+            get
+            {
+                return _Quantity;
+            }
+            set
+            {
+                OnQuantityChanging(value);
+                ReportPropertyChanging("Quantity");
+                _Quantity = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Quantity");
+                OnQuantityChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Quantity;
+        partial void OnQuantityChanging(Nullable<global::System.Int32> value);
+        partial void OnQuantityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TotalPrice
+        {
+            get
+            {
+                return _TotalPrice;
+            }
+            set
+            {
+                OnTotalPriceChanging(value);
+                ReportPropertyChanging("TotalPrice");
+                _TotalPrice = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalPrice");
+                OnTotalPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TotalPrice;
+        partial void OnTotalPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnTotalPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MonthOrdered
+        {
+            get
+            {
+                return _MonthOrdered;
+            }
+            set
+            {
+                OnMonthOrderedChanging(value);
+                ReportPropertyChanging("MonthOrdered");
+                _MonthOrdered = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MonthOrdered");
+                OnMonthOrderedChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MonthOrdered;
+        partial void OnMonthOrderedChanging(Nullable<global::System.Int32> value);
+        partial void OnMonthOrderedChanged();
+
+        #endregion
+    
     }
     
     /// <summary>
