@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.BLL;
+using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.Handle_Request
 {
@@ -13,8 +15,65 @@ namespace SA33.Team12.SSIS.Handle_Request
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            if (!Page.IsPostBack)
+            {
+                BindSRFGridView();
+            }
         }
+
+        protected void BindSRFGridView()
+        {
+            using (BLL.StationeryRetrievalManager srm = new BLL.StationeryRetrievalManager())
+            {
+
+                this.SRFGridView.DataSource = srm.GetAllStationeryRetrievalForms();
+                this.SRFGridView.DataBind();
+            }
+        }
+
+        protected void SRFGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            SRFGridView.PageIndex = e.NewPageIndex;
+            BindSRFGridView();
+        }
+
+        protected void SRFGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int UserID = (int)DataBinder.Eval(e.Row.DataItem, "RetrievedBy");
+                if (UserID != 0)
+                {
+                    Literal aa = e.Row.FindControl("RetrievedByLiteral") as Literal;
+                    if (aa != null)
+                    {
+                        using (UserManager um = new UserManager())
+                        {
+                            User user = um.GetUserByID(UserID);
+                            if (user != null) aa.Text = user.UserName;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void BtnFilter_Click(object sender, EventArgs e)
+        {
+            string selectedItem = DDLIsDisbursed.SelectedValue.ToString();
+            bool status = true;
+            if (selectedItem == "false") {
+                status = false;
+            }
+            StationeryRetrievalFormSearchDTO searchCriteria = new StationeryRetrievalFormSearchDTO();
+            searchCriteria.IsDistributed = status;
+            using (BLL.StationeryRetrievalManager srm = new BLL.StationeryRetrievalManager())
+            {
+                List<StationeryRetrievalForm> SRF = srm.FindStationeryRetrievalFormByCriteria(searchCriteria);
+                SRFGridView.DataSource = SRF;
+                SRFGridView.DataBind();
+            }
+        }
+
 
         protected void DisbursementGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -51,6 +110,13 @@ namespace SA33.Team12.SSIS.Handle_Request
                 }
             }
         }
+
+        
+
+       
+       
+
+     
 
 
     }

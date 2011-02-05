@@ -4,6 +4,39 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <fieldset>
+<legend>Stationery Retrieval Form List</legend>
+Filter By Disbursement Status:
+    <asp:DropDownList ID="DDLIsDisbursed" runat="server">
+        <asp:ListItem Value="true">Already Disbursed</asp:ListItem>
+        <asp:ListItem Value="false">Never Disbursed</asp:ListItem>
+    </asp:DropDownList>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="BtnFilter" runat="server" Text="Filter" 
+        onclick="BtnFilter_Click" />
+    <asp:GridView ID="SRFGridView" runat="server" AutoGenerateColumns="False"
+         AllowPaging="True" onpageindexchanging="SRFGridView_PageIndexChanging" 
+        onrowdatabound="SRFGridView_RowDataBound">
+        <Columns>
+            <asp:BoundField DataField="StationeryRetrievalFormID" HeaderText="SRFID" 
+                SortExpression="StationeryRetrievalFormID" />
+            <asp:BoundField DataField="StationeryRetrievalNumber" 
+                HeaderText="StationeryRetrievedNumber" 
+                SortExpression="StationeryRetrievalNumber" />
+            <asp:BoundField DataField="DateRetrieved" HeaderText="DateRetrieved" 
+                SortExpression="DateRetrieved" />
+            <asp:TemplateField HeaderText="RetrievedBy">
+                 <ItemTemplate>
+                     <asp:Literal runat="server" ID="RetrievedByLiteral" />
+                 </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="IsDistributed" HeaderText="IsDisbursed" 
+                SortExpression="IsDistributed" />
+            <asp:CommandField ShowSelectButton="True" />
+        </Columns>
+    </asp:GridView>
+</fieldset>
+
+<fieldset>
 <legend>Disbursement List</legend>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
         SelectMethod="FindAllDisbursement" 
