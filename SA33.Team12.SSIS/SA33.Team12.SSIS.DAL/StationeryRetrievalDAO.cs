@@ -168,12 +168,38 @@ namespace SA33.Team12.SSIS.DAL
         /// Find stationeryRetrievalForms by Criteria
         /// </summary>
         /// <returns>stationeryRetrievalForm object</returns>
-        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria(DTO.StationeryRetrievalFormSearchDTO stationeryRetrievalFormSearchDTO)
+        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria(DTO.StationeryRetrievalFormSearchDTO criteria)
         {
-            return GetAllStationeryRetrievalForms();
-            //.Where(r => r.StationeryRetrievalFormID == (stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID == 0 ? r.StationeryRetrievalFormID : stationeryRetrievalFormSearchDTO.StationeryRetrievalFormID)
+            return (from s in context.StationeryRetrievalForms
+                    where
+                        s.StationeryRetrievalFormID ==
+                        (criteria.StationeryRetrievalFormID == 0
+                             ? s.StationeryRetrievalFormID
+                             : criteria.StationeryRetrievalFormID)
+                        && s.IsRetrieved == (criteria.IsRetrieved == null ? s.IsRetrieved : criteria.IsRetrieved)
+                        && s.IsCollected == (criteria.IsCollected == null ? s.IsCollected : criteria.IsCollected)
+                        &&
+                        s.IsDistributed == (criteria.IsDistributed == null ? s.IsDistributed : criteria.IsDistributed)
+                        &&
+                        (EntityFunctions.DiffDays(s.DateRetrieved,
+                                                  (criteria.StartDateRetrieved == null ||
+                                                   criteria.StartDateRetrieved == DateTime.MinValue
+                                                       ? s.DateRetrieved
+                                                       : criteria.StartDateRetrieved)) <= 0
+                         &&
+                         EntityFunctions.DiffDays(s.DateRetrieved,
+                                                  (criteria.EndDateRetrieved == null ||
+                                                   criteria.EndDateRetrieved == DateTime.MinValue
+                                                       ? s.DateRetrieved
+                                                       : criteria.EndDateRetrieved)) >= 0)
+                        &&
+                        (EntityFunctions.DiffDays(s.DateRetrieved,
+                                                  (criteria.ExactDateRetrieved == null ||
+                                                   criteria.ExactDateRetrieved == DateTime.MinValue
+                                                       ? s.DateRetrieved
+                                                       : criteria.ExactDateRetrieved)) == 0)
 
-
+                    select s).ToList();
         }
         #endregion
 
