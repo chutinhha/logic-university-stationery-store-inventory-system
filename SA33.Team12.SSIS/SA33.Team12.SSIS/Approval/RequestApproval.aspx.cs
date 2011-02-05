@@ -14,12 +14,13 @@ namespace SA33.Team12.SSIS.Approval
     {
         RequisitionManager requisitionManager;
         List<Requisition> requisitions;
+        User currentUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            requisitionManager = new RequisitionManager();
-            UserManager u = new UserManager();
+            requisitionManager = new RequisitionManager();           
 
-            requisitions = requisitionManager.GetAllUnApprovedRequisitionByDepartmentID(1);
+            currentUser = Utilities.Membership.GetCurrentLoggedInUser();
+            requisitions = requisitionManager.GetAllUnApprovedRequisitionByDepartmentID(currentUser.DepartmentID);
             if (requisitions != null)
             {
                 GridView1.DataSource = requisitions;
@@ -27,7 +28,7 @@ namespace SA33.Team12.SSIS.Approval
             }
             if (requisitions.Count == 0)
             {
-                Button1.Visible = false;
+                ApproveAllButton.Visible = false;
                 Label1.Text = "No pending requests for approval.";
             }
 
@@ -68,7 +69,7 @@ namespace SA33.Team12.SSIS.Approval
         private void ApproveSingleReq(int reqID)
         {
             Requisition r = requisitionManager.GetRequisitionByID(reqID);
-            r.ApprovedBy = 6;
+            r.ApprovedBy = currentUser.UserID;
             requisitionManager.ApproveRequisition(r);
             //UtilityFunctions.SendEmail(r.RequisitionID + " - Your Request has been approved", "Dear " + r.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", new List<DAL.User>());
             Response.Redirect("RequestApproval.aspx");

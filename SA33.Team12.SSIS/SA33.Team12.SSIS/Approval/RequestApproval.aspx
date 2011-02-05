@@ -42,6 +42,6 @@
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
             SelectMethod="GetAllUnApprovedRequisition" 
             TypeName="SA33.Team12.SSIS.BLL.RequisitionManager"></asp:ObjectDataSource>
-        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+        <asp:Button ID="ApproveAllButton" runat="server" onclick="Button1_Click" 
             Text="Approve All" />
 </asp:Content>

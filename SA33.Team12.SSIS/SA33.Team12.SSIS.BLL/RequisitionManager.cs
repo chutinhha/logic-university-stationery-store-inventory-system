@@ -169,7 +169,7 @@ namespace SA33.Team12.SSIS.BLL
             catch (Exception)
             {
 
-                throw;
+                throw new ApprovalException("Approval Failed.");
             }
         }
 
@@ -208,7 +208,7 @@ namespace SA33.Team12.SSIS.BLL
             catch (Exception)
             {
 
-                throw;
+                throw new ApprovalException("Approval Failed for all requisitions.");
             }
         }
 
