@@ -35,6 +35,7 @@ namespace SA33.Team12.SSIS.Stock
                     lblOrderDate.Text = po.DateOfOrder.ToShortDateString();
                     lblDateToSupply.Text = po.DateToSupply.ToShortDateString();
                     lblStatus.Text = (po.IsDelivered  ? "Delivered" : "Outstanding");
+                    lblSupplier.Text = po.Supplier.CompanyName;
                     List<PurchaseOrderItem> items = po.PurchaseOrderItems.ToList<PurchaseOrderItem>();
                     this.gvPODetails.DataSource = items;
                     this.gvPODetails.DataBind();
@@ -52,7 +53,7 @@ namespace SA33.Team12.SSIS.Stock
 
         protected void btnReplenish_Click(object sender, EventArgs e)
         {
-            Response.Redirect("");
+            Response.Redirect("~/Stock/ReplenishStock.aspx?ID=" + Request.QueryString["ID"]);
         }
     }
 }
