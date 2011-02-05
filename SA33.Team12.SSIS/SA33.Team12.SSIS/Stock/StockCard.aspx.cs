@@ -44,6 +44,14 @@ namespace SA33.Team12.SSIS.Stock
                 this.gvTransactions.DataSource = trans;
                 this.gvTransactions.DataBind();
             }
+
+            btnPrint.Enabled = true;
+            btnPrint.Visible = true;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
