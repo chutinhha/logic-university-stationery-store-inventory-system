@@ -50,8 +50,8 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                 StationeryRetrievalForm stationeryRetrievalForm
                     = sm.GetStationeryRetrievalFormByID(this.StationeryRetrievalFormID);
 
-                isRetrieved = (bool) stationeryRetrievalForm.IsRetrieved;
-                isCollected = (bool) stationeryRetrievalForm.IsCollected;
+                isRetrieved = (bool)stationeryRetrievalForm.IsRetrieved;
+                isCollected = (bool)stationeryRetrievalForm.IsCollected;
 
                 this.UpdateButton.Visible = (!IsRetrieved || !isCollected);
 
@@ -87,7 +87,10 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         StationeryRetrievalFormItemByDeptGridView.DataSource = srfiByDept;
                         StationeryRetrievalFormItemByDeptGridView.DataBind();
                     }
-                    FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView);
+                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 3);
+                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 2);
+                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 1);
+
                 }
             }
         }
@@ -134,23 +137,50 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
         }
 
-        protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept)
+        protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept, int cellIndex)
         {
             for (int i = 0; i < srfByDept.Rows.Count; i++)
             {
+                int rowToSpan = 1;
                 GridViewRow currentRow = srfByDept.Rows[i];
-                if(currentRow.RowType == DataControlRowType.DataRow)
+                string currentText = string.Empty;
+                DataBoundLiteralControl currentCellCtrl = null;
+                if (currentRow.Cells[cellIndex].Controls.Count > 0)
+                    currentCellCtrl = currentRow.Cells[cellIndex].Controls[0] as DataBoundLiteralControl;
+                if (currentCellCtrl != null)
+                    currentText = currentCellCtrl.Text.Trim();
+                else
                 {
-                    if(srfByDept.Rows.Count - 1 > i + 1)
+                    currentText = currentRow.Cells[cellIndex].Text.Trim();
+                }
+                for (int j = i; j < srfByDept.Rows.Count; j++)
+                {
+                    if (srfByDept.Rows.Count - 1 > j + 1)
                     {
-                        GridViewRow nextRow = srfByDept.Rows[i + 1];
-                        if (currentRow.Cells[1].Text.Trim() == nextRow.Cells[1].Text.Trim())
+                        GridViewRow nextRow = srfByDept.Rows[j + 1];
+                        string nextText = string.Empty;
+                        DataBoundLiteralControl nextCellCtrl = null;
+                        if (nextRow.Cells[cellIndex].Controls.Count > 0)
+                            nextCellCtrl = nextRow.Cells[cellIndex].Controls[0] as DataBoundLiteralControl;
+                        if (nextCellCtrl != null) nextText = nextCellCtrl.Text.Trim();
+                        else
                         {
-                            currentRow.Cells[1].RowSpan++;
-                            nextRow.Cells.Remove(nextRow.Cells[1]);
+                            nextText = nextRow.Cells[cellIndex].Text.Trim();
+                        }
+                        if (currentText == nextText)
+                        {
+                            rowToSpan++;
+                            nextRow.Cells.RemoveAt(cellIndex);
+                        }
+                        else
+                        {
+                            i = j;
+                            break;
                         }
                     }
                 }
+                currentRow.Cells[cellIndex].RowSpan = rowToSpan;
+
             }
         }
     }
