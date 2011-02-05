@@ -24,6 +24,11 @@ namespace SA33.Team12.SSIS.BLL
             return stationeryRetrievalDAO.CreateStationeryRetrievalForm(createdBy, true, "");
         }
 
+        public StationeryRetrievalForm SetRecommendedQuantity(int stationeryRetrievalFormID)
+        {
+            return stationeryRetrievalDAO.SetRecommendedQuantity(stationeryRetrievalFormID);
+        }
+
         public StationeryRetrievalForm CreateStationeryRetrievalForm(User createdBy, List<Requisition> requisitions)
         {
             string requisitionIds = string.Empty;
@@ -56,9 +61,9 @@ namespace SA33.Team12.SSIS.BLL
             return stationeryRetrievalDAO.UpdateReceivedQuantity(stationeryRetrievalForm);
         }
 
-        public void UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
+        public StationeryRetrievalForm UpdateActualQuantity(StationeryRetrievalForm stationeryRetrievalForm)
         {
-            stationeryRetrievalDAO.UpdateActualQuantity(stationeryRetrievalForm);
+           return stationeryRetrievalDAO.UpdateActualQuantity(stationeryRetrievalForm);
         }
 
         public List<StationeryRetrievalFormItem> FindStationeryRetrievalFormItemsByCriteria(StationeryRetrievalFormItemSearchDTO criteria)

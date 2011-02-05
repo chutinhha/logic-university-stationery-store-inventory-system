@@ -31,12 +31,21 @@ namespace SA33.Team12.SSIS.StationeryRetrieval {
         protected global::System.Web.UI.WebControls.Button BackButton;
         
         /// <summary>
-        /// UpdateButton control.
+        /// UpdateRetrievedQuantityButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateButton;
+        protected global::System.Web.UI.WebControls.Button UpdateRetrievedQuantityButton;
+        
+        /// <summary>
+        /// UpdateActualQuantityButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateActualQuantityButton;
     }
 }

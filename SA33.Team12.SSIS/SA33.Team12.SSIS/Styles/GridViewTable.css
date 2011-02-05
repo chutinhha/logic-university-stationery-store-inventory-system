@@ -46,8 +46,8 @@ table.screenFriendlyGridView tbody td a
 }
 table.screenFriendlyGridView tbody td a:visited
 {
-    color: gray;
-    text-decoration: line-through;
+    color: #666;
+    /*text-decoration: line-through;*/
 }
 table.screenFriendlyGridView tbody td a:hover
 {
