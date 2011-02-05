@@ -26,6 +26,7 @@ table.screenFriendlyGridView td, table.screenFriendlyGridView th
 {
     color: #363636;
     padding: .4em;
+    margin-left: 160px;
 }
 table.screenFriendlyGridView tr
 {

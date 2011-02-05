@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
+using System.Threading;
 using System.Web.DynamicData;
 using System.Web.Security;
 using System.Web.UI;
@@ -7,6 +9,8 @@ using System.Web.UI.WebControls;
 using System.Transactions;
 using System.Collections.Generic;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.BLL;
+using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.UserAdministration
 {
@@ -18,21 +22,42 @@ namespace SA33.Team12.SSIS.UserAdministration
             this.UserFormView.EnableDynamicData(typeof(User));
         }
 
-        protected void UserFormView_Error(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Exception exception = Server.GetLastError();
-            if(exception.InnerException is Exceptions.UserException)
+            if(!Page.IsPostBack)
             {
-                this.ErrorMessage.Text = exception.InnerException.Message;
-            }else if (exception is Exceptions.UserException)
-            {
-                this.ErrorMessage.Text = exception.Message;
+                DataBindUserGridView();
             }
-            //else
-            //{
-            //    Server.Transfer("~/GenericErrorPage.aspx", true);
-            //}
-            Server.ClearError();
+        }
+        protected void DataBindUserGridView()
+        {
+            DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
+            string[] roles = Utilities.Membership.GetCurrentLoggedInUserRole();
+
+            List<User> UserList = null;
+
+            var isAdmin = (from r in roles
+                     where r.Contains("Administrators")
+                     select r);
+            var isDeptHead = (from r in roles
+                              where r.Contains("DepartmentHead") || r.Contains("TemporaryDepartmentHead")
+                              select r);
+            using(UserManager um = new UserManager())
+            if(isAdmin.Count() > 0)
+            {
+                UserList = um.GetAllUsers();
+            }
+            else if(isDeptHead.Count() > 0)
+            {
+                UserList = um.FindUsersByCriteria(
+                    new UserSearchDTO() {DepartmentID = loggedInUser.DepartmentID});
+            }
+            else
+            {
+                throw new Exceptions.UserException("You do not have access permission to this page.");
+            }
+            this.UserGridView.DataSource = UserList;
+            this.UserGridView.DataBind();
         }
 
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -61,6 +86,7 @@ namespace SA33.Team12.SSIS.UserAdministration
                     break;
                 case "delete": break;
             }
+            DataBindUserGridView();
         }
 
         protected void UserFormView_ItemInserting(object sender, FormViewInsertEventArgs e)
@@ -147,5 +173,12 @@ namespace SA33.Team12.SSIS.UserAdministration
                 default: break;
             }
         }
+
+        protected void UserGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            UserGridView.PageIndex = e.NewPageIndex;
+            DataBindUserGridView();
+        }
+
     }
 }
