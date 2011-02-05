@@ -87,6 +87,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         StationeryRetrievalFormItemByDeptGridView.DataSource = srfiByDept;
                         StationeryRetrievalFormItemByDeptGridView.DataBind();
                     }
+                    FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView);
                 }
             }
         }
@@ -131,6 +132,26 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
         protected void BackButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+        }
+
+        protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept)
+        {
+            for (int i = 0; i < srfByDept.Rows.Count; i++)
+            {
+                GridViewRow currentRow = srfByDept.Rows[i];
+                if(currentRow.RowType == DataControlRowType.DataRow)
+                {
+                    if(srfByDept.Rows.Count - 1 > i + 1)
+                    {
+                        GridViewRow nextRow = srfByDept.Rows[i + 1];
+                        if (currentRow.Cells[1].Text.Trim() == nextRow.Cells[1].Text.Trim())
+                        {
+                            currentRow.Cells[1].RowSpan++;
+                            nextRow.Cells.Remove(nextRow.Cells[1]);
+                        }
+                    }
+                }
+            }
         }
     }
 }
