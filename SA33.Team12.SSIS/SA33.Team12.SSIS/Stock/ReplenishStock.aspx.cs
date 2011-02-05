@@ -12,7 +12,7 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class ReplenishStock : System.Web.UI.Page
     {
-        PurchaseOrder po = new PurchaseOrder();
+      //  public PurchaseOrder po = new PurchaseOrder();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -28,7 +28,7 @@ namespace SA33.Team12.SSIS.Stock
                 int purchaseOrderID = int.Parse(Request.QueryString["ID"]);
                 using (PurchaseOrderManager pom = new PurchaseOrderManager())
                 {
-                    po = pom.FindPurchaseOrderByID(purchaseOrderID);
+                    PurchaseOrder po = pom.FindPurchaseOrderByID(purchaseOrderID);
                     List<PurchaseOrderItem> items = po.PurchaseOrderItems.ToList<PurchaseOrderItem>();
                     this.gvPOitems.DataSource = items;
                     this.gvPOitems.DataBind();
@@ -45,6 +45,7 @@ namespace SA33.Team12.SSIS.Stock
         {
             using (PurchaseOrderManager pom = new PurchaseOrderManager())
             {
+                PurchaseOrder po = pom.FindPurchaseOrderByID(int.Parse(Request.QueryString["ID"]));
                 po.DONumber = txtDONumber.Text.ToString();
                 po.IsDelivered = true;
                 po.DateReceived = Convert.ToDateTime(txtReceivedDate.Text.ToString());
