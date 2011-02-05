@@ -75,6 +75,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Approval\RequestApproval.aspx" />
     <Content Include="HandleRequest\Disbursement.aspx" />
+    <Content Include="Print\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\PrintRequestByIndividualEmployee.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
@@ -162,6 +163,19 @@
     </Compile>
     <Compile Include="HandleRequest\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\StationeryRequisitionTrendReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StationeryRequisitionTrendReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Print\StationeryRequisitionTrendReportByDept.aspx.cs">
+      <DependentUpon>StationeryRequisitionTrendReportByDept.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\StationeryRequisitionTrendReportByDept.aspx.designer.cs">
+      <DependentUpon>StationeryRequisitionTrendReportByDept.aspx</DependentUpon>
     </Compile>
     <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
@@ -455,6 +469,10 @@
     <EmbeddedResource Include="Print\StationeryOrderedByCategoryCR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StationeryOrderedByCategoryCR.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print\StationeryRequisitionTrendReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StationeryRequisitionTrendReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
