@@ -249,10 +249,15 @@ namespace SA33.Team12.SSIS.DAL
         /// Get All Requistions by Employee ID
         /// </summary>
         /// <returns></returns>
-        public List<Requisition> GetAllRequisition(int EmployeeID)
+        public List<Requisition> GetAllRequisition(int EmployeeID, RequisitionSearchDTO reqSearchDTO)
         {
             try
             {
+                if (reqSearchDTO != null)
+                {
+                    return GetAllRequisition().Where(x => x.CreatedBy == EmployeeID && x.DateRequested.Month == reqSearchDTO.ExactDateRequested.Month && x.DateRequested.Year == reqSearchDTO.ExactDateRequested.Year).ToList<Requisition>();
+
+                }
                 return GetAllRequisition().Where(x => x.CreatedBy == EmployeeID).ToList<Requisition>();
             }
             catch (Exception)
