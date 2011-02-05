@@ -32,8 +32,21 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="Role" HeaderText="Role" SortExpression="Role" />
                 <asp:CheckBoxField DataField="IsEnabled" HeaderText="Enabled" ReadOnly="true" />
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:ButtonField ButtonType="Link" CommandName="Disable" Text="Disable" />
+                <asp:TemplateField HeaderText="Actions">
+                    <ItemTemplate>
+                        <asp:LinkButton runat="server" 
+                            CommandName="Select" Text="Select"
+                            CommandArgument='<%# Eval("UserID") %>'  />
+                        <asp:LinkButton runat="server" 
+                            Visible='<%# (bool) Eval("IsEnabled") %>' 
+                            CommandName="Disable" Text="Disable" 
+                            CommandArgument='<%# Eval("UserID") %>'  />
+                        <asp:LinkButton runat="server" 
+                            Visible='<%# !(bool) Eval("IsEnabled") %>'
+                            CommandName="Enable" Text="Enable" 
+                            CommandArgument='<%# Eval("UserID") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
         <asp:ObjectDataSource ID="UserObjectDataSource" runat="server" SelectMethod="GetAllUsers"
@@ -44,7 +57,9 @@
         <legend>User Detail</legend>
         <asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True" DataSourceID="UserDetailObjectDataSource"
             OnItemInserting="UserFormView_ItemInserting" OnItemUpdating="UserFormView_ItemUpdating"
-            OnItemCommand="UserFormView_ItemCommand" OnDataBound="UserFormView_DataBound">
+            OnItemCommand="UserFormView_ItemCommand" 
+            OnDataBound="UserFormView_DataBound" 
+            onmodechanging="UserFormView_ModeChanging">
             <EmptyDataTemplate>
                 Please select a user to view its detail.
                 <br />
@@ -62,7 +77,8 @@
                             <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" DataField="DepartmentID"
                                 Mode="Edit" Visible="false" />
                             <asp:DropDownList runat="server" ID="DepartmentDropDownList" DataTextField="Name"
-                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource" SelectedValue='<%# Eval("DepartmentID") %>'>
+                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource" 
+                                SelectedValue='<%# Eval("DepartmentID") %>'>
                             </asp:DropDownList>
                             <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"
                                 TypeName="SA33.Team12.SSIS.BLL.UserManager" SelectMethod="GetAllDepartments">
@@ -122,7 +138,8 @@
                                 Visible="false" />
                             <asp:DropDownList ID="MemebershipRoleDropDownList" runat="server">
                             </asp:DropDownList>
-                            <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" runat="server" SelectMethod="GetAllRoles"
+                            <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" 
+                                runat="server" SelectMethod="GetAllRoles"
                                 TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
                         </td>
                         <tr>

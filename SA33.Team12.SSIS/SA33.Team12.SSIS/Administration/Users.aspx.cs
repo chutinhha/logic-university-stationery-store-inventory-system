@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
-using System.Threading;
-using System.Web.DynamicData;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Transactions;
 using System.Collections.Generic;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
@@ -25,9 +21,7 @@ namespace SA33.Team12.SSIS.UserAdministration
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
-            {
                 DataBindUserGridView();
-            }
         }
         protected void DataBindUserGridView()
         {
@@ -37,43 +31,52 @@ namespace SA33.Team12.SSIS.UserAdministration
             List<User> UserList = null;
 
             var isAdmin = (from r in roles
-                     where r.Contains("Administrators")
-                     select r);
+                           where r.Contains("Administrators")
+                           select r);
             var isDeptHead = (from r in roles
-                              where r.Contains("DepartmentHead") || r.Contains("TemporaryDepartmentHead")
+                              where r.Contains("DepartmentHeads") || r.Contains("TemporaryDepartmentHeads")
                               select r);
-            using(UserManager um = new UserManager())
-            if(isAdmin.Count() > 0)
-            {
-                UserList = um.GetAllUsers();
-            }
-            else if(isDeptHead.Count() > 0)
-            {
-                UserList = um.FindUsersByCriteria(
-                    new UserSearchDTO() {DepartmentID = loggedInUser.DepartmentID});
-            }
-            else
-            {
-                throw new Exceptions.UserException("You do not have access permission to this page.");
-            }
+            using (UserManager um = new UserManager())
+                if (isAdmin.Count() > 0)
+                {
+                    UserList = um.GetAllUsers();
+                }
+                else if (isDeptHead.Count() > 0)
+                {
+                    UserList = um.FindUsersByCriteria(
+                        new UserSearchDTO() { DepartmentID = loggedInUser.DepartmentID });
+                }
+                else
+                {
+                    UserList = um.FindUsersByCriteria(
+                        new UserSearchDTO() { UserID = loggedInUser.UserID });
+                }
             this.UserGridView.DataSource = UserList;
             this.UserGridView.DataBind();
         }
 
         protected void UserGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int UserID = int.Parse(e.CommandArgument.ToString());
             switch (e.CommandName.ToLower())
             {
                 case "disable":
-                    int rowID = int.Parse(e.CommandArgument.ToString());
-                    int UserID = (int)UserGridView.DataKeys[rowID].Value;
                     try
                     {
-                        using (TransactionScope ts = new TransactionScope())
-                        {
-                            DAL.User user = Utilities.Membership.GetUserById(UserID);
-                            Utilities.Membership.DisableUser(user);
-                        }
+                        DAL.User user = Utilities.Membership.GetUserById(UserID);
+                        Utilities.Membership.DisableUser(user);
+                    }
+                    catch (Exception exception)
+                    {
+                        this.ErrorMessage.Text = exception.Message;
+                    }
+
+                    break;
+                case "enable":
+                    try
+                    {
+                        DAL.User user = Utilities.Membership.GetUserById(UserID);
+                        Utilities.Membership.EnableUser(user);
                     }
                     catch (Exception exception)
                     {
@@ -98,7 +101,7 @@ namespace SA33.Team12.SSIS.UserAdministration
                     userFormView.FindControl("DepartmentDropDownList") as DropDownList;
 
                 e.Values["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
-                
+
                 DropDownList MemebershipRoleDropDownList =
                  UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
                 string roles = string.Empty;
@@ -136,9 +139,9 @@ namespace SA33.Team12.SSIS.UserAdministration
             {
                 DataBindMemebershipDropDownList();
             }
-            else if(UserFormView.CurrentMode == FormViewMode.ReadOnly)
+            else if (UserFormView.CurrentMode == FormViewMode.ReadOnly)
             {
-                
+
             }
         }
 
@@ -150,7 +153,11 @@ namespace SA33.Team12.SSIS.UserAdministration
             {
                 MemebershipRoleDropDownList.DataSource = Roles.GetAllRoles();
                 MemebershipRoleDropDownList.DataBind();
-                MemebershipRoleDropDownList.Items[0].Selected = true;
+                string role =
+                    DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] { "," },
+                                                                                    StringSplitOptions.
+                                                                                        RemoveEmptyEntries)[0].ToString();
+                MemebershipRoleDropDownList.SelectedValue = role;
             }
         }
 
@@ -177,8 +184,11 @@ namespace SA33.Team12.SSIS.UserAdministration
         protected void UserGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             UserGridView.PageIndex = e.NewPageIndex;
-            DataBindUserGridView();
         }
 
+        protected void UserFormView_ModeChanging(object sender, FormViewModeEventArgs e)
+        {
+            DataBindUserGridView();
+        }
     }
 }
