@@ -407,7 +407,9 @@
     <Content Include="Approval\Web.config" />
     <Content Include="App_Themes\BlueTheme\Default.skin" />
     <None Include="ClassDiagram1.cd" />
-    <Content Include="RequestStationery\Web.config" />
+    <Content Include="RequestStationery\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
