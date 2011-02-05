@@ -22,7 +22,7 @@ namespace SA33.Team12.SSIS.Test
             reqSearchDTO = new RequisitionSearchDTO();
             if (!IsPostBack)
             {
-                for (int i = 2011; i > 1900; i--)
+                for (int i = DateTime.Now.Year ; i > DateTime.Now.Year - 50; i--)
                 {
                     YearDDL.Items.Add(i.ToString());
                 }
