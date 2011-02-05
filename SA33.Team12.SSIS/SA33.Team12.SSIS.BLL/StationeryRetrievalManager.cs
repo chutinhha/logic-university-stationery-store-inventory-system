@@ -74,5 +74,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             return stationeryRetrievalDAO.GetVwStationeryRetrievalFormItemByDeptByFormID(stationeryRetrievalFormID);
         }
+
+        public List<StationeryRetrievalForm> FindStationeryRetrievalFormByCriteria(StationeryRetrievalFormSearchDTO criteria)
+        {
+            return stationeryRetrievalDAO.FindStationeryRetrievalFormByCriteria(criteria);
+        }
+        
     }
 }
