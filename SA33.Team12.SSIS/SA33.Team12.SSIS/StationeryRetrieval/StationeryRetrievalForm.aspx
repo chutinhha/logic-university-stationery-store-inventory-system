@@ -83,7 +83,7 @@
                 </Columns>
             </asp:GridView>
             <asp:GridView 
-                runat="server" 
+                runat="server"
                 ID="StationeryRetrievalFormItemByDeptGridView"
                 AutoGenerateColumns="False">
                 <Columns>
@@ -101,6 +101,14 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="QuantityNeededByItem" HeaderText="Quantity Needed" />
+                    <asp:TemplateField HeaderText="Quantity Retrieved">
+                        <ItemTemplate>
+                            <%# Eval("QuantityRetrieved") %>
+                            <asp:HiddenField runat="server" 
+                                ID="StationeryRetrievalFormItemIDHiddenField" 
+                                Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Department" SortExpression="DepartmentID">
                         <ItemTemplate>
                             <%# Convert.ToInt32(Eval("DepartmentID")) == 0 
@@ -109,17 +117,6 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="QuantityNeeded" 
                         HeaderText="QuantityNeeded" SortExpression="QuantityNeeded" />
-                    <asp:TemplateField HeaderText="Quantity Retrieved">
-                        <ItemTemplate>
-                            <asp:HiddenField runat="server" 
-                                ID="StationeryRetrievalFormItemIDHiddenField" 
-                                Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
-                            <asp:Label runat="server" 
-                                ID="QuantityRetrievedLabel" 
-                                Text='<%# Eval("QuantityRetrieved") %>'>
-                            </asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity Recommended">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="QuantityRetrievedLabel" Text='<%# Eval("QuantityRecommended") %>'>

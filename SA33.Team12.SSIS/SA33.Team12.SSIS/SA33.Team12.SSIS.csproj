@@ -74,6 +74,7 @@
     <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
+    <Content Include="Styles\GridViewTable.css" />
     <Content Include="TestPOandPOitems.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
     <Content Include="GenericErrorPage.aspx" />
@@ -404,6 +405,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Approval\Web.config" />
+    <Content Include="App_Themes\BlueTheme\Default.skin" />
     <None Include="ClassDiagram1.cd" />
     <Content Include="RequestStationery\Web.config" />
   </ItemGroup>

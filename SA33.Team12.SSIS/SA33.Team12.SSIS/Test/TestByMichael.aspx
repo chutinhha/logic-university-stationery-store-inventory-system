@@ -43,7 +43,11 @@
 <asp:GridView runat="server" ID="DisbursementGridView" AllowPaging="True"
     AutoGenerateColumns="False" onrowdatabound="DisbursementGridView_RowDataBound" 
         onpageindexchanging="DisbursementGridView_PageIndexChanging" 
-        onrowcommand="DisbursementGridView_RowCommand" DataKeyNames="DisbursementID">
+        onrowcommand="DisbursementGridView_RowCommand" 
+        DataKeyNames="DisbursementID" BorderColor="#CCCCCC" BorderStyle="Solid" 
+        BorderWidth="1px" Width="100%">
+    <AlternatingRowStyle BackColor="#FFFF99" BorderColor="#CCCCCC" 
+        BorderStyle="Solid" BorderWidth="1px" CssClass="alternateRow" />
     <Columns>
         <asp:TemplateField HeaderText="Disbursement ID">
             <ItemTemplate>
@@ -69,6 +73,8 @@
         <asp:CommandField ShowSelectButton="true" />
 
     </Columns>
+    <RowStyle BackColor="#CCFFFF" BorderColor="#CCCCCC" BorderStyle="Solid" 
+        BorderWidth="1px" CssClass="normalRow" />
 </asp:GridView>
 
 <asp:DetailsView ID="DisbursementDetailView" runat="server" AutoGenerateRows="true">
