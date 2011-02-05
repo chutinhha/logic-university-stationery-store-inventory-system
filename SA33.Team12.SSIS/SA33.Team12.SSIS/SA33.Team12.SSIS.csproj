@@ -92,6 +92,7 @@
     <Content Include="Test\PlaceStockAdjustment.aspx" />
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
+    <Content Include="Print\StationeryOrderedByCategoryReport.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="RequestStationery\StationeryRequest.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
@@ -169,6 +170,11 @@
     <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.designer.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Print\ReportDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="RequestStationery\ViewRequestHistory.aspx.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -232,6 +238,12 @@
     <Compile Include="Stock\PlacePurchaseOrder.aspx.designer.cs">
       <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Print\StationeryOrderedByCategoryCR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StationeryOrderedByCategoryCR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Test\DisbursementBLLTest.aspx.cs">
       <DependentUpon>DisbursementBLLTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -273,6 +285,13 @@
     </Compile>
     <Compile Include="Test\POTest.aspx.designer.cs">
       <DependentUpon>POTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\StationeryOrderedByCategoryReport.aspx.cs">
+      <DependentUpon>StationeryOrderedByCategoryReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\StationeryOrderedByCategoryReport.aspx.designer.cs">
+      <DependentUpon>StationeryOrderedByCategoryReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\Stationeries.aspx.cs">
       <DependentUpon>Stationeries.aspx</DependentUpon>
@@ -417,9 +436,26 @@
     <Content Include="RequestStationery\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Print\ReportDS.xsc">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </None>
+    <None Include="Print\ReportDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Print\ReportDS.xss">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Print\StationeryOrderedByCategoryCR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StationeryOrderedByCategoryCR.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
