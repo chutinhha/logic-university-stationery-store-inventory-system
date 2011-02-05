@@ -277,9 +277,9 @@ namespace SA33.Team12.SSIS.BLL
         /// Find All Requistions by EmpID
         /// </summary>
         /// <returns></returns>
-        public List<Requisition> GetAllRequisition(int EmployeeID)
+        public List<Requisition> GetAllRequisition(int EmployeeID, RequisitionSearchDTO reqSearchDTO)
         {
-            List<Requisition> temp = requisitionDAO.GetAllRequisition(EmployeeID);
+            List<Requisition> temp = requisitionDAO.GetAllRequisition(EmployeeID, reqSearchDTO);
             if (temp != null)
             {
                 return temp;
