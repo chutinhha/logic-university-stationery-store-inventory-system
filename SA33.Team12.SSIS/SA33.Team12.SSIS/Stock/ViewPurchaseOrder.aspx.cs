@@ -73,11 +73,5 @@ namespace SA33.Team12.SSIS.Stock
                 gvPurchaseOrder.DataBind();
             }
         }
-
-        protected void gvPurchaseOrder_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Session["PurchaseOrderSelected"] = (PurchaseOrder)(gvPurchaseOrder.SelectedValue);
-            Response.Redirect("PurchaseOrderDetail.aspx");
-        }
     }
 }

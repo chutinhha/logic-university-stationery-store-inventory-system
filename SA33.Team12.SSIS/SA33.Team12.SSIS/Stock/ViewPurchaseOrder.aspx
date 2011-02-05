@@ -65,8 +65,7 @@
 
     <fieldset>
     <legend>Purchase Orders</legend>
-    <asp:GridView ID="gvPurchaseOrder" runat="server" AutoGenerateColumns="False" 
-        onselectedindexchanged="gvPurchaseOrder_SelectedIndexChanged">
+    <asp:GridView ID="gvPurchaseOrder" runat="server" AutoGenerateColumns="False" >
         <Columns>
             <asp:TemplateField HeaderText="PO Number">
             <ItemTemplate>
