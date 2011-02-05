@@ -31,8 +31,6 @@ namespace SA33.Team12.SSIS.Approval
                 ApproveAllButton.Visible = false;
                 Label1.Text = "No pending requests for approval.";
             }
-
-            // ApproveSingleRequest();
         }
 
         private void ApproveSingleRequest()
@@ -48,7 +46,7 @@ namespace SA33.Team12.SSIS.Approval
             if (param == "RequestID")
             {
                 Requisition r = requisitionManager.GetRequisitionByID(Convert.ToInt32(Request.QueryString["RequestID"]));
-                r.ApprovedBy = 6;
+                r.ApprovedBy = currentUser.UserID;
                 requisitionManager.ApproveRequisition(r);
                 Response.Redirect("ApproveRequest.aspx");
             }
@@ -72,7 +70,7 @@ namespace SA33.Team12.SSIS.Approval
             r.ApprovedBy = currentUser.UserID;
             requisitionManager.ApproveRequisition(r);
             //UtilityFunctions.SendEmail(r.RequisitionID + " - Your Request has been approved", "Dear " + r.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", new List<DAL.User>());
-            Response.Redirect("RequestApproval.aspx");
+           
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -84,6 +82,7 @@ namespace SA33.Team12.SSIS.Approval
                     ApproveSingleReq(item.RequisitionID);
                 }
             }
+            Response.Redirect("RequestApproval.aspx");
         }
     }
 }
