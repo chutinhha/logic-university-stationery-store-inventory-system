@@ -11,8 +11,6 @@
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
     </siteMapNode>
-    <siteMapNode url="~/UserAdministration/Users.aspx" title="Website Users" description="Website user administration">
-    </siteMapNode>
     <siteMapNode url="~/StationeryRetrieval/StationeryRetrievalList.aspx"
                  title="Stationery Retrieval Forms" description="Stationery Retrieval Forms">
       <siteMapNode url="~/StationeryRetrieval/UpdateStationeryRetrievalForm.aspx"
@@ -23,6 +21,8 @@
     <siteMapNode url="~/HandleRequest/Disbursement.aspx" title="Disbursement" description="Disbursement" />
     <siteMapNode url="~/Print/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee"></siteMapNode>
     <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
+    <siteMapNode url="~/Administration/Users.aspx" title="Administration" description="Maintain Users">
+    </siteMapNode>
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>
 </siteMap>

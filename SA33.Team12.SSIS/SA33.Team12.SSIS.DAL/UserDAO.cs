@@ -73,33 +73,29 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                using (TransactionScope ts = new TransactionScope())
-                {
-                    // First will throw excpetion if no user is found
-                    User persistedUser = (from u in context.Users
-                                     where u.UserID == user.UserID
-                                     select u).First<User>();
-                    Department department = (from d in context.Departments
-                                             where d.DepartmentID == user.DepartmentID
-                                             select d).FirstOrDefault<Department>();
+                // First will throw excpetion if no user is found
+                User persistedUser = (from u in context.Users
+                                      where u.UserID == user.UserID
+                                      select u).First<User>();
+                Department department = (from d in context.Departments
+                                         where d.DepartmentID == user.DepartmentID
+                                         select d).FirstOrDefault<Department>();
 
 
-                    persistedUser.Department = department;
-                    
-                    persistedUser.UserName = user.UserName;
-                    persistedUser.Password = user.Password;
-                    persistedUser.MembershipProviderKey = user.MembershipProviderKey;
-                    persistedUser.FirstName = user.FirstName;
-                    persistedUser.LastName = user.LastName;
-                    persistedUser.Email = user.Email;
-                    persistedUser.Password = user.Password;
-                    persistedUser.IsEnabled = user.IsEnabled;
+                persistedUser.Department = department;
 
-                    context.ObjectStateManager.ChangeObjectState(persistedUser, EntityState.Modified);
-                    context.SaveChanges();
-                    ts.Complete();
-                    return persistedUser;
-                }
+                persistedUser.UserName = user.UserName;
+                persistedUser.Password = user.Password;
+                persistedUser.MembershipProviderKey = user.MembershipProviderKey;
+                persistedUser.FirstName = user.FirstName;
+                persistedUser.LastName = user.LastName;
+                persistedUser.Email = user.Email;
+                persistedUser.Password = user.Password;
+                persistedUser.IsEnabled = user.IsEnabled;
+
+                context.ObjectStateManager.ChangeObjectState(persistedUser, EntityState.Modified);
+                context.SaveChanges();
+                return persistedUser;
             }
             catch (Exception)
             {
@@ -230,11 +226,11 @@ namespace SA33.Team12.SSIS.DAL
         public List<CollectionPoint> FindCollectionPointsByCriteria(DTO.CollectionPointSearchDTO criteria)
         {
             var Query = from cp in context.CollectionPoints
-                        where cp.CollectionPointID == (criteria.CollectionPointID == 0 
+                        where cp.CollectionPointID == (criteria.CollectionPointID == 0
                             ? cp.CollectionPointID : criteria.CollectionPointID)
-                        && cp.Name == (criteria.Name == null || criteria.Name == "" 
+                        && cp.Name == (criteria.Name == null || criteria.Name == ""
                             ? cp.Name : criteria.Name)
-                        && cp.Time == (criteria.Time == null || criteria.Time == "" 
+                        && cp.Time == (criteria.Time == null || criteria.Time == ""
                             ? cp.Time : criteria.Time)
                         select cp;
             return Query.ToList<CollectionPoint>();
@@ -275,9 +271,9 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                CollectionPoint tempCollectionPoint 
-                        = (from c in context.CollectionPoints 
-                           where c.CollectionPointID == collectionPoint.CollectionPointID 
+                CollectionPoint tempCollectionPoint
+                        = (from c in context.CollectionPoints
+                           where c.CollectionPointID == collectionPoint.CollectionPointID
                            select c).First<CollectionPoint>();
 
                 tempCollectionPoint.Name = collectionPoint.Name;
@@ -285,7 +281,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.ObjectStateManager.ChangeObjectState(tempCollectionPoint, 
+                    context.ObjectStateManager.ChangeObjectState(tempCollectionPoint,
                         EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
@@ -302,8 +298,8 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                CollectionPoint persistedCollectionPoint 
-                    = (from c in context.CollectionPoints 
+                CollectionPoint persistedCollectionPoint
+                    = (from c in context.CollectionPoints
                        where c.CollectionPointID == collectionPoint.CollectionPointID
                        select c).First<CollectionPoint>();
 
@@ -324,17 +320,17 @@ namespace SA33.Team12.SSIS.DAL
         #region BlacklistLogs
         public List<BlacklistLog> FindBlacklistLogsByCriteria(DTO.BlackListLogSearchDTO criteria)
         {
-            var Query = 
+            var Query =
                 from bll in context.BlacklistLogs
-                where bll.BlacklistLogID == (criteria.BlackListLogID == 0 
+                where bll.BlacklistLogID == (criteria.BlackListLogID == 0
                     ? bll.BlacklistLogID : criteria.BlackListLogID)
-                && bll.DepartmentID == (criteria.DepartmentID == 0 
+                && bll.DepartmentID == (criteria.DepartmentID == 0
                     ? bll.DepartmentID : criteria.DepartmentID)
                 && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.StartDateBlackListed == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
                     && EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
                 && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
                 select bll;
-               
+
             return Query.ToList<BlacklistLog>();
         }
 
@@ -375,8 +371,8 @@ namespace SA33.Team12.SSIS.DAL
             {
                 // First will throw exblletion if no user is found
                 BlacklistLog tempBlacklistLog = (from c in context.BlacklistLogs
-                                                       where c.BlacklistLogID == blackListLog.BlacklistLogID
-                                                       select c).First<BlacklistLog>();
+                                                 where c.BlacklistLogID == blackListLog.BlacklistLogID
+                                                 select c).First<BlacklistLog>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
@@ -397,8 +393,8 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 BlacklistLog persistedBlacklistLog = (from c in context.BlacklistLogs
-                                                            where c.BlacklistLogID == blackListLog.BlacklistLogID
-                                                            select c).FirstOrDefault();
+                                                      where c.BlacklistLogID == blackListLog.BlacklistLogID
+                                                      select c).FirstOrDefault();
 
                 using (TransactionScope ts = new TransactionScope())
                 {
@@ -412,7 +408,7 @@ namespace SA33.Team12.SSIS.DAL
                 throw;
             }
         }
-        #endregion 
+        #endregion
 
         #region ApprovalAudits
         public List<ApprovalAudit> FindApprovalAuditsByCriteria(DTO.ApprovalAuditSearchDTO criteria)
@@ -420,7 +416,7 @@ namespace SA33.Team12.SSIS.DAL
             var Query =
                 from aa in context.ApprovalAudits
                 where aa.ApprovalAuditID == (criteria.ApprovalAuditID == 0 ? aa.ApprovalAuditID : criteria.ApprovalAuditID)
-                && aa.ApprovedBy == (criteria.ApprovedBy == 0? aa.ApprovedBy : criteria.ApprovedBy)
+                && aa.ApprovedBy == (criteria.ApprovedBy == 0 ? aa.ApprovedBy : criteria.ApprovedBy)
                 && aa.Reason.Contains((criteria.Reason == null || criteria.Reason == "" ? aa.Reason : criteria.Reason))
                 && aa.StatusFrom.Contains((criteria.StatusFrom == null || criteria.StatusFrom == "" ? aa.StatusFrom : criteria.StatusFrom))
                 && aa.StatusTo.Contains((criteria.StatusTo == null || criteria.StatusTo == "" ? aa.StatusTo : criteria.StatusTo))
@@ -465,9 +461,9 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 ApprovalAudit tempApprovalAudit = (from aa in context.ApprovalAudits
-                                                 where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
-                                                 select aa).First<ApprovalAudit>();
-                
+                                                   where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
+                                                   select aa).First<ApprovalAudit>();
+
                 tempApprovalAudit.User = ApprovalAudit.User;
                 tempApprovalAudit.Reason = ApprovalAudit.Reason;
                 tempApprovalAudit.StatusFrom = ApprovalAudit.StatusFrom;
@@ -492,8 +488,8 @@ namespace SA33.Team12.SSIS.DAL
             try
             {
                 ApprovalAudit persistedApprovalAudit = (from aa in context.ApprovalAudits
-                                                      where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
-                                                      select aa).FirstOrDefault();
+                                                        where aa.ApprovalAuditID == ApprovalAudit.ApprovalAuditID
+                                                        select aa).FirstOrDefault();
 
                 using (TransactionScope ts = new TransactionScope())
                 {

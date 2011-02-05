@@ -45,6 +45,11 @@ namespace SA33.Team12.SSIS.Utilities
             }
         }
         
+        public static string[] GetCurrentLoggedInUserRole()
+        {
+            return WebSecurity.Roles.GetRolesForUser();
+        }
+
         public static DAL.User CreateUser(DAL.User user)
         {
             try
@@ -97,7 +102,7 @@ namespace SA33.Team12.SSIS.Utilities
                     {
                         if (oldUser.UserName != user.UserName)
                             throw new Exceptions.UserException("Changing user name is not allowed.");
-                        string[] roles = user.Role.Split(',');
+                        string[] roles = user.Role.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
                         if (roles.Length > 0)
                             AddUserToRoles(user.UserName, roles);
                         user = um.UpdateUser(user);
@@ -178,6 +183,7 @@ namespace SA33.Team12.SSIS.Utilities
                     WebSecurity.MembershipUser membershipUser
                         = WebSecurity.Membership.GetUser(user.UserName);
                     membershipUser.IsApproved = false;
+                    WebSecurity.Membership.UpdateUser(membershipUser);
                     using (BLL.UserManager um = new BLL.UserManager())
                     {
                         um.DisableUser(user);
