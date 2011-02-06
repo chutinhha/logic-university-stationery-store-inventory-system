@@ -40,13 +40,13 @@ namespace SA33.Team12.SSIS.Handle_Request {
         protected global::System.Web.UI.WebControls.GridView SRFGridView;
         
         /// <summary>
-        /// ObjectDataSource1 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// DisbursementGridView control.
@@ -58,12 +58,39 @@ namespace SA33.Team12.SSIS.Handle_Request {
         protected global::System.Web.UI.WebControls.GridView DisbursementGridView;
         
         /// <summary>
-        /// DisbursementItemObjectDataSource control.
+        /// DisbursementItemGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource DisbursementItemObjectDataSource;
+        protected global::System.Web.UI.WebControls.GridView DisbursementItemGridView;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// tbxQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbxQuantity;
+        
+        /// <summary>
+        /// BtnUpdateQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUpdateQuantity;
     }
 }
