@@ -488,8 +488,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempLocation);
-                    context.ObjectStateManager.ChangeObjectState(tempLocation, EntityState.Modified);
+                   
                     context.SaveChanges();
                     ts.Complete();
                     return tempLocation;

@@ -74,6 +74,8 @@
     <Content Include="Administration\MaintainDepartment.aspx" />
     <Content Include="Administration\UpdateCollectionPoint.aspx" />
     <Content Include="Approval\RequestApproval.aspx" />
+    <Content Include="Catalog\Suppliers.aspx" />
+    <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
     <Content Include="HandleRequest\Disbursement.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
@@ -176,6 +178,20 @@
     </Compile>
     <Compile Include="Approval\RequestApproval.aspx.designer.cs">
       <DependentUpon>RequestApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\Suppliers.aspx.cs">
+      <DependentUpon>Suppliers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalog\Suppliers.aspx.designer.cs">
+      <DependentUpon>Suppliers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\Locations.aspx.cs">
+      <DependentUpon>Locations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalog\Locations.aspx.designer.cs">
+      <DependentUpon>Locations.aspx</DependentUpon>
     </Compile>
     <Compile Include="Catalog\SpecialStationeries.aspx.cs">
       <DependentUpon>SpecialStationeries.aspx</DependentUpon>
