@@ -378,7 +378,6 @@
           </Key>
           <Property Name="CollectionPointID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
-          <Property Name="Time" Type="nvarchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -1801,7 +1800,6 @@
           </Key>
           <Property Name="CollectionPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="Time" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Departments" Relationship="SA33.Team12.SSIS.Model.Department_CollectoinPoint" FromRole="CollectionPoints" ToRole="Departments" />
         </EntityType>
         <EntityType Name="Department">
@@ -3032,7 +3030,6 @@
           <EntitySetMapping Name="CollectionPoints"><EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.CollectionPoint"><MappingFragment StoreEntitySet="CollectionPoints">
             <ScalarProperty Name="CollectionPointID" ColumnName="CollectionPointID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Time" ColumnName="Time" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Departments"><EntityTypeMapping TypeName="SA33.Team12.SSIS.Model.Department"><MappingFragment StoreEntitySet="Departments">
             <ScalarProperty Name="IsBlackListed" ColumnName="IsBlackListed" />
@@ -3339,7 +3336,7 @@
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.ApprovalAudit" Width="1.5" PointX="7.5" PointY="29.25" Height="2.172587890624996" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.BlacklistLog" Width="1.5" PointX="3" PointY="23" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.Category" Width="1.5" PointX="7.5" PointY="32.125" Height="3.7109993489583388" IsExpanded="true" />
-        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.CollectionPoint" Width="1.5" PointX="0.75" PointY="26.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.CollectionPoint" Width="1.5" PointX="0.75" PointY="26.125" Height="1.5956835937500031" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.Department" Width="1.5" PointX="3" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.DisbursementItem" Width="2" PointX="15" PointY="31.25" Height="3.9033007812500031" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.Disbursement" Width="1.5" PointX="7.5" PointY="36.625" Height="1.9802864583333246" IsExpanded="true" />
@@ -3448,8 +3445,10 @@
           <ConnectorPoint PointX="7.5" PointY="35.429625081977939" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Department_CollectoinPoint" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="27.018992513020834" />
-          <ConnectorPoint PointX="3" PointY="27.018992513020834" />
+          <ConnectorPoint PointX="2.25" PointY="26.922841796875" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="26.922841796875" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="26.922841796875" />
+          <ConnectorPoint PointX="3" PointY="26.922841796875" />
         </AssociationConnector>
         <AssociationConnector Association="SA33.Team12.SSIS.Model.Departments_In_StationeryRetrievalFormItem" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="26.970896809895834" />
@@ -3983,8 +3982,8 @@
           <ConnectorPoint PointX="3.5" PointY="3.3071907552083331" />
           <ConnectorPoint PointX="3.5" PointY="20" />
           <ConnectorPoint PointX="2.75" PointY="20" />
-          <ConnectorPoint PointX="2.75" PointY="26.970896809895834" />
-          <ConnectorPoint PointX="3" PointY="26.970896809895834" />
+          <ConnectorPoint PointX="2.75" PointY="27.713569708333335" />
+          <ConnectorPoint PointX="3" PointY="27.713569708333335" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.vw_StationeryOrderedByCategory" Width="4" PointX="4.5" PointY="1.125" Height="1.787985026041667" />
       </Diagram>

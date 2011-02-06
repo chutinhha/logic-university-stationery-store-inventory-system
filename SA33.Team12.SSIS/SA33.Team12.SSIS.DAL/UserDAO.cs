@@ -232,8 +232,6 @@ namespace SA33.Team12.SSIS.DAL
                             ? cp.CollectionPointID : criteria.CollectionPointID)
                         && cp.Name == (criteria.Name == null || criteria.Name == ""
                             ? cp.Name : criteria.Name)
-                        && cp.Time == (criteria.Time == null || criteria.Time == ""
-                            ? cp.Time : criteria.Time)
                         select cp;
             return Query.ToList<CollectionPoint>();
         }
@@ -279,7 +277,6 @@ namespace SA33.Team12.SSIS.DAL
                            select c).First<CollectionPoint>();
 
                 tempCollectionPoint.Name = collectionPoint.Name;
-                tempCollectionPoint.Time = collectionPoint.Time;
 
                 using (TransactionScope ts = new TransactionScope())
                 {
