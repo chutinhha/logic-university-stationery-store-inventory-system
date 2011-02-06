@@ -11,6 +11,14 @@ using System.Data.Objects;
 
 namespace SA33.Team12.SSIS.DAL
 {
+    public enum AdjustmentType
+    {
+        AdjustmentUp,
+        AdjustmentDown,
+        Consumption,
+        Replenish,
+        Damage
+    }
     public class AdjustmentVoucherDAO : DALLogic
     {
         //Created by Anthony 30 Jan 2011
