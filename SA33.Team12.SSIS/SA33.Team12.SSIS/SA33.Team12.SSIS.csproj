@@ -74,6 +74,7 @@
     <Content Include="Administration\MaintainDepartment.aspx" />
     <Content Include="Administration\UpdateCollectionPoint.aspx" />
     <Content Include="Approval\RequestApproval.aspx" />
+    <Content Include="Catalog\Stationeries.aspx" />
     <Content Include="Catalog\Suppliers.aspx" />
     <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
@@ -113,7 +114,7 @@
     <Content Include="Test\Users.aspx" />
     <Content Include="Test\UserAdd.aspx" />
     <Content Include="Catalog\Categories.aspx" />
-    <Content Include="Catalog\Stationeries.aspx" />
+    <Content Include="Catalog\StationeriesOld.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -178,6 +179,13 @@
     </Compile>
     <Compile Include="Approval\RequestApproval.aspx.designer.cs">
       <DependentUpon>RequestApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\Stationeries.aspx.cs">
+      <DependentUpon>Stationeries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalog\Stationeries.aspx.designer.cs">
+      <DependentUpon>Stationeries.aspx</DependentUpon>
     </Compile>
     <Compile Include="Catalog\Suppliers.aspx.cs">
       <DependentUpon>Suppliers.aspx</DependentUpon>
@@ -455,12 +463,12 @@
     <Compile Include="Catalog\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Catalog\Stationeries.aspx.cs">
-      <DependentUpon>Stationeries.aspx</DependentUpon>
+    <Compile Include="Catalog\StationeriesOld.aspx.cs">
+      <DependentUpon>StationeriesOld.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Catalog\Stationeries.aspx.designer.cs">
-      <DependentUpon>Stationeries.aspx</DependentUpon>
+    <Compile Include="Catalog\StationeriesOld.aspx.designer.cs">
+      <DependentUpon>StationeriesOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

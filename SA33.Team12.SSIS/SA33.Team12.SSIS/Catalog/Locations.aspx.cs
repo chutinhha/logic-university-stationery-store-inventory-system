@@ -53,11 +53,11 @@ namespace SA33.Team12.SSIS.Catalog
             location.CreatedBy = Utilities.Membership.GetCurrentLoggedInUser().UserID;
             location.CreatedDate = DateTime.Now;
 
-            CatalogManager categoryManager = new CatalogManager();
+            CatalogManager manager = new CatalogManager();
 
             try
             {
-                categoryManager.CreateLocation(location);
+                manager.CreateLocation(location);
             }
             catch (Exception)
             {

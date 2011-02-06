@@ -50,11 +50,11 @@ namespace SA33.Team12.SSIS.Catalog
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {            
-            CatalogManager categoryManager = new CatalogManager();
+            CatalogManager manager = new CatalogManager();
             SpecialStationery specialStationery = new SpecialStationery();  
             specialStationery.Description = NameTextBox.Text;
-            int count = categoryManager.GetSpecialStationeryCount();
-            specialStationery.ItemCode = categoryManager.GenerateItemCode(specialStationery.Description, count);
+            int count = manager.GetSpecialStationeryCount();
+            specialStationery.ItemCode = manager.GenerateItemCode(specialStationery.Description, count);
             specialStationery.Quantity = 0;
             specialStationery.UnitOfMeasure = UOMTextBox.Text;
             specialStationery.DateCreated = DateTime.Now;
@@ -66,7 +66,7 @@ namespace SA33.Team12.SSIS.Catalog
 
             try
             {
-                categoryManager.CreateSpecialStationery(specialStationery);
+                manager.CreateSpecialStationery(specialStationery);
             }
             catch (Exception)
             {

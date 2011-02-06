@@ -74,7 +74,7 @@
             </table>
     </fieldset>
     <fieldset>
-    <legend>Location List</legend>
+    <legend>Supplier List</legend>
     <asp:GridView runat="server" ID="SupplierGridView" AllowPaging="True"
         AutoGenerateColumns="False" DataSourceID="SupplierObjectDataSource"
         SelectedRowStyle-BackColor="LightGray" 
