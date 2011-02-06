@@ -49,6 +49,27 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public void DeleteAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        {
+            try
+            {
+                AdjustmentVoucherTransaction persistedTransaction = (from t in context.AdjustmentVoucherTransactions
+                                              where t.AdjustmentVoucherTransactionID == adjustmentVoucherTransaction.AdjustmentVoucherTransactionID
+                                                                  select t).First<AdjustmentVoucherTransaction>();
+
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.AdjustmentVoucherTransactions.DeleteObject(persistedTransaction);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void UpdateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction updateAdjustmentVoucherTransaction)
         {
             try
@@ -66,10 +87,6 @@ namespace SA33.Team12.SSIS.DAL
                 throw new AdjustmentVoucherException("Update Adjustment Voucher failed." + ex.Message);
 
             }
-
-
-
-
         }
 
         ////This for the approval and to convert from the temp database into the actual database (Thinking on how to copy from temp table to the actual table)
@@ -114,20 +131,11 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         //Need to FindByGetID Temp Table AdjustmentVoucherTransaction
-        public List<AdjustmentVoucherTransaction> FindAdjustmentVoucherTransactionsByGetID(AdjustmentVoucherTransactionSearchDTO adjustmentVoucherTransactionSearchDTO)
+        public AdjustmentVoucherTransaction FindAdjustmentVoucherTransactionsByGetID(int adjustmentVoucherTransactionID)
         {
-            var tempQuery = (from r in context.AdjustmentVoucherTransactions
-                             where 1 == 1
-                             select r);
-
-            if (adjustmentVoucherTransactionSearchDTO != null)
-            {
-                if (adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID != -1)
-                {
-                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionSearchDTO.AdjustmentVoucherTransactionID);
-                }
-            }
-            return (from q in tempQuery select q).ToList<AdjustmentVoucherTransaction>();
+            return (from r in context.AdjustmentVoucherTransactions
+                             where r.AdjustmentVoucherTransactionID == adjustmentVoucherTransactionID
+                             select r).FirstOrDefault<AdjustmentVoucherTransaction>();
         }
 
         #endregion
