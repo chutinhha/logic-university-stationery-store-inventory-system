@@ -783,7 +783,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AdjustmentVoucherTransactions_StockLogTransactions">
-          <End Role="AdjustmentVoucherTransactions" Type="SA33.Team12.SSIS.Model.Store.AdjustmentVoucherTransactions" Multiplicity="1" />
+          <End Role="AdjustmentVoucherTransactions" Type="SA33.Team12.SSIS.Model.Store.AdjustmentVoucherTransactions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockLogTransactions" Type="SA33.Team12.SSIS.Model.Store.StockLogTransactions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdjustmentVoucherTransactions">
@@ -2206,7 +2208,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AdjustmentVoucherTransactions_StockLogTransactions">
-          <End Role="AdjustmentVoucherTransactions" Type="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Multiplicity="1" />
+          <End Role="AdjustmentVoucherTransactions" Type="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockLogTransactions" Type="SA33.Team12.SSIS.Model.StockLogTransaction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdjustmentVoucherTransactions">
