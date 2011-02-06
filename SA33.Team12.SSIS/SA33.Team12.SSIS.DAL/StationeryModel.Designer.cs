@@ -26,7 +26,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "ApprovalAudits_MadeBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "ApprovalAudits", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.ApprovalAudit), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_BlacklistLogs", "Departments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Department), "BlacklistLogs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.BlacklistLog), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Categories_Stationeries_FK1", "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Category), "Stationeries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Approved_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Created_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Category_Modified_By", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "Categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Department_CollectoinPoint", "CollectionPoints", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.CollectionPoint), "Departments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Department), true)]
@@ -1828,8 +1828,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="dateModified">Initial value of the DateModified property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="modifiedBy">Initial value of the ModifiedBy property.</param>
-        /// <param name="approvedBy">Initial value of the ApprovedBy property.</param>
-        public static Category CreateCategory(global::System.Int32 categoryID, global::System.String name, global::System.Boolean isApproved, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy, global::System.Int32 approvedBy)
+        public static Category CreateCategory(global::System.Int32 categoryID, global::System.String name, global::System.Boolean isApproved, global::System.DateTime dateCreated, global::System.DateTime dateModified, global::System.Int32 createdBy, global::System.Int32 modifiedBy)
         {
             Category category = new Category();
             category.CategoryID = categoryID;
@@ -1839,7 +1838,6 @@ namespace SA33.Team12.SSIS.DAL
             category.DateModified = dateModified;
             category.CreatedBy = createdBy;
             category.ModifiedBy = modifiedBy;
-            category.ApprovedBy = approvedBy;
             return category;
         }
 
@@ -2020,9 +2018,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 ApprovedBy
+        public Nullable<global::System.Int32> ApprovedBy
         {
             get
             {
@@ -2037,8 +2035,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnApprovedByChanged();
             }
         }
-        private global::System.Int32 _ApprovedBy;
-        partial void OnApprovedByChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _ApprovedBy;
+        partial void OnApprovedByChanging(Nullable<global::System.Int32> value);
         partial void OnApprovedByChanged();
     
         /// <summary>

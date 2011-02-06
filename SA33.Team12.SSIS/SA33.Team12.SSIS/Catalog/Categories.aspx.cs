@@ -10,7 +10,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
-
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 
@@ -71,5 +70,27 @@ namespace SA33.Team12.SSIS.Catalog
                 ts.Complete();
             }
         }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            Category category = new Category();
+            category.Name = NameTextBox.Text;
+            category.CreatedBy = Utilities.Membership.GetCurrentLoggedInUser().UserID;
+            category.ModifiedBy = Utilities.Membership.GetCurrentLoggedInUser().UserID;
+
+            CatalogManager categoryManager = new CatalogManager();
+
+            try
+            {
+                categoryManager.CreateCategory(category);
+            }
+            catch (Exception)
+            {
+                ErrorLabel.Text = "Category Creation Failed";
+            }
+
+        }
+
+       
     }
 }
