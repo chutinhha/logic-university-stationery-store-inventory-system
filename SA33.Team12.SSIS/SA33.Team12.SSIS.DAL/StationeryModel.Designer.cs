@@ -8551,6 +8551,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _SpecialStationeryID;
         partial void OnSpecialStationeryIDChanging(Nullable<global::System.Int32> value);
         partial void OnSpecialStationeryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Price;
+        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnPriceChanged();
 
         #endregion
     
@@ -8879,6 +8903,30 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Int32 _StationeryID;
         partial void OnStationeryIDChanging(global::System.Int32 value);
         partial void OnStationeryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Price;
+        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnPriceChanged();
 
         #endregion
     
@@ -11298,24 +11346,24 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Month
+        public Nullable<global::System.Int32> MonthOrdered
         {
             get
             {
-                return _Month;
+                return _MonthOrdered;
             }
             set
             {
-                OnMonthChanging(value);
-                ReportPropertyChanging("Month");
-                _Month = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Month");
-                OnMonthChanged();
+                OnMonthOrderedChanging(value);
+                ReportPropertyChanging("MonthOrdered");
+                _MonthOrdered = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MonthOrdered");
+                OnMonthOrderedChanged();
             }
         }
-        private global::System.String _Month;
-        partial void OnMonthChanging(global::System.String value);
-        partial void OnMonthChanged();
+        private Nullable<global::System.Int32> _MonthOrdered;
+        partial void OnMonthOrderedChanging(Nullable<global::System.Int32> value);
+        partial void OnMonthOrderedChanged();
 
         #endregion
     
