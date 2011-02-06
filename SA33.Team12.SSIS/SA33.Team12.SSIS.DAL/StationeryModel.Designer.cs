@@ -2244,13 +2244,11 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         /// <param name="collectionPointID">Initial value of the CollectionPointID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="time">Initial value of the Time property.</param>
-        public static CollectionPoint CreateCollectionPoint(global::System.Int32 collectionPointID, global::System.String name, global::System.String time)
+        public static CollectionPoint CreateCollectionPoint(global::System.Int32 collectionPointID, global::System.String name)
         {
             CollectionPoint collectionPoint = new CollectionPoint();
             collectionPoint.CollectionPointID = collectionPointID;
             collectionPoint.Name = name;
-            collectionPoint.Time = time;
             return collectionPoint;
         }
 
@@ -2307,30 +2305,6 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Time
-        {
-            get
-            {
-                return _Time;
-            }
-            set
-            {
-                OnTimeChanging(value);
-                ReportPropertyChanging("Time");
-                _Time = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Time");
-                OnTimeChanged();
-            }
-        }
-        private global::System.String _Time;
-        partial void OnTimeChanging(global::System.String value);
-        partial void OnTimeChanged();
 
         #endregion
     
