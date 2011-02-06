@@ -1,4 +1,13 @@
-﻿select.commandButton, 
+﻿select.commandButton{
+  color:#369;
+  font: bold 100% arial,helvetica,sans-serif;
+  background-color:#ccc;
+  border: 1px solid;
+  border-color: #696 #363 #363 #696;
+  filter:progid:DXImageTransform.Microsoft.Gradient
+  (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffaaaaff');
+}
+
 input.commandButton {
   color:#369;
   font: bold 100% arial,helvetica,sans-serif;

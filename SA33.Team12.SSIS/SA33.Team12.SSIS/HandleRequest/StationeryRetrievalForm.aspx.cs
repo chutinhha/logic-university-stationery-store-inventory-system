@@ -34,9 +34,9 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             if (!Page.IsPostBack)
             {
                 if (Convert.ToInt32(Request.QueryString["ID"]) == 0)
-                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+                    Response.Redirect("~/HandleRequest/StationeryRetrievalList.aspx");
                 if (Request.QueryString["ID"].Trim() == "")
-                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+                    Response.Redirect("~/HandleRequest/StationeryRetrievalList.aspx");
                 DataBindStationeryRetrievalFormView();
             }
         }
@@ -175,7 +175,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 
         protected void BackButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/StationeryRetrieval/StationeryRetrievalList.aspx");
+            Response.Redirect("~/HandleRequest/StationeryRetrievalList.aspx");
         }
 
         protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept, int cellIndex)
