@@ -14,7 +14,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-Logic University - Stationery Reorder Report for Jan - APR 2011</h2>
+        Logic University - Stationery Requisition trend Report</h2>
     <p>
         &nbsp;</p>
 &nbsp;<table style="width: 100%;">
@@ -84,6 +84,6 @@ Logic University - Stationery Reorder Report for Jan - APR 2011</h2>
     <br />
   
     <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
-        AutoDataBind="true" />
+        AutoDataBind="true" ToolPanelView="None" />
 
 </asp:Content>

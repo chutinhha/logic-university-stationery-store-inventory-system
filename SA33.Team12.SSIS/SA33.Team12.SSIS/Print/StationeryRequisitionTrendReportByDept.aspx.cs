@@ -23,10 +23,10 @@ namespace SA33.Team12.SSIS.Test
             rep.Load(Server.MapPath("~/Print/StationeryRequisitionTrendReport.rpt"));
 
             ds = new ReportDS();
-            vw_StationeryOrderedByCategoryTableAdapter ts = new vw_StationeryOrderedByCategoryTableAdapter();
-            ts.Fill(ds.vw_StationeryOrderedByCategory);
+            VW_StationeryRequisitionTrendByDepartmentTableAdapter ts = new VW_StationeryRequisitionTrendByDepartmentTableAdapter();
+            ts.Fill(ds.VW_StationeryRequisitionTrendByDepartment);
 
-            dv = ds.vw_StationeryOrderedByCategory.DefaultView;
+            dv = ds.VW_StationeryRequisitionTrendByDepartment.DefaultView;
             
             GenerateReport(dv);
         }
@@ -68,7 +68,7 @@ namespace SA33.Team12.SSIS.Test
 
         protected void ResetButton_Click(object sender, EventArgs e)
         {
-            dv = ds.vw_StationeryOrderedByCategory.DefaultView;
+            dv = ds.VW_StationeryRequisitionTrendByDepartment.DefaultView;
             GenerateReport(dv);
         }
 
