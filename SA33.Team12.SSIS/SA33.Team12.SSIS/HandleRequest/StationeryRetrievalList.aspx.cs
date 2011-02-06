@@ -42,7 +42,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                     DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
                     StationeryRetrievalForm srf 
                         = sm.CreateStationeryRetrievalFormByAllRequisitions(loggedInUser);
-                    Response.Redirect("~/StationeryRetrieval/StationeryRetrievalForm.aspx?ID=" 
+                    Response.Redirect("~/HandleRequest/StationeryRetrievalForm.aspx?ID=" 
                         + srf.StationeryRetrievalFormID);
                 }
             }

@@ -76,8 +76,8 @@
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
-    <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
-    <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
+    <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
+    <Content Include="HandleRequest\StationeryRetrievalList.aspx" />
     <Content Include="Stock\ApplyAdjustmentVoucher.aspx" />
     <Content Include="Stock\ApproveAdjustmentVoucher.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
@@ -205,18 +205,18 @@
     <Compile Include="RequestStationery\ViewRequestHistory.aspx.designer.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="StationeryRetrieval\StationeryRetrievalForm.aspx.cs">
+    <Compile Include="HandleRequest\StationeryRetrievalForm.aspx.cs">
       <DependentUpon>StationeryRetrievalForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StationeryRetrieval\StationeryRetrievalForm.aspx.designer.cs">
+    <Compile Include="HandleRequest\StationeryRetrievalForm.aspx.designer.cs">
       <DependentUpon>StationeryRetrievalForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="StationeryRetrieval\StationeryRetrievalList.aspx.cs">
+    <Compile Include="HandleRequest\StationeryRetrievalList.aspx.cs">
       <DependentUpon>StationeryRetrievalList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StationeryRetrieval\StationeryRetrievalList.aspx.designer.cs">
+    <Compile Include="HandleRequest\StationeryRetrievalList.aspx.designer.cs">
       <DependentUpon>StationeryRetrievalList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock\ApplyAdjustmentVoucher.aspx.cs">
