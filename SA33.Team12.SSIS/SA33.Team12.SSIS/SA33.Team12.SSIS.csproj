@@ -36,12 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=14.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=14.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=14.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=14.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,6 +79,8 @@
     <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
+    <Content Include="Stock\ReplenishStock.aspx" />
+    <Content Include="Stock\StockCard.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
     <Content Include="Styles\GridViewTable.css" />
     <Content Include="TestPOandPOitems.aspx" />
@@ -216,6 +216,18 @@
     </Compile>
     <Compile Include="Stock\PurchaseOrderDetail.aspx.designer.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReplenishStock.aspx.cs">
+      <DependentUpon>ReplenishStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\ReplenishStock.aspx.designer.cs">
+      <DependentUpon>ReplenishStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\StockCard.aspx.cs">
+      <DependentUpon>StockCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\StockCard.aspx.designer.cs">
+      <DependentUpon>StockCard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock\ViewPurchaseOrder.aspx.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
