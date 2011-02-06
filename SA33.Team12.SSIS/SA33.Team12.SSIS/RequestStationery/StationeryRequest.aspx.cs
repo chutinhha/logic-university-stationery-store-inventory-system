@@ -8,6 +8,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -234,11 +235,27 @@ namespace SA33.Team12.SSIS.Test
             item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("DropDownList3")).SelectedValue);
             item.QuantityIssued = 0;
             item.Price = 0;
-            if (((TextBox)DetailsView1.FindControl("TextBox5")).Text != string.Empty)
+            int qty = 0;
+            try
             {
-                item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox5")).Text);
+                if (((TextBox)DetailsView1.FindControl("TextBox5")).Text != string.Empty)
+                {
+                    qty = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox5")).Text);
+                }
+                else
+                {
+                    qty = 1;
+                }
             }
-
+            catch (Exception)
+            {
+                ((RangeValidator)DetailsView1.FindControl("RangeValidator1")).ErrorMessage = "Enter a valid number";
+            }
+            if (qty > 0)
+            {
+                item.QuantityRequested = qty;
+            }
+            
 
             if (Session["Requisition"] != null)
             {
@@ -284,20 +301,40 @@ namespace SA33.Team12.SSIS.Test
             SpecialRequisitionItem item = new SpecialRequisitionItem();
             item.QuantityIssued = 0;
             item.Price = 0;
+            int qty = 0;
 
             if (((TextBox)DetailsView2.FindControl("TextBox1")).Text != string.Empty)
             {
                 item.Name = ((TextBox)DetailsView2.FindControl("TextBox1")).Text;
+            }
+            else
+            {
+                ((RequiredFieldValidator)DetailsView2.FindControl("RequiredFieldValidator2")).ErrorMessage = "Name required.";
             }
 
             if (((TextBox)DetailsView2.FindControl("TextBox2")).Text != string.Empty)
             {
                 item.Description = ((TextBox)DetailsView2.FindControl("TextBox2")).Text;
             }
-
-            if (((TextBox)DetailsView2.FindControl("TextBox3")).Text != string.Empty)
+          
+            try
             {
-                item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView2.FindControl("TextBox3")).Text);
+                if (((TextBox)DetailsView2.FindControl("TextBox3")).Text != string.Empty)
+                {
+                    qty = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox3")).Text);
+                }
+                else
+                {
+                    qty = 1;
+                }
+            }
+            catch (Exception)
+            {
+                ((RangeValidator)DetailsView2.FindControl("RangeValidator2")).ErrorMessage = "Enter a valid number";
+            }
+            if (qty > 0)
+            {
+                item.QuantityRequested = qty;
             }
 
             if (((TextBox)DetailsView2.FindControl("TextBox4")).Text != string.Empty)
@@ -315,7 +352,14 @@ namespace SA33.Team12.SSIS.Test
                 Session["Requisition"] = requisition;
             }
 
-            requisition.SpecialRequisitionItems.Add(item);
+            if (item.Name != null && item.Description != null && item.RemarkByRequester != null)
+            {
+                requisition.SpecialRequisitionItems.Add(item);
+            }
+            else
+            {
+                ((RangeValidator)DetailsView2.FindControl("RangeValidator2")).ErrorMessage = "All Fields are mandatory";
+            }
 
             PopulateData(requisition);
             DataBind();
@@ -352,8 +396,7 @@ namespace SA33.Team12.SSIS.Test
             }
             catch (Exception)
             {
-                
-                throw;
+                throw new RequisitionException("Error occured. Please try again.");
             }
             
         }
@@ -373,6 +416,16 @@ namespace SA33.Team12.SSIS.Test
                 
                 throw;
             }
+        }
+
+        protected void DetailsView1_ModeChanging(object sender, DetailsViewModeEventArgs e)
+        {
+
+        }
+
+        protected void DetailsView2_ModeChanging(object sender, DetailsViewModeEventArgs e)
+        {
+
         }
     }
 }

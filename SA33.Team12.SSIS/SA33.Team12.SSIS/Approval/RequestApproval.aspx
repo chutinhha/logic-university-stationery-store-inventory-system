@@ -6,6 +6,9 @@
     <p>
         <asp:Label ID="Label1" runat="server"></asp:Label>
     </p>
+    <fieldset>
+    <fieldset>
+    <legend>Result</legend>
    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="RequisitionID" 
             onrowcommand="GridView1_RowCommand">
@@ -39,9 +42,11 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        </fieldset>
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
             SelectMethod="GetAllUnApprovedRequisition" 
             TypeName="SA33.Team12.SSIS.BLL.RequisitionManager"></asp:ObjectDataSource>
         <asp:Button ID="ApproveAllButton" runat="server" onclick="Button1_Click" 
             Text="Approve All" />
+            </fieldset>
 </asp:Content>

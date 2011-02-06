@@ -4,32 +4,35 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h2>Category</h2>
     
-    <asp:GridView runat="server" ID="CategoryGridView" AllowPaging="True" DataKeyNames="CategoryID"
+    <asp:GridView runat="server" ID="CategoryGridView" AllowPaging="True"
         AutoGenerateColumns="False" DataSourceID="CategoryObjectDataSource"
         SelectedRowStyle-BackColor="LightGray" 
         onselectedindexchanged="CategoryGridView_SelectedIndexChanged">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
                 ShowSelectButton="True" />
-            <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
-                SortExpression="CategoryID" />
-            <asp:TemplateField HeaderText="Name">
+            <asp:DynamicField DataField="CategoryID" HeaderText="CategoryID" />
+            <asp:TemplateField ConvertEmptyStringToNull="False" HeaderText="Name" 
+                SortExpression="Name">
                 <ItemTemplate>
-                    <asp:DynamicControl runat="server" ID="NameLabel"
-                        DataField="Name" Mode="ReadOnly" /> 
+                    <asp:DynamicControl ID="DynamicControl1" runat="server" DataField="Name" 
+                        Mode="ReadOnly" />
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:DynamicControl runat="server" ID="NameTextBox"
-                        DataField="Name" Mode="Edit" /> 
+                    <asp:DynamicControl ID="DynamicControl1" runat="server" DataField="Name" 
+                        Mode="Edit" />
                 </EditItemTemplate>
             </asp:TemplateField>
         </Columns>
+
+<SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>
     </asp:GridView>
 
     <asp:ObjectDataSource ID="CategoryObjectDataSource" runat="server" 
         DataObjectTypeName="SA33.Team12.SSIS.DAL.Category" DeleteMethod="DeleteCategory" 
         InsertMethod="CreateCategory" SelectMethod="GetAllCategories" 
-        TypeName="SA33.Team12.SSIS.BLL.CatalogManager" UpdateMethod="UpdateCategory">
+        TypeName="SA33.Team12.SSIS.BLL.CatalogManager" 
+        UpdateMethod="UpdateCategory" OldValuesParameterFormatString="original_{0}">
     </asp:ObjectDataSource>
 
 
