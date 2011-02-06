@@ -26,8 +26,7 @@ namespace SA33.Team12.SSIS.Test
             VW_StationeryRequisitionTrendByDepartmentTableAdapter ts = new VW_StationeryRequisitionTrendByDepartmentTableAdapter();
             ts.Fill(ds.VW_StationeryRequisitionTrendByDepartment);
 
-            dv = ds.VW_StationeryRequisitionTrendByDepartment.DefaultView;
-            
+            dv = ds.VW_StationeryRequisitionTrendByDepartment.DefaultView;            
             GenerateReport(dv);
         }
 
@@ -57,13 +56,14 @@ namespace SA33.Team12.SSIS.Test
                         query.Append("Month='" + item.Text + "'");                        
                         query.Append(" or ");
                     }
-                  
+                    
                 }
                 query.Append("1=-1)");
-                dv.RowFilter = query.ToString();
-
-                GenerateReport(dv);
             }
+            
+            dv.RowFilter = query.ToString();
+
+            GenerateReport(dv);
         }
 
         protected void ResetButton_Click(object sender, EventArgs e)
