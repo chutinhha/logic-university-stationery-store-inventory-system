@@ -235,12 +235,9 @@ namespace SA33.Team12.SSIS.DAL
                 tempStationery.ItemCode = stationery.ItemCode;
                 tempStationery.Description = stationery.Description;
                 tempStationery.ReorderLevel = stationery.ReorderLevel;
-                tempStationery.ReorderQuantity = stationery.ReorderQuantity;
-                tempStationery.QuantityInHand = stationery.QuantityInHand;
-                tempStationery.DateCreated = stationery.DateCreated;
+                tempStationery.ReorderQuantity = stationery.ReorderQuantity;  
                 tempStationery.DateModified = stationery.DateModified;
                 tempStationery.DateApproved = stationery.DateApproved;
-                tempStationery.CreatedByUser = stationery.CreatedByUser;
                 tempStationery.ModifiedByUser = stationery.ModifiedByUser;
                 tempStationery.ApprovedByUser = stationery.ApprovedByUser;
                 tempStationery.IsApproved = stationery.IsApproved;
@@ -248,8 +245,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempStationery);
-                    context.ObjectStateManager.ChangeObjectState(tempStationery, EntityState.Modified);
+               
                     context.SaveChanges();
                     ts.Complete();
                     return tempStationery;
@@ -269,8 +265,13 @@ namespace SA33.Team12.SSIS.DAL
                                                   where s.StationeryID == stationery.StationeryID
                                                   select s).First<Stationery>();
 
+                List<StationeryPrice> spList = GetAllStationeryPrices().Where(x => x.StationeryID == persistedStationery.StationeryID).ToList<StationeryPrice>();
                 using (TransactionScope ts = new TransactionScope())
                 {
+                    foreach (StationeryPrice temp in spList)
+                    {
+                        context.StationeryPrices.DeleteObject(temp);
+                    }
                     context.Stationeries.DeleteObject(persistedStationery);
                     context.SaveChanges();
                     ts.Complete();

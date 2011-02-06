@@ -54,11 +54,11 @@ namespace SA33.Team12.SSIS.Catalog
             supplier.TenderedYear = TenderYearCalender.SelectedDate;
             supplier.PreferredRank = Convert.ToInt32(RankingDDL.SelectedValue);
 
-            CatalogManager categoryManager = new CatalogManager();
+            CatalogManager manager = new CatalogManager();
 
             try
             {
-                categoryManager.CreateSupplier(supplier);
+                manager.CreateSupplier(supplier);
                 SupplierGridView.DataBind();
             }
             catch (Exception)

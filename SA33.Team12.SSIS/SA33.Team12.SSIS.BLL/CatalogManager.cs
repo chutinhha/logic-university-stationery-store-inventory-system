@@ -169,7 +169,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (stationery != null)
-                {
+                {                    
                     catalogDAO.DeleteStationery(stationery);
                 }
             }
