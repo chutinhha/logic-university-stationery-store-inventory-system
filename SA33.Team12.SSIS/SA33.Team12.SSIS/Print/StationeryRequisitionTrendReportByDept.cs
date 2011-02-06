@@ -16,14 +16,14 @@ namespace SA33.Team12.SSIS.Print {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class StationeryRequisitionTrendReport : ReportClass {
+    public class StationeryRequisitionTrendReportByDept : ReportClass {
         
-        public StationeryRequisitionTrendReport() {
+        public StationeryRequisitionTrendReportByDept() {
         }
         
         public override string ResourceName {
             get {
-                return "StationeryRequisitionTrendReport.rpt";
+                return "StationeryRequisitionTrendReportByDept.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SA33.Team12.SSIS.Print {
         
         public override string FullResourceName {
             get {
-                return "SA33.Team12.SSIS.Print.StationeryRequisitionTrendReport.rpt";
+                return "SA33.Team12.SSIS.Print.StationeryRequisitionTrendReportByDept.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace SA33.Team12.SSIS.Print {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedStationeryRequisitionTrendReport : Component, ICachedReport {
+    public class CachedStationeryRequisitionTrendReportByDept : Component, ICachedReport {
         
-        public CachedStationeryRequisitionTrendReport() {
+        public CachedStationeryRequisitionTrendReportByDept() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace SA33.Team12.SSIS.Print {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            StationeryRequisitionTrendReport rpt = new StationeryRequisitionTrendReport();
+            StationeryRequisitionTrendReportByDept rpt = new StationeryRequisitionTrendReportByDept();
             rpt.Site = this.Site;
             return rpt;
         }

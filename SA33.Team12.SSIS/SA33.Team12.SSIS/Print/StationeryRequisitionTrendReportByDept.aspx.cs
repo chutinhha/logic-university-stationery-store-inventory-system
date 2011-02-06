@@ -20,7 +20,7 @@ namespace SA33.Team12.SSIS.Test
         protected void Page_Load(object sender, EventArgs e)
         {
             rep = new ReportDocument();
-            rep.Load(Server.MapPath("~/Print/CrystalReport1.rpt"));
+            rep.Load(Server.MapPath("~/Print/StationeryRequisitionTrendReportByDept.rpt"));
 
             ds = new ReportDS();
             VW_StationeryRequisitionTrendByDepartmentTableAdapter ts = new VW_StationeryRequisitionTrendByDepartmentTableAdapter();
@@ -62,7 +62,6 @@ namespace SA33.Team12.SSIS.Test
             }
             
             dv.RowFilter = query.ToString();
-
             GenerateReport(dv);
         }
 

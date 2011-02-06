@@ -10,13 +10,15 @@
         {
             width: 228px;
         }
+        .style3
+        {
+            width: 57px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         Logic University - Stationery Requisition trend Report</h2>
-    <p>
-        &nbsp;</p>
 &nbsp;<table style="width: 100%;">
         <tr>
             <td class="style1">
@@ -30,9 +32,12 @@
                     SelectMethod="GetAllDepartments" TypeName="SA33.Team12.SSIS.BLL.UserManager">
                 </asp:ObjectDataSource>
             </td>
+            <td class="style3">
+                &nbsp;</td>
             <td>
                 <asp:DropDownList ID="CategoryDDL" runat="server" DataSourceID="CategoryDS" 
-                    DataTextField="Name" DataValueField="Name" AppendDataBoundItems="True">
+                    DataTextField="Name" DataValueField="Name" AppendDataBoundItems="True" 
+                    Visible="False">
                     <asp:ListItem>Select a category</asp:ListItem>
                 </asp:DropDownList>
                 <asp:ObjectDataSource ID="CategoryDS" runat="server" 
@@ -61,6 +66,8 @@
                     <asp:ListItem Value="12">December</asp:ListItem>
                 </asp:ListBox>
             </td>
+            <td class="style3">
+                &nbsp;</td>
             <td>
                 &nbsp;
             </td>
@@ -76,6 +83,8 @@
                 <asp:Button ID="ResetButton" runat="server" onclick="ResetButton_Click" 
                     Text="Reset" />
             </td>
+            <td class="style3">
+                &nbsp;</td>
             <td>
                 &nbsp;
             </td>

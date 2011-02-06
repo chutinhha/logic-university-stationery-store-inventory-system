@@ -166,22 +166,16 @@
     <Compile Include="HandleRequest\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\CrystalReport1.cs">
+    <Compile Include="Print\StationeryRequisitionTrendReportByDept.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <DependentUpon>StationeryRequisitionTrendReportByDept.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Print\StationeryOrderedByCategory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StationeryOrderedByCategory.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Print\StationeryRequisitionTrendReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StationeryRequisitionTrendReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Print\StationeryRequisitionTrendReportByDept.aspx.cs">
@@ -293,12 +287,6 @@
     </Compile>
     <Compile Include="Stock\PlacePurchaseOrder.aspx.designer.cs">
       <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Print\StationeryOrderedByCategoryCR.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StationeryOrderedByCategoryCR.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Test\DisbursementBLLTest.aspx.cs">
       <DependentUpon>DisbursementBLLTest.aspx</DependentUpon>
@@ -508,21 +496,13 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Print\CrystalReport1.rpt">
+    <EmbeddedResource Include="Print\StationeryRequisitionTrendReportByDept.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+      <LastGenOutput>StationeryRequisitionTrendReportByDept.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Print\StationeryOrderedByCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StationeryOrderedByCategory.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Print\StationeryOrderedByCategoryCR.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>StationeryOrderedByCategoryCR.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Print\StationeryRequisitionTrendReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>StationeryRequisitionTrendReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
