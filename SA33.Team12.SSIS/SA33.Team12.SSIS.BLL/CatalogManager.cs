@@ -206,8 +206,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (specialStationery != null)
-                {
-                    specialStationery.DateCreated = DateTime.Now;
+                {             
                     catalogDAO.CreateSpecialStationery(specialStationery);
                 }
             }
@@ -248,6 +247,19 @@ namespace SA33.Team12.SSIS.BLL
             {
                 throw new Exceptions.UserException("Catalog special stationery item deletion failed.");
             }
+        }
+
+        public string GenerateItemCode(string description, int count)
+        {
+            string result = string.Empty;
+            if (count < 10)
+                result = description.Substring(0, 1) + "00" + count;
+            if (count >= 10 && count < 100)
+                result = description.Substring(0, 1) + "0" + count;
+            if (count >= 100 && count < 1000)
+                result = description.Substring(0, 1) + count;
+
+            return result;
         }
         #endregion
 
