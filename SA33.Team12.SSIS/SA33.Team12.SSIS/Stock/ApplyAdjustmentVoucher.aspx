@@ -28,10 +28,12 @@
                     Item Description
                 </td>
                 <td>
-                    Reason:
-                </td>
+                    Type</td>
                 <td>
                     Quantity</td>
+                <td>
+                    Reason:
+                </td>
                 <td>
                     &nbsp;
                 </td>
@@ -57,10 +59,18 @@
                     </asp:ObjectDataSource>
                 </td>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlType" runat="server">
+                        <asp:ListItem Value="0">ADJ -</asp:ListItem>
+                        <asp:ListItem Value="1">ADJ +</asp:ListItem>
+                        <asp:ListItem Value="2">Consumed</asp:ListItem>
+                        <asp:ListItem Value="3">Replenished</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
                 <td>
-                    <asp:TextBox ID="TextBox2" runat="server" Width="51px"></asp:TextBox>
+                    <asp:TextBox ID="txtQuantity" runat="server" Width="51px"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtReason" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
@@ -70,18 +80,27 @@
     </fieldset>
     <fieldset>
         <legend>Adjustment Items</legend>
-        <asp:GridView ID="gvAdjustmentItems" runat="server" AutoGenerateColumns="False">
+        <asp:GridView ID="gvAdjustmentItems" runat="server" AutoGenerateColumns="False" 
+            DataKeyNames="StationeryID">
             <Columns>
-                <asp:BoundField DataField="Description" HeaderText="Item Description" 
-                    SortExpression="Description" />
-                <asp:TemplateField HeaderText="Reason">
+                <%--<asp:TemplateField HeaderText="Item Description">
                     <ItemTemplate>
-                        <asp:Literal ID="ltlReason" runat="server"></asp:Literal>
+                        <%# ((Stationery )Eval("Stationery")).Description %>
                     </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Quantity"></asp:TemplateField>
-                <asp:CommandField ShowDeleteButton="True" />
+                </asp:TemplateField>--%>
+                <asp:BoundField DataField="Reason" HeaderText="Reason" />
+                <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
+                    SortExpression="Quantity" />
+                <asp:BoundField DataField="Balance" HeaderText="Balance" 
+                    SortExpression="Balance" />
+             <%--   <asp:TemplateField HeaderText="Type">
+                    <ItemTemplate>
+                       <%# ((Stationery )Eval("Stationery")).Description %>
+                    </ItemTemplate>
+                </asp:TemplateField>--%>
             </Columns>
         </asp:GridView>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" 
+            onclick="btnSubmit_Click" />
     </fieldset>
 </asp:Content>

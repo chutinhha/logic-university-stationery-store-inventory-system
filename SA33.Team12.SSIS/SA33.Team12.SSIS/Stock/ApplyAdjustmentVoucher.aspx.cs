@@ -12,25 +12,25 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class AdjustmentVoucher : System.Web.UI.Page
     {
-        List<AdjustmentVoucherTransaction> adjustments = new List<AdjustmentVoucherTransaction>();
-        private List<Stationery> stationeries = new List<Stationery>();
-       
+        private List<StockLogTransaction> adjustments = new List<StockLogTransaction>();
+        //      private List<Stationery> stationeries = new List<Stationery>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["stationeries"] != null)
+            if (Session["adjustments"] != null)
             {
-                stationeries = (List<Stationery>) Session["stationeries"];
+                adjustments = (List<StockLogTransaction>)Session["adjustments"];
             }
             else
             {
-                stationeries = new List<Stationery>();
-                Session["stationeries"] = stationeries;
+                adjustments = new List<StockLogTransaction>();
+                Session["adjustments"] = adjustments;
             }
         }
 
         private void Populate()
         {
-            gvAdjustmentItems.DataSource = stationeries;
+            gvAdjustmentItems.DataSource = adjustments;
             gvAdjustmentItems.DataBind();
 
         }
@@ -38,19 +38,47 @@ namespace SA33.Team12.SSIS.Stock
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             bool existing = false;
-            using(CatalogManager cm = new CatalogManager())
+            using (CatalogManager cm = new CatalogManager())
             {
                 Stationery stationery = cm.FindStationeryByID(int.Parse(ddlDescription.SelectedValue));
-                foreach (Stationery s in stationeries)
+                foreach (StockLogTransaction adj in adjustments)
                 {
-                    if (s.StationeryID == stationery.StationeryID)
+                    if (adj.StationeryID == stationery.StationeryID)
                         existing = true;
                 }
                 if (!existing)
                 {
-                    stationeries.Add(stationery);
+                    StockLogTransaction adj = new StockLogTransaction();
+                    adj.Reason = txtReason.Text.ToString();
+                    adj.Quantity = int.Parse(txtQuantity.Text.ToString());
+                    adj.StationeryID = stationery.StationeryID;
+                    adj.Balance = stationery.QuantityInHand;
+                    adj.Type = int.Parse(ddlType.SelectedValue);
+                    adjustments.Add(adj);
                 }
+                txtQuantity.Text = "";
+                txtReason.Text = "";
                 Populate();
+            }
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
+            {
+                AdjustmentVoucherTransaction tran = new AdjustmentVoucherTransaction();
+
+                tran.VoucherNumber = "88888";
+                tran.DateIssued = DateTime.Now;
+                tran.CreatedBy = 1; //testing purpose only
+
+                foreach (StockLogTransaction adj in adjustments)
+                {
+                    adj.AdjustmentVoucherTransaction = tran;
+                    avm.CreateStockLogTransaction(adj);
+                }
+
+                avm.CreateAdjustmentVoucherTransaction(tran);
             }
         }
     }
