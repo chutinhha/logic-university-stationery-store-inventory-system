@@ -7,8 +7,8 @@ using System.Web.UI.WebControls;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Data;
 using System.Text;
-using SA33.Team12.SSIS.Print;
-using SA33.Team12.SSIS.Print.ReportDSTableAdapters;
+using SA33.Team12.SSIS.Print.Store;
+using SA33.Team12.SSIS.Print.Store.ReportDSTableAdapters;
 
 namespace SA33.Team12.SSIS.Test
 {
@@ -20,7 +20,7 @@ namespace SA33.Team12.SSIS.Test
         protected void Page_Load(object sender, EventArgs e)
         {
             rep = new ReportDocument();
-            rep.Load(Server.MapPath("~/Print/StationeryRequisitionTrendReportByDept.rpt"));
+            rep.Load(Server.MapPath("~/Print/Store/StationeryRequisitionTrendReportByDept.rpt"));
 
             ds = new ReportDS();
             VW_StationeryRequisitionTrendByDepartmentTableAdapter ts = new VW_StationeryRequisitionTrendByDepartmentTableAdapter();

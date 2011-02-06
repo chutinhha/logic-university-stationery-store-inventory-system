@@ -73,8 +73,8 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Approval\RequestApproval.aspx" />
     <Content Include="HandleRequest\Disbursement.aspx" />
-    <Content Include="Print\StationeryRequisitionTrendReportByDept.aspx" />
-    <Content Include="Print\PrintRequestByIndividualEmployee.aspx" />
+    <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
+    <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalForm.aspx" />
     <Content Include="StationeryRetrieval\StationeryRetrievalList.aspx" />
@@ -95,7 +95,7 @@
     <Content Include="Test\PlaceStockAdjustment.aspx" />
     <Content Include="Test\poItemTest.aspx" />
     <Content Include="Test\POTest.aspx" />
-    <Content Include="Print\StationeryOrderedByCategoryReport.aspx" />
+    <Content Include="Print\Store\StationeryOrderedByCategoryReport.aspx" />
     <Content Include="Test\Stationeries.aspx" />
     <Content Include="RequestStationery\StationeryRequest.aspx" />
     <Content Include="Test\StockLogTransactionTest.aspx" />
@@ -166,33 +166,33 @@
     <Compile Include="HandleRequest\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\StationeryRequisitionTrendReportByDept.cs">
+    <Compile Include="Print\Store\StationeryRequisitionTrendReportByDept.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StationeryRequisitionTrendReportByDept.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Print\StationeryOrderedByCategory.cs">
+    <Compile Include="Print\Store\StationeryOrderedByCategory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StationeryOrderedByCategory.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Print\StationeryRequisitionTrendReportByDept.aspx.cs">
+    <Compile Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx.cs">
       <DependentUpon>StationeryRequisitionTrendReportByDept.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Print\StationeryRequisitionTrendReportByDept.aspx.designer.cs">
+    <Compile Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx.designer.cs">
       <DependentUpon>StationeryRequisitionTrendReportByDept.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.cs">
+    <Compile Include="Print\Department\PrintRequestByIndividualEmployee.aspx.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Print\PrintRequestByIndividualEmployee.aspx.designer.cs">
+    <Compile Include="Print\Department\PrintRequestByIndividualEmployee.aspx.designer.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\ReportDS.Designer.cs">
+    <Compile Include="Print\Store\ReportDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
@@ -330,11 +330,11 @@
     <Compile Include="Test\POTest.aspx.designer.cs">
       <DependentUpon>POTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\StationeryOrderedByCategoryReport.aspx.cs">
+    <Compile Include="Print\Store\StationeryOrderedByCategoryReport.aspx.cs">
       <DependentUpon>StationeryOrderedByCategoryReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Print\StationeryOrderedByCategoryReport.aspx.designer.cs">
+    <Compile Include="Print\Store\StationeryOrderedByCategoryReport.aspx.designer.cs">
       <DependentUpon>StationeryOrderedByCategoryReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\Stationeries.aspx.cs">
@@ -480,27 +480,29 @@
     <Content Include="RequestStationery\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Print\ReportDS.xsc">
+    <Content Include="Print\Department\Web.config" />
+    <None Include="Print\Store\ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>
-    <None Include="Print\ReportDS.xsd">
+    <None Include="Print\Store\ReportDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportDS.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Print\ReportDS.xss">
+    <None Include="Print\Store\ReportDS.xss">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>
+    <Content Include="Print\Store\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Print\StationeryRequisitionTrendReportByDept.rpt">
+    <EmbeddedResource Include="Print\Store\StationeryRequisitionTrendReportByDept.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StationeryRequisitionTrendReportByDept.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Print\StationeryOrderedByCategory.rpt">
+    <EmbeddedResource Include="Print\Store\StationeryOrderedByCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StationeryOrderedByCategory.cs</LastGenOutput>
     </EmbeddedResource>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA33.Team12.SSIS.Print {
+namespace SA33.Team12.SSIS.Print.Store {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace SA33.Team12.SSIS.Print {
         
         public override string FullResourceName {
             get {
-                return "SA33.Team12.SSIS.Print.StationeryOrderedByCategory.rpt";
+                return "SA33.Team12.SSIS.Print.Store.StationeryOrderedByCategory.rpt";
             }
             set {
                 // Do nothing

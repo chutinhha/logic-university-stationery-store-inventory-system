@@ -21,9 +21,9 @@
       <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />
     <siteMapNode url="~/HandleRequest/Disbursement.aspx" title="Disbursement" description="Disbursement" />
     <siteMapNode url="/Print" title="Print">
-    <siteMapNode url="~/Print/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee" />
-      <siteMapNode url="~/Print/StationeryOrderedByCategoryReport.aspx" title="Stationery Ordered By Category" />
-      <siteMapNode url="~/Print/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
+    <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee" />
+      <siteMapNode url="~/Print/Store/StationeryOrderedByCategoryReport.aspx" title="Stationery Ordered By Category" />
+      <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
     </siteMapNode>
     <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
     <siteMapNode url="~/Administration/Users.aspx" title="Administration" description="Maintain Users">
