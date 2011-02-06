@@ -67,6 +67,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             return adjustmentVoucherDAO.FindAdjustmentVoucherTransactionsByGetID(AdjID);
         }
+
+        void DeleteAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        {
+            adjustmentVoucherDAO.DeleteAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+        }
         #endregion
 
         #region StockLogTransaction (Temporary Table) (Create, Update, Delete) Query (GetAll, GetID, GetCriteria)
