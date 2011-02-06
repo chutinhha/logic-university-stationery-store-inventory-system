@@ -80,6 +80,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryRetrievalFormItemByDeptSpecialStationery", "vw_GetStationeryRetrievalFormItemByDept", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryRetrievalFormItemByDept), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByCategoryCategory", "VW_RequisitionsByCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByCategory), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByDepartmentDepartment", "VW_RequisitionsByDepartment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByDepartment), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
 
 #endregion
 
@@ -2619,6 +2620,28 @@ namespace SA33.Team12.SSIS.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Disbursement")]
+        public EntityCollection<Disbursement> Disbursements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Disbursement>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Disbursement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Disbursement>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Disbursement", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -2749,6 +2772,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _StationeryRetrievalFormID;
         partial void OnStationeryRetrievalFormIDChanging(Nullable<global::System.Int32> value);
         partial void OnStationeryRetrievalFormIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DepartmentID
+        {
+            get
+            {
+                return _DepartmentID;
+            }
+            set
+            {
+                OnDepartmentIDChanging(value);
+                ReportPropertyChanging("DepartmentID");
+                _DepartmentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DepartmentID");
+                OnDepartmentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DepartmentID;
+        partial void OnDepartmentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnDepartmentIDChanged();
 
         #endregion
     
@@ -2848,6 +2895,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StationeryRetrievalForm>("SA33.Team12.SSIS.Model.StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Department")]
+        public Department Department
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Department").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Department").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Department> DepartmentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Department");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("SA33.Team12.SSIS.Model.Departments_Disbursements_FK1", "Department", value);
                 }
             }
         }
@@ -8691,7 +8776,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="balance">Initial value of the Balance property.</param>
         /// <param name="stationeryID">Initial value of the StationeryID property.</param>
-        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID)
+        /// <param name="price">Initial value of the Price property.</param>
+        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID, global::System.Decimal price)
         {
             StockLogTransaction stockLogTransaction = new StockLogTransaction();
             stockLogTransaction.StockLogTransactionID = stockLogTransactionID;
@@ -8701,6 +8787,7 @@ namespace SA33.Team12.SSIS.DAL
             stockLogTransaction.Quantity = quantity;
             stockLogTransaction.Balance = balance;
             stockLogTransaction.StationeryID = stationeryID;
+            stockLogTransaction.Price = price;
             return stockLogTransaction;
         }
 
@@ -8881,9 +8968,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> Price
+        public global::System.Decimal Price
         {
             get
             {
@@ -8898,8 +8985,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnPriceChanged();
             }
         }
-        private Nullable<global::System.Decimal> _Price;
-        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
         partial void OnPriceChanged();
 
         #endregion
