@@ -6,4 +6,23 @@
     <AlternatingRowStyle CssClass="" />
 </asp:GridView>
 
+<asp:DetailsView runat="server" CssClass="screenFriendlyGridView">
+    <AlternatingRowStyle CssClass="odd" />
+</asp:DetailsView>
+
 <asp:Button runat="server" CssClass="commandButton" />
+
+<asp:DropDownList runat="server" CssClass="commandButton" />
+
+<asp:CompareValidator runat="server" 
+    CssClass="failureNotification"></asp:CompareValidator>
+<asp:CustomValidator runat="server" 
+    CssClass="failureNotification"></asp:CustomValidator>
+<asp:RangeValidator runat="server" 
+    CssClass="failureNotification"></asp:RangeValidator>
+<asp:RegularExpressionValidator runat="server" 
+    CssClass="failureNotification"></asp:RegularExpressionValidator>
+<asp:RequiredFieldValidator runat="server" 
+    CssClass="failureNotification"></asp:RequiredFieldValidator>
+<asp:ValidationSummary runat="server"  
+    CssClass="failureNotification" />

@@ -84,6 +84,7 @@
     <Content Include="Stock\ReplenishStock.aspx" />
     <Content Include="Stock\StockCard.aspx" />
     <Content Include="Stock\ViewPurchaseOrder.aspx" />
+    <Content Include="Styles\FormElements.css" />
     <Content Include="Styles\GridViewTable.css" />
     <Content Include="TestPOandPOitems.aspx" />
     <Content Include="Test\CategoriesTestV.aspx" />
