@@ -16,7 +16,8 @@ Filter By Disbursement Status:
     <asp:GridView ID="SRFGridView" runat="server" AutoGenerateColumns="False"
          AllowPaging="True" onpageindexchanging="SRFGridView_PageIndexChanging" 
         onrowdatabound="SRFGridView_RowDataBound" 
-        onrowcommand="SRFGridView_RowCommand">
+        onrowcommand="SRFGridView_RowCommand" 
+        DataKeyNames="StationeryRetrievalFormID">
         <Columns>
             <asp:BoundField DataField="StationeryRetrievalFormID" HeaderText="SRFID" 
                 SortExpression="StationeryRetrievalFormID" />
@@ -102,7 +103,7 @@ Filter By Disbursement Status:
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-      <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+      DisbusementItemID:<asp:TextBox ID="tbxDisbursementItemID" runat="server"></asp:TextBox>
       Update Disbursed Quantity:<asp:TextBox ID="tbxQuantity" runat="server"></asp:TextBox>
     <asp:Button ID="BtnUpdateQuantity" runat="server" Text="Update" 
         onclick="BtnUpdateQuantity_Click" style="height: 26px" />

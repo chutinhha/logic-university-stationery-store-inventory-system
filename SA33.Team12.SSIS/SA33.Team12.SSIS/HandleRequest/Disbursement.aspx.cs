@@ -174,7 +174,7 @@ namespace SA33.Team12.SSIS.Handle_Request
 
         protected void BtnUpdateQuantity_Click(object sender, EventArgs e)
         {
-            int ItemID =Convert.ToInt32(Label1.Text.ToString());
+            int ItemID = Convert.ToInt32(tbxDisbursementItemID.Text.ToString());
             int Quantity = Convert.ToInt32(tbxQuantity.Text.ToString());
             using (BLL.DisbursementManager dm = new DisbursementManager())
             {
@@ -182,10 +182,10 @@ namespace SA33.Team12.SSIS.Handle_Request
                 DAL.DisbursementItem newItem = new DisbursementItem();
                 newItem.QuantityDisbursed = Quantity;
                 DAL.DisbursementItem UpdatedItem = dm.UpdateDisbursementItem(newItem);
-                List<DAL.DisbursementItem> Items = new List<DisbursementItem>();
+                /*List<DAL.DisbursementItem> Items = new List<DisbursementItem>();
                 Items.Add(UpdatedItem);
                 DisbursementItemGridView.DataSource = Items;
-                DisbursementItemGridView.DataBind();
+                DisbursementItemGridView.DataBind();*/
             }
         }
 
