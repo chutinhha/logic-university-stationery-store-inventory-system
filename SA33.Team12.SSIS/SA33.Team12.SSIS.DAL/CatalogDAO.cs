@@ -11,6 +11,7 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using SA33.Team12.SSIS.DAL;
+using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.DAL
 {
@@ -68,17 +69,21 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
+                Category c = GetAllCategories().Where(x => x.Name.ToLower() == category.Name.ToLower()).FirstOrDefault<Category>();
+
                 using (TransactionScope ts = new TransactionScope())
-                {
-                    context.Categories.AddObject(category);
-                    context.SaveChanges();
-                    ts.Complete();
+                {                
+                   
+                        context.AddToCategories(category);
+                        context.SaveChanges();
+                        ts.Complete();
+                   
                     return category;
                 }
             }
             catch (Exception)
             {
-                throw;
+                throw new CatalogException("Error Occured when creating category");
             }
         }
 
@@ -91,17 +96,11 @@ namespace SA33.Team12.SSIS.DAL
                                          select s).First<Category>();
                 
                 tempCategory.Name = category.Name;
-                tempCategory.IsApproved = category.IsApproved;
-                tempCategory.DateCreated = category.DateCreated;
-                tempCategory.DateModified = category.DateModified;
-                tempCategory.CreatedByUser = category.CreatedByUser;
-                tempCategory.ModifiedByUser = category.ModifiedByUser;
-                tempCategory.ApprovedByUser = category.ApprovedByUser;
+                tempCategory.DateModified = DateTime.Now;               
+                tempCategory.ModifiedByUser = category.ModifiedByUser;            
               
                 using (TransactionScope ts = new TransactionScope())
-                {
-                context.Attach(tempCategory);
-                context.ObjectStateManager.ChangeObjectState(tempCategory, EntityState.Modified);
+                {            
                 context.SaveChanges();
                 ts.Complete();
                 return tempCategory;
@@ -119,7 +118,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Category persistedCategory = (from c in context.Categories
                                       where c.CategoryID == category.CategoryID
-                                      select c).First<Category>();
+                                      select c).FirstOrDefault<Category>();
 
                 using (TransactionScope ts = new TransactionScope())
                 {

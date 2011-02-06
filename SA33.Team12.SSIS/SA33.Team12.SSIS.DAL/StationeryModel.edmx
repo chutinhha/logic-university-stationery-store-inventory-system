@@ -1809,7 +1809,7 @@
           <Property Name="DateModified" Type="DateTime" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedBy" Type="Int32" />
           <NavigationProperty Name="Stationeries" Relationship="SA33.Team12.SSIS.Model.Categories_Stationeries_FK1" FromRole="Categories" ToRole="Stationeries" />
           <NavigationProperty Name="ApprovedByUser" Relationship="SA33.Team12.SSIS.Model.Category_Approved_By" FromRole="Categories" ToRole="Users" />
           <NavigationProperty Name="CreatedByUser" Relationship="SA33.Team12.SSIS.Model.Category_Created_By" FromRole="Categories" ToRole="Users" />
@@ -2258,7 +2258,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Category_Approved_By">
-          <End Role="Users" Type="SA33.Team12.SSIS.Model.User" Multiplicity="1" />
+          <End Role="Users" Type="SA33.Team12.SSIS.Model.User" Multiplicity="0..1" />
           <End Role="Categories" Type="SA33.Team12.SSIS.Model.Category" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">

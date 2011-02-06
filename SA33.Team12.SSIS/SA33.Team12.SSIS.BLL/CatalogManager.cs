@@ -51,6 +51,9 @@ namespace SA33.Team12.SSIS.BLL
                 if (category != null)
                 {
                     category.DateCreated = DateTime.Now;
+                    category.DateModified = DateTime.Now;
+                    category.IsApproved = false;
+                    category.ApprovedByUser = null;
                     catalogDAO.CreateCategory(category);
                 }
             }
@@ -73,7 +76,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog category updating failed.");
+                throw new Exceptions.UserException("Catalog updating failed.");
             }
             return category;
         }
@@ -83,13 +86,13 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (category != null)
-                {
+                {                                          
                     catalogDAO.DeleteCategory(category);
                 }
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog category deletion failed.");
+                throw new Exceptions.UserException("Catalog deletion failed.");
             }
         }
 
