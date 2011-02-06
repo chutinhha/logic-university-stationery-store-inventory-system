@@ -60,6 +60,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             return adjustmentVoucherDAO.GetAllAdjustmentVoucherTransaction();
         }
+
+        public AdjustmentVoucherTransaction GetAdjustmentVoucherTransactionByID(int AdjID)
+        {
+            return adjustmentVoucherDAO.FindAdjustmentVoucherTransactionsByGetID(AdjID);
+        }
         #endregion
 
         #region StockLogTransaction (Temporary Table) (Create, Update, Delete) Query (GetAll, GetID, GetCriteria)
