@@ -20,7 +20,7 @@ namespace SA33.Team12.SSIS.Test
         protected void Page_Load(object sender, EventArgs e)
         {
             rep = new ReportDocument();
-            rep.Load(Server.MapPath("~/Print/StationeryRequisitionTrendReport.rpt"));
+            rep.Load(Server.MapPath("~/Print/CrystalReport1.rpt"));
 
             ds = new ReportDS();
             VW_StationeryRequisitionTrendByDepartmentTableAdapter ts = new VW_StationeryRequisitionTrendByDepartmentTableAdapter();
@@ -76,7 +76,7 @@ namespace SA33.Team12.SSIS.Test
         {
             rep.SetDataSource(dataview);
             rep.VerifyDatabase();
-            CrystalReportViewer1.ReportSource = rep;
+            CrystalReportViewer1.ReportSource = rep;            
         }
     }
 }

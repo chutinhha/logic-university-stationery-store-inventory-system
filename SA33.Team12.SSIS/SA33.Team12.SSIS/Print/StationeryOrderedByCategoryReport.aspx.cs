@@ -20,7 +20,7 @@ namespace SA33.Team12.SSIS.Test
         protected void Page_Load(object sender, EventArgs e)
         {
             rep = new ReportDocument();
-            rep.Load(Server.MapPath("~/Print/StationeryOrderedByCategoryCR.rpt"));
+            rep.Load(Server.MapPath("~/Print/StationeryOrderedByCategory.rpt"));
 
             ds = new ReportDS();
             vw_StationeryOrderedByCategoryTableAdapter ts = new vw_StationeryOrderedByCategoryTableAdapter();
