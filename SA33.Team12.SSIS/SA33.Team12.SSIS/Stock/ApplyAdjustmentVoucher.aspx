@@ -12,11 +12,7 @@
         {
             width: 301px;
         }
-        .style3
-        {
-            margin-left: 361px;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>
@@ -76,14 +72,16 @@
         <legend>Adjustment Items</legend>
         <asp:GridView ID="gvAdjustmentItems" runat="server" AutoGenerateColumns="False">
             <Columns>
-                <asp:BoundField DataField="Reason" HeaderText="Reason" />
-                <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
-                <asp:BoundField DataField="Balance" HeaderText="Balance" />
+                <asp:BoundField DataField="Description" HeaderText="Item Description" 
+                    SortExpression="Description" />
+                <asp:TemplateField HeaderText="Reason">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltlReason" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Quantity"></asp:TemplateField>
+                <asp:CommandField ShowDeleteButton="True" />
             </Columns>
         </asp:GridView>
     </fieldset>
-    <div>
-        <asp:Button ID="btnPrint" runat="server" CssClass="style3" Enabled="False" OnClick="Button1_Click"
-            Text="Print" Visible="False" />
-    </div>
 </asp:Content>
