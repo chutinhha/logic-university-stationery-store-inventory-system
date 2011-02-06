@@ -16,48 +16,7 @@ namespace SA33.Team12.SSIS.Stock
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Page.IsPostBack)
-            //{
-            //    DataTable myDt = new DataTable();
-            //    myDt = CreateDataTable();
-            //    Session["myDatatable"] = myDt;
-            //    this.gvPurchaseOrders.DataSource = ((DataTable)Session["myDatatable"]).DefaultView;
-            //    this.gvPurchaseOrders.DataBind();
-            //}
-        }
 
-         private DataTable CreateDataTable()
-        {
-            DataTable myDataTable = new DataTable();
-            DataColumn myDataColumn;
-            
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = Type.GetType("System.String");
-            myDataColumn.ColumnName = "Purchase Order ID";
-            myDataTable.Columns.Add(myDataColumn);
-            myDataTable.PrimaryKey = new DataColumn[] { myDataTable.Columns["StationeryID"] };
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = Type.GetType("System.String");
-            myDataColumn.ColumnName = "Description";
-            myDataTable.Columns.Add(myDataColumn);
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = Type.GetType("System.Int32");
-            myDataColumn.ColumnName = "Type";
-            myDataTable.Columns.Add(myDataColumn);
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = Type.GetType("System.Int32");
-            myDataColumn.ColumnName = "Quantity";
-            myDataTable.Columns.Add(myDataColumn);
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = Type.GetType("System.String");
-            myDataColumn.ColumnName = "Reason";
-            myDataTable.Columns.Add(myDataColumn);
-
-            return myDataTable;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
