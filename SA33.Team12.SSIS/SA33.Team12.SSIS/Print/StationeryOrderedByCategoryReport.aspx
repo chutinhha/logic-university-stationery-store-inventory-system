@@ -10,9 +10,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Logic University - Stationery Reorder Report</h2>
-    <p>
-        &nbsp;</p>
+        Logic University - Stationery Reorder Report&nbsp;</h2>
 &nbsp;<table style="width: 100%;">
         <tr>
             <td class="style1">
