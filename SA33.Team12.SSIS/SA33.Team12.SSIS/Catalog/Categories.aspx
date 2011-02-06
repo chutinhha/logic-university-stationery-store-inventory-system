@@ -23,8 +23,6 @@
                         DataField="Name" Mode="Edit" /> 
                 </EditItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" 
-                SortExpression="UnitOfMeasure" />
         </Columns>
     </asp:GridView>
 
