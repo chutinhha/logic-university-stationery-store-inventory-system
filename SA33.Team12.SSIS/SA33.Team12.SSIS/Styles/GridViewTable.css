@@ -43,7 +43,7 @@ table.screenFriendlyGridView thead th, table.screenFriendlyGridView tfoot th
 table.screenFriendlyGridView tbody td a
 {
     color: #363636;
-    text-decoration: none;
+    text-decoration: underline;
 }
 table.screenFriendlyGridView tbody td a:visited
 {
@@ -52,7 +52,7 @@ table.screenFriendlyGridView tbody td a:visited
 }
 table.screenFriendlyGridView tbody td a:hover
 {
-    text-decoration: underline;
+    text-decoration: none;
 }
 table.screenFriendlyGridView tbody th a
 {
@@ -60,10 +60,12 @@ table.screenFriendlyGridView tbody th a
     font-weight: normal;
     text-decoration: none;
 }
+
 table.screenFriendlyGridView tbody th a:hover
 {
     color: #363636;
 }
+
 table.screenFriendlyGridView tbody td + td + td + td a
 {
     background-image: url('bullet_blue.png');

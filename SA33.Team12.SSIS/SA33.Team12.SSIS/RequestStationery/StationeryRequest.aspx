@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         Stationery Request Form</h2>
-    <asp:DetailsView ID="RequestDetailsView" runat="server" Height="50px" Width="282px"
+    <asp:DetailsView ID="RequestDetailsView" runat="server"
         AutoGenerateRows="False" DataSourceID="RequisitionDetailsDS">
         <Fields>
             <asp:BoundField HeaderText="Requisition Form Number" DataField="RequisitionForm" />

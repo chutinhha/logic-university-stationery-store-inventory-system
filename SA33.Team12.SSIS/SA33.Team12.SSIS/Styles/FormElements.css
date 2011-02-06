@@ -1,0 +1,19 @@
+﻿select.commandButton, 
+input.commandButton {
+  color:#369;
+  font: bold 100% arial,helvetica,sans-serif;
+  background-color:#ccc;
+  border: 1px solid;
+  border-color: #696 #363 #363 #696;
+  padding: 3px 6px;
+  filter:progid:DXImageTransform.Microsoft.Gradient
+  (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffaaaaff');
+}
+
+input[type=text]
+{
+    color: #333;
+    font: 100% arial,helvetica,sans-serif;
+    border: 1px solid;
+    border-color: #696 #363 #363 #696;
+}
