@@ -180,19 +180,15 @@ namespace SA33.Team12.SSIS.DAL
                 Department persistedDepartment = (from d in context.Departments
                                                   where d.DepartmentID == department.DepartmentID
                                                   select d).First<Department>();
+                CollectionPoint point = (from cp in context.CollectionPoints
+                                      where cp.CollectionPointID == department.CollectionPointID
+                                      select cp).First();
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    persistedDepartment.CollectionPoint = department.CollectionPoint;
+                    persistedDepartment.CollectionPoint = point;
                     persistedDepartment.Code = department.Code;
                     persistedDepartment.Name = department.Name;
                     persistedDepartment.IsBlackListed = department.IsBlackListed;
-
-                    //CollectionPoint newCollectionPoint =
-                    //        (from c in context.CollectionPoints
-                    //         where c.CollectionPointID == department.CollectionPointID
-                    //         select c).First<CollectionPoint>();
-
-                    //persistedDepartment.CollectionPoint = newCollectionPoint;
                     context.SaveChanges();
                     ts.Complete();
                     return persistedDepartment;
