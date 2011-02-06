@@ -12,6 +12,8 @@
 
 <asp:Button runat="server" CssClass="commandButton" />
 
+<asp:TextBox runat="server" CssClass="editable" />
+
 <asp:DropDownList runat="server" CssClass="commandButton" />
 
 <asp:CompareValidator runat="server" 

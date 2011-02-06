@@ -6,12 +6,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        User List</h2>
+        Maintain Users</h2>
     <p class="failureNotification">
         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
     </p>
     <fieldset>
-        <legend>User List</legend>
+        <legend>Users List</legend>
         <asp:GridView runat="server" ID="UserGridView" AutoGenerateColumns="False" DataKeyNames="UserID"
             OnRowCommand="UserGridView_RowCommand" AllowPaging="True" 
             SelectedRowStyle-BackColor="Silver" 
@@ -30,7 +30,7 @@
                         <%# ((Department) Eval("Department")).Name %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Role" HeaderText="Role" SortExpression="Role" />
+                <asp:BoundField DataField="Role" HeaderText="Roles" SortExpression="Role" />
                 <asp:CheckBoxField DataField="IsEnabled" HeaderText="Enabled" ReadOnly="true" />
                 <asp:TemplateField HeaderText="Actions">
                     <ItemTemplate>
@@ -54,7 +54,7 @@
             InsertMethod="CreateUser" UpdateMethod="UpdateUser"></asp:ObjectDataSource>
     </fieldset>
     <fieldset>
-        <legend>User Detail</legend>
+        <legend>Selected User's Detail</legend>
         <asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True" DataSourceID="UserDetailObjectDataSource"
             OnItemInserting="UserFormView_ItemInserting" OnItemUpdating="UserFormView_ItemUpdating"
             OnItemCommand="UserFormView_ItemCommand" 
@@ -136,11 +136,8 @@
                         <td>
                             <asp:DynamicControl ID="RoleDynamicControl" runat="server" DataField="Role" Mode="Edit"
                                 Visible="false" />
-                            <asp:DropDownList ID="MemebershipRoleDropDownList" runat="server">
-                            </asp:DropDownList>
-                            <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" 
-                                runat="server" SelectMethod="GetAllRoles"
-                                TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
+                            <asp:CheckBoxList ID="MembershipRoleCheckBoxList" runat="server">
+                            </asp:CheckBoxList>
                         </td>
                         <tr>
                             <th>
@@ -232,10 +229,8 @@
                         <td>
                             <asp:DynamicControl ID="RoleDynamicControl" runat="server" DataField="Role" Mode="Insert"
                                 Visible="false" />
-                            <asp:DropDownList ID="MemebershipRoleDropDownList" runat="server">
-                            </asp:DropDownList>
-                            <asp:ObjectDataSource ID="MembershipRoleObjectDataSource" runat="server" SelectMethod="GetAllRoles"
-                                TypeName="System.Web.Security.Roles"></asp:ObjectDataSource>
+                            <asp:CheckBoxList ID="MembershipRoleCheckBoxList" runat="server">
+                            </asp:CheckBoxList>
                         </td>
                         <tr>
                             <td>

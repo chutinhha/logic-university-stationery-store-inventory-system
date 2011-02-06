@@ -104,8 +104,10 @@ namespace SA33.Team12.SSIS.UserAdministration
 
                 DropDownList MemebershipRoleDropDownList =
                  UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+                CheckBoxList MembershipRoleCheckBoxList =
+                 UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
                 string roles = string.Empty;
-                foreach (ListItem item in MemebershipRoleDropDownList.Items)
+                foreach (ListItem item in MembershipRoleCheckBoxList.Items)
                 {
                     if (item.Selected) roles += item.Value + ",";
                 }
@@ -124,8 +126,10 @@ namespace SA33.Team12.SSIS.UserAdministration
 
                 DropDownList MemebershipRoleDropDownList =
                   UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+                CheckBoxList MembershipRoleCheckBoxList =
+                 UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
                 string roles = string.Empty;
-                foreach (ListItem item in MemebershipRoleDropDownList.Items)
+                foreach (ListItem item in MembershipRoleCheckBoxList.Items)
                 {
                     if (item.Selected) roles += item.Value + ",";
                 }
@@ -147,17 +151,31 @@ namespace SA33.Team12.SSIS.UserAdministration
 
         protected void DataBindMemebershipDropDownList()
         {
-            DropDownList MemebershipRoleDropDownList =
-                UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
-            if (MemebershipRoleDropDownList != null)
+            //DropDownList MemebershipRoleDropDownList =
+            //    UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+            //if (MemebershipRoleDropDownList != null)
+            //{
+            //    MemebershipRoleDropDownList.DataSource = Roles.GetAllRoles();
+            //    MemebershipRoleDropDownList.DataBind();
+            //    string role =
+            //        DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] { "," },
+            //                                                                        StringSplitOptions.
+            //                                                                            RemoveEmptyEntries)[0].ToString();
+            //    MemebershipRoleDropDownList.SelectedValue = role;
+            //}
+            CheckBoxList MembershipRoleCheckBoxList =
+                UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
+            if (MembershipRoleCheckBoxList != null)
             {
-                MemebershipRoleDropDownList.DataSource = Roles.GetAllRoles();
-                MemebershipRoleDropDownList.DataBind();
-                string role =
-                    DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] { "," },
+                MembershipRoleCheckBoxList.DataSource = Roles.GetAllRoles();
+                MembershipRoleCheckBoxList.DataBind();
+                string[] roles =
+                    DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] {","},
                                                                                     StringSplitOptions.
-                                                                                        RemoveEmptyEntries)[0].ToString();
-                MemebershipRoleDropDownList.SelectedValue = role;
+                                                                                        RemoveEmptyEntries);
+                foreach (ListItem item in MembershipRoleCheckBoxList.Items)
+                    foreach (string role in roles)
+                        if(item.Text == role) item.Selected = true;
             }
         }
 
