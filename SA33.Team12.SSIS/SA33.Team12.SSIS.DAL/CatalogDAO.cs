@@ -344,7 +344,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.SpecialStationeries.AddObject(specialStationery);
+                    context.AddToSpecialStationeries(specialStationery);
                     context.SaveChanges();
                     ts.Complete();
                     return specialStationery;
@@ -379,8 +379,8 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempSpecialStationery);
-                    context.ObjectStateManager.ChangeObjectState(tempSpecialStationery, EntityState.Modified);
+                  //  context.Attach(tempSpecialStationery);
+                  //context.ObjectStateManager.ChangeObjectState(tempSpecialStationery, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
                     return tempSpecialStationery;
