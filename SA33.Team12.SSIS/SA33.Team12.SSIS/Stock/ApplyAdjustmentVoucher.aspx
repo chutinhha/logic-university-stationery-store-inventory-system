@@ -6,7 +6,7 @@
     <style type="text/css">
         .style1
         {
-            width: 254px;
+            width: 165px;
         }
         .style2
         {

@@ -68,7 +68,7 @@ namespace SA33.Team12.SSIS.Stock
             {
                 AdjustmentVoucherTransaction tran = new AdjustmentVoucherTransaction();
 
-                tran.VoucherNumber = "88888";
+                tran.VoucherNumber = "88888"; // tesing only
                 tran.DateIssued = DateTime.Now;
                 tran.CreatedBy = 1; //testing purpose only
 
