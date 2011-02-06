@@ -1,6 +1,8 @@
 ﻿/***
  * Author: Anthony
  * Initial Implementation: 30/Jan/2011
+ * Updated: 6/Feb/2011
+ * By: Wang Pinyi
  ***/
 
 using System;
