@@ -70,7 +70,7 @@ namespace SA33.Team12.SSIS.Catalog
             }
             catch (Exception)
             {
-                ErrorLabel.Text = "Category Creation Failed";
+                ErrorLabel.Text = "Create Special Request Failed";
             }
 
         }
