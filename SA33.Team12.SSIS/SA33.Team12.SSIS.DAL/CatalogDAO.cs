@@ -708,8 +708,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempSupplier);
-                    context.ObjectStateManager.ChangeObjectState(tempSupplier, EntityState.Modified);
+                    
                     context.SaveChanges();
                     ts.Complete();
                     return tempSupplier;

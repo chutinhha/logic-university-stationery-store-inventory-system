@@ -17,7 +17,10 @@
                 <td class="style1">
                     Supplier Name</td>
                 <td>
-                    <asp:TextBox ID="NameTextBox" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="NameTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                        ControlToValidate="NameTextBox" Display="Dynamic" 
+                        ErrorMessage="Supplier name is required" ValidationGroup="input"></asp:RequiredFieldValidator>
                 </td>
                 <td>
                     &nbsp;</td>
@@ -26,7 +29,10 @@
                 <td class="style1">
                     Supplier Code</td>
                 <td>
-                    <asp:TextBox ID="SupplierCodeTextBox" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="SupplierCodeTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                        ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
+                        ErrorMessage="Supplier code is required" ValidationGroup="input"></asp:RequiredFieldValidator>
                 </td>
                 <td>
                     &nbsp;</td>
@@ -44,7 +50,7 @@
                 <td class="style1">
                     Ranking</td>
                 <td>
-                    <asp:DropDownList ID="RankingDDL" runat="server">
+                    <asp:DropDownList ID="RankingDDL" runat="server" ValidationGroup="input">
                         <asp:ListItem>1</asp:ListItem>
                         <asp:ListItem>2</asp:ListItem>
                         <asp:ListItem>3</asp:ListItem>
@@ -65,7 +71,7 @@
                     &nbsp;</td>
                 <td>
                     <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
-                        style="margin-left: 0px" Text="Add" />
+                        style="margin-left: 0px" Text="Add" ValidationGroup="input" />
                     <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
                 </td>
                 <td>
