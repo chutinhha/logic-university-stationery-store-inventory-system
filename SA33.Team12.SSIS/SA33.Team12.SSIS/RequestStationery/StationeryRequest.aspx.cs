@@ -238,13 +238,13 @@ namespace SA33.Team12.SSIS.Test
         {
             SpecialRequisitionItem splItem = new SpecialRequisitionItem();
 
-            splItem.SpecialStationeryID = 1;
-            splItem.QuantityRequested = 1;
-            splItem.QuantityIssued = 1;
-            splItem.Name = "test";
-            splItem.Description = "desc";
-            splItem.RemarkByRequester = "remark";
-            splItem.Price = 2.03m;
+            //splItem.SpecialStationeryID = 1;
+            splItem.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView2.FindControl("QtyNeededTextBox")).Text);
+            splItem.QuantityIssued = 0;
+            splItem.Name = ((TextBox)DetailsView2.FindControl("itemNameTextBox")).Text;
+            splItem.Description = ((TextBox)DetailsView2.FindControl("DescriptionTextBox")).Text;
+            splItem.RemarkByRequester = ((TextBox)DetailsView2.FindControl("ReasonTextBox")).Text;
+            splItem.Price = 0;
 
             requisition.SpecialRequisitionItems.Add(splItem);
             GridDataBind();
