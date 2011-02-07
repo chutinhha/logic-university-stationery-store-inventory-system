@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SA33.Team12.SSIS.Administration
 {
     [MetadataType(typeof(BlackListLogMetaData))]
-    public partial class BlackListLog
+    public partial class BlacklistLog
     {
     }
 
