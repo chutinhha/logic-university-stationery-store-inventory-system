@@ -338,6 +338,11 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetAllStationeryPrices();
         }
 
+        public List<StationeryPrice> GetStationeryPricesByStationeryID(int stationeryID)
+        {
+            return catalogDAO.GetStationeryPriceByStationeryID(stationeryID);
+        }
+
         public StationeryPrice GetStationeryPriceByID(int StationeryPriceID)
         {
             return catalogDAO.GetStationeryPriceByID(StationeryPriceID);

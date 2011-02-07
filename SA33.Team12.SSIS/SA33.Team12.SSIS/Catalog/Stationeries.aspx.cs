@@ -31,7 +31,7 @@ namespace SA33.Team12.SSIS.Catalog
 
         protected void SpecialStationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void transactionButton_Click(object sender, EventArgs e)
@@ -93,6 +93,15 @@ namespace SA33.Team12.SSIS.Catalog
                 ErrorLabel.Text = "Create Stationery Failed";
             }
 
+        }
+
+        protected void StationeryPriceGridView_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+           
+        }
+
+        protected void StationeryPriceGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
         }
 
        
