@@ -165,7 +165,8 @@
         onselectedindexchanged="SpecialStationeryGridView_SelectedIndexChanged" 
             DataKeyNames="StationeryID">
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
+                ShowSelectButton="True" />
             <asp:BoundField DataField="StationeryID" 
                 HeaderText="StationeryID" SortExpression="StationeryID" />
             <asp:TemplateField HeaderText="CategoryID" SortExpression="CategoryID">
@@ -251,6 +252,50 @@
 
     <asp:ValidationSummary runat="server" DisplayMode="BulletList" 
         CssClass="failureNotification" />
+    </fieldset> 
+
+    <fieldset>
+    <legend>Stationery Price</legend>
+        <asp:GridView ID="StationeryPriceGridView" runat="server" AllowPaging="True" 
+            AutoGenerateColumns="False" DataSourceID="StationeryPriceDS" 
+            DataKeyNames="StationeryPriceID" 
+            onrowediting="StationeryPriceGridView_RowEditing" 
+            onrowupdating="StationeryPriceGridView_RowUpdating">
+            <Columns>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:BoundField DataField="StationeryPriceID" HeaderText="StationeryPriceID" 
+                    SortExpression="StationeryPriceID" />
+                <asp:BoundField DataField="StationeryID" HeaderText="StationeryID" 
+                    SortExpression="StationeryID" />
+                <asp:TemplateField HeaderText="SupplierID" SortExpression="SupplierID">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="SupplierDDL" runat="server" DataSourceID="supplierDS1"
+                            DataTextField="CompanyName" DataValueField="SupplierID" 
+                            SelectedValue='<%# Bind("SupplierID") %>'>
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="supplierDS1" runat="server" 
+                            SelectMethod="GetAllSuppliers" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+                        </asp:ObjectDataSource>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <%# ((SA33.Team12.SSIS.DAL.Supplier) Eval("Supplier")).CompanyName %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
+            </Columns>
+        </asp:GridView>
+        <asp:ObjectDataSource ID="StationeryPriceDS" runat="server" 
+            SelectMethod="GetStationeryPricesByStationeryID" 
+            TypeName="SA33.Team12.SSIS.BLL.CatalogManager" 
+            DataObjectTypeName="SA33.Team12.SSIS.DAL.StationeryPrice" 
+            DeleteMethod="DeleteStationeryPrice" InsertMethod="CreateStationeryPrice" 
+            OldValuesParameterFormatString="original_{0}" 
+            UpdateMethod="UpdateStationeryPrice">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="StationeryGridView" Name="stationeryID" 
+                    PropertyName="SelectedValue" Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
     </fieldset>
     </fieldset>
 </asp:Content>

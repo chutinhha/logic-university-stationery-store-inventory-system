@@ -559,6 +559,11 @@ namespace SA33.Team12.SSIS.DAL
             return stationeryPrice;
         }
 
+        public List<StationeryPrice> GetStationeryPriceByStationeryID(int stationeryID)
+        {
+            return GetAllStationeryPrices().Where(x => x.StationeryID == stationeryID).ToList<StationeryPrice>();
+        }
+
         public int GetStationeryPriceCount()
         {
             return context.StationeryPrices.Count();
@@ -596,8 +601,8 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    context.Attach(tempStationeryPrice);
-                    context.ObjectStateManager.ChangeObjectState(tempStationeryPrice, EntityState.Modified);
+                   // context.Attach(tempStationeryPrice);
+                    //context.ObjectStateManager.ChangeObjectState(tempStationeryPrice, EntityState.Modified);
                     context.SaveChanges();
                     ts.Complete();
                     return tempStationeryPrice;
@@ -628,7 +633,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 throw;
             }
-        }
+        }        
         # endregion
 
         #region Suppliers
