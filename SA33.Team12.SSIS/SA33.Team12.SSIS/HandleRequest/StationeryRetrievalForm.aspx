@@ -5,13 +5,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Stationery Retrieval Form</h2>
-    <asp:FormView runat="server" ID="StationeryRetrievalFormView" DataKeyNames="StationeryRetrievalFormID"
-        AllowPaging="true" OnDataBound="StationeryRetrievalFormView_DataBound">
+<fieldset>
+<legend><h2>Stationery Retrieval Form</h2></legend>
+
+    <asp:FormView runat="server" ID="StationeryRetrievalFormView" 
+        DataKeyNames="StationeryRetrievalFormID"
+        AllowPaging="false" OnDataBound="StationeryRetrievalFormView_DataBound">
         <ItemTemplate>
-            <table>
-                <tr>
+            <table class="screenFriendlyGridView">
+                <tr class="odd">
                     <th align="left">
                         StationeryRetrievalFormID :
                     </th>
@@ -27,15 +29,7 @@
                         <asp:Label ID="StationeryRetrievalNumberLabel" runat="server" Text='<%# Bind("StationeryRetrievalNumber") %>' />
                     </td>
                 </tr>
-                <tr>
-                    <th align="left">
-                        RetrievedBy :
-                    </th>
-                    <td>
-                        <asp:Label ID="RetrievedByLabel" runat="server" Text='<%# Bind("RetrievedBy") %>' />
-                    </td>
-                </tr>
-                <tr>
+                <tr class="odd">
                     <th align="left">
                         DateRetrieved :
                     </th>
@@ -45,14 +39,15 @@
                 </tr>
                 <tr>
                     <th align="left">
-                        RetrievedByUser :
+                        Retrieved By :
                     </th>
                     <td>
                         <asp:Label ID="RetrievedByUserLabel" runat="server" Text='<%# Convert.ToInt32(Eval("RetrievedBy")) == 0 ? "" : ((User) Eval("RetrievedByUser")).UserName %>' />
                     </td>
                 </tr>
             </table>
-            <br />
+            <fieldset>
+                <legend>Item List</legend>
             <asp:GridView runat="server" ID="StationeryRetrievalFormItemGridView" AutoGenerateColumns="False"
                 DataKeyNames="StationeryRetrievalFormItemID">
                 <Columns>
@@ -61,10 +56,15 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="StationeryID" SortExpression="StationeryID">
+                    <asp:TemplateField HeaderText="Stationery" SortExpression="StationeryID">
                         <ItemTemplate>
                             <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "" : ((Stationery) Eval("Stationery")).ItemCode  %>
                             <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 ? "" : ((SpecialStationery)Eval("SpecialStationery")).ItemCode%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Is Special">
+                        <ItemTemplate>
+                            <input type="checkbox" <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "checked='checked'" : ""  %> disabled="disabled" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="QuantityNeeded" HeaderText="QuantityNeeded" SortExpression="QuantityNeeded" />
@@ -92,14 +92,12 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="StationeryID" SortExpression="StationeryID">
+                    <asp:TemplateField HeaderText="Stationery" SortExpression="StationeryID">
                         <ItemTemplate>
-                            <%# Convert.ToInt32(Eval("StationeryID")) == 0 
-                                ? "" : ((Stationery) Eval("Stationery")).ItemCode  %>
-                            <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 
-                                ? "" : ((SpecialStationery)Eval("SpecialStationery")).ItemCode%>
-                        </ItemTemplate>
+                            <%# Convert.ToBoolean(Eval("IsSpecial")) ? ((SpecialStationery)Eval("SpecialStationery")).ItemCode : ((Stationery)Eval("Stationery")).ItemCode%>          
+                            </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:CheckBoxField DataField="IsSpecial" HeaderText="Is Special" />
                     <asp:BoundField DataField="QuantityNeededByItem" HeaderText="Quantity Needed" />
                     <asp:TemplateField HeaderText="Quantity Retrieved">
                         <ItemTemplate>
@@ -139,6 +137,7 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            </fieldset>
         </ItemTemplate>
     </asp:FormView>
     <asp:Button runat="server" ID="BackButton" Text="Back" OnClick="BackButton_Click" />
@@ -146,4 +145,6 @@
         oncommand="UpdateButton_Command" CommandName="Retrieved" />
     <asp:Button runat="server" ID="UpdateActualQuantityButton" Text="Update" 
         oncommand="UpdateButton_Command" CommandName="Actual" />
+
+</fieldset>
 </asp:Content>

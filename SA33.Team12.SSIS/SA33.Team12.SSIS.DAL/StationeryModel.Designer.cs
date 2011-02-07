@@ -81,6 +81,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByCategoryCategory", "VW_RequisitionsByCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByCategory), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Category), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByDepartmentDepartment", "VW_RequisitionsByDepartment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByDepartment), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
 
 #endregion
 
@@ -659,6 +660,22 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
         private ObjectSet<vw_StationeryOrderedByCategory> _vw_StationeryOrderedByCategory;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VW_StationeryRequisitionTrendByDepartment> VW_StationeryRequisitionTrendByDepartment
+        {
+            get
+            {
+                if ((_VW_StationeryRequisitionTrendByDepartment == null))
+                {
+                    _VW_StationeryRequisitionTrendByDepartment = base.CreateObjectSet<VW_StationeryRequisitionTrendByDepartment>("VW_StationeryRequisitionTrendByDepartment");
+                }
+                return _VW_StationeryRequisitionTrendByDepartment;
+            }
+        }
+        private ObjectSet<VW_StationeryRequisitionTrendByDepartment> _VW_StationeryRequisitionTrendByDepartment;
 
         #endregion
         #region AddTo Methods
@@ -925,6 +942,14 @@ namespace SA33.Team12.SSIS.DAL
         public void AddTovw_StationeryOrderedByCategory(vw_StationeryOrderedByCategory vw_StationeryOrderedByCategory)
         {
             base.AddObject("vw_StationeryOrderedByCategory", vw_StationeryOrderedByCategory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VW_StationeryRequisitionTrendByDepartment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVW_StationeryRequisitionTrendByDepartment(VW_StationeryRequisitionTrendByDepartment vW_StationeryRequisitionTrendByDepartment)
+        {
+            base.AddObject("VW_StationeryRequisitionTrendByDepartment", vW_StationeryRequisitionTrendByDepartment);
         }
 
         #endregion
@@ -6130,6 +6155,28 @@ namespace SA33.Team12.SSIS.DAL
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogTransactions_FK1", "StockLogTransaction")]
+        public EntityCollection<StockLogTransaction> StockLogTransactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StockLogTransaction>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "StockLogTransaction");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StockLogTransaction>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "StockLogTransaction", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -8399,7 +8446,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="reason">Initial value of the Reason property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="balance">Initial value of the Balance property.</param>
-        public static StockLog CreateStockLog(global::System.Int32 stockLogID, global::System.Int32 adjustmentVoucherID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance)
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="dateCreated">Initial value of the DateCreated property.</param>
+        public static StockLog CreateStockLog(global::System.Int32 stockLogID, global::System.Int32 adjustmentVoucherID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Decimal price, global::System.DateTime dateCreated)
         {
             StockLog stockLog = new StockLog();
             stockLog.StockLogID = stockLogID;
@@ -8408,6 +8457,8 @@ namespace SA33.Team12.SSIS.DAL
             stockLog.Reason = reason;
             stockLog.Quantity = quantity;
             stockLog.Balance = balance;
+            stockLog.Price = price;
+            stockLog.DateCreated = dateCreated;
             return stockLog;
         }
 
@@ -8612,9 +8663,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> Price
+        public global::System.Decimal Price
         {
             get
             {
@@ -8629,9 +8680,33 @@ namespace SA33.Team12.SSIS.DAL
                 OnPriceChanged();
             }
         }
-        private Nullable<global::System.Decimal> _Price;
-        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
         partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                OnDateCreatedChanging(value);
+                ReportPropertyChanging("DateCreated");
+                _DateCreated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateCreated");
+                OnDateCreatedChanged();
+            }
+        }
+        private global::System.DateTime _DateCreated;
+        partial void OnDateCreatedChanging(global::System.DateTime value);
+        partial void OnDateCreatedChanged();
 
         #endregion
     
@@ -8775,7 +8850,8 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="balance">Initial value of the Balance property.</param>
         /// <param name="stationeryID">Initial value of the StationeryID property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID, global::System.Decimal price)
+        /// <param name="dateCreated">Initial value of the DateCreated property.</param>
+        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID, global::System.Decimal price, global::System.DateTime dateCreated)
         {
             StockLogTransaction stockLogTransaction = new StockLogTransaction();
             stockLogTransaction.StockLogTransactionID = stockLogTransactionID;
@@ -8786,6 +8862,7 @@ namespace SA33.Team12.SSIS.DAL
             stockLogTransaction.Balance = balance;
             stockLogTransaction.StationeryID = stationeryID;
             stockLogTransaction.Price = price;
+            stockLogTransaction.DateCreated = dateCreated;
             return stockLogTransaction;
         }
 
@@ -8986,6 +9063,54 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Decimal _Price;
         partial void OnPriceChanging(global::System.Decimal value);
         partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SpecialStationeryID
+        {
+            get
+            {
+                return _SpecialStationeryID;
+            }
+            set
+            {
+                OnSpecialStationeryIDChanging(value);
+                ReportPropertyChanging("SpecialStationeryID");
+                _SpecialStationeryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SpecialStationeryID");
+                OnSpecialStationeryIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SpecialStationeryID;
+        partial void OnSpecialStationeryIDChanging(Nullable<global::System.Int32> value);
+        partial void OnSpecialStationeryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                OnDateCreatedChanging(value);
+                ReportPropertyChanging("DateCreated");
+                _DateCreated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateCreated");
+                OnDateCreatedChanged();
+            }
+        }
+        private global::System.DateTime _DateCreated;
+        partial void OnDateCreatedChanging(global::System.DateTime value);
+        partial void OnDateCreatedChanged();
 
         #endregion
     
@@ -9063,6 +9188,44 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Stationery>("SA33.Team12.SSIS.Model.Stationeries_StockLogTransactions_FK1", "Stationery", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery")]
+        public SpecialStationery SpecialStationery
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SpecialStationery> SpecialStationeryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery", value);
                 }
             }
         }
@@ -10508,6 +10671,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _UrgencyLevel;
         partial void OnUrgencyLevelChanging(Nullable<global::System.Int32> value);
         partial void OnUrgencyLevelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsSpecial
+        {
+            get
+            {
+                return _IsSpecial;
+            }
+            set
+            {
+                OnIsSpecialChanging(value);
+                ReportPropertyChanging("IsSpecial");
+                _IsSpecial = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsSpecial");
+                OnIsSpecialChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsSpecial;
+        partial void OnIsSpecialChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsSpecialChanged();
 
         #endregion
     
@@ -11405,24 +11592,151 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MonthOrdered
+        public global::System.String Month
         {
             get
             {
-                return _MonthOrdered;
+                return _Month;
             }
             set
             {
-                OnMonthOrderedChanging(value);
-                ReportPropertyChanging("MonthOrdered");
-                _MonthOrdered = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MonthOrdered");
-                OnMonthOrderedChanged();
+                OnMonthChanging(value);
+                ReportPropertyChanging("Month");
+                _Month = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Month");
+                OnMonthChanged();
             }
         }
-        private Nullable<global::System.Int32> _MonthOrdered;
-        partial void OnMonthOrderedChanging(Nullable<global::System.Int32> value);
-        partial void OnMonthOrderedChanged();
+        private global::System.String _Month;
+        partial void OnMonthChanging(global::System.String value);
+        partial void OnMonthChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SA33.Team12.SSIS.Model", Name="VW_StationeryRequisitionTrendByDepartment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class VW_StationeryRequisitionTrendByDepartment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new VW_StationeryRequisitionTrendByDepartment object.
+        /// </summary>
+        /// <param name="departmentName">Initial value of the DepartmentName property.</param>
+        public static VW_StationeryRequisitionTrendByDepartment CreateVW_StationeryRequisitionTrendByDepartment(global::System.String departmentName)
+        {
+            VW_StationeryRequisitionTrendByDepartment vW_StationeryRequisitionTrendByDepartment = new VW_StationeryRequisitionTrendByDepartment();
+            vW_StationeryRequisitionTrendByDepartment.DepartmentName = departmentName;
+            return vW_StationeryRequisitionTrendByDepartment;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DepartmentName
+        {
+            get
+            {
+                return _DepartmentName;
+            }
+            set
+            {
+                if (_DepartmentName != value)
+                {
+                    OnDepartmentNameChanging(value);
+                    ReportPropertyChanging("DepartmentName");
+                    _DepartmentName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("DepartmentName");
+                    OnDepartmentNameChanged();
+                }
+            }
+        }
+        private global::System.String _DepartmentName;
+        partial void OnDepartmentNameChanging(global::System.String value);
+        partial void OnDepartmentNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Category
+        {
+            get
+            {
+                return _Category;
+            }
+            set
+            {
+                OnCategoryChanging(value);
+                ReportPropertyChanging("Category");
+                _Category = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Category");
+                OnCategoryChanged();
+            }
+        }
+        private global::System.String _Category;
+        partial void OnCategoryChanging(global::System.String value);
+        partial void OnCategoryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> QuantityRequested
+        {
+            get
+            {
+                return _QuantityRequested;
+            }
+            set
+            {
+                OnQuantityRequestedChanging(value);
+                ReportPropertyChanging("QuantityRequested");
+                _QuantityRequested = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("QuantityRequested");
+                OnQuantityRequestedChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _QuantityRequested;
+        partial void OnQuantityRequestedChanging(Nullable<global::System.Int32> value);
+        partial void OnQuantityRequestedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Month
+        {
+            get
+            {
+                return _Month;
+            }
+            set
+            {
+                OnMonthChanging(value);
+                ReportPropertyChanging("Month");
+                _Month = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Month");
+                OnMonthChanged();
+            }
+        }
+        private global::System.String _Month;
+        partial void OnMonthChanging(global::System.String value);
+        partial void OnMonthChanged();
 
         #endregion
     
