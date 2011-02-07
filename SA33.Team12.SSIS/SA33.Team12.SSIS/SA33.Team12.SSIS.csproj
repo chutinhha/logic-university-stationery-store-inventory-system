@@ -86,6 +86,8 @@
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
     <Content Include="HandleRequest\Disbursement.aspx" />
     <Content Include="HandleRequest\Disbursements.aspx" />
+    <Content Include="Distribution\Disbursements.aspx" />
+    <Content Include="Distribution\Distribution.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalList.aspx" />
