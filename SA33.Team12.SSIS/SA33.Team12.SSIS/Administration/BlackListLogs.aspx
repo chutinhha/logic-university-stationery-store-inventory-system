@@ -19,7 +19,7 @@
         <tr>
             <td>Start Black Listed Date :</td>
             <td>
-                <asp:TextBox runat="server" ID="StartBlackListedDateTextBox" CssClass="jqui" />
+                <asp:TextBox runat="server" ID="StartBlackListedDateTextBox" />
                 <script type="text/javascript">
 					$(function() {
 					    $('#<%= this.StartBlackListedDateTextBox.ClientID %>').datepicker({
@@ -42,7 +42,7 @@
         <tr>
             <td>Start Black Listed Date :</td>
             <td>
-                <asp:TextBox runat="server" ID="EndBlackListedDateTextBox" CssClass="jqui" />
+                <asp:TextBox runat="server" ID="EndBlackListedDateTextBox" />
                 <script type="text/javascript">
                     $(function () {
                         $('#<%= this.EndBlackListedDateTextBox.ClientID %>').datepicker({
