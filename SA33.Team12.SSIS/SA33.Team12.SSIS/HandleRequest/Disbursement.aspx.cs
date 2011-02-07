@@ -105,5 +105,10 @@ namespace SA33.Team12.SSIS.RequestStationery
             gridView.EditIndex = -1;
             DataBindDisbursementFormView(this.DisbursementId);
         }
+
+        protected void BackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/HandleRequest/Disbursements.aspx");
+        }
     }
 }

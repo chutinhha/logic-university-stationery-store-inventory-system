@@ -270,6 +270,6 @@
     </asp:GridView>
     </fieldset>
     <asp:Button runat="server" ID="UpdateButton" Text="Update" />
-    <asp:Button runat="server" ID="BackButton" Text="Back" />
+    <asp:Button runat="server" ID="BackButton" Text="Back" onclick="BackButton_Click" />
 </fieldset>
 </asp:Content>
