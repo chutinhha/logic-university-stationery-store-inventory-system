@@ -22,7 +22,7 @@
                 <asp:DynamicControl runat="server" DataField="Code" ID="CodeLabel" Mode="ReadOnly" />
             </ItemTemplate>
             <EditItemTemplate>
-                <asp:DynamicControl runat="server" DataField="Code" ID="CodeTextBox" Mode="Edit" />
+                <asp:DynamicControl runat="server" DataField="Code" ID="CodeTextBox" Mode="Edit" ValidationGroup="Edit" />
             </EditItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Name" SortExpression="Name">
@@ -30,7 +30,7 @@
                 <asp:DynamicControl runat="server" DataField="Name" ID="NameLabel" Mode="ReadOnly" />
             </ItemTemplate>
             <EditItemTemplate>
-                <asp:DynamicControl runat="server" DataField="Name" ID="NameTextBox" Mode="Edit" />
+                <asp:DynamicControl runat="server" DataField="Name" ID="NameTextBox" Mode="Edit" ValidationGroup="Edit" />
             </EditItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Collection Point">
@@ -53,7 +53,7 @@
         <asp:CheckBoxField DataField="IsBlackListed" HeaderText="Blacklisted" 
             SortExpression="IsBlackListed" />
         <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-            HeaderText="Actions" />
+            HeaderText="Actions" ValidationGroup="Edit" />
     </Columns>
 </asp:GridView>
     <asp:ObjectDataSource ID="DepartmentObjectDataSource" runat="server" 
@@ -63,8 +63,65 @@
         DeleteMethod="DeleteDepartment" InsertMethod="CreateDepartment" 
         OldValuesParameterFormatString="original_{0}" UpdateMethod="UpdateDepartment">
     </asp:ObjectDataSource>
-<asp:ValidationSummary runat="server" />
+<asp:ValidationSummary runat="server" ValidationGroup="Edit" />
 <asp:DynamicDataManager runat="server" ID="DynamicDataManager" />
+
+</fieldset>
+
+<fieldset>
+    <legend>
+        New Department
+    </legend>
+
+    <asp:DetailsView ID="DepartmentDetailsView" runat="server" AutoGenerateRows="false"
+        DataSourceID="DepartmentObjectDataSource" DefaultMode="Insert" 
+        oniteminserting="DepartmentDetailsView_ItemInserting">
+        <Fields>
+            <asp:TemplateField HeaderText="Code">
+                <InsertItemTemplate>
+                    <asp:DynamicControl runat="server"
+                        ID="CodeControl"
+                        DataField="Code"
+                        Mode="Insert" />
+                </InsertItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Name">
+                <InsertItemTemplate>
+                    <asp:DynamicControl runat="server"
+                        ID="NameControl"
+                        DataField="Name"
+                        Mode="Insert" />
+                </InsertItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Collection Point">
+                <InsertItemTemplate>
+                    <asp:DynamicControl runat="server"
+                        ID="CollectionPointControl"
+                        DataField="CollectionPointID"
+                        Mode="Insert" Visible="false" />
+                <asp:DropDownList runat="server" ID="CollectionPointDropDownList" 
+                    DataSourceID="CollectionPointObjectDataSource" 
+                    DataTextField="Name" 
+                    DataValueField="CollectionPointID">
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="CollectionPointObjectDataSource" 
+                    runat="server" 
+                    SelectMethod="GetAllCollectionPoints" 
+                    TypeName="SA33.Team12.SSIS.BLL.UserManager">
+                    </asp:ObjectDataSource>
+                </InsertItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="IsBlacklisted">
+                <InsertItemTemplate>
+                    <asp:DynamicControl runat="server"
+                        ID="IsBlacklistedControl"
+                        DataField="IsBlacklisted"
+                        Mode="Insert" />
+                </InsertItemTemplate>
+            </asp:TemplateField>
+            <asp:CommandField ShowInsertButton="True" />
+        </Fields>
+    </asp:DetailsView>
 
 </fieldset>
 </asp:Content>

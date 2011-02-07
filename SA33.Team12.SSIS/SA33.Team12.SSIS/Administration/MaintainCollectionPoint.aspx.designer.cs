@@ -10,25 +10,34 @@
 namespace SA33.Team12.SSIS.Administration {
     
     
-    public partial class MaintainDepartment {
+    public partial class MaintainCollectionPoint {
         
         /// <summary>
-        /// DepartmentGridView control.
+        /// CollectionPointGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView DepartmentGridView;
+        protected global::System.Web.UI.WebControls.GridView CollectionPointGridView;
         
         /// <summary>
-        /// DepartmentObjectDataSource control.
+        /// CollectionPointObjectDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource DepartmentObjectDataSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource CollectionPointObjectDataSource;
+        
+        /// <summary>
+        /// ValidationSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
         
         /// <summary>
         /// DynamicDataManager control.
@@ -40,12 +49,21 @@ namespace SA33.Team12.SSIS.Administration {
         protected global::System.Web.DynamicData.DynamicDataManager DynamicDataManager;
         
         /// <summary>
-        /// DepartmentDetailsView control.
+        /// CollectionPointDetailView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DepartmentDetailsView;
+        protected global::System.Web.UI.WebControls.DetailsView CollectionPointDetailView;
+        
+        /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
     }
 }

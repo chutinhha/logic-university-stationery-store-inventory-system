@@ -26,5 +26,13 @@ namespace SA33.Team12.SSIS.Administration
                 this.DepartmentGridView.Rows[e.RowIndex].FindControl("CollectionPointDropDownList") as DropDownList;
             e.NewValues["CollectionPointID"] = CollectionPointDropDownList.SelectedValue.ToString();
         }
+
+        protected void DepartmentDetailsView_ItemInserting(object sender, DetailsViewInsertEventArgs e)
+        {
+            DropDownList CollectionPointDropDownList =
+                this.DepartmentDetailsView.FindControl("CollectionPointDropDownList") as DropDownList;
+            e.Values["CollectionPointID"] = CollectionPointDropDownList.SelectedValue.ToString();
+        }
+
     }
 }
