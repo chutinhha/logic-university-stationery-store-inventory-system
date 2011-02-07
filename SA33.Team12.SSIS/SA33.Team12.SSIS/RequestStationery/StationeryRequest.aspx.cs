@@ -163,6 +163,7 @@ namespace SA33.Team12.SSIS.Test
             }
             else
             {
+                
                 if (Session["Requisition"] != null)
                 {
                     requisition = (Requisition)Session["Requisition"];
@@ -178,14 +179,17 @@ namespace SA33.Team12.SSIS.Test
                     {
                         reqItem.QuantityRequested += req.QuantityIssued;
                         requisition.RequisitionItems.Remove(req);
-                        requisition.RequisitionItems.Add(reqItem);                      
+                        requisition.RequisitionItems.Add(reqItem);
                         break;
                     }
+                   
                 }
+
+                RequestItemGridView.EditIndex = -1;
+                PopulateData(requisition);
+                RequestItemGridView.DataBind();
             }
-            RequestItemGridView.EditIndex = -1;
-            PopulateData(requisition);
-            RequestItemGridView.DataBind();
+            
         }
 
         protected void RequestItemGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
