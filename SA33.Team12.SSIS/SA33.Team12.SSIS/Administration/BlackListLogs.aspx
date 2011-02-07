@@ -1,62 +1,94 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BlackListLogs.aspx.cs" Inherits="SA33.Team12.SSIS.Administration.BlackListLogs" %>
+<%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <h2>Black List Logs</h2>
-
+<fieldset>
+    <legend>Search Filter</legend>
+    <table>
+        <tr>
+            <td>Department :</td>
+            <td>
+                <asp:DropDownList runat="server" ID="DepartmentDropDownList"
+                    DataTextField="Name" DataValueField="DepartmentID">
+                </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Black Listed Date :</td>
+            <td>
+                <asp:TextBox runat="server" ID="StartBlackListedDateTextBox" CssClass="jqui" />
+                <script type="text/javascript">
+					$(function() {
+					    $('#<%= this.StartBlackListedDateTextBox.ClientID %>').datepicker({
+							showOn: 'button',
+							dateFormat: 'dd/mm/yy',
+							buttonImage: '/Styles/jqui/images/calendar.gif',
+							buttonImageOnly: true,
+							setDate: '2/7/2011 2:11:32 PM',
+							onSelect: function() { },
+							maxDate: '+0d',
+							showButtonPanel: false,
+							changeMonth: true,
+							changeYear: true,
+							yearRange: '<%= DateTime.Now.Year-10 %>:<%= DateTime.Now.Year %>'
+						});
+					});
+				</script>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Black Listed Date :</td>
+            <td>
+                <asp:TextBox runat="server" ID="EndBlackListedDateTextBox" CssClass="jqui" />
+                <script type="text/javascript">
+                    $(function () {
+                        $('#<%= this.EndBlackListedDateTextBox.ClientID %>').datepicker({
+                            showOn: 'button',
+                            dateFormat: 'dd/mm/yy',
+                            buttonImage: '/Styles/jqui/images/calendar.gif',
+                            buttonImageOnly: true,
+                            setDate: '2/7/2011 2:11:32 PM',
+                            onSelect: function () { },
+                            maxDate: '+0d',
+                            showButtonPanel: false,
+                            changeMonth: true,
+                            changeYear: true,
+                            yearRange: '<%= DateTime.Now.Year-10 %>:<%= DateTime.Now.Year %>'
+                        });
+                    });
+				</script>
+            </td>
+        </tr>        <tr>
+            <td></td>
+            <td>
+                <asp:Button runat="server" ID="SearchButton" Text="Search" 
+                    onclick="SearchButton_Click" />
+            </td>
+        </tr>
+    </table>
+</fieldset>
 <fieldset>
 <legend>Black List Logs</legend>
 
     <asp:GridView runat="server" ID="BlackListLogGridView" AllowPaging="True" 
-        AutoGenerateColumns="False" DataSourceID="BlackListLogObjectDataSource" >
+        AutoGenerateColumns="False" 
+        onpageindexchanging="BlackListLogGridView_PageIndexChanging">
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             <asp:BoundField DataField="BlacklistLogID" HeaderText="BlacklistLogID" 
                 SortExpression="BlacklistLogID" />
-            <asp:BoundField DataField="DepartmentID" HeaderText="DepartmentID" 
-                SortExpression="DepartmentID" />
-            <asp:TemplateField HeaderText="DateBlacklisted">
+            <asp:TemplateField HeaderText="Department" SortExpression="DepartmentID">
                 <ItemTemplate>
-                    <asp:DynamicControl runat="server" DataField="DateBlacklisted" 
-                        Mode="ReadOnly"/>
+                    <%# ((Department) Eval("Department")).Name %>
                 </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:DynamicControl runat="server" DataField="DateBlacklisted" 
-                        Mode="Edit"/>
-                </EditItemTemplate>
             </asp:TemplateField>
+            <asp:BoundField DataField="DateBlacklisted" HeaderText="Date Black Listed" 
+                SortExpression="DateBlacklisted" />
         </Columns>
     </asp:GridView>
 
 </fieldset>
-
-
-<fieldset>
-<legend>New Black List Log</legend>
-
-    <asp:DetailsView runat="server" ID="BlackListLogDetailsView" 
-        AutoGenerateRows="False" DataSourceID="BlackListLogObjectDataSource" >
-        <Fields>
-            <asp:BoundField DataField="BlacklistLogID" HeaderText="BlacklistLogID" 
-                SortExpression="BlacklistLogID" />
-            <asp:BoundField DataField="DepartmentID" HeaderText="DepartmentID" 
-                SortExpression="DepartmentID" />
-            <asp:BoundField DataField="DateBlacklisted" HeaderText="DateBlacklisted" 
-                SortExpression="DateBlacklisted" />
-            <asp:CommandField ShowInsertButton="True" />
-        </Fields>
-    </asp:DetailsView>
-
-</fieldset>
-
-<asp:ObjectDataSource runat="server" ID="BlackListLogObjectDataSource" 
-        DataObjectTypeName="SA33.Team12.SSIS.DAL.BlacklistLog" 
-        DeleteMethod="DeleteBlacklistLog" InsertMethod="CreateBlacklistLog" 
-        SelectMethod="GetAllBlacklistLogs" TypeName="SA33.Team12.SSIS.BLL.UserManager" 
-        UpdateMethod="UpdateBlacklistLog">
-</asp:ObjectDataSource>
-
-<asp:DynamicDataManager runat="server" ID="DynamicDataManager" />
 
 </asp:Content>

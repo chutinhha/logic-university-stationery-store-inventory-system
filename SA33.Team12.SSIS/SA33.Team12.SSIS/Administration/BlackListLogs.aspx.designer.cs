@@ -13,6 +13,42 @@ namespace SA33.Team12.SSIS.Administration {
     public partial class BlackListLogs {
         
         /// <summary>
+        /// DepartmentDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DepartmentDropDownList;
+        
+        /// <summary>
+        /// StartBlackListedDateTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox StartBlackListedDateTextBox;
+        
+        /// <summary>
+        /// EndBlackListedDateTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EndBlackListedDateTextBox;
+        
+        /// <summary>
+        /// SearchButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SearchButton;
+        
+        /// <summary>
         /// BlackListLogGridView control.
         /// </summary>
         /// <remarks>
@@ -20,32 +56,5 @@ namespace SA33.Team12.SSIS.Administration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView BlackListLogGridView;
-        
-        /// <summary>
-        /// BlackListLogDetailsView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView BlackListLogDetailsView;
-        
-        /// <summary>
-        /// BlackListLogObjectDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource BlackListLogObjectDataSource;
-        
-        /// <summary>
-        /// DynamicDataManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.DynamicData.DynamicDataManager DynamicDataManager;
     }
 }
