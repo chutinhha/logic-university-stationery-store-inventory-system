@@ -10,52 +10,34 @@
 namespace SA33.Team12.SSIS.Administration {
     
     
-    public partial class MaintainCollectionPoint {
+    public partial class BlackListLogs {
         
         /// <summary>
-        /// CollectionPointGridView control.
+        /// BlackListLogGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView CollectionPointGridView;
+        protected global::System.Web.UI.WebControls.GridView BlackListLogGridView;
         
         /// <summary>
-        /// CollectionPointObjectDataSource control.
+        /// BlackListLogDetailsView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource CollectionPointObjectDataSource;
+        protected global::System.Web.UI.WebControls.DetailsView BlackListLogDetailsView;
         
         /// <summary>
-        /// ValidationSummary control.
+        /// BlackListLogObjectDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
-        
-        /// <summary>
-        /// CollectionPointDetailView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView CollectionPointDetailView;
-        
-        /// <summary>
-        /// ValidationSummary1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource BlackListLogObjectDataSource;
         
         /// <summary>
         /// DynamicDataManager control.
