@@ -151,7 +151,7 @@ namespace SA33.Team12.SSIS.Test
 
         protected void RequestItemGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox3")).Text));
+            RequisitionItem reqItem = requisitionManager.GetRequisitionItemsByID(Convert.ToInt32(((TextBox)RequestItemGridView.Rows[e.RowIndex].FindControl("TextBox2")).Text));
             GridViewRow row = RequestItemGridView.Rows[e.RowIndex];
             DropDownList t = (DropDownList)row.FindControl("DropDownList1");
             if (reqItem != null)
@@ -159,7 +159,7 @@ namespace SA33.Team12.SSIS.Test
                 reqItem.StationeryID = Convert.ToInt32(t.Text);
                 reqItem.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("TextBox2")).Text);
                 requisitionManager.UpdateRequisitionItem(reqItem);
-                UtilityFunctions.SendEmail("Update requisition successful.", requisition.RequisitionID + " - Requestion has been updated successfully.", requisition.CreatedByUser);
+                //UtilityFunctions.SendEmail("Update requisition successful.", requisition.RequisitionID + " - Requestion has been updated successfully.", requisition.CreatedByUser);
             }
             else
             {
@@ -321,7 +321,7 @@ namespace SA33.Team12.SSIS.Test
             {
                 if (((TextBox)DetailsView2.FindControl("TextBox3")).Text != string.Empty)
                 {
-                    qty = Convert.ToInt32(((TextBox)DetailsView1.FindControl("TextBox3")).Text);
+                    qty = Convert.ToInt32(((TextBox)DetailsView2.FindControl("TextBox3")).Text);
                 }
                 else
                 {
@@ -369,29 +369,14 @@ namespace SA33.Team12.SSIS.Test
         {
             try
             {
-                //CatalogManager cManager = new CatalogManager();
-                //foreach (var item in requisition.SpecialRequisitionItems)
-                //{
-                //    SpecialStationery temp = new SpecialStationery()
-                //    {
-                //        ItemCode = "s001",
-                //      Description = item.Name,
-                //      Quantity = item.QuantityRequested,
-                //      CreatedBy = 1,
-                //      ModifiedBy = 1,
-                //      CategoryID = 1,
-                //      DateCreated = DateTime.Now.Date,
-                //      UnitOfMeasure = "box",
-                //      IsApproved = false
-                //    };
-
-                //    item.SpecialStationery = temp;
-                //    //item.SpecialStationeryID = temp.SpecialStationeryID;
                 requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
                 Requisition temp = requisitionManager.CreateRequisition(requisition);
-                UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
-                Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID);
+               // UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
+                
+               // Response.Redirect( Server.MapPath("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID));
+                Session["Requisition"] = null;
 
+                requisition = null;
                 
             }
             catch (Exception)

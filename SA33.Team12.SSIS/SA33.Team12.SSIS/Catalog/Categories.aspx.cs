@@ -91,6 +91,27 @@ namespace SA33.Team12.SSIS.Catalog
 
         }
 
+        protected void StationeryGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        {
+            if (e.Exception != null)
+            {
+                ErrorLabel.Text = "The category can't be deleted";
+                e.ExceptionHandled = true;
+            }
+        }
+
+        protected void StationeryGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                
+                 ErrorLabel.Text = "The category can't be deleted";
+            }
+        }     
        
     }
 }

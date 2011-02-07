@@ -34,14 +34,17 @@ namespace SA33.Team12.SSIS.DAL
                 //Create a transaction scope
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    //Add requisition to context                
-                    context.AddToRequisitions(requisition);
+                    if (requisition != null)
+                    {
+                        //Add requisition to context                
+                        context.AddToRequisitions(requisition);
 
-                    //Save the changes
-                    context.SaveChanges();
+                        //Save the changes
+                        context.SaveChanges();
 
-                    //Notify Transaction completed
-                    ts.Complete();
+                        //Notify Transaction completed
+                        ts.Complete();
+                    }
                 }
                 
             }
