@@ -32,7 +32,6 @@ namespace SA33.Team12.SSIS.Stock
         {
             gvAdjustmentItems.DataSource = adjustments;
             gvAdjustmentItems.DataBind();
-
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
