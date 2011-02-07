@@ -46,8 +46,6 @@
         DataKeyNames="LocationID" onrowupdating="LocationGridView_RowUpdating">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-            <asp:BoundField DataField="LocationID" HeaderText="LocationID" 
-                SortExpression="LocationID" />
              <asp:TemplateField ConvertEmptyStringToNull="False" HeaderText="Name" 
                 SortExpression="Name">
                 <ItemTemplate>
