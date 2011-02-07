@@ -7,8 +7,8 @@ using System.Web.UI.WebControls;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Data;
 using System.Text;
-using SA33.Team12.SSIS.Print.Store;
-using SA33.Team12.SSIS.Print.Store.ReportDSTableAdapters;
+using SA33.Team12.SSIS.Print;
+using SA33.Team12.SSIS.Print.ReportDSTableAdapters;
 
 namespace SA33.Team12.SSIS.Test
 {
