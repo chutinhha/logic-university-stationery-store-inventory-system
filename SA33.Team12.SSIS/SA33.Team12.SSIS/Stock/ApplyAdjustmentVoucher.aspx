@@ -81,23 +81,31 @@
     <fieldset>
         <legend>Adjustment Items</legend>
         <asp:GridView ID="gvAdjustmentItems" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="StationeryID">
+            DataKeyNames="StationeryID" 
+            onrowdatabound="gvAdjustmentItems_RowDataBound">
             <Columns>
                 <%--<asp:TemplateField HeaderText="Item Description">
                     <ItemTemplate>
                         <%# ((Stationery )Eval("Stationery")).Description %>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
-                <asp:BoundField DataField="Reason" HeaderText="Reason" />
-                <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
-                    SortExpression="Quantity" />
-                <asp:BoundField DataField="Balance" HeaderText="Balance" 
-                    SortExpression="Balance" />
              <%--   <asp:TemplateField HeaderText="Type">
                     <ItemTemplate>
                        <%# ((Stationery )Eval("Stationery")).Description %>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
+                <asp:BoundField DataField="StationeryID" HeaderText="Stationery ID" 
+                    SortExpression="StationeryID" />
+                <asp:TemplateField HeaderText="Description">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltlDescription" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Reason" HeaderText="Reason" />
+                <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
+                    SortExpression="Quantity" />
+                <asp:BoundField DataField="Balance" HeaderText="Balance" 
+                    SortExpression="Balance" />
             </Columns>
         </asp:GridView>
         <asp:Button ID="btnSubmit" runat="server" Text="Submit" 
