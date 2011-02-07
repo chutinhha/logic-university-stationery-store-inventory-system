@@ -11,9 +11,9 @@
         onrowdatabound="gvAdjustments_RowDataBound" 
         onrowcommand="gvAdjustments_RowCommand">
         <Columns>
-        <asp:TemplateField HeaderText="Voucher Number" SortExpression="RequisitionID">
+        <asp:TemplateField HeaderText="Voucher Number" SortExpression="AdjustmentVoucherTransactionID">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CommandName="RequestID" CommandArgument='<%# Eval("AdjustmentVoucherTransactionID") %>'
+                        <asp:LinkButton ID="LinkButton2" runat="server" CommandName="AdjustmentVoucherTransactionID" CommandArgument='<%# Eval("AdjustmentVoucherTransactionID") %>'
                             Text='<%# Eval("VoucherNumber") %>'></asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
