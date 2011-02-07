@@ -11,7 +11,7 @@
         onrowdatabound="gvAdjustments_RowDataBound" 
         onrowcommand="gvAdjustments_RowCommand">
         <Columns>
-        <asp:TemplateField HeaderText="RequisitionID" SortExpression="RequisitionID">
+        <asp:TemplateField HeaderText="Voucher Number" SortExpression="RequisitionID">
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton2" runat="server" CommandName="RequestID" CommandArgument='<%# Eval("AdjustmentVoucherTransactionID") %>'
                             Text='<%# Eval("VoucherNumber") %>'></asp:LinkButton>
@@ -20,8 +20,6 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("AdjustmentVoucherTransactionID") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
-            <asp:BoundField DataField="VoucherNumber" HeaderText="Voucher Number" 
-                SortExpression="VoucherNumber" />
             <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" 
                 SortExpression="DateIssued" />
             <asp:TemplateField HeaderText="Created By">
