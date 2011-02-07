@@ -64,7 +64,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                     {
                         DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
                         dm.CreateDisbursementBySRF(loggedInUser, stationeryRetrievalFormID);
-                        DataBindStationeryRetrievalFormGridView();
+                        Response.Redirect("~/HandleRequest/Disbursements.aspx?SRFId=" + stationeryRetrievalFormID);
                     }
                 }
                 catch (Exception exception)
