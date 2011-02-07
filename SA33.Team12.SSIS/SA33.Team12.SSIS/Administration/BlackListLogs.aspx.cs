@@ -48,17 +48,31 @@ namespace SA33.Team12.SSIS.Administration
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            BlackListLogSearchDTO criteria = new BlackListLogSearchDTO();
-            criteria.DepartmentID = Convert.ToInt32(this.DepartmentDropDownList.SelectedValue);
-            DataBindBlackListLogGridView(criteria);
+            try
+            {
+                BlackListLogSearchDTO criteria = new BlackListLogSearchDTO();
+                DateTime StartDate = DateTime.MinValue;
+                DateTime EndDate = DateTime.MaxValue;
+                if (StartBlackListedDateTextBox.Text.Trim() != "")
+                    StartDate = DateTime.Parse(StartBlackListedDateTextBox.Text);
+                if (EndBlackListedDateTextBox.Text.Trim() != "")
+                    EndDate = DateTime.Parse(EndBlackListedDateTextBox.Text);
+
+                criteria.DepartmentID = Convert.ToInt32(this.DepartmentDropDownList.SelectedValue);
+                criteria.StartDateBlackListed = StartDate;
+                criteria.EndDateBlackListed = EndDate;
+                DataBindBlackListLogGridView(criteria);
+            }
+            catch (FormatException)
+            {
+                this.ErrorMessage.Text = "Please enter valid date.";
+            }
         }
 
         protected void BlackListLogGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             this.BlackListLogGridView.PageIndex = e.NewPageIndex;
-            BlackListLogSearchDTO criteria = new BlackListLogSearchDTO();
-            criteria.DepartmentID = Convert.ToInt32(this.DepartmentDropDownList.SelectedValue);
-            DataBindBlackListLogGridView(criteria);
+            SearchButton_Click(null, null);
         }
     }
 }
