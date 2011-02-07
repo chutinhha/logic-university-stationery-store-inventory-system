@@ -96,14 +96,23 @@ namespace SA33.Team12.SSIS.DAL
                     select d).FirstOrDefault();
         }
 
-        public List<Disbursement> FindDisbursementByCriteria(DTO.DisbursementSearchDTO criteria) 
+        public List<Disbursement> FindDisbursementByCriteria(DTO.DisbursementSearchDTO criteria)
         {
             var Query =
                 from d in context.Disbursements
                 where d.DisbursementID == (criteria.DisbursementID == 0 ? d.DisbursementID : criteria.DisbursementID)
-                && d.CreatedBy == (criteria.CreatedBy == 0 ? d.CreatedBy : criteria.CreatedBy)
-                && d.DateCreated == (criteria.DateCreated == null||criteria.DateCreated==DateTime.MinValue ? d.DateCreated : criteria.DateCreated)
-                && d.StationeryRetrievalFormID==(criteria.StationeryRetrievalFormID==0?d.StationeryRetrievalFormID:criteria.StationeryRetrievalFormID)
+                      && d.DepartmentID == (criteria.DepartmentID == 0 ? d.DepartmentID : criteria.DepartmentID)
+                      && d.CreatedBy == (criteria.CreatedBy == 0 ? d.CreatedBy : criteria.CreatedBy)
+                      &&
+                      d.DateCreated ==
+                      (criteria.DateCreated == null || criteria.DateCreated == DateTime.MinValue
+                           ? d.DateCreated
+                           : criteria.DateCreated)
+                      &&
+                      d.StationeryRetrievalFormID ==
+                      (criteria.StationeryRetrievalFormID == 0
+                           ? d.StationeryRetrievalFormID
+                           : criteria.StationeryRetrievalFormID)
                 select d;
             List<Disbursement> disbursements = Query.ToList<Disbursement>();
             return disbursements;
@@ -134,6 +143,16 @@ namespace SA33.Team12.SSIS.DAL
                 throw e;
             }
         }
+
+        public List<vw_GetStationeryDistributionList> GetDistributionListByDisbursementID(int disbursementId)
+        {
+            List<vw_GetStationeryDistributionList> distributionLists = context.vw_GetStationeryDistributionList.ToList();
+            var Query = from d in distributionLists
+                        where d.DisbursementID == disbursementId
+                        select d;
+            return Query.ToList();
+        }
+
         #endregion
 
         #region DisbursementItem

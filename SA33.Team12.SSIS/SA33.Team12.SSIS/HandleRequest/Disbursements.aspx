@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Disbursements.aspx.cs" Inherits="SA33.Team12.SSIS.RequestStationery.Disbursements" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Disbursements.aspx.cs" Inherits="SA33.Team12.SSIS.HandleRequest.Disbursements" %>
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
