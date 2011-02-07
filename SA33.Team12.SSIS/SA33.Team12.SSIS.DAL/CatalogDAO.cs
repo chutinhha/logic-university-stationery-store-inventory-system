@@ -228,24 +228,21 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Stationery tempStationery = (from s in context.Stationeries
                                              where s.StationeryID == stationery.StationeryID
-                                             select s).First<Stationery>();
+                                             select s).FirstOrDefault<Stationery>();
 
-                tempStationery.Category = stationery.Category;
-                tempStationery.Location = stationery.Location;
+                tempStationery.CategoryID = stationery.CategoryID;
+                tempStationery.LocationID = stationery.LocationID;
                 tempStationery.ItemCode = stationery.ItemCode;
                 tempStationery.Description = stationery.Description;
                 tempStationery.ReorderLevel = stationery.ReorderLevel;
                 tempStationery.ReorderQuantity = stationery.ReorderQuantity;  
-                tempStationery.DateModified = stationery.DateModified;
-                tempStationery.DateApproved = stationery.DateApproved;
-                tempStationery.ModifiedByUser = stationery.ModifiedByUser;
-                tempStationery.ApprovedByUser = stationery.ApprovedByUser;
-                tempStationery.IsApproved = stationery.IsApproved;
+                tempStationery.DateModified = stationery.DateModified;                
+                tempStationery.ModifiedBy = stationery.ModifiedBy;                                
                 tempStationery.UnitOfMeasure = stationery.UnitOfMeasure;
+                tempStationery.IsApproved = stationery.IsApproved;
 
                 using (TransactionScope ts = new TransactionScope())
-                {
-               
+                {               
                     context.SaveChanges();
                     ts.Complete();
                     return tempStationery;
@@ -379,9 +376,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempSpecialStationery.UnitOfMeasure = specialStationery.UnitOfMeasure;
 
                 using (TransactionScope ts = new TransactionScope())
-                {
-                  //  context.Attach(tempSpecialStationery);
-                  //context.ObjectStateManager.ChangeObjectState(tempSpecialStationery, EntityState.Modified);
+                {                  
                     context.SaveChanges();
                     ts.Complete();
                     return tempSpecialStationery;

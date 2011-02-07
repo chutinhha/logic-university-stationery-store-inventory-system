@@ -21,17 +21,20 @@
                 <td class="style1">
                     Name</td>
                 <td class="style2">
-                    <asp:TextBox ID="NameTextBox" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="NameTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
                 </td>
                 <td>
-                    &nbsp;</td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                        ControlToValidate="NameTextBox" Display="Dynamic" 
+                        ErrorMessage="Name is required" ValidationGroup="input"></asp:RequiredFieldValidator>
+                </td>
             </tr>
             <tr>
                 <td class="style1">
                     Category</td>
                 <td class="style2">
                     <asp:DropDownList ID="CategoryDDL" runat="server" DataSourceID="CategoryDS" 
-                        DataTextField="Name" DataValueField="CategoryID">
+                        DataTextField="Name" DataValueField="CategoryID" ValidationGroup="input">
                     </asp:DropDownList>
                     <asp:ObjectDataSource ID="CategoryDS" runat="server" 
                         SelectMethod="GetAllCategories" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
@@ -44,22 +47,36 @@
                 <td class="style1">
                     Description</td>
                 <td class="style2">
-                    <asp:TextBox ID="DescriptionTextBox" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="DescriptionTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
                 </td>
                 <td>
-                    &nbsp;</td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                        ControlToValidate="DescriptionTextBox" Display="Dynamic" 
+                        ErrorMessage="Description is required" ValidationGroup="input"></asp:RequiredFieldValidator>
+                </td>
             </tr>
             <tr>
                 <td class="style1">
                     Unit of Measure</td>
                 <td class="style2">
-                    <asp:TextBox ID="UOMTextBox" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="UOMTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
                 </td>
                 <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                        ControlToValidate="UOMTextBox" Display="Dynamic" 
+                        ErrorMessage="Unit of Measure is required" ValidationGroup="input"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1">
+                    &nbsp;</td>
+                <td class="style2">
                     <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
-                        style="margin-left: 0px" Text="Add" />
+                        style="margin-left: 0px" Text="Add" ValidationGroup="input" />
                     <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
                 </td>
+                <td>
+                    &nbsp;</td>
             </tr>
             </table>
     </fieldset>

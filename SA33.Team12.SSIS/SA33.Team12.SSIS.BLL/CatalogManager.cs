@@ -15,7 +15,7 @@ using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.BLL
 {
-    public class CatalogManager:BusinessLogic
+    public class CatalogManager : BusinessLogic
     {
         private CatalogDAO catalogDAO;
 
@@ -41,7 +41,7 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         public int GetCategoryCount()
-        {   
+        {
             return catalogDAO.GetCategoryCount();
         }
 
@@ -59,8 +59,8 @@ namespace SA33.Team12.SSIS.BLL
                 }
             }
             catch (Exception)
-            { 
-            throw new Exceptions.UserException("Catalog category creation failed.");
+            {
+                throw new Exceptions.UserException("Catalog category creation failed.");
             }
             return category;
         }
@@ -87,7 +87,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (category != null)
-                {                                          
+                {
                     catalogDAO.DeleteCategory(category);
                 }
             }
@@ -153,7 +153,7 @@ namespace SA33.Team12.SSIS.BLL
             {
                 if (stationery != null)
                 {
-                    stationery.DateModified = DateTime.Now;
+                    stationery.DateModified = DateTime.Now;                    
                     catalogDAO.UpdateStationery(stationery);
                 }
             }
@@ -170,7 +170,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (stationery != null)
-                {                    
+                {
                     catalogDAO.DeleteStationery(stationery);
                 }
             }
@@ -207,7 +207,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 if (specialStationery != null)
-                {             
+                {
                     catalogDAO.CreateSpecialStationery(specialStationery);
                 }
             }
@@ -253,13 +253,15 @@ namespace SA33.Team12.SSIS.BLL
         public string GenerateItemCode(string description, int count)
         {
             string result = string.Empty;
-            if (count < 10)
-                result = description.Substring(0, 1) + "00" + count;
-            if (count >= 10 && count < 100)
-                result = description.Substring(0, 1) + "0" + count;
-            if (count >= 100 && count < 1000)
-                result = description.Substring(0, 1) + count;
-
+            if (description != string.Empty)
+            {
+                if (count < 10)
+                    result = description.Substring(0, 1) + "00" + count;
+                if (count >= 10 && count < 100)
+                    result = description.Substring(0, 1) + "0" + count;
+                if (count >= 100 && count < 1000)
+                    result = description.Substring(0, 1) + count;
+            }
             return result;
         }
         #endregion
@@ -309,7 +311,7 @@ namespace SA33.Team12.SSIS.BLL
                 {
                     catalogDAO.UpdateLocation(location);
                 }
-             
+
             }
             catch (Exception)
             {
