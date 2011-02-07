@@ -83,7 +83,7 @@
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
-    <Content Include="RequestStationery\Disbursement.aspx" />
+    <Content Include="HandleRequest\Disbursement.aspx" />
     <Content Include="HandleRequest\Disbursements.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
@@ -286,11 +286,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </Compile>
-    <Compile Include="RequestStationery\Disbursement.aspx.cs">
+    <Compile Include="HandleRequest\Disbursement.aspx.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RequestStationery\Disbursement.aspx.designer.cs">
+    <Compile Include="HandleRequest\Disbursement.aspx.designer.cs">
       <DependentUpon>Disbursement.aspx</DependentUpon>
     </Compile>
     <Compile Include="HandleRequest\Disbursements.aspx.cs">
