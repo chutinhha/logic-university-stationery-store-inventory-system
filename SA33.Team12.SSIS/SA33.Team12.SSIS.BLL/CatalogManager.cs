@@ -11,6 +11,7 @@ using System.Transactions;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using SA33.Team12.SSIS.BLL;
+using SA33.Team12.SSIS.Exceptions;
 
 namespace SA33.Team12.SSIS.BLL
 {
@@ -304,10 +305,11 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                if (location != null)
+                if (location != null && location.Name != string.Empty)
                 {
                     catalogDAO.UpdateLocation(location);
                 }
+             
             }
             catch (Exception)
             {

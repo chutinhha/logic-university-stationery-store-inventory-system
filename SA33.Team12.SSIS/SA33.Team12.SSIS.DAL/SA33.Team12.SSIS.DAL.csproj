@@ -53,6 +53,7 @@
     <Compile Include="AdjustmentVoucherDAO.cs" />
     <Compile Include="CatalogDAO.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="DTO\AdjustmentVoucherTransactionSearchDTO.cs" />
     <Compile Include="DTO\ApprovalAuditSearchDTO.cs" />

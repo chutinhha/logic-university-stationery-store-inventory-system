@@ -17,9 +17,10 @@
                 <td class="style1">
                     Location Name</td>
                 <td>
-                    <asp:TextBox ID="NameTextBox" runat="server"></asp:TextBox>
-                    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
-                        style="margin-left: 0px" Text="Add" />
+                    <asp:TextBox ID="NameTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                        ControlToValidate="NameTextBox" Display="Dynamic" 
+                        ErrorMessage="Location name is required" ValidationGroup="input"></asp:RequiredFieldValidator>
                 </td>
                 <td>
                     &nbsp;</td>
@@ -28,6 +29,8 @@
                 <td class="style1">
                     &nbsp;</td>
                 <td>
+                    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
+                        style="margin-left: 0px" Text="Add" ValidationGroup="input" />
                     <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
                 </td>
                 <td>
@@ -40,19 +43,32 @@
     <asp:GridView runat="server" ID="LocationGridView" AllowPaging="True"
         AutoGenerateColumns="False" DataSourceID="LocationObjectDataSource"
         SelectedRowStyle-BackColor="LightGray" 
-        DataKeyNames="LocationID">
+        DataKeyNames="LocationID" onrowupdating="LocationGridView_RowUpdating">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             <asp:BoundField DataField="LocationID" HeaderText="LocationID" 
                 SortExpression="LocationID" />
-            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-           <asp:TemplateField>
+             <asp:TemplateField ConvertEmptyStringToNull="False" HeaderText="Name" 
+                SortExpression="Name">
+                <ItemTemplate>
+                    <asp:DynamicControl ID="DynamicControl1" runat="server" DataField="Name" 
+                        Mode="ReadOnly" />
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:DynamicControl ID="DynamicControl1" runat="server" DataField="Name" 
+                        Mode="Edit" />
+                </EditItemTemplate>
+            </asp:TemplateField>
+           <asp:TemplateField HeaderText="CreatedBy">
            <ItemTemplate>
            <%# ((SA33.Team12.SSIS.DAL.User) Eval("CreatedByUser")).UserName %>
            </ItemTemplate>
            </asp:TemplateField>
-            <asp:BoundField DataField="CreatedDate" HeaderText="CreatedDate" 
-                SortExpression="CreatedDate" />
+               <asp:TemplateField HeaderText="CreatedDate">
+           <ItemTemplate>
+           <%# Eval("CreatedDate") %>
+           </ItemTemplate>
+           </asp:TemplateField>
         </Columns>
 
 <SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>

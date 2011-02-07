@@ -17,9 +17,10 @@
                 <td class="style1">
                     Category Name</td>
                 <td>
-                    <asp:TextBox ID="NameTextBox" runat="server"></asp:TextBox>
-                    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
-                        style="margin-left: 0px" Text="Add" />
+                    <asp:TextBox ID="NameTextBox" runat="server" ValidationGroup="input"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                        ControlToValidate="NameTextBox" Display="Dynamic" 
+                        ErrorMessage="Category name is required" ValidationGroup="input"></asp:RequiredFieldValidator>
                 </td>
                 <td>
                     &nbsp;</td>
@@ -28,6 +29,8 @@
                 <td class="style1">
                     &nbsp;</td>
                 <td>
+                    <asp:Button ID="SubmitButton" runat="server" onclick="SubmitButton_Click" 
+                        style="margin-left: 0px" Text="Add" ValidationGroup="input" />
                     <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
                 </td>
                 <td>
