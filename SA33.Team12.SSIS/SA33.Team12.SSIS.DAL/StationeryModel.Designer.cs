@@ -82,7 +82,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByDepartmentDepartment", "VW_RequisitionsByDepartment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByDepartment), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListRequisition", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Requisition", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListRequisition", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Requisition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListDepartment", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListStationery", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListSpecialStationery", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
@@ -10401,11 +10401,15 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Create a new vw_GetStationeryDistributionList object.
         /// </summary>
+        /// <param name="requisitionID">Initial value of the RequisitionID property.</param>
         /// <param name="quantityDisbursed">Initial value of the QuantityDisbursed property.</param>
-        public static vw_GetStationeryDistributionList Createvw_GetStationeryDistributionList(global::System.Int32 quantityDisbursed)
+        /// <param name="disbursementID">Initial value of the DisbursementID property.</param>
+        public static vw_GetStationeryDistributionList Createvw_GetStationeryDistributionList(global::System.Int32 requisitionID, global::System.Int32 quantityDisbursed, global::System.Int32 disbursementID)
         {
             vw_GetStationeryDistributionList vw_GetStationeryDistributionList = new vw_GetStationeryDistributionList();
+            vw_GetStationeryDistributionList.RequisitionID = requisitionID;
             vw_GetStationeryDistributionList.QuantityDisbursed = quantityDisbursed;
+            vw_GetStationeryDistributionList.DisbursementID = disbursementID;
             return vw_GetStationeryDistributionList;
         }
 
@@ -10415,9 +10419,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> RequisitionID
+        public global::System.Int32 RequisitionID
         {
             get
             {
@@ -10425,15 +10429,18 @@ namespace SA33.Team12.SSIS.DAL
             }
             set
             {
-                OnRequisitionIDChanging(value);
-                ReportPropertyChanging("RequisitionID");
-                _RequisitionID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RequisitionID");
-                OnRequisitionIDChanged();
+                if (_RequisitionID != value)
+                {
+                    OnRequisitionIDChanging(value);
+                    ReportPropertyChanging("RequisitionID");
+                    _RequisitionID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RequisitionID");
+                    OnRequisitionIDChanged();
+                }
             }
         }
-        private Nullable<global::System.Int32> _RequisitionID;
-        partial void OnRequisitionIDChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _RequisitionID;
+        partial void OnRequisitionIDChanging(global::System.Int32 value);
         partial void OnRequisitionIDChanged();
     
         /// <summary>
@@ -10583,7 +10590,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 QuantityDisbursed
         {
@@ -10593,19 +10600,40 @@ namespace SA33.Team12.SSIS.DAL
             }
             set
             {
-                if (_QuantityDisbursed != value)
-                {
-                    OnQuantityDisbursedChanging(value);
-                    ReportPropertyChanging("QuantityDisbursed");
-                    _QuantityDisbursed = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("QuantityDisbursed");
-                    OnQuantityDisbursedChanged();
-                }
+                OnQuantityDisbursedChanging(value);
+                ReportPropertyChanging("QuantityDisbursed");
+                _QuantityDisbursed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("QuantityDisbursed");
+                OnQuantityDisbursedChanged();
             }
         }
         private global::System.Int32 _QuantityDisbursed;
         partial void OnQuantityDisbursedChanging(global::System.Int32 value);
         partial void OnQuantityDisbursedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DisbursementID
+        {
+            get
+            {
+                return _DisbursementID;
+            }
+            set
+            {
+                OnDisbursementIDChanging(value);
+                ReportPropertyChanging("DisbursementID");
+                _DisbursementID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DisbursementID");
+                OnDisbursementIDChanged();
+            }
+        }
+        private global::System.Int32 _DisbursementID;
+        partial void OnDisbursementIDChanging(global::System.Int32 value);
+        partial void OnDisbursementIDChanged();
 
         #endregion
     
@@ -10694,7 +10722,7 @@ namespace SA33.Team12.SSIS.DAL
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListStationery", "Stationery")]
-        public Stationery Stationeries
+        public Stationery Stationery
         {
             get
             {
@@ -10710,7 +10738,7 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Stationery> StationeriesReference
+        public EntityReference<Stationery> StationeryReference
         {
             get
             {

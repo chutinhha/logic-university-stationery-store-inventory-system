@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA33.Team12.SSIS.RequestStationery {
+namespace SA33.Team12.SSIS.HandleRequest {
     
     
     public partial class Disbursement {

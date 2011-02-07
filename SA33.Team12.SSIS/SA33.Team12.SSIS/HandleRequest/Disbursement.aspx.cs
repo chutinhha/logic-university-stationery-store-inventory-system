@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 
-namespace SA33.Team12.SSIS.RequestStationery
+namespace SA33.Team12.SSIS.HandleRequest
 {
     public partial class Disbursement : System.Web.UI.Page
     {

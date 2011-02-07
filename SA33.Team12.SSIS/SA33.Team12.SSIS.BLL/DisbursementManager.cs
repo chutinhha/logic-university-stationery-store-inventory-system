@@ -97,6 +97,11 @@ namespace SA33.Team12.SSIS.BLL
             return disbursementDAO.FindDisbursementByCriteria(disbursementSearchDTO);
         }
 
+        public List<vw_GetStationeryDistributionList> GetDistributionListByDisbursementID(int disbursementId)
+        {
+            return disbursementDAO.GetDistributionListByDisbursementID(disbursementId);
+        }
+
         public void DeleteDisbursement(Disbursement disbursement)
         {
             disbursementDAO.DeleteDisbursement(disbursement);
