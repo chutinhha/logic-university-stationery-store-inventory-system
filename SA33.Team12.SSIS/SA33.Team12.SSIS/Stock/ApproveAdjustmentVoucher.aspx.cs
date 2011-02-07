@@ -97,7 +97,6 @@ namespace SA33.Team12.SSIS.Stock
       //          UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
 
             }
-
             Populate();
         }
 
