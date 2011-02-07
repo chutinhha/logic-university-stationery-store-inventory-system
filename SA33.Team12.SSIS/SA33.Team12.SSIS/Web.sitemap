@@ -8,8 +8,7 @@
                   title="Category Listing" description="Category Listing" />
     </siteMapNode>
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
-    <siteMapNode title="Stock" description="Stock">
-      <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order"/>
+    <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
       <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
       <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
@@ -18,7 +17,7 @@
                  title="Handle Requests" description="Stationery Retrieval Forms">
       <siteMapNode url="~/HandleRequest/StationeryRetrievalForm.aspx"
                    title="Stationery Retrieval Form" description="Stationery Retrieval Form" />
-    <siteMapNode url="~/HandleRequest/Disbursement.aspx" title="Disbursement" description="Disbursement" />
+      <siteMapNode url="~/HandleRequest/Disbursement.aspx" title="Disbursement" description="Disbursement" />
     </siteMapNode>
 
     <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />
@@ -28,11 +27,11 @@
       <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
     </siteMapNode>
     <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
-    <siteMapNode url="~/Administration/Users.aspx?" 
-                 title="Administration" 
+    <siteMapNode url="~/Administration/Users.aspx?"
+                 title="Administration"
                  description="Maintain Users">
-      <siteMapNode url="~/Administration/Users.aspx" 
-                    title="User Administration" 
+      <siteMapNode url="~/Administration/Users.aspx"
+                    title="User Administration"
                     description="Maintain Users Accounts" />
       <siteMapNode url="~/Administration/MaintainDepartment.aspx"
                     title="Maintain Departments"
@@ -40,10 +39,10 @@
       <siteMapNode url="~/Administration/MaintainCollectionPoint.aspx"
                     title="Maintain Collection Points"
                     description="Maintain Collection Points" />
-      <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx" 
-                   title="Change Collection Point" 
+      <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx"
+                   title="Change Collection Point"
                    description="Change Collection Point" />
-      </siteMapNode>
+    </siteMapNode>
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>
 </siteMap>
