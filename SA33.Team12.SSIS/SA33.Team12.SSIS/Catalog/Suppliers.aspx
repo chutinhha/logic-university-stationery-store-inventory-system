@@ -34,7 +34,9 @@
                         ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
                         ErrorMessage="Supplier code is required" ValidationGroup="input"></asp:RequiredFieldValidator>
                     <asp:RangeValidator ID="RangeValidator1" runat="server" 
-                        ErrorMessage="Max 4 chars" MaximumValue="4" MinimumValue="1"></asp:RangeValidator>
+                        ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
+                        ErrorMessage="Max 4 chars" MaximumValue="4" MinimumValue="1" 
+                        ValidationGroup="input"></asp:RangeValidator>
                 </td>
                 <td>
                     &nbsp;</td>
@@ -89,8 +91,6 @@
         DataKeyNames="SupplierID">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-            <asp:BoundField DataField="SupplierID" HeaderText="SupplierID" 
-                SortExpression="SupplierID" />
             <asp:BoundField DataField="SupplierCode" HeaderText="SupplierCode" 
                 SortExpression="SupplierCode" />
             <asp:BoundField DataField="CompanyName" HeaderText="CompanyName" 
