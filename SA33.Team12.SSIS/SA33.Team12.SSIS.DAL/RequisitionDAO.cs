@@ -539,7 +539,7 @@ namespace SA33.Team12.SSIS.DAL
                 var temp = (from ri in context.RequisitionItems
                             where ri.RequisitionItemID == requisitionItem.RequisitionItemID
                             select ri).FirstOrDefault<RequisitionItem>();
-                temp.Stationery = requisitionItem.Stationery;
+                temp.StationeryID = requisitionItem.StationeryID;
                 temp.QuantityRequested = requisitionItem.QuantityRequested;
                 temp.Price = requisitionItem.Price;
 
