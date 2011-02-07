@@ -86,9 +86,11 @@ namespace SA33.Team12.SSIS.Stock
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 int stationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
+                DAL.AdjustmentType adjType =  (AdjustmentType) DataBinder.Eval(e.Row.DataItem, "Type");
                 if (stationeryID != 0)
                 {
                     Literal ltl = e.Row.FindControl("ltlDescription") as Literal;
+                    Literal type = e.Row.FindControl("ltlType") as Literal;
                     if (ltl != null)
                     {
                         using (CatalogManager cm = new CatalogManager())
@@ -97,6 +99,11 @@ namespace SA33.Team12.SSIS.Stock
                             if (s != null) ltl.Text = s.Description;
                         }
                     }
+                    if (type != null)
+                        using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
+                        {
+                            type.Text = adjType.ToString();
+                        }
                 }
             }
         }
