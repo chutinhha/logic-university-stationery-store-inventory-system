@@ -5,9 +5,10 @@
 
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
-      <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
-      <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
+      <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
+      <siteMapNode url="~/Stock/ApplyAdjustmentVoucher.aspx" title="Apply Adjustment" description="Apply Adjustment Voucher"/>
+      <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
     </siteMapNode>
     <siteMapNode url="~/HandleRequest/StationeryRetrievalList.aspx"
                  title="Handle Requests" description="Stationery Retrieval Forms">
