@@ -52,24 +52,46 @@
     <fieldset>
         <legend>Adjustment Items</legend>
         <asp:GridView ID="gvAdjustmentItems" runat="server" AutoGenerateColumns="False" 
-            DataKeyNames="StationeryID">
+            DataKeyNames="StationeryID" 
+            onrowdatabound="gvAdjustmentItems_RowDataBound">
             <Columns>
-                <%--<asp:TemplateField HeaderText="Item Description">
-                    <ItemTemplate>
-                        <%# ((Stationery )Eval("Stationery")).Description %>
-                    </ItemTemplate>
-                </asp:TemplateField>--%>
-                <asp:BoundField DataField="Reason" HeaderText="Reason" />
-                <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
-                    SortExpression="Quantity" />
-                <asp:BoundField DataField="Balance" HeaderText="Balance" 
-                    SortExpression="Balance" />
              <%--   <asp:TemplateField HeaderText="Type">
                     <ItemTemplate>
                        <%# ((Stationery )Eval("Stationery")).Description %>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
+                <asp:TemplateField HeaderText="Item Description">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltlDescription" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Reason" HeaderText="Reason" />
+                <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
+                    SortExpression="Quantity" />
+                <asp:BoundField DataField="Balance" HeaderText="Balance" 
+                    SortExpression="Balance" />
             </Columns>
         </asp:GridView>
+    </fieldset>
+    <fieldset>
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    Reason:
+                    <asp:TextBox ID="txtReason" runat="server" AutoPostBack="True" 
+                        ontextchanged="txtReason_TextChanged" Width="229px"></asp:TextBox>
+                </td>
+                <td>
+                    &nbsp;
+                    <asp:Button ID="btnReject" runat="server" Enabled="False" 
+                        onclick="btnReject_Click" Text="Reject" />
+                </td>
+                <td>
+                    &nbsp;
+                    <asp:Button ID="btnApprove" runat="server" onclick="btnApprove_Click" 
+                        Text="Approve" />
+                </td>
+            </tr>
+        </table>
     </fieldset>
 </asp:Content>
