@@ -254,16 +254,19 @@ namespace SA33.Team12.SSIS.Test
         {
             try
             {
-                requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
-                Requisition temp = requisitionManager.CreateRequisition(requisition);
-                // UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
-
-                if (temp != null)
+                if (requisition.RequisitionItems.Count > 0 || requisition.SpecialRequisitionItems.Count > 0)
                 {
-                    Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID, false);
-                }
+                    requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
+                    Requisition temp = requisitionManager.CreateRequisition(requisition);
+                    // UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
 
-                requisition = null;
+                    if (temp != null)
+                    {
+                        Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID, false);
+                    }
+
+                    requisition = null;
+                }
             }
             catch (Exception)
             {
