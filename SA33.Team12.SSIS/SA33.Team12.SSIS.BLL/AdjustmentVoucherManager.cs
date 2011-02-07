@@ -40,10 +40,14 @@ namespace SA33.Team12.SSIS.BLL
             return adjustmentVoucherTransaction;
         }
 
-        public void ApproveAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        public decimal getTotalCost(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
         {
-            //Still thinking what to do with this
-            //AdjustmentVoucherDAO.ApproveAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
+            decimal totalCost = 0;
+            foreach (StockLogTransaction logTran in adjustmentVoucherTransaction.StockLogTransactions)
+            {
+                totalCost += logTran.Quantity * logTran.Price;
+            }
+            return totalCost;
         }
 
         public void UpdateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
