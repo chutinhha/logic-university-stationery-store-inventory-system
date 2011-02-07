@@ -71,62 +71,28 @@
                 Supply By</td>
             <td>
                 <asp:TextBox ID="txtDateToSupply" runat="server"></asp:TextBox>
-&nbsp;(dd/mm/yyyy)</td>
+                 <script type="text/javascript">
+                     $(function () {
+                         $('#<%= this.txtDateToSupply.ClientID %>').datepicker({
+                             showOn: 'button',
+                             dateFormat: 'dd/mm/yy',
+                             buttonImage: '/Styles/jqui/images/calendar.gif',
+                             buttonImageOnly: true,
+                             setDate: '<%= DateTime.Now%>',
+                             onSelect: function () { },
+                             minDate: '-0d',
+                             showButtonPanel: false,
+                             changeMonth: true,
+                             changeYear: true,
+                             yearRange: '<%= DateTime.Now.Year-10 %>:<%= DateTime.Now.Year %>'
+                         });
+                     });
+				</script>
+</td>
         </tr>
     </table>
     </fieldset>
-    <fieldset> 
-    <legend> Add New Purchase Order Item</legend>
-    <table style="width: 100%;">
-        <tr>
-            <td class="style2">
-                Category
-            </td>
-            <td class="style9">
-                Item Description 
-            </td>
-            <td class="style4">
-                &nbsp; Order Quantity
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:DropDownList ID="ddlCategory" runat="server" DataSourceID="CategoryDataSource"
-                    DataTextField="Name" DataValueField="CategoryID" 
-                    AutoPostBack="True">
-                </asp:DropDownList>
-                <asp:ObjectDataSource ID="CategoryDataSource" runat="server" 
-                    SelectMethod="GetAllCategories" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
-                </asp:ObjectDataSource>
-            </td>
-            <td class="style9">
-                &nbsp;<asp:DropDownList ID="ddlDescription" runat="server" 
-                    DataSourceID="ObjectDataSource4" DataTextField="Description" 
-                    DataValueField="StationeryID">
-                </asp:DropDownList>
-            </td>
-            <td class="style4">
-                &nbsp;
-                <asp:TextBox ID="txtOrderQuantity" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
-            </td>
-        </tr>
-        </table>
-    </fieldset>
     
-    <asp:ObjectDataSource ID="ObjectDataSource4" runat="server" 
-        SelectMethod="GetStationeriesByCategory" 
-        TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="ddlCategory" Name="CategoryID" 
-                PropertyName="SelectedValue" Type="Int32" />
-        </SelectParameters>
-    </asp:ObjectDataSource>
     <fieldset>
     <legend>Items To Order</legend>
     <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False" 
@@ -141,13 +107,13 @@
                 ReadOnly="True" SortExpression="ReorderQuantity" />
             <asp:TemplateField HeaderText="Supplier">
                 <ItemTemplate>
-                    <asp:DropDownList ID="ddlSupplier" runat="server" 
-                        DataSourceID="SupplierDataSource" DataTextField="CompanyName" 
-                        DataValueField="SupplierID">
+                    <asp:DropDownList ID="ddlSupplier" runat="server" DataTextField="CompanyName" DataValueField="SupplierID">
                     </asp:DropDownList>
-                    <asp:ObjectDataSource ID="SupplierDataSource" runat="server" 
-                        SelectMethod="GetAllSuppliers" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
-                    </asp:ObjectDataSource>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Price" Visible = "false">
+                <ItemTemplate>
+                    <asp:Literal ID="ltlPrice" runat="server"></asp:Literal>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Recommended Reorder Quantity">
