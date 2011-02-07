@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
-using System.Collections.Specialized;
 
 namespace SA33.Team12.SSIS.Stock
 {
@@ -64,7 +63,7 @@ namespace SA33.Team12.SSIS.Stock
             }
             if (e.CommandName == "AdjustmentVoucherTransactionID")
             {
-                Response.Redirect("~/Stock/ApplyAdjustmentVoucher.aspx?AdjustmentVoucherTransactionID=" + e.CommandArgument);
+                Response.Redirect("~/Stock/AdjustmentVoucherDetail.aspx?ID=" + e.CommandArgument);
             }
         }
 
