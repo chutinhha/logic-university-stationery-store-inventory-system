@@ -59,6 +59,7 @@ namespace SA33.Team12.SSIS.DAL
 
                 using (TransactionScope ts = new TransactionScope())
                 {
+                    persistedTransaction.StockLogTransactions.Load();
                     context.AdjustmentVoucherTransactions.DeleteObject(persistedTransaction);
                     context.SaveChanges();
                     ts.Complete();
@@ -184,7 +185,12 @@ namespace SA33.Team12.SSIS.DAL
                             where ri.StockLogTransactionID == stockLogTransaction.StockLogTransactionID
                             select ri).FirstOrDefault<StockLogTransaction>();
 
-                context.StockLogTransactions.DeleteObject(temp);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    context.StockLogTransactions.DeleteObject(temp);
+                    context.SaveChanges();
+                    ts.Complete();
+                }
             }
             catch (Exception ex)
             {
