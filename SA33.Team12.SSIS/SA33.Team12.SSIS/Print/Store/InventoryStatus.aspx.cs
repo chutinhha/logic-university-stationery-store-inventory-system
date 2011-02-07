@@ -15,7 +15,7 @@ namespace SA33.Team12.SSIS.Print.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ReportDS ds = new ReportDS();
+            ds = new ReportDS();
             ta = new ReportDSTableAdapters.StationeriesTableAdapter();
             ta.Fill(ds.Stationeries);
 
