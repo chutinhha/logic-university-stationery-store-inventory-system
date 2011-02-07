@@ -62,7 +62,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_StationeryRetrievalFormItems_FK1", "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "StationeryRetrievalFormItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationery_RetrievedBy", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.User), "StationeryRetrievalForms", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Suppliers_PurchaseOrders_FK1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.PurchaseOrder), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Stationeries_StockLogTransactions_FK1", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "StationeryRetrievalForms_Disbursements_FK1", "StationeryRetrievalForm", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalForm), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Price_Of_Stationery_By_Supplier", "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Stationery), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Prices_By_Supplier", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Supplier), "StationeryPrice", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StationeryPrice), true)]
@@ -8846,10 +8846,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="reason">Initial value of the Reason property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="balance">Initial value of the Balance property.</param>
-        /// <param name="stationeryID">Initial value of the StationeryID property.</param>
         /// <param name="price">Initial value of the Price property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Int32 stationeryID, global::System.Decimal price, global::System.DateTime dateCreated)
+        public static StockLogTransaction CreateStockLogTransaction(global::System.Int32 stockLogTransactionID, global::System.Int32 adjustmentVoucherTransactionID, global::System.Int32 type, global::System.String reason, global::System.Int32 quantity, global::System.Int32 balance, global::System.Decimal price, global::System.DateTime dateCreated)
         {
             StockLogTransaction stockLogTransaction = new StockLogTransaction();
             stockLogTransaction.StockLogTransactionID = stockLogTransactionID;
@@ -8858,7 +8857,6 @@ namespace SA33.Team12.SSIS.DAL
             stockLogTransaction.Reason = reason;
             stockLogTransaction.Quantity = quantity;
             stockLogTransaction.Balance = balance;
-            stockLogTransaction.StationeryID = stationeryID;
             stockLogTransaction.Price = price;
             stockLogTransaction.DateCreated = dateCreated;
             return stockLogTransaction;
@@ -9017,9 +9015,9 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 StationeryID
+        public Nullable<global::System.Int32> StationeryID
         {
             get
             {
@@ -9034,8 +9032,8 @@ namespace SA33.Team12.SSIS.DAL
                 OnStationeryIDChanged();
             }
         }
-        private global::System.Int32 _StationeryID;
-        partial void OnStationeryIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _StationeryID;
+        partial void OnStationeryIDChanging(Nullable<global::System.Int32> value);
         partial void OnStationeryIDChanged();
     
         /// <summary>

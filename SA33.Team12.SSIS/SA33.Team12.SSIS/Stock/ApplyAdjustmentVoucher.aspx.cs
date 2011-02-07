@@ -50,8 +50,10 @@ namespace SA33.Team12.SSIS.Stock
                     StockLogTransaction adj = new StockLogTransaction();
                     adj.Reason = txtReason.Text.ToString();
                     adj.Quantity = int.Parse(txtQuantity.Text.ToString());
-                    adj.StationeryID = stationery.StationeryID;
+                    adj.Stationery = stationery;
                     adj.Balance = stationery.QuantityInHand;
+                    adj.Price = 0.0m;
+                    adj.DateCreated = DateTime.Now;
                     adj.Type = int.Parse(ddlType.SelectedValue);
                     adjustments.Add(adj);
                 }
@@ -74,11 +76,13 @@ namespace SA33.Team12.SSIS.Stock
                 foreach (StockLogTransaction adj in adjustments)
                 {
                     adj.AdjustmentVoucherTransaction = tran;
-                    avm.CreateStockLogTransaction(adj);
+                    //avm.CreateStockLogTransaction(adj);
                 }
 
                 avm.CreateAdjustmentVoucherTransaction(tran);
             }
+
+            Session["adjustments"] = null;
         }
 
         protected void gvAdjustmentItems_RowDataBound(object sender, GridViewRowEventArgs e)
