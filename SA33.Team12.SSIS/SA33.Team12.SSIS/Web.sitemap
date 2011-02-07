@@ -26,9 +26,21 @@
       <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
     </siteMapNode>
     <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
-    <siteMapNode url="~/Administration/Users.aspx?" title="Administration" description="Maintain Users">
-        <siteMapNode url="~/Administration/Users.aspx" title="User Administration" description="Maintain Users Accounts" />
-      <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx" title="Collection Point" description="Set Collection Point" />
+    <siteMapNode url="~/Administration/Users.aspx?" 
+                 title="Administration" 
+                 description="Maintain Users">
+      <siteMapNode url="~/Administration/Users.aspx" 
+                    title="User Administration" 
+                    description="Maintain Users Accounts" />
+      <siteMapNode url="~/Administration/MaintainDepartment.aspx"
+                    title="Maintain Departments"
+                    description="Maintain Departments" />
+      <siteMapNode url="~/Administration/MaintainCollectionPiont.aspx"
+                    title="Maintain Collection Points"
+                    description="Maintain Collection Points" />
+      <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx" 
+                   title="Change Collection Point" 
+                   description="Change Collection Point" />
       </siteMapNode>
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>
