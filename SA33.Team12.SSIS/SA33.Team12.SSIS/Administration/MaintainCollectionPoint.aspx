@@ -44,7 +44,6 @@
         TypeName="SA33.Team12.SSIS.BLL.UserManager" 
         UpdateMethod="UpdateCollectionPoint" />
 <asp:ValidationSummary runat="server" ID="ValidationSummary" ValidationGroup="Edit" />
-<asp:DynamicDataManager runat="server" ID="DynamicDataManager" />
 </fieldset>
 <fieldset>
     <legend>New Collection Point</legend>
@@ -67,5 +66,7 @@
     </asp:DetailsView>
     <asp:ValidationSummary runat="server" ID="ValidationSummary1" ValidationGroup="Insert" />
 </fieldset>
+
+<asp:DynamicDataManager runat="server" ID="DynamicDataManager" />
 
 </asp:Content>

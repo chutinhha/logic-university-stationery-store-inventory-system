@@ -82,7 +82,7 @@
                     <asp:DynamicControl runat="server"
                         ID="CodeControl"
                         DataField="Code"
-                        Mode="Insert" />
+                        Mode="Insert" ValidationGroup="Insert"  />
                 </InsertItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Name">
@@ -90,7 +90,7 @@
                     <asp:DynamicControl runat="server"
                         ID="NameControl"
                         DataField="Name"
-                        Mode="Insert" />
+                        Mode="Insert"  ValidationGroup="Insert"  />
                 </InsertItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Collection Point">
@@ -119,9 +119,9 @@
                         Mode="Insert" />
                 </InsertItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ShowInsertButton="True" />
+            <asp:CommandField ShowInsertButton="True" ValidationGroup="Insert"  />
         </Fields>
     </asp:DetailsView>
-
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Insert" />
 </fieldset>
 </asp:Content>
