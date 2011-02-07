@@ -80,6 +80,7 @@
     <Content Include="Catalog\Suppliers.aspx" />
     <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
+    <Content Include="Print\Employee\ViewRequisitionList.aspx" />
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
@@ -242,6 +243,13 @@
     <Compile Include="Catalog\SpecialStationeries.aspx.designer.cs">
       <DependentUpon>SpecialStationeries.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Print\Employee\ViewRequisitionList.aspx.cs">
+      <DependentUpon>ViewRequisitionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\Employee\ViewRequisitionList.aspx.designer.cs">
+      <DependentUpon>ViewRequisitionList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Print\Store\InventoryStatus.aspx.cs">
       <DependentUpon>InventoryStatus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -281,7 +289,7 @@
     <Compile Include="Print\Department\PrintRequestByIndividualEmployee.aspx.designer.cs">
       <DependentUpon>PrintRequestByIndividualEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\Store\ReportDS.Designer.cs">
+    <Compile Include="Print\ReportDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
@@ -578,15 +586,15 @@
     </Content>
     <Content Include="Print\Department\Web.config" />
     <Content Include="Print\Employee\Web.config" />
-    <None Include="Print\Store\ReportDS.xsc">
+    <None Include="Print\ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>
-    <None Include="Print\Store\ReportDS.xsd">
+    <None Include="Print\ReportDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportDS.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Print\Store\ReportDS.xss">
+    <None Include="Print\ReportDS.xss">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>
     <Content Include="Print\Store\Web.config" />
