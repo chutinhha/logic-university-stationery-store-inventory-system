@@ -318,12 +318,26 @@ namespace SA33.Team12.SSIS.DAL
             var Query =
                 from bll in context.BlacklistLogs
                 where bll.BlacklistLogID == (criteria.BlackListLogID == 0
-                    ? bll.BlacklistLogID : criteria.BlackListLogID)
-                && bll.DepartmentID == (criteria.DepartmentID == 0
-                    ? bll.DepartmentID : criteria.DepartmentID)
-                && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.StartDateBlackListed == null || criteria.StartDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.StartDateBlackListed)) <= 0
-                    && EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.EndDateBlackListed == null || criteria.EndDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.EndDateBlackListed)) >= 0)
-                && (EntityFunctions.DiffDays(bll.DateBlacklisted, (criteria.ExactDateBlackListed == null || criteria.ExactDateBlackListed == DateTime.MinValue ? bll.DateBlacklisted : criteria.ExactDateBlackListed)) == 0)
+                                                 ? bll.BlacklistLogID
+                                                 : criteria.BlackListLogID)
+                      && bll.DepartmentID == (criteria.DepartmentID == 0
+                                                  ? bll.DepartmentID
+                                                  : criteria.DepartmentID)
+                      &&
+                      (EntityFunctions.DiffDays(bll.DateBlacklisted,
+                                                (criteria.StartDateBlackListed == DateTime.MinValue
+                                                     ? bll.DateBlacklisted
+                                                     : criteria.StartDateBlackListed)) <= 0
+                       &&
+                       EntityFunctions.DiffDays(bll.DateBlacklisted,
+                                                (criteria.EndDateBlackListed == DateTime.MinValue
+                                                     ? bll.DateBlacklisted
+                                                     : criteria.EndDateBlackListed)) >= 0)
+                      &&
+                      (EntityFunctions.DiffDays(bll.DateBlacklisted,
+                                                (criteria.ExactDateBlackListed == DateTime.MinValue
+                                                     ? bll.DateBlacklisted
+                                                     : criteria.ExactDateBlackListed)) == 0)
                 select bll;
 
             return Query.ToList<BlacklistLog>();
