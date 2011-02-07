@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SA33.Team12.SSIS.Administration
+namespace SA33.Team12.SSIS.DAL
 {
     [MetadataType(typeof(BlackListLogMetaData))]
     public partial class BlacklistLog
