@@ -472,7 +472,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog upplier updating failed.");
+                throw new Exceptions.UserException("Update Supplier failed.");
             }
             return supplier;
         }
