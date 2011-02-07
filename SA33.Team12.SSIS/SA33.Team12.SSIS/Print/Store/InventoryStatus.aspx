@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+<h2>Logic university - Inventory Status Report</h2>
+    <p>&nbsp;</p>
     <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
     AutoDataBind="true" ToolPanelView="None" />
 
