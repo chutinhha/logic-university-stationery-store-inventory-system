@@ -80,7 +80,7 @@
     <Content Include="Catalog\Suppliers.aspx" />
     <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
-    <Content Include="Print\Employee\ViewRequisitionList.aspx" />
+    <Content Include="Print\Employee\PrintRequestHistory.aspx" />
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
@@ -243,12 +243,12 @@
     <Compile Include="Catalog\SpecialStationeries.aspx.designer.cs">
       <DependentUpon>SpecialStationeries.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\Employee\ViewRequisitionList.aspx.cs">
-      <DependentUpon>ViewRequisitionList.aspx</DependentUpon>
+    <Compile Include="Print\Employee\PrintRequestHistory.aspx.cs">
+      <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Print\Employee\ViewRequisitionList.aspx.designer.cs">
-      <DependentUpon>ViewRequisitionList.aspx</DependentUpon>
+    <Compile Include="Print\Employee\PrintRequestHistory.aspx.designer.cs">
+      <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Print\Store\InventoryStatus.aspx.cs">
       <DependentUpon>InventoryStatus.aspx</DependentUpon>

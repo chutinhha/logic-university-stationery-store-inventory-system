@@ -10,7 +10,7 @@
 namespace SA33.Team12.SSIS.Print.Employee {
     
     
-    public partial class ViewRequisitionList {
+    public partial class PrintRequestHistory {
         
         /// <summary>
         /// GridView1 control.
