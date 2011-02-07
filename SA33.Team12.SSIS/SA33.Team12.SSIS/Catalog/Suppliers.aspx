@@ -33,6 +33,8 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                         ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
                         ErrorMessage="Supplier code is required" ValidationGroup="input"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                        ErrorMessage="Max 4 chars" MaximumValue="4" MinimumValue="1"></asp:RangeValidator>
                 </td>
                 <td>
                     &nbsp;</td>
