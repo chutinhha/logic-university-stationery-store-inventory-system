@@ -9,7 +9,7 @@ using CrystalDecisions.CrystalReports.Engine;
 
 namespace SA33.Team12.SSIS.Print.Employee
 {
-    public partial class ViewRequisitionList : System.Web.UI.Page
+    public partial class PrintRequestHistory : System.Web.UI.Page
     {
         ReportDS ds;
         ReportDSTableAdapters.RequisitionsTableAdapter ta;
