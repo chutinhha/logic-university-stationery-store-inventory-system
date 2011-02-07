@@ -57,5 +57,10 @@ namespace SA33.Team12.SSIS.Stock
             
 
         }
+
+        protected void btnAdjust_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ApplyAdjustmentVoucher.aspx");
+        }
     }
 }
