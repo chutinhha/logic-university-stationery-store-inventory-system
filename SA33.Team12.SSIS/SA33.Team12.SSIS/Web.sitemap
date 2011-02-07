@@ -35,7 +35,7 @@
       <siteMapNode url="~/Administration/MaintainDepartment.aspx"
                     title="Maintain Departments"
                     description="Maintain Departments" />
-      <siteMapNode url="~/Administration/MaintainCollectionPiont.aspx"
+      <siteMapNode url="~/Administration/MaintainCollectionPoint.aspx"
                     title="Maintain Collection Points"
                     description="Maintain Collection Points" />
       <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx" 
