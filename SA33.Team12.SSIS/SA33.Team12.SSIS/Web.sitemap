@@ -2,11 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="default.aspx?" title="Home Page"  description="Home Page">
     <siteMapNode url="default.aspx" title="Home Page"  description="Home Page" />
-    <siteMapNode url="~/Catalog/Categories.aspx?"
-                 title="Stationery Catalog"  description="Statoinery Catalog">
-      <siteMapNode url="~/Catalog/Categories.aspx"
-                  title="Category Listing" description="Category Listing" />
-    </siteMapNode>
+
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
       <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
@@ -42,6 +38,13 @@
       <siteMapNode url="~/Administration/UpdateCollectionPoint.aspx"
                    title="Change Collection Point"
                    description="Change Collection Point" />
+    </siteMapNode>
+    <siteMapNode url="~/Catalog" title="Catalog" description="Catalog">
+      <siteMapNode url="~/Catalog/Categories.aspx" title="Stationery Category" description="Stationery Category"></siteMapNode>
+      <siteMapNode url="~/Catalog/Locations.aspx" title="Stationery Location" description="Stationery Location"></siteMapNode>
+      <siteMapNode url="~/Catalog/SpecialStationeries.aspx" title="Manage Special Stationery" description="Manage Special Stationery"></siteMapNode>
+      <siteMapNode url="~/Catalog/Stationeries.aspx" title="Manage Stationery" description="Manage Stationery"></siteMapNode>
+      <siteMapNode url="~/Catalog/Suppliers.aspx" title="Manage Supplier" description="Manage Supplier"></siteMapNode>
     </siteMapNode>
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>

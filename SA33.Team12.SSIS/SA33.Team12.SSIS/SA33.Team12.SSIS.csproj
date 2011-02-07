@@ -116,7 +116,6 @@
     <Content Include="Test\Users.aspx" />
     <Content Include="Test\UserAdd.aspx" />
     <Content Include="Catalog\Categories.aspx" />
-    <Content Include="Catalog\StationeriesOld.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -478,13 +477,6 @@
     </Compile>
     <Compile Include="Catalog\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Catalog\StationeriesOld.aspx.cs">
-      <DependentUpon>StationeriesOld.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Catalog\StationeriesOld.aspx.designer.cs">
-      <DependentUpon>StationeriesOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
