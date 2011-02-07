@@ -80,7 +80,7 @@ namespace SA33.Team12.SSIS.Stock
                 voucher.DateApproved = DateTime.Now;
                 voucher.DateIssued = tran.DateIssued;
                 voucher.VoucherNumber = tran.VoucherNumber;
-                //  avm.DeleteAdjustmentVoucherTransaction(tran);             currently not working
+                avm.DeleteAdjustmentVoucherTransaction(tran);             
                 foreach (StockLogTransaction logTran in tran.StockLogTransactions)
                 {
                     StockLog log = new StockLog();
@@ -90,10 +90,12 @@ namespace SA33.Team12.SSIS.Stock
                     log.Reason = logTran.Reason;
                     log.StationeryID = logTran.StationeryID;
                     log.Type = logTran.Type;
-
+                    log.Price = logTran.Price;
+                    avm.CreateStockLog(log);
+                    avm.DeleteStockLogTransaction(logTran);
                 }
                 avm.CreateAdjustmentVoucher(voucher);
-                UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
+      //          UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
 
             }
 
