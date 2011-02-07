@@ -22,7 +22,7 @@ namespace SA33.Team12.SSIS.DAL.DTO
         public int CreatedBy { get; set; }
         public int ReceiveBy { get; set; }
         public String DONumber { get; set; }
-        public Boolean IsDelivered { get; set; }
+        public bool? IsDelivered { get; set; }
         public DateTime ExactDateReceived { get; set; }
         public DateTime StartDateReceived { get; set; }
         public DateTime EndDateReceived { get; set; }
