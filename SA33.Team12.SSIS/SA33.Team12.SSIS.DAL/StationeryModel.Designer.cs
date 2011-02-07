@@ -4108,15 +4108,13 @@ namespace SA33.Team12.SSIS.DAL
         /// <param name="purchaseOrderID">Initial value of the PurchaseOrderID property.</param>
         /// <param name="quantityToOrder">Initial value of the QuantityToOrder property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        /// <param name="deliveryRemarks">Initial value of the DeliveryRemarks property.</param>
-        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price, global::System.String deliveryRemarks)
+        public static PurchaseOrderItem CreatePurchaseOrderItem(global::System.Int32 purchaseOrderItemID, global::System.Int32 purchaseOrderID, global::System.Int32 quantityToOrder, global::System.Decimal price)
         {
             PurchaseOrderItem purchaseOrderItem = new PurchaseOrderItem();
             purchaseOrderItem.PurchaseOrderItemID = purchaseOrderItemID;
             purchaseOrderItem.PurchaseOrderID = purchaseOrderID;
             purchaseOrderItem.QuantityToOrder = quantityToOrder;
             purchaseOrderItem.Price = price;
-            purchaseOrderItem.DeliveryRemarks = deliveryRemarks;
             return purchaseOrderItem;
         }
 
@@ -4249,7 +4247,7 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String DeliveryRemarks
         {
@@ -4261,7 +4259,7 @@ namespace SA33.Team12.SSIS.DAL
             {
                 OnDeliveryRemarksChanging(value);
                 ReportPropertyChanging("DeliveryRemarks");
-                _DeliveryRemarks = StructuralObject.SetValidValue(value, false);
+                _DeliveryRemarks = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("DeliveryRemarks");
                 OnDeliveryRemarksChanged();
             }
