@@ -40,15 +40,24 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                 using (StationeryRetrievalManager sm = new StationeryRetrievalManager())
                 {
                     DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
-                    StationeryRetrievalForm srf 
+                    StationeryRetrievalForm srf
                         = sm.CreateStationeryRetrievalFormByAllRequisitions(loggedInUser);
-                    Response.Redirect("~/HandleRequest/StationeryRetrievalForm.aspx?ID=" 
+                    Response.Redirect("~/HandleRequest/StationeryRetrievalForm.aspx?ID="
                         + srf.StationeryRetrievalFormID);
                 }
             }
             catch (Exception exception)
             {
                 this.ErrorMessage.Text = exception.Message;
+            }
+        }
+
+        protected void StationeryRetrievalFormGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.ToLower().CompareTo("disburse") == 0)
+            {
+                int disbursementID = int.Parse(e.CommandArgument.ToString());
+
             }
         }
     }

@@ -18,7 +18,7 @@
                         StationeryRetrievalFormID :
                     </th>
                     <td>
-                        <asp:Label ID="StationeryRetrievalFormIDLabel" runat="server" Text='<%# Bind("StationeryRetrievalFormID") %>' />
+                        <%# Eval("StationeryRetrievalFormID") %>
                     </td>
                 </tr>
                 <tr>
@@ -26,7 +26,7 @@
                         StationeryRetrievalNumber :
                     </th>
                     <td>
-                        <asp:Label ID="StationeryRetrievalNumberLabel" runat="server" Text='<%# Bind("StationeryRetrievalNumber") %>' />
+                        <%# Eval("StationeryRetrievalNumber") %>
                     </td>
                 </tr>
                 <tr class="odd">
@@ -34,7 +34,7 @@
                         DateRetrieved :
                     </th>
                     <td>
-                        <asp:Label ID="DateRetrievedLabel" runat="server" Text='<%# Bind("DateRetrieved") %>' />
+                        <%# Eval("DateRetrieved") %>
                     </td>
                 </tr>
                 <tr>
@@ -42,7 +42,7 @@
                         Retrieved By :
                     </th>
                     <td>
-                        <asp:Label ID="RetrievedByUserLabel" runat="server" Text='<%# Convert.ToInt32(Eval("RetrievedBy")) == 0 ? "" : ((User) Eval("RetrievedByUser")).UserName %>' />
+                        <%# Convert.ToInt32(Eval("RetrievedBy")) == 0 ? "" : ((User) Eval("RetrievedByUser")).UserName %>
                     </td>
                 </tr>
             </table>
@@ -56,7 +56,7 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Stationery" SortExpression="StationeryID">
+                    <asp:TemplateField HeaderText="Stationery">
                         <ItemTemplate>
                             <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "" : ((Stationery) Eval("Stationery")).ItemCode  %>
                             <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 ? "" : ((SpecialStationery)Eval("SpecialStationery")).ItemCode%>
@@ -70,14 +70,17 @@
                     <asp:BoundField DataField="QuantityNeeded" HeaderText="QuantityNeeded" SortExpression="QuantityNeeded" />
                     <asp:TemplateField HeaderText="Quantity Retrieved">
                         <ItemTemplate>
-                            <asp:HiddenField runat="server" ID="StationeryRetrievalFormItemIDHiddenField" Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
+                            <asp:HiddenField runat="server" 
+                                ID="StationeryRetrievalFormItemIDHiddenField" 
+                                Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
                             <asp:TextBox runat="server" Visible='<%# !this.IsRetrieved || !this.IsCollected %>'
                                 ID="QuantityRetrievedTextBox" Text='<%# ((int) Eval("QuantityNeeded")) - 5 %>'
                                 CssClass="numericEntry">
                             </asp:TextBox>
-                            <asp:Label runat="server" ID="QuantityRetrievedLabel" Visible='<%# this.IsRetrieved %>'
+                            <asp:Literal runat="server" 
+                                ID="QuantityRetrievedLabel" Visible='<%# this.IsRetrieved %>'
                                 Text='<%# Eval("QuantityRetrieved") %>'>
-                            </asp:Label>
+                            </asp:Literal>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -92,12 +95,17 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Stationery" SortExpression="StationeryID">
+                    <asp:TemplateField HeaderText="Stationery">
                         <ItemTemplate>
                             <%# Convert.ToBoolean(Eval("IsSpecial")) ? ((SpecialStationery)Eval("SpecialStationery")).ItemCode : ((Stationery)Eval("Stationery")).ItemCode%>          
                             </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CheckBoxField DataField="IsSpecial" HeaderText="Is Special" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <input type="checkbox" disabled="disabled"
+                                <%# ((bool) Eval("IsSpecial"))? "checked='checked'":"" %> />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="QuantityNeededByItem" HeaderText="Quantity Needed" />
                     <asp:TemplateField HeaderText="Quantity Retrieved">
                         <ItemTemplate>
@@ -128,7 +136,8 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity Actual">
                         <ItemTemplate>
-                            <asp:HiddenField runat="server" ID="srfByDeptIDHiddenField" Value='<%# Eval("StationeryRetrievalFormItemByDeptID") %>' />
+                            <asp:HiddenField runat="server" ID="srfByDeptIDHiddenField" 
+                                Value='<%# Eval("StationeryRetrievalFormItemByDeptID") %>' />
                             <asp:TextBox runat="server" ID="QuantityActualTextBox"
                                 Text='<%# Eval("QuantityRecommended") %>'  Visible='<%# !this.IsCollected %>' />
                             <asp:Label runat="server" ID="QuantityActualLabel"

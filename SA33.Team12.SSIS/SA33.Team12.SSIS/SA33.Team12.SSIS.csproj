@@ -84,6 +84,7 @@
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
+    <Content Include="RequestStationery\Disbursements.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalList.aspx" />
@@ -291,6 +292,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RequestStationery\Disbursements.aspx.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestStationery\Disbursements.aspx.designer.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
     </Compile>
     <Compile Include="RequestStationery\ViewRequestHistory.aspx.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>

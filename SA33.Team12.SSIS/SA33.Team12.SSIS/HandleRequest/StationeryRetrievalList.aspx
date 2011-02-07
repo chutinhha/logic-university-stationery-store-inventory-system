@@ -42,7 +42,8 @@
             SortExpression="IsDistributed" />
         <asp:TemplateField>
             <ItemTemplate>
-                <asp:LinkButton runat="server" ID="DisburseLinkButton" 
+                <asp:LinkButton runat="server" ID="DisburseLinkButton" CommandName="Disburse"
+                    CommandArgument='<%# Eval("StationeryRetrievalFormID")%>'
                     Text="Disburse" Visible='<%# !(bool) Eval("IsDistributed") %>' /> 
             </ItemTemplate>
         </asp:TemplateField>
