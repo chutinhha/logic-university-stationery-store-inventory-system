@@ -68,7 +68,7 @@ namespace SA33.Team12.SSIS.BLL
             return adjustmentVoucherDAO.FindAdjustmentVoucherTransactionsByGetID(AdjID);
         }
 
-        void DeleteAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        public void DeleteAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
         {
             adjustmentVoucherDAO.DeleteAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
         }
@@ -162,12 +162,6 @@ namespace SA33.Team12.SSIS.BLL
             {
                 throw new Exception("Adjustment Voucher Creation Failed" + ex.Message);
             }
-        }
-
-        public void ApproveAdjustmentVoucher(AdjustmentVoucher adjustmentVoucher)
-        {
-            //Still thinking what to do with this
-            //AdjustmentVoucherDAO.ApproveAdjustmentVoucherTransaction(adjustmentVoucherTransaction);
         }
 
         public void UpdateAdjustmentVoucher(AdjustmentVoucher adjustmentVoucher)
