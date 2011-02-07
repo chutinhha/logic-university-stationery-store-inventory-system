@@ -481,15 +481,16 @@ namespace SA33.Team12.SSIS.DAL
             {
                 Location tempLocation = (from l in context.Locations
                                          where l.LocationID == location.LocationID
-                                         select l).First<Location>();
+                                         select l).FirstOrDefault<Location>();
 
-                tempLocation.Name = location.Name;
-                tempLocation.CreatedByUser = location.CreatedByUser;
-                tempLocation.CreatedDate = location.CreatedDate;
+                if (location.Name != string.Empty)
+                {
+                    tempLocation.Name = location.Name;                    
+                }
+               
 
                 using (TransactionScope ts = new TransactionScope())
-                {
-                   
+                {                   
                     context.SaveChanges();
                     ts.Complete();
                     return tempLocation;
@@ -497,7 +498,7 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception)
             {
-                throw;
+                throw new CatalogException("Location Update Failed.");
             }
         }
 
@@ -518,7 +519,7 @@ namespace SA33.Team12.SSIS.DAL
             }
             catch (Exception)
             {
-                throw;
+                throw new CatalogException("Delete Location Failed.");
             }
         }
         # endregion

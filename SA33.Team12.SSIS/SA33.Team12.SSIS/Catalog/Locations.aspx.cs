@@ -66,6 +66,11 @@ namespace SA33.Team12.SSIS.Catalog
 
         }
 
+        protected void LocationGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+
+        }
+
        
     }
 }
