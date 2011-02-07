@@ -48,7 +48,6 @@
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
                 ShowSelectButton="True" />
-            <asp:DynamicField DataField="CategoryID" HeaderText="CategoryID" />
             <asp:TemplateField ConvertEmptyStringToNull="False" HeaderText="Name" 
                 SortExpression="Name">
                 <ItemTemplate>
