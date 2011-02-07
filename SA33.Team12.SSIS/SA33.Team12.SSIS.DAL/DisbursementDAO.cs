@@ -4,12 +4,14 @@
  ***/
 
 using System;
+using System.Data.Objects;
 using System.Web;
 using System.ComponentModel;
 using System.Transactions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using SA33.Team12.SSIS.DAL.DTO;
 
 
 namespace SA33.Team12.SSIS.DAL
@@ -105,6 +107,32 @@ namespace SA33.Team12.SSIS.DAL
                 select d;
             List<Disbursement> disbursements = Query.ToList<Disbursement>();
             return disbursements;
+        }
+
+        public List<Disbursement> CreateDisbursementBySRF(User createdBy, int stationeryRetrievalFormId)
+        {
+            try
+            {
+                ObjectParameter message = new ObjectParameter("Message", typeof(string));
+
+                int errorCode = context.CreateDisbursementsBySRFId(stationeryRetrievalFormId,
+                                                                   createdBy.UserID, message);
+
+                if (errorCode == -1)
+                    throw new Exceptions.StationeryRetrievalException(message.Value.ToString());
+                else
+                {
+                    return
+                        FindDisbursementByCriteria(new DisbursementSearchDTO()
+                            {
+                                StationeryRetrievalFormID = stationeryRetrievalFormId
+                            });
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         #endregion
 

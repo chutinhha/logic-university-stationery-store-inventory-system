@@ -1016,6 +1016,37 @@ namespace SA33.Team12.SSIS.DAL
     
             return base.ExecuteFunction("SetRecommendedQuantity", srfIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="sRFID">No Metadata Documentation available.</param>
+        /// <param name="userId">No Metadata Documentation available.</param>
+        /// <param name="message">No Metadata Documentation available.</param>
+        public int CreateDisbursementsBySRFId(Nullable<global::System.Int32> sRFID, Nullable<global::System.Int32> userId, ObjectParameter message)
+        {
+            ObjectParameter sRFIDParameter;
+            if (sRFID.HasValue)
+            {
+                sRFIDParameter = new ObjectParameter("SRFID", sRFID);
+            }
+            else
+            {
+                sRFIDParameter = new ObjectParameter("SRFID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter userIdParameter;
+            if (userId.HasValue)
+            {
+                userIdParameter = new ObjectParameter("UserId", userId);
+            }
+            else
+            {
+                userIdParameter = new ObjectParameter("UserId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("CreateDisbursementsBySRFId", sRFIDParameter, userIdParameter, message);
+        }
 
         #endregion
     }

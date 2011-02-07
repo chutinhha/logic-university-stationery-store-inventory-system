@@ -55,28 +55,14 @@ namespace SA33.Team12.SSIS.BLL
             return newDisbursement;
         }
 
-        public Disbursement CreateDisbursementBySRF(StationeryRetrievalForm SRF)
+        public List<Disbursement> CreateDisbursementBySRF(User CreatedBy, int stationeryRetrievalFormId)
         {
-            Disbursement newDisbursement = new Disbursement();
-            Disbursement createdDisbursement = new Disbursement();
-            
-            try
-            {
-                if (ValidateStationeryRetrievalForm(SRF, DisbursementMethod.CreateBySRF))
-                {
-                    newDisbursement.DateCreated = Convert.ToDateTime(DateTime.Now.Date.ToShortDateString());
-                    newDisbursement.StationeryRetrievalFormID = SRF.StationeryRetrievalFormID;
-                    newDisbursement.CreatedBy = 0;
-                    createdDisbursement = disbursementDAO.CreateDisbursement(newDisbursement);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-            return createdDisbursement;
+            return disbursementDAO.CreateDisbursementBySRF(CreatedBy, stationeryRetrievalFormId);
         }
-
+        public List<Disbursement> CreateDisbursementBySRF(User CreatedBy, StationeryRetrievalForm stationeryRetrievalForm)
+        {
+            return disbursementDAO.CreateDisbursementBySRF(CreatedBy, stationeryRetrievalForm.StationeryRetrievalFormID);
+        }
 
 
         public Disbursement UpdateDisbursement(Disbursement disbursement)

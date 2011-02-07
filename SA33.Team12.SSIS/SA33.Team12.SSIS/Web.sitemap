@@ -4,17 +4,19 @@
     <siteMapNode url="default.aspx" title="Home Page"  description="Home Page" />
 
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
+    
     <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
       <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
       <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
       <siteMapNode url="~/Stock/ApplyAdjustmentVoucher.aspx" title="Apply Adjustment" description="Apply Adjustment Voucher"/>
       <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
     </siteMapNode>
+    
     <siteMapNode url="~/HandleRequest/StationeryRetrievalList.aspx"
                  title="Handle Requests" description="Stationery Retrieval Forms">
       <siteMapNode url="~/HandleRequest/StationeryRetrievalForm.aspx"
                    title="Stationery Retrieval Form" description="Stationery Retrieval Form" />
-      <siteMapNode url="~/HandleRequest/Disbursement.aspx" title="Disbursement" description="Disbursement" />
+      <siteMapNode url="~/HandleRequest/Disbursements.aspx" title="Disbursements" description="Disbursements" />
     </siteMapNode>
 
     <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />

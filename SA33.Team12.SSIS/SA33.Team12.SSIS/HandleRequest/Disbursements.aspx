@@ -8,8 +8,10 @@
 <fieldset>
 <legend>Maintain Disbursements</legend>
 
-<asp:GridView runat="server" ID="DisbursementGridView" AutoGenerateColumns="False" 
-        DataSourceID="DisbursementObjectDataSource" AllowPaging="True">
+<asp:GridView runat="server" 
+    ID="DisbursementGridView" 
+        AutoGenerateColumns="False" 
+        AllowPaging="True">
     <Columns>
         <asp:BoundField DataField="DisbursementID" HeaderText="Id" 
             SortExpression="DisbursementID" />
@@ -17,7 +19,8 @@
             HeaderText="Stationery Retrieval No." 
             SortExpression="StationeryRetrievalFormID">
             <ItemTemplate>
-                <%# ((StationeryRetrievalForm) Eval("StationeryRetrievalForm")).StationeryRetrievalNumber %>
+                <a href='<%= Page.ResolveClientUrl("~") %>HandleRequest/StationeryRetrievalForm.aspx?ID=<%# Eval("StationeryRetrievalFormID") %>'>
+                <%# ((StationeryRetrievalForm) Eval("StationeryRetrievalForm")).StationeryRetrievalNumber %></a>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="DepartmentID" 
@@ -34,13 +37,15 @@
                 <%# ((User)Eval("User")).UserName %>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:CommandField ShowSelectButton="True" />
+        <asp:TemplateField HeaderText="Action">
+            <ItemTemplate>
+                <a href='<%=Page.ResolveClientUrl("~") %>HandleRequest/Disbursement.aspx?DisbursementID=<%# Eval("DisbursementID") %>'>
+                    View</a>
+                    
+            </ItemTemplate>
+        </asp:TemplateField>
     </Columns>
 </asp:GridView>
-
-    <asp:ObjectDataSource ID="DisbursementObjectDataSource" runat="server" 
-        SelectMethod="FindAllDisbursement" 
-        TypeName="SA33.Team12.SSIS.BLL.DisbursementManager"></asp:ObjectDataSource>
 
 </fieldset>
 
