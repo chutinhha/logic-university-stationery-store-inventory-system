@@ -17,7 +17,7 @@
                             Text='<%# Eval("VoucherNumber") %>'></asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("RequisitionID") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("AdjustmentVoucherTransactionID") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
             <asp:BoundField DataField="VoucherNumber" HeaderText="Voucher Number" 
@@ -32,7 +32,7 @@
              <asp:TemplateField HeaderText="Approve" ShowHeader="False">
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" 
-                            CommandName="Approve" CommandArgument='<%# Eval("RequisitionID") %>' Text="Approve"></asp:LinkButton>
+                            CommandName="Approve" CommandArgument='<%# Eval("AdjustmentVoucherTransactionID") %>' Text="Approve"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
         </Columns>

@@ -13,11 +13,20 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class ApproveAdjustmentVoucher : System.Web.UI.Page
     {
-        AdjustmentVoucherManager avm = new AdjustmentVoucherManager();
+
         List<AdjustmentVoucherTransaction> trans;
         User currentUser;
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                Populate();
+            }
+
+        }
+
+        private void Populate()
         {
             using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
             {
@@ -25,7 +34,6 @@ namespace SA33.Team12.SSIS.Stock
                 gvAdjustments.DataSource = trans;
                 gvAdjustments.DataBind();
             }
-          
         }
 
         protected void gvAdjustments_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -62,14 +70,34 @@ namespace SA33.Team12.SSIS.Stock
 
         private void ApproveSingleAdj(int AdjID)
         {
-            AdjustmentVoucherTransaction tran = avm.GetAdjustmentVoucherTransactionByID(AdjID);
-            AdjustmentVoucher voucher = new AdjustmentVoucher();
+            using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
+            {
+                AdjustmentVoucherTransaction tran = avm.GetAdjustmentVoucherTransactionByID(AdjID);
+                SA33.Team12.SSIS.DAL.AdjustmentVoucher voucher = new SA33.Team12.SSIS.DAL.AdjustmentVoucher();
 
-     
-     //       r.ApprovedBy = currentUser.UserID;
-     //       requisitionManager.ApproveRequisition(r);
-    //        UtilityFunctions.SendEmail(r.RequisitionID + " - Your Request has been approved", "Dear " + r.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", r.CreatedByUser);
+                voucher.CreatedBy = tran.CreatedBy;
+                voucher.ApprovedBy = 3; //tesing only
+                voucher.DateApproved = DateTime.Now;
+                voucher.DateIssued = tran.DateIssued;
+                voucher.VoucherNumber = tran.VoucherNumber;
+                //  avm.DeleteAdjustmentVoucherTransaction(tran);             currently not working
+                foreach (StockLogTransaction logTran in tran.StockLogTransactions)
+                {
+                    StockLog log = new StockLog();
+                    log.AdjustmentVoucher = voucher;
+                    log.Balance = logTran.Balance;
+                    log.Quantity = logTran.Quantity;
+                    log.Reason = logTran.Reason;
+                    log.StationeryID = logTran.StationeryID;
+                    log.Type = logTran.Type;
 
+                }
+                avm.CreateAdjustmentVoucher(voucher);
+                UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
+
+            }
+
+            Populate();
         }
 
         protected void btnApproveAll_Click(object sender, EventArgs e)
