@@ -54,8 +54,8 @@ namespace SA33.Team12.SSIS.Stock
                 po.ReceivedBy = Membership.GetCurrentLoggedInUser().UserID;
                 pom.UpdatePurchaseOrder(po);
             }
-            
 
+            Response.Redirect("ViewPurchaseOrder.aspx");
         }
 
         protected void btnAdjust_Click(object sender, EventArgs e)
