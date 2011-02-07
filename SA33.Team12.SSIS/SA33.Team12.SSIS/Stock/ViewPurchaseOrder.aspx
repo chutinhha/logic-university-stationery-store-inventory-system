@@ -107,6 +107,11 @@
         <asp:GridView ID="gvPurchaseOrder" runat="server" AutoGenerateColumns="False" 
         >
             <Columns>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <%# Container.DataItemIndex + 1  %>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <asp:BoundField DataField="PurchaseOrderID" HeaderText="PO ID" 
                     SortExpression="PurchaseOrderID" />
                 <asp:TemplateField HeaderText="PO Number">
