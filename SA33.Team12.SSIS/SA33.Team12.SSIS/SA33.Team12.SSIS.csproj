@@ -161,7 +161,6 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administration\BlackListLog.cs" />
     <Compile Include="Administration\BlackListLogs.aspx.cs">
       <DependentUpon>BlackListLogs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
