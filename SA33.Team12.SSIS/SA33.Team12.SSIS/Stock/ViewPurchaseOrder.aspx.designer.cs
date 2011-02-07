@@ -49,6 +49,15 @@ namespace SA33.Team12.SSIS.Stock {
         protected global::System.Web.UI.WebControls.TextBox txtEndDateOfOrder;
         
         /// <summary>
+        /// txtPONumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPONumber;
+        
+        /// <summary>
         /// btnView control.
         /// </summary>
         /// <remarks>
