@@ -20,6 +20,12 @@
             <td>Start Black Listed Date :</td>
             <td>
                 <asp:TextBox runat="server" ID="StartBlackListedDateTextBox" />
+                <asp:RegularExpressionValidator runat="server"
+                    Display="Dynamic"
+                    ValidationGroup="Search"
+                    ValidationExpression="\d?\d/\d\d/\d\d\d\d"
+                    ControlToValidate="StartBlackListedDateTextBox"
+                    Text="Please enter valid date." />
                 <script type="text/javascript">
 					$(function() {
 					    $('#<%= this.StartBlackListedDateTextBox.ClientID %>').datepicker({
@@ -43,6 +49,13 @@
             <td>Start Black Listed Date :</td>
             <td>
                 <asp:TextBox runat="server" ID="EndBlackListedDateTextBox" />
+                <asp:RegularExpressionValidator runat="server"
+                    Display="Dynamic"
+                    ValidationGroup="Search"
+                    ValidationExpression="\d?\d/\d\d/\d\d\d\d"
+                    ControlToValidate="EndBlackListedDateTextBox"
+                    Text="Please enter valid date." />
+
                 <script type="text/javascript">
                     $(function () {
                         $('#<%= this.EndBlackListedDateTextBox.ClientID %>').datepicker({
@@ -69,6 +82,9 @@
             </td>
         </tr>
     </table>
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server"
+                        ValidationGroup="Search" />
+    <asp:Label ID="ErrorMessage" runat="server" CssClass="failureNotification" />
 </fieldset>
 <fieldset>
 <legend>Black List Logs</legend>
