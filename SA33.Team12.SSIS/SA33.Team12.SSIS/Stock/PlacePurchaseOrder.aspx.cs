@@ -31,7 +31,7 @@ namespace SA33.Team12.SSIS.Stock
                 this.gvPOItems.DataSource = stationeries;
                 this.gvPOItems.DataBind();
             }
-            //          lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName ;
+            lblCreatedBy.Text = Membership.GetCurrentLoggedInUser().UserName;
             lblDate.Text = DateTime.Now.ToShortDateString();
         }
 
@@ -45,7 +45,7 @@ namespace SA33.Team12.SSIS.Stock
                 purchaseOrder.PONumber = "88888";
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-                purchaseOrder.CreatedBy = 1; //testing purpose only
+                purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID; 
                 purchaseOrder.IsDelivered = false;
                 purchaseOrder.DateToSupply = DateTime.Now;
                 //      purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);  //dont know working or not
@@ -55,14 +55,14 @@ namespace SA33.Team12.SSIS.Stock
                     PurchaseOrderItem item = new PurchaseOrderItem();
 
                     item.PurchaseOrder = purchaseOrder;
-                    item.StationeryID = (int) gvPOItems.DataKeys[r.RowIndex].Value;
+                    item.StationeryID = (int)gvPOItems.DataKeys[r.RowIndex].Value;
                     item.QuantityToOrder = 5;
-              //      item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
+                  //   item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
                     using (CatalogManager cm = new CatalogManager())
                     {
                         StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
                         criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("ddlSupplier")).SelectedValue.ToString());
-                        criteria.StationeryID = (int) item.StationeryID;
+                        criteria.StationeryID = (int)item.StationeryID;
                         item.Price = (decimal)88.88;
                         //         item.Price = cm.FindStationeryPricesByCriteria(criteria).Price;    
                         // the above command encounterd nullreference exception
@@ -70,13 +70,9 @@ namespace SA33.Team12.SSIS.Stock
                         // record supplier ID for the PO
                         purchaseOrder.SupplierID = criteria.SupplierID;
                     }
-             //       purchaseOrderDAO.CreatePurchaseOrderItem(item);
-                   pom.CreatePurchaseOrderItem(item);
+                   // pom.CreatePurchaseOrderItem(item);
+                    purchaseOrder.PurchaseOrderItems.Add(item);
                 }
-                
-       
-
-          //      purchaseOrderDAO.CreatePurchaseOrder(purchaseOrder);
                 pom.CreatePurchaseOrder(purchaseOrder);
             }
         }
@@ -111,7 +107,7 @@ namespace SA33.Team12.SSIS.Stock
             //            }
             //        }
             //    }
-                
+
             //}
         }
 
