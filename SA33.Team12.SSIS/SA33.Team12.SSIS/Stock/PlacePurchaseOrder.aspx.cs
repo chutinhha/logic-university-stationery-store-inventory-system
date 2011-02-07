@@ -42,13 +42,12 @@ namespace SA33.Team12.SSIS.Stock
             {
                 PurchaseOrder purchaseOrder = new PurchaseOrder();
 
-                purchaseOrder.PONumber = "88888";
+                purchaseOrder.PONumber = pom.CreatePONumber();
                 purchaseOrder.DateOfOrder = DateTime.Now;
                 purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
                 purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID; 
                 purchaseOrder.IsDelivered = false;
-                purchaseOrder.DateToSupply = DateTime.Now;
-                //      purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);  //dont know working or not
+                purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);  //dont know working or not
 
                 foreach (GridViewRow r in gvPOItems.Rows)
                 {
