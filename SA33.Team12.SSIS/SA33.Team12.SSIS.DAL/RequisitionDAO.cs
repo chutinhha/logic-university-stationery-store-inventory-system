@@ -202,7 +202,7 @@ namespace SA33.Team12.SSIS.DAL
                                            where p.RequisitionID == cancelRequisition.RequisitionID
                                            select p).FirstOrDefault<Requisition>();
 
-                    var status = (from s in context.Statuses where s.Name == "Cancelled" select s).FirstOrDefault<Status>();
+                    var status = (from s in context.Statuses where s.Name == "Cancel" select s).FirstOrDefault<Status>();
 
                     UpdateRequisitionStatus(tempRequisition, status);
                     context.SaveChanges();
@@ -295,7 +295,7 @@ namespace SA33.Team12.SSIS.DAL
         {
             try
             {
-                return GetAllRequisition().Where(t => (t.ApprovedBy == 0 || t.ApprovedByUser == null) && t.DepartmentID == departmentID && t.Status.Name != "Cancelled").ToList<Requisition>();
+                return GetAllRequisition().Where(t => (t.ApprovedBy == 0 || t.ApprovedByUser == null) && t.DepartmentID == departmentID && t.Status.Name != "Cancel").ToList<Requisition>();
             }
             catch (Exception)
             {

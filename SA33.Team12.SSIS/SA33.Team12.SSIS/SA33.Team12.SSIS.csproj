@@ -577,6 +577,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Print\Department\Web.config" />
+    <Content Include="Print\Employee\Web.config" />
     <None Include="Print\Store\ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>
