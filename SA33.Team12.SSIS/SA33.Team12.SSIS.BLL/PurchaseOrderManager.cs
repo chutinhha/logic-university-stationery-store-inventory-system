@@ -32,6 +32,20 @@ namespace SA33.Team12.SSIS.BLL
             Create, Update
         };
 
+        public string CreatePONumber()
+        {
+            string POnumber = "";
+            foreach (PurchaseOrder po in context.PurchaseOrders)
+            {
+                if (po.PONumber.CompareTo(POnumber) > 0)
+                {
+                    POnumber = po.PONumber;
+                }
+            }
+            POnumber = (int.Parse(POnumber) + 1).ToString();
+            return POnumber;
+        }
+
         //CRUD for PurchaseOrder
         public PurchaseOrder CreatePurchaseOrder(PurchaseOrder po)
         {
