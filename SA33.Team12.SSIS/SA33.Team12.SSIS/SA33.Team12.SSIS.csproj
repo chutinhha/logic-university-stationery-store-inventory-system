@@ -71,6 +71,7 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Administration\MaintainCollectionPoint.aspx" />
     <Content Include="Administration\MaintainDepartment.aspx" />
     <Content Include="Administration\UpdateCollectionPoint.aspx" />
     <Content Include="Approval\RequestApproval.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\MaintainCollectionPoint.aspx.cs">
+      <DependentUpon>MaintainCollectionPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\MaintainCollectionPoint.aspx.designer.cs">
+      <DependentUpon>MaintainCollectionPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\MaintainDepartment.aspx.cs">
       <DependentUpon>MaintainDepartment.aspx</DependentUpon>
