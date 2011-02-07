@@ -66,14 +66,12 @@ namespace SA33.Team12.SSIS.Test
                 {
                     RequestItemGridView.DataSource = reqItems;
                     RequestItemGridView.DataKeyNames = new string[] { "RequisitionItemID" };
-
                 }
 
                 if (splReqItems.Count > 0)
                 {
                     SpecialRequestItemGridView.DataSource = splReqItems;
                     SpecialRequestItemGridView.DataKeyNames = new string[] { "SpecialStationeryID" };
-
                 }
                 
                 DetailsView1.DataSource = reqItems;
@@ -117,19 +115,13 @@ namespace SA33.Team12.SSIS.Test
                 {
                     
                     temp.QuantityRequested = Convert.ToInt32(((TextBox)row.FindControl("QtyTextBox")).Text);
-                    temp.StationeryID = Convert.ToInt32(((DropDownList)row.FindControl("stationeryDDL")).SelectedValue);
-
-                    
+                    temp.StationeryID = Convert.ToInt32(((DropDownList)row.FindControl("stationeryDDL")).SelectedValue);                    
                     break;
-
                 }
             }
-
             Session["Requisition"] = requisition;
             RequestItemGridView.EditIndex = -1;
-            GridDataBind();                  
-
-           
+            GridDataBind();           
         }
 
         protected void RequestItemGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -181,9 +173,6 @@ namespace SA33.Team12.SSIS.Test
 
             }
             GridDataBind();
-
-
-
         }
 
         private void GridDataBind()
@@ -217,7 +206,7 @@ namespace SA33.Team12.SSIS.Test
                 Requisition temp = requisitionManager.CreateRequisition(requisition);
                // UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
                 
-               // Response.Redirect( Server.MapPath("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID));
+                //Response.Redirect( Server.MapPath("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID));
                 Session["Requisition"] = null;
 
                 requisition = null;
@@ -269,6 +258,19 @@ namespace SA33.Team12.SSIS.Test
         protected void RequestItemGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
            
+        }
+
+        protected void SpecialRequestItemGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            foreach (var item in requisition.SpecialRequisitionItems)
+            {
+                if (item.Name == e.Keys["Name"].ToString())
+                {
+                    requisition.SpecialRequisitionItems.Remove(item);
+                    break;
+                }
+            }
+            GridDataBind();
         }
     }
 }

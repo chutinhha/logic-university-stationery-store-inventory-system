@@ -523,7 +523,7 @@ namespace SA33.Team12.SSIS.BLL
             try
             {
                 RequisitionItem temp = requisitionDAO.GetRequisitionItemsByID(requisitionItem.RequisitionItemID);
-                if (temp != null && ValidateRequisitionItem(temp, RequisitionMethod.Update))
+                if (ValidateRequisitionItem(temp, RequisitionMethod.Update))
                 {
                     temp.Stationery = requisitionItem.Stationery;
                     temp.QuantityRequested = requisitionItem.QuantityRequested;
