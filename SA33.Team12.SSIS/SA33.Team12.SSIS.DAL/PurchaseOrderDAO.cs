@@ -102,16 +102,16 @@ namespace SA33.Team12.SSIS.DAL
                     && (EntityFunctions.DiffDays(u.DateOfOrder, (criteria.StartDateOfOrder == null || criteria.StartDateOfOrder == DateTime.MinValue ? u.DateOfOrder : criteria.StartDateOfOrder)) <= 0
                     && EntityFunctions.DiffDays(u.DateOfOrder, (criteria.EndDateOfOrder == null || criteria.EndDateOfOrder == DateTime.MinValue ? u.DateOfOrder : criteria.EndDateOfOrder)) >= 0)
                     && (EntityFunctions.DiffDays(u.DateOfOrder, (criteria.ExactDateOfOrder == null || criteria.ExactDateOfOrder == DateTime.MinValue ? u.DateOfOrder : criteria.ExactDateOfOrder)) == 0)
-                    && u.IsDelivered == (criteria.IsDelivered == null ? u.IsDelivered : criteria.IsDelivered)
+                    //&& u.IsDelivered == (criteria.IsDelivered == null ? u.IsDelivered : criteria.IsDelivered)
                     && u.PONumber == (criteria.PONumber == null ? u.PONumber : criteria.PONumber)
-                    && (EntityFunctions.DiffDays(u.DateReceived, (criteria.StartDateReceived == null || criteria.StartDateReceived == DateTime.MinValue ? u.DateReceived : criteria.StartDateReceived)) <= 0
-                    && EntityFunctions.DiffDays(u.DateReceived, (criteria.EndDateReceived == null || criteria.EndDateReceived == DateTime.MinValue ? u.DateReceived : criteria.EndDateReceived)) >= 0)
-                    && (EntityFunctions.DiffDays(u.DateReceived, (criteria.ExactDateReceived == null || criteria.ExactDateReceived == DateTime.MinValue ? u.DateReceived : criteria.ExactDateReceived)) == 0)
-                    && (EntityFunctions.DiffDays(u.DateToSupply, (criteria.StartDateToSupply == null || criteria.StartDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.StartDateToSupply)) <= 0
-                    && EntityFunctions.DiffDays(u.DateToSupply, (criteria.EndDateToSupply == null || criteria.EndDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.EndDateToSupply)) >= 0)
-                    && (EntityFunctions.DiffDays(u.DateToSupply, (criteria.ExactDateToSupply == null || criteria.ExactDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.ExactDateToSupply)) == 0)
-                    && u.ReceivedBy == (criteria.ReceiveBy == 0 ? u.ReceivedBy : criteria.ReceiveBy)
-                    && u.DONumber == (criteria.DONumber == null ? u.DONumber : criteria.DONumber)
+                    //&& (EntityFunctions.DiffDays(u.DateReceived, (criteria.StartDateReceived == null || criteria.StartDateReceived == DateTime.MinValue ? u.DateReceived : criteria.StartDateReceived)) <= 0
+                    //&& EntityFunctions.DiffDays(u.DateReceived, (criteria.EndDateReceived == null || criteria.EndDateReceived == DateTime.MinValue ? u.DateReceived : criteria.EndDateReceived)) >= 0)
+                    //&& (EntityFunctions.DiffDays(u.DateReceived, (criteria.ExactDateReceived == null || criteria.ExactDateReceived == DateTime.MinValue ? u.DateReceived : criteria.ExactDateReceived)) == 0)
+                    //&& (EntityFunctions.DiffDays(u.DateToSupply, (criteria.StartDateToSupply == null || criteria.StartDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.StartDateToSupply)) <= 0
+                    //&& EntityFunctions.DiffDays(u.DateToSupply, (criteria.EndDateToSupply == null || criteria.EndDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.EndDateToSupply)) >= 0)
+                    //&& (EntityFunctions.DiffDays(u.DateToSupply, (criteria.ExactDateToSupply == null || criteria.ExactDateToSupply == DateTime.MinValue ? u.DateToSupply : criteria.ExactDateToSupply)) == 0)
+                    //&& u.ReceivedBy == (criteria.ReceiveBy == 0 ? u.ReceivedBy : criteria.ReceiveBy)
+                  //  && u.DONumber == (criteria.DONumber == null ? u.DONumber : criteria.DONumber)
                     select u;
                 List<PurchaseOrder> purchaseOrders = Query.ToList<PurchaseOrder>();
                 return purchaseOrders;
