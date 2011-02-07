@@ -32,5 +32,10 @@ namespace SA33.Team12.SSIS.Stock
                 gvPurchaseOrder.DataBind();
             }
         }
+
+        protected void gvPurchaseOrder_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
     }
 }
