@@ -80,5 +80,25 @@ namespace SA33.Team12.SSIS.Stock
                 avm.CreateAdjustmentVoucherTransaction(tran);
             }
         }
+
+        protected void gvAdjustmentItems_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int stationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
+                if (stationeryID != 0)
+                {
+                    Literal ltl = e.Row.FindControl("ltlDescription") as Literal;
+                    if (ltl != null)
+                    {
+                        using (CatalogManager cm = new CatalogManager())
+                        {
+                            Stationery s = cm.FindStationeryByID(stationeryID);
+                            if (s != null) ltl.Text = s.Description;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
