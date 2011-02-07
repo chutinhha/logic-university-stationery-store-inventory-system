@@ -8,258 +8,223 @@
     <asp:FormView runat="server" ID="DisbursementFormView" 
         DataSourceID="DisbursementObjectDataSource">
         <EditItemTemplate>
-            DisbursementID:
-            <asp:DynamicControl ID="DisbursementIDDynamicControl" runat="server" 
-                DataField="DisbursementID" Mode="Edit" />
+            <tr><th>DisbursementID:</th>
+            <td><asp:TextBox ID="DisbursementIDTextBox" runat="server" 
+                Text='<%# Bind("DisbursementID") %>' /></td></tr>
+
             <br />
-            DateCreated:
-            <asp:DynamicControl ID="DateCreatedDynamicControl" runat="server" 
-                DataField="DateCreated" Mode="Edit" />
+            <tr><th>DateCreated:</th>
+            <td><asp:TextBox ID="DateCreatedTextBox" runat="server" 
+                Text='<%# Bind("DateCreated") %>' /></td></tr>
+
             <br />
-            CreatedBy:
-            <asp:DynamicControl ID="CreatedByDynamicControl" runat="server" 
-                DataField="CreatedBy" Mode="Edit" />
+            <tr><th>CreatedBy:</th>
+            <td><asp:TextBox ID="CreatedByTextBox" runat="server" 
+                Text='<%# Bind("CreatedBy") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalFormID:
-            <asp:DynamicControl ID="StationeryRetrievalFormIDDynamicControl" runat="server" 
-                DataField="StationeryRetrievalFormID" Mode="Edit" />
+            <tr><th>StationeryRetrievalFormID:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormIDTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormID") %>' /></td></tr>
+
             <br />
-            DepartmentID:
-            <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
-                DataField="DepartmentID" Mode="Edit" />
+            <tr><th>DepartmentID:</th>
+            <td><asp:TextBox ID="DepartmentIDTextBox" runat="server" 
+                Text='<%# Bind("DepartmentID") %>' /></td></tr>
+
             <br />
-            DisbursementItems:
-            <asp:DynamicControl ID="DisbursementItemsDynamicControl" runat="server" 
-                DataField="DisbursementItems" Mode="Edit" />
+            <tr><th>DisbursementItems:</th>
+            <td><asp:TextBox ID="DisbursementItemsTextBox" runat="server" 
+                Text='<%# Bind("DisbursementItems") %>' /></td></tr>
+
             <br />
-            User:
-            <asp:DynamicControl ID="UserDynamicControl" runat="server" DataField="User" 
-                Mode="Edit" />
+            <tr><th>User:</th>
+            <td><asp:TextBox ID="UserTextBox" runat="server" Text='<%# Bind("User") %>' /></td></tr>
+
             <br />
-            UserReference:
-            <asp:DynamicControl ID="UserReferenceDynamicControl" runat="server" 
-                DataField="UserReference" Mode="Edit" />
+            <tr><th>UserReference:</th>
+            <td><asp:TextBox ID="UserReferenceTextBox" runat="server" 
+                Text='<%# Bind("UserReference") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalForm:
-            <asp:DynamicControl ID="StationeryRetrievalFormDynamicControl" runat="server" 
-                DataField="StationeryRetrievalForm" Mode="Edit" />
+            <tr><th>StationeryRetrievalForm:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalForm") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalFormReference:
-            <asp:DynamicControl ID="StationeryRetrievalFormReferenceDynamicControl" 
-                runat="server" DataField="StationeryRetrievalFormReference" Mode="Edit" />
+            <tr><th>StationeryRetrievalFormReference:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormReferenceTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormReference") %>' /></td></tr>
+
             <br />
-            Department:
-            <asp:DynamicControl ID="DepartmentDynamicControl" runat="server" 
-                DataField="Department" Mode="Edit" />
+            <tr><th>Department:</th>
+            <td><asp:TextBox ID="DepartmentTextBox" runat="server" 
+                Text='<%# Bind("Department") %>' /></td></tr>
+
             <br />
-            DepartmentReference:
-            <asp:DynamicControl ID="DepartmentReferenceDynamicControl" runat="server" 
-                DataField="DepartmentReference" Mode="Edit" />
+            <tr><th>DepartmentReference:</th>
+            <td><asp:TextBox ID="DepartmentReferenceTextBox" runat="server" 
+                Text='<%# Bind("DepartmentReference") %>' /></td></tr>
+
             <br />
-            EntityState:
-            <asp:DynamicControl ID="EntityStateDynamicControl" runat="server" 
-                DataField="EntityState" Mode="Edit" />
+            <tr><th>EntityState:</th>
+            <td><asp:TextBox ID="EntityStateTextBox" runat="server" 
+                Text='<%# Bind("EntityState") %>' /></td></tr>
+
             <br />
-            EntityKey:
-            <asp:DynamicControl ID="EntityKeyDynamicControl" runat="server" 
-                DataField="EntityKey" Mode="Edit" />
+            <tr><th>EntityKey:</th>
+            <td><asp:TextBox ID="EntityKeyTextBox" runat="server" 
+                Text='<%# Bind("EntityKey") %>' /></td></tr>
+
             <br />
             <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-                CommandName="Update" Text="Update" ValidationGroup="Insert" />
+                CommandName="Update" Text="Update" />
             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
                 CausesValidation="False" CommandName="Cancel" Text="Cancel" />
         </EditItemTemplate>
         <InsertItemTemplate>
-            DisbursementID:
-            <asp:DynamicControl ID="DisbursementIDDynamicControl" runat="server" 
-                DataField="DisbursementID" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>DisbursementID:</th>
+            <td><asp:TextBox ID="DisbursementIDTextBox" runat="server" 
+                Text='<%# Bind("DisbursementID") %>' /></td></tr>
+
             <br />
-            DateCreated:
-            <asp:DynamicControl ID="DateCreatedDynamicControl" runat="server" 
-                DataField="DateCreated" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>DateCreated:</th>
+            <td><asp:TextBox ID="DateCreatedTextBox" runat="server" 
+                Text='<%# Bind("DateCreated") %>' /></td></tr>
+
             <br />
-            CreatedBy:
-            <asp:DynamicControl ID="CreatedByDynamicControl" runat="server" 
-                DataField="CreatedBy" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>CreatedBy:</th>
+            <td><asp:TextBox ID="CreatedByTextBox" runat="server" 
+                Text='<%# Bind("CreatedBy") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalFormID:
-            <asp:DynamicControl ID="StationeryRetrievalFormIDDynamicControl" runat="server" 
-                DataField="StationeryRetrievalFormID" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>StationeryRetrievalFormID:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormIDTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormID") %>' /></td></tr>
+
             <br />
-            DepartmentID:
-            <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
-                DataField="DepartmentID" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>DepartmentID:</th>
+            <td><asp:TextBox ID="DepartmentIDTextBox" runat="server" 
+                Text='<%# Bind("DepartmentID") %>' /></td></tr>
+
             <br />
-            DisbursementItems:
-            <asp:DynamicControl ID="DisbursementItemsDynamicControl" runat="server" 
-                DataField="DisbursementItems" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>DisbursementItems:</th>
+            <td><asp:TextBox ID="DisbursementItemsTextBox" runat="server" 
+                Text='<%# Bind("DisbursementItems") %>' /></td></tr>
+
             <br />
-            User:
-            <asp:DynamicControl ID="UserDynamicControl" runat="server" DataField="User" 
-                Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>User:</th>
+            <td><asp:TextBox ID="UserTextBox" runat="server" Text='<%# Bind("User") %>' /></td></tr>
+
             <br />
-            UserReference:
-            <asp:DynamicControl ID="UserReferenceDynamicControl" runat="server" 
-                DataField="UserReference" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>UserReference:</th>
+            <td><asp:TextBox ID="UserReferenceTextBox" runat="server" 
+                Text='<%# Bind("UserReference") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalForm:
-            <asp:DynamicControl ID="StationeryRetrievalFormDynamicControl" runat="server" 
-                DataField="StationeryRetrievalForm" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>StationeryRetrievalForm:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalForm") %>' /></td></tr>
+
             <br />
-            StationeryRetrievalFormReference:
-            <asp:DynamicControl ID="StationeryRetrievalFormReferenceDynamicControl" 
-                runat="server" DataField="StationeryRetrievalFormReference" Mode="Insert" 
-                ValidationGroup="Insert" />
+            <tr><th>StationeryRetrievalFormReference:</th>
+            <td><asp:TextBox ID="StationeryRetrievalFormReferenceTextBox" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormReference") %>' /></td></tr>
+
             <br />
-            Department:
-            <asp:DynamicControl ID="DepartmentDynamicControl" runat="server" 
-                DataField="Department" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>Department:</th>
+            <td><asp:TextBox ID="DepartmentTextBox" runat="server" 
+                Text='<%# Bind("Department") %>' /></td></tr>
+
             <br />
-            DepartmentReference:
-            <asp:DynamicControl ID="DepartmentReferenceDynamicControl" runat="server" 
-                DataField="DepartmentReference" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>DepartmentReference:</th>
+            <td><asp:TextBox ID="DepartmentReferenceTextBox" runat="server" 
+                Text='<%# Bind("DepartmentReference") %>' /></td></tr>
+
             <br />
-            EntityState:
-            <asp:DynamicControl ID="EntityStateDynamicControl" runat="server" 
-                DataField="EntityState" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>EntityState:</th>
+            <td><asp:TextBox ID="EntityStateTextBox" runat="server" 
+                Text='<%# Bind("EntityState") %>' /></td></tr>
+
             <br />
-            EntityKey:
-            <asp:DynamicControl ID="EntityKeyDynamicControl" runat="server" 
-                DataField="EntityKey" Mode="Insert" ValidationGroup="Insert" />
+            <tr><th>EntityKey:</th>
+            <td><asp:TextBox ID="EntityKeyTextBox" runat="server" 
+                Text='<%# Bind("EntityKey") %>' /></td></tr>
+
             <br />
             <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-                CommandName="Insert" Text="Insert" ValidationGroup="Insert" />
+                CommandName="Insert" Text="Insert" />
             &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
                 CausesValidation="False" CommandName="Cancel" Text="Cancel" />
         </InsertItemTemplate>
         <ItemTemplate>
-            <table>
-                <tr class="odd">
-                    <th>DisbursementID: </th>
-                    <td>
-                        <asp:DynamicControl ID="DisbursementIDDynamicControl" runat="server" 
-                            DataField="DisbursementID" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>DateCreated: </th>
-                    <td>
-                        <asp:DynamicControl ID="DateCreatedDynamicControl" runat="server" 
-                            DataField="DateCreated" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        CreatedBy:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="CreatedByDynamicControl" runat="server" 
-                            DataField="CreatedBy" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        StationeryRetrievalFormID:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="StationeryRetrievalFormIDDynamicControl" runat="server" 
-                            DataField="StationeryRetrievalFormID" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        DepartmentID:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" 
-                            DataField="DepartmentID" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        DisbursementItems:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="DisbursementItemsDynamicControl" runat="server" 
-                            DataField="DisbursementItems" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        User:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="UserReferenceDynamicControl" runat="server" 
-                            DataField="UserReference" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        UserReference:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="UserDynamicControl" runat="server" DataField="User" 
-                            Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        StationeryRetrievalForm:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="StationeryRetrievalFormDynamicControl" runat="server" 
-                            DataField="StationeryRetrievalForm" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        StationeryRetrievalFormReference:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="StationeryRetrievalFormReferenceDynamicControl" 
-                            runat="server" DataField="StationeryRetrievalFormReference" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Department:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="DepartmentDynamicControl" runat="server" 
-                            DataField="Department" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        DepartmentReference:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="DepartmentReferenceDynamicControl" runat="server" 
-                            DataField="DepartmentReference" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        EntityState:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="EntityStateDynamicControl" runat="server" 
-                            DataField="EntityState" Mode="ReadOnly" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        EntityKey:
-                    </th>
-                    <td>
-                        <asp:DynamicControl ID="EntityKeyDynamicControl" runat="server" 
-                            DataField="EntityKey" Mode="ReadOnly" />
-                    </td>
-                </tr>
-            </table>
-            <asp:DetailsView runat="server" ID="DisbursementDetailsView"
-                DataSource='<%# Eval("DisbursementItems") %>'>
-            </asp:DetailsView>
+            <tr><th>DisbursementID:</th>
+            <td><asp:Label ID="DisbursementIDLabel" runat="server" 
+                Text='<%# Bind("DisbursementID") %>' /></td></tr>
+
+            <br />
+            <tr><th>DateCreated:</th>
+            <td><asp:Label ID="DateCreatedLabel" runat="server" 
+                Text='<%# Bind("DateCreated") %>' /></td></tr>
+
+            <br />
+            <tr><th>CreatedBy:</th>
+            <td><asp:Label ID="CreatedByLabel" runat="server" Text='<%# Bind("CreatedBy") %>' /></td></tr>
+
+            <br />
+            <tr><th>StationeryRetrievalFormID:</th>
+            <td><asp:Label ID="StationeryRetrievalFormIDLabel" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormID") %>' /></td></tr>
+
+            <br />
+            <tr><th>DepartmentID:</th>
+            <td><asp:Label ID="DepartmentIDLabel" runat="server" 
+                Text='<%# Bind("DepartmentID") %>' /></td></tr>
+
+            <br />
+            <tr><th>DisbursementItems:</th>
+            <td><asp:Label ID="DisbursementItemsLabel" runat="server" 
+                Text='<%# Bind("DisbursementItems") %>' /></td></tr>
+
+            <br />
+            <tr><th>User:</th>
+            <td><asp:Label ID="UserLabel" runat="server" Text='<%# Bind("User") %>' /></td></tr>
+
+            <br />
+            <tr><th>UserReference:</th>
+            <td><asp:Label ID="UserReferenceLabel" runat="server" 
+                Text='<%# Bind("UserReference") %>' /></td></tr>
+
+            <br />
+            <tr><th>StationeryRetrievalForm:</th>
+            <td><asp:Label ID="StationeryRetrievalFormLabel" runat="server" 
+                Text='<%# Bind("StationeryRetrievalForm") %>' /></td></tr>
+
+            <br />
+            <tr><th>StationeryRetrievalFormReference:</th>
+            <td><asp:Label ID="StationeryRetrievalFormReferenceLabel" runat="server" 
+                Text='<%# Bind("StationeryRetrievalFormReference") %>' /></td></tr>
+
+            <br />
+            <tr><th>Department:</th>
+            <td><asp:Label ID="DepartmentLabel" runat="server" 
+                Text='<%# Bind("Department") %>' /></td></tr>
+
+            <br />
+            <tr><th>DepartmentReference:</th>
+            <td><asp:Label ID="DepartmentReferenceLabel" runat="server" 
+                Text='<%# Bind("DepartmentReference") %>' /></td></tr>
+
+            <br />
+            <tr><th>EntityState:</th>
+            <td><asp:Label ID="EntityStateLabel" runat="server" 
+                Text='<%# Bind("EntityState") %>' /></td></tr>
+
+            <br />
+            <tr><th>EntityKey:</th>
+            <td><asp:Label ID="EntityKeyLabel" runat="server" Text='<%# Bind("EntityKey") %>' /></td></tr>
+
+            <br />
         </ItemTemplate>
     </asp:FormView>
     <asp:ObjectDataSource ID="DisbursementObjectDataSource" runat="server" 
