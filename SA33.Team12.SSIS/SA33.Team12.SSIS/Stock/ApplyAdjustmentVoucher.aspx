@@ -60,10 +60,11 @@
                 </td>
                 <td>
                     <asp:DropDownList ID="ddlType" runat="server">
-                        <asp:ListItem Value="0">ADJ -</asp:ListItem>
-                        <asp:ListItem Value="1">ADJ +</asp:ListItem>
-                        <asp:ListItem Value="2">Consumed</asp:ListItem>
-                        <asp:ListItem Value="3">Replenished</asp:ListItem>
+                        <asp:ListItem Value="0">AdjustmentUp</asp:ListItem>
+                        <asp:ListItem Value="1">AdjustmentDown</asp:ListItem>
+                        <asp:ListItem Value="2">Consumption</asp:ListItem>
+                        <asp:ListItem Value="3">Replenish</asp:ListItem>
+                        <asp:ListItem Value="4">Damage</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td>
@@ -102,6 +103,11 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Reason" HeaderText="Reason" />
+                <asp:TemplateField HeaderText="Type">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltlType" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
                     SortExpression="Quantity" />
                 <asp:BoundField DataField="Balance" HeaderText="Balance" 
