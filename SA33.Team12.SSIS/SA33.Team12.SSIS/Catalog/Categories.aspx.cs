@@ -83,6 +83,7 @@ namespace SA33.Team12.SSIS.Catalog
             try
             {
                 categoryManager.CreateCategory(category);
+                CategoryGridView.DataBind();
             }
             catch (Exception)
             {
@@ -104,7 +105,7 @@ namespace SA33.Team12.SSIS.Catalog
         {
             try
             {
-
+                
             }
             catch (Exception)
             {

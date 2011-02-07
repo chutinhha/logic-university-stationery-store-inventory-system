@@ -138,9 +138,11 @@
                                     <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                                 </EditItemTemplate>
                                 <InsertItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox1"
-                                        Display="Dynamic" ErrorMessage="Item Name Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="itemNameTextBox" runat="server" 
+                                        ValidationGroup="SplItemValidation"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="itemNameTextBox"
+                                        Display="Dynamic" ErrorMessage="Item Name Required" 
+                                        ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                                 </InsertItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Description">
@@ -151,9 +153,11 @@
                                     <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                                 </EditItemTemplate>
                                 <InsertItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox2"
-                                        Display="Dynamic" ErrorMessage="Description Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="DescriptionTextBox" runat="server" 
+                                        ValidationGroup="SplItemValidation"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DescriptionTextBox"
+                                        Display="Dynamic" ErrorMessage="Description Required" 
+                                        ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                                 </InsertItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Quantity Needed">
@@ -164,10 +168,12 @@
                                     <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
                                 </EditItemTemplate>
                                 <InsertItemTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox3"
-                                        Display="Dynamic" ErrorMessage="Quantity Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
-                                    <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TextBox3"
+                                    <asp:TextBox ID="QtyNeededTextBox" runat="server" 
+                                        ValidationGroup="SplItemValidation"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="QtyNeededTextBox"
+                                        Display="Dynamic" ErrorMessage="Quantity Required" 
+                                        ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                                    <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="QtyNeededTextBox"
                                         Display="Dynamic" ErrorMessage="Invalid Quantity Entered" MaximumValue="10000"
                                         MinimumValue="1" Type="Integer" ValidationGroup="SplItemValidation"></asp:RangeValidator>
                                 </InsertItemTemplate>
@@ -180,22 +186,11 @@
                                     <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
                                 </EditItemTemplate>
                                 <InsertItemTemplate>
-                                    <asp:TextBox ID="TextBox4" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBox4"
-                                        Display="Dynamic" ErrorMessage="Reason required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
-                                </InsertItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Unit Of Measure">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label5" runat="server"></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                                </EditItemTemplate>
-                                <InsertItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server" ValidationGroup="SplItemValidation"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBox5"
-                                        Display="Dynamic" ErrorMessage="Unit of Measure Required" ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="ReasonTextBox" runat="server" 
+                                        ValidationGroup="SplItemValidation"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ReasonTextBox"
+                                        Display="Dynamic" ErrorMessage="Reason required" 
+                                        ValidationGroup="SplItemValidation"></asp:RequiredFieldValidator>
                                 </InsertItemTemplate>
                             </asp:TemplateField>
                             <asp:CommandField ShowInsertButton="True" ValidationGroup="SplItemValidation" />
@@ -206,9 +201,7 @@
         </fieldset>
     </fieldset>
     <fieldset>
-        <legend>Items Added</legend>
-            <fieldset>
-                <legend>Items</legend>
+        <legend>Items Addedlegend>Items</legend>
                 <asp:GridView ID="RequestItemGridView" runat="server" 
                     AutoGenerateColumns="False" OnRowCancelingEdit="RequestItemGridView_RowCancelingEdit"
                     OnRowDeleting="RequestItemGridView_RowDeleting" OnRowEditing="RequestItemGridView_RowEditing"
