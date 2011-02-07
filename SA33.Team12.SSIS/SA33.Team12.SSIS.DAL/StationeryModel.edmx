@@ -1930,7 +1930,7 @@
           <Property Name="PurchaseOrderID" Type="Int32" Nullable="false" />
           <Property Name="QuantityToOrder" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="DeliveryRemarks" Type="String" MaxLength="255" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="DeliveryRemarks" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PurchaseOrder" Relationship="SA33.Team12.SSIS.Model.PurchaseOrders_PurchaseOrderItems_FK1" FromRole="PurchaseOrderItems" ToRole="PurchaseOrders" />
           <NavigationProperty Name="Stationery" Relationship="SA33.Team12.SSIS.Model.Stationeries_PurchaseOrderItems" FromRole="PurchaseOrderItems" ToRole="Stationeries" />
           <Property Type="Int32" Name="SpecialStationeryID" />
@@ -3448,7 +3448,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="StationeryModel" ZoomLevel="76">
+      <Diagram Name="StationeryModel" ZoomLevel="100">
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucher" Width="1.5" PointX="7.5" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Width="1.5" PointX="3.125" PointY="20.25" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.ApprovalAudit" Width="1.5" PointX="7.5" PointY="29.25" Height="2.172587890624996" IsExpanded="true" />
