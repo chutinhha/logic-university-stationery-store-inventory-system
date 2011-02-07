@@ -31,19 +31,23 @@ namespace SA33.Team12.SSIS.Test
 
         protected void StationeriesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+         
             if(e.Row.RowType == DataControlRowType.DataRow)
-            {
+            { 
+                List<Supplier> suppliers = new List<Supplier>();
                 int stationeryID = (int) DataBinder.Eval(e.Row.DataItem, "StationeryID");
                 DropDownList SupplierDrowDownList = e.Row.FindControl("SupplierDrowDownList") as DropDownList;
                 using (CatalogManager cm = new CatalogManager())
                 {
-                    List<Supplier> suppliers = cm.GetSuppliersByStationeryID(stationeryID);
+                    List<StationeryPrice> prices = cm.GetStationeryPricesByStationeryID(stationeryID);
+                    foreach (StationeryPrice p in prices)
+                    {
+                        suppliers.Add(p.Supplier);
+                    }
                     SupplierDrowDownList.DataSource = suppliers;
                     SupplierDrowDownList.DataBind();
                 }
             }
-
         }
-
     }
 }
