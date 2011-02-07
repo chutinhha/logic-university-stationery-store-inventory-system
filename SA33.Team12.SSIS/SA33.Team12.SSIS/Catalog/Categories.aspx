@@ -78,7 +78,8 @@
     <asp:ValidationSummary runat="server" DisplayMode="BulletList" 
         CssClass="failureNotification" />
     <asp:GridView runat="server" ID="StationeryGridView"
-        AutoGenerateColumns="true">
+        AutoGenerateColumns="true" onrowdeleted="StationeryGridView_RowDeleted" 
+            onrowdeleting="StationeryGridView_RowDeleting">
     </asp:GridView>
     </fieldset>
     </fieldset>
