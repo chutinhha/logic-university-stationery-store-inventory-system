@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
@@ -37,6 +38,7 @@ namespace SA33.Team12.SSIS.Stock
                     lblSupplier.Text = po.Supplier.CompanyName;
                     lblOrderDate.Text = po.DateOfOrder.ToShortDateString();
                     txtReceivedDate.Text = DateTime.Now.ToShortDateString();
+                    lblReceivedBy.Text = Membership.GetCurrentLoggedInUser().UserName;
                 }
             }
         }
@@ -49,7 +51,7 @@ namespace SA33.Team12.SSIS.Stock
                 po.DONumber = txtDONumber.Text.ToString();
                 po.IsDelivered = true;
                 po.DateReceived = Convert.ToDateTime(txtReceivedDate.Text.ToString());
-          //      po.ReceivedBy = 
+                po.ReceivedBy = Membership.GetCurrentLoggedInUser().UserID;
                 pom.UpdatePurchaseOrder(po);
             }
             
