@@ -22,12 +22,30 @@ namespace SA33.Team12.SSIS.RequestStationery {
         protected global::System.Web.UI.WebControls.FormView DisbursementFormView;
         
         /// <summary>
-        /// DisbursementObjectDataSource control.
+        /// DisbursementGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource DisbursementObjectDataSource;
+        protected global::System.Web.UI.WebControls.GridView DisbursementGridView;
+        
+        /// <summary>
+        /// UpdateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateButton;
+        
+        /// <summary>
+        /// BackButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BackButton;
     }
 }

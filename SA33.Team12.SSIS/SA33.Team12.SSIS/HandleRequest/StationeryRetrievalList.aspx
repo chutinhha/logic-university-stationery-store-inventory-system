@@ -10,7 +10,8 @@
 <legend>Stationery Retrieval Forms</legend>
 <asp:GridView runat="server" ID="StationeryRetrievalFormGridView" 
         AutoGenerateColumns="False" 
-        onrowdatabound="StationeryRetrievalFormGridView_RowDataBound">
+        onrowdatabound="StationeryRetrievalFormGridView_RowDataBound" 
+        onrowcommand="StationeryRetrievalFormGridView_RowCommand">
     <Columns>
         <asp:BoundField DataField="StationeryRetrievalFormID" 
             HeaderText="ID" 
@@ -42,9 +43,11 @@
             SortExpression="IsDistributed" />
         <asp:TemplateField>
             <ItemTemplate>
+                <a href='<%= Page.ResolveClientUrl("~") %>HandleRequest/Disbursements.aspx?SRFId=<%# Eval("StationeryRetrievalFormID") %>'<%# (bool) Eval("IsDistributed") ? "" : " style='display:none'" %>>View Disbursements</a>
                 <asp:LinkButton runat="server" ID="DisburseLinkButton" CommandName="Disburse"
                     CommandArgument='<%# Eval("StationeryRetrievalFormID")%>'
-                    Text="Disburse" Visible='<%# !(bool) Eval("IsDistributed") %>' /> 
+                    Text="Disburse" Visible='<%# (bool) Eval("IsCollected") && !(bool) Eval("IsDistributed") %>' />
+
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>

@@ -1473,6 +1473,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_CreateDisbursment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SRFID" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar" Mode="InOut" />
+        </Function>
         <Function Name="sp_CreateStaioneryFromAllRequisitions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="ProcessAllRequisitions" Type="bit" Mode="In" />
@@ -1788,6 +1793,11 @@
             <End Role="SpecialStationery" EntitySet="SpecialStationeries" />
             <End Role="StockLogTransaction" EntitySet="StockLogTransactions" />
           </AssociationSet>
+          <FunctionImport Name="CreateDisbursementsBySRFId">
+            <Parameter Name="SRFID" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
           <Key>
@@ -3428,6 +3438,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateDisbursementsBySRFId" FunctionName="SA33.Team12.SSIS.Model.Store.sp_CreateDisbursment" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

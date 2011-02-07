@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
@@ -56,8 +57,20 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
         {
             if (e.CommandName.ToLower().CompareTo("disburse") == 0)
             {
-                int disbursementID = int.Parse(e.CommandArgument.ToString());
-
+                try
+                {
+                    int stationeryRetrievalFormID = int.Parse(e.CommandArgument.ToString());
+                    using(DisbursementManager dm = new DisbursementManager())
+                    {
+                        DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
+                        dm.CreateDisbursementBySRF(loggedInUser, stationeryRetrievalFormID);
+                        DataBindStationeryRetrievalFormGridView();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    this.ErrorMessage.Text = exception.Message;
+                }
             }
         }
     }
