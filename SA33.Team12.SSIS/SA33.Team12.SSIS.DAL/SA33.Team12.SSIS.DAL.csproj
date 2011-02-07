@@ -55,6 +55,8 @@
     <Compile Include="CatalogDAO.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CollectionPoint.cs" />
+    <Compile Include="Disbursement.cs" />
+    <Compile Include="DisbursementItem.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="DTO\AdjustmentVoucherTransactionSearchDTO.cs" />
