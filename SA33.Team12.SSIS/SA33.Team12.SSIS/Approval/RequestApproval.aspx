@@ -21,14 +21,26 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="RequisitionForm" HeaderText="RequisitionForm" 
                     SortExpression="RequisitionForm" />
-                <asp:BoundField DataField="CreatedBy" HeaderText="CreatedBy" 
-                    SortExpression="CreatedBy" />
-                <asp:BoundField DataField="DepartmentID" HeaderText="DepartmentID" 
-                    SortExpression="DepartmentID" />
-                <asp:BoundField DataField="StatusID" HeaderText="StatusID" 
-                    SortExpression="StatusID" />
-                <asp:BoundField DataField="UrgencyID" HeaderText="UrgencyID" 
-                    SortExpression="UrgencyID" />
+                <asp:TemplateField HeaderText="Created By">
+             <ItemTemplate>
+                    <%# ((SA33.Team12.SSIS.DAL.User) Eval("CreatedByUser")).UserName %>
+             </ItemTemplate>
+             </asp:TemplateField>
+                <asp:TemplateField HeaderText="Department">
+             <ItemTemplate>
+                    <%# ((SA33.Team12.SSIS.DAL.Department) Eval("Department")).Name %>
+             </ItemTemplate>
+             </asp:TemplateField>
+             <asp:TemplateField HeaderText="Status">
+             <ItemTemplate>
+                    <%# ((SA33.Team12.SSIS.DAL.Status) Eval("Status")).Name %>
+             </ItemTemplate>
+             </asp:TemplateField>
+                <asp:TemplateField HeaderText="Urgency">
+             <ItemTemplate>
+                    <%# ((SA33.Team12.SSIS.DAL.Urgency)Eval("Urgency")).Name%>
+             </ItemTemplate>
+             </asp:TemplateField>
                 <asp:BoundField DataField="DateRequested" HeaderText="DateRequested" 
                     SortExpression="DateRequested" />
                 <asp:TemplateField HeaderText="Approve" ShowHeader="False">

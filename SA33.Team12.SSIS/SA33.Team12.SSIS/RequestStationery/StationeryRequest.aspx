@@ -229,7 +229,7 @@
         </asp:GridView>
     </fieldset>
     <fieldset>
-        <legend>Special Items</legend>
+        <legend>Special Items List</legend>
         <asp:GridView ID="SpecialRequestItemGridView" runat="server" AutoGenerateColumns="False"
             Style="margin-right: 0px" DataKeyNames="Name" OnRowDeleting="SpecialRequestItemGridView_RowDeleting">
             <Columns>
