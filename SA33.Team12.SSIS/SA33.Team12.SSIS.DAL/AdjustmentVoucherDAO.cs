@@ -259,14 +259,9 @@ namespace SA33.Team12.SSIS.DAL
             {
                 //Create a transaction scope
                 using (TransactionScope ts = new TransactionScope())
-                {
-                    //Add adjustmentVoucherTransaction to context                
-                    context.AddToAdjustmentVouchers(AdjustmentVoucher);
-
-                    //Save the changes
-                    context.SaveChanges();
-
-                    //Notify Transaction completed
+                {      
+                    this.context.AdjustmentVouchers.AddObject(AdjustmentVoucher);
+                    this.context.SaveChanges();
                     ts.Complete();
                 }
             }
