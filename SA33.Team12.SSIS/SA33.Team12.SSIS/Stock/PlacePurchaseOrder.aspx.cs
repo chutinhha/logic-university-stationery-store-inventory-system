@@ -19,10 +19,7 @@ namespace SA33.Team12.SSIS.Stock
         //populate all the stationeries whose current quantity in hand are less than reorder level
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                Populate();
-            }
+            Populate();
         }
 
         protected void Populate()
@@ -68,8 +65,8 @@ namespace SA33.Team12.SSIS.Stock
                             PurchaseOrderItem item = new PurchaseOrderItem();
                             item.PurchaseOrder = purchaseOrder;
                             item.StationeryID = (int)gvPOItems.DataKeys[r.RowIndex].Value;
-                                 item.QuantityToOrder = 5;
-                          //  item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
+                            item.QuantityToOrder = 5;
+                            //  item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
                             using (CatalogManager cm = new CatalogManager())
                             {
                                 StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
@@ -118,15 +115,15 @@ namespace SA33.Team12.SSIS.Stock
                 int stationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
                 if (stationeryID != 0)
                 {
-                    //TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
-                    //DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
-                    //if (tb != null)
-                    //{
-                    //    using (PurchaseOrderManager pom = new PurchaseOrderManager())
-                    //    {
-                    //        tb.Text = pom.GetQuantityToOrder(stationeryID).ToString();
-                    //    }
-                    //}
+                    TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
+                    DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
+                    if (tb != null)
+                    {
+                        using (PurchaseOrderManager pom = new PurchaseOrderManager())
+                        {
+                            tb.Text = pom.GetQuantityToOrder(stationeryID).ToString();
+                        }
+                    }
                     List<Supplier> suppliers = new List<Supplier>();
 
                     DropDownList SupplierDrowDownList = e.Row.FindControl("ddlSupplier") as DropDownList;
@@ -143,6 +140,14 @@ namespace SA33.Team12.SSIS.Stock
                 }
             }
         }
+
+        protected void gvPOItems_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPOItems.PageIndex = e.NewPageIndex;
+            DataBind();
+        }
+
+
 
     }
 }
