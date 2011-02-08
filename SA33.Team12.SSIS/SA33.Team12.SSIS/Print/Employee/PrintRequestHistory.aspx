@@ -3,9 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<h2>View Requisition List</h2>
+<h2>Request history</h2>
 
     <br />
+    <fieldset>
+    <legend>Result</legend>
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="RequisitionID" 
         onpageindexchanging="GridView1_PageIndexChanging">
@@ -33,5 +35,6 @@
                 SortExpression="DateApproved" />
         </Columns>
     </asp:GridView>
-
+    </fieldset>
+    <input id="Button1" type="button" value="Print" onclick="window.print();" />
 </asp:Content>

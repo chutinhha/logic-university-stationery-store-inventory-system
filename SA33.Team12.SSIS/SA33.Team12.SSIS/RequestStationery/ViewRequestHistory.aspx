@@ -3,17 +3,7 @@
 
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .style2
-        {
-            width: 96px;
-        }
-        .style3
-        {
-            width: 70px;
-        }
-    </style>
-</asp:Content>
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         Request History</h2>
@@ -50,10 +40,23 @@
             </td>
             <td>&nbsp;</td>
             <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <th align="left">
+                &nbsp;</th>
+            <td>
+                &nbsp;</td>
+            <td>&nbsp;</td>
+            <th align="left">
+                &nbsp;</th>
+            <td>
                 <asp:Button ID="SearchButton" runat="server" OnClick="SearchButton_Click"
                     Text="Search" />
-                <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
             </td>
+            <td>&nbsp;</td>
+            <td>
+                &nbsp;</td>
         </tr>
     </table>
         </fieldset>
@@ -65,6 +68,8 @@
                 <ItemTemplate>
                     <%# Container.DataItemIndex + 1 %>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Right"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Requisition Form#">
                 <ItemTemplate>
@@ -97,10 +102,18 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="DateRequested" HeaderText="DateRequested" SortExpression="DateRequested"
-                DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-HorizontalAlign="Center" />
+                DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-HorizontalAlign="Center" >
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
+            </asp:BoundField>
             <asp:BoundField DataField="DateApproved" HeaderText="DateApproved" SortExpression="DateApproved"
-                DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-HorizontalAlign="Center" />
+                DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-HorizontalAlign="Center" >
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
+            </asp:BoundField>
         </Columns>
+        <EmptyDataTemplate>
+            No records found.
+        </EmptyDataTemplate>
     </asp:GridView>
         </fieldset>
+    <asp:Button ID="Button1" runat="server" Text="Print" OnClientClick="window.print();" />
 </asp:Content>

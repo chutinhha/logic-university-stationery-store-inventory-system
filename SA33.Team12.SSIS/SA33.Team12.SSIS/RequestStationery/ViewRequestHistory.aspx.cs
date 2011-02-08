@@ -20,13 +20,14 @@ namespace SA33.Team12.SSIS.Test
             reqManager = new RequisitionManager();
             currentUser = Utilities.Membership.GetCurrentLoggedInUser();
             reqSearchDTO = new RequisitionSearchDTO();
+            GridView1.DataSource = reqManager.GetAllRequisition(currentUser.UserID, null);
             if (!IsPostBack)
             {
                 for (int i = DateTime.Now.Year ; i > DateTime.Now.Year - 50; i--)
                 {
                     YearDDL.Items.Add(i.ToString());
                 }
-                GridView1.DataSource = reqManager.GetAllRequisition(currentUser.UserID, null);
+               
             }
             else
             {
@@ -34,8 +35,7 @@ namespace SA33.Team12.SSIS.Test
                 if (reqSearchDTO != null)
                 {
                     GridView1.DataSource = reqManager.GetAllRequisition(currentUser.UserID, reqSearchDTO);
-                    if (reqManager.GetAllRequisition(currentUser.UserID, reqSearchDTO).Count == 0)
-                        ErrorLabel.Text = "No Record Found";
+                   
                 }
                 else
                 {
