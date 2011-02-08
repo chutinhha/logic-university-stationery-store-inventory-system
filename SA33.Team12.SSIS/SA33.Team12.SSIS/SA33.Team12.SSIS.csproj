@@ -578,7 +578,6 @@
     <Compile Include="Utilities\Membership.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Notification\" />
   </ItemGroup>
   <ItemGroup>
@@ -605,6 +604,7 @@
   <ItemGroup>
     <Content Include="Approval\Web.config" />
     <Content Include="App_Themes\BlueTheme\Default.skin" />
+    <Content Include="Administration\web.config" />
     <None Include="ClassDiagram1.cd" />
     <Content Include="RequestStationery\Web.config">
       <SubType>Designer</SubType>
