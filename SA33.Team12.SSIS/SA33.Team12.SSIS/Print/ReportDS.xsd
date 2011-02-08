@@ -179,6 +179,30 @@ FROM            VW_RequisitionsByEmployee</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VW_StationeryCatalogueTableAdapter" GeneratorDataComponentClassName="VW_StationeryCatalogueTableAdapter" Name="VW_StationeryCatalogue" UserDataComponentName="VW_StationeryCatalogueTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SA33_Team12_SSISConnectionString (Web.config)" DbObjectName="[SA33.Team12.SSIS].dbo.VW_StationeryCatalogue" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        VW_StationeryCatalogue.*
+FROM            VW_StationeryCatalogue</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="StationeryID" DataSetColumn="StationeryID" />
+              <Mapping SourceColumn="ItemCode" DataSetColumn="ItemCode" />
+              <Mapping SourceColumn="Category" DataSetColumn="Category" />
+              <Mapping SourceColumn="Location" DataSetColumn="Location" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="UnitOfMeasure" DataSetColumn="UnitOfMeasure" />
+              <Mapping SourceColumn="ReorderQuantity" DataSetColumn="ReorderQuantity" />
+              <Mapping SourceColumn="ReorderLevel" DataSetColumn="ReorderLevel" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -325,6 +349,50 @@ FROM            VW_RequisitionsByEmployee</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="VW_StationeryCatalogue" msprop:Generator_TableClassName="VW_StationeryCatalogueDataTable" msprop:Generator_TableVarName="tableVW_StationeryCatalogue" msprop:Generator_TablePropName="VW_StationeryCatalogue" msprop:Generator_RowDeletingName="VW_StationeryCatalogueRowDeleting" msprop:Generator_UserTableName="VW_StationeryCatalogue" msprop:Generator_RowChangingName="VW_StationeryCatalogueRowChanging" msprop:Generator_RowEvHandlerName="VW_StationeryCatalogueRowChangeEventHandler" msprop:Generator_RowDeletedName="VW_StationeryCatalogueRowDeleted" msprop:Generator_RowEvArgName="VW_StationeryCatalogueRowChangeEvent" msprop:Generator_RowChangedName="VW_StationeryCatalogueRowChanged" msprop:Generator_RowClassName="VW_StationeryCatalogueRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StationeryID" msprop:Generator_ColumnVarNameInTable="columnStationeryID" msprop:Generator_ColumnPropNameInRow="StationeryID" msprop:Generator_ColumnPropNameInTable="StationeryIDColumn" msprop:Generator_UserColumnName="StationeryID" type="xs:int" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnitOfMeasure" msprop:Generator_ColumnVarNameInTable="columnUnitOfMeasure" msprop:Generator_ColumnPropNameInRow="UnitOfMeasure" msprop:Generator_ColumnPropNameInTable="UnitOfMeasureColumn" msprop:Generator_UserColumnName="UnitOfMeasure">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReorderQuantity" msprop:Generator_ColumnVarNameInTable="columnReorderQuantity" msprop:Generator_ColumnPropNameInRow="ReorderQuantity" msprop:Generator_ColumnPropNameInTable="ReorderQuantityColumn" msprop:Generator_UserColumnName="ReorderQuantity" type="xs:int" />
+              <xs:element name="ReorderLevel" msprop:Generator_ColumnVarNameInTable="columnReorderLevel" msprop:Generator_ColumnPropNameInRow="ReorderLevel" msprop:Generator_ColumnPropNameInTable="ReorderLevelColumn" msprop:Generator_UserColumnName="ReorderLevel" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -334,6 +402,10 @@ FROM            VW_RequisitionsByEmployee</CommandText>
     <xs:unique name="Requisitions_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Requisitions" />
       <xs:field xpath="mstns:RequisitionID" />
+    </xs:unique>
+    <xs:unique name="VW_StationeryCatalogue_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:VW_StationeryCatalogue" />
+      <xs:field xpath="mstns:StationeryID" />
     </xs:unique>
   </xs:element>
 </xs:schema>
