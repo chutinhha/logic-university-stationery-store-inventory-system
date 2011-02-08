@@ -127,22 +127,12 @@ namespace SA33.Team12.SSIS.BLL
 
         public List<SpecialStationery> GetSpecialStationeryToBeOrdered()
         {
-            List<SpecialStationery> specialStationeries= new List<SpecialStationery>();
-            foreach (SpecialRequisitionItem item in context.SpecialRequisitionItems)
-            {
-                if (item.QuantityRequested > item.QuantityIssued)
-                {
-                    bool existing = false;
-                    foreach (SpecialStationery s in specialStationeries)
-                    {
-                        if (s == item.SpecialStationery)
-                            existing = true;
-                    }
-                    if(!existing)
-                    specialStationeries.Add(item.SpecialStationery);
-                }
-            }
-            return specialStationeries;
+            var Query = from ss in context.SpecialStationeries
+                        where context.SpecialRequisitionItems.Any(
+                            sritem => sritem.SpecialStationeryID == ss.SpecialStationeryID
+                            && sritem.QuantityIssued < sritem.QuantityRequested && ss != null)
+                        select ss;
+            return Query.ToList<SpecialStationery>();
         }
 
         public List<Stationery> GetStationeriesByCategory(int CategoryID)
