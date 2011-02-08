@@ -191,15 +191,14 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         // purchase order reorder automation, will give recommended reorder quantity for specialstationery to satisfy pending requisition 
-        public int GetQuantityToOrderSpecial(SpecialStationery item)
+        public int GetQuantityToOrderSpecial(int id)
         {
-
             int orderQuantity = 0;
 
             foreach (SpecialRequisitionItem specialItem in context.SpecialRequisitionItems)
             {
-                if (specialItem.SpecialRequisitionItemsID == item.SpecialStationeryID && specialItem.QuantityRequested > specialItem.QuantityIssued)
-                    orderQuantity += ((int)specialItem.QuantityRequested - (int)specialItem.QuantityIssued);
+                if (specialItem.SpecialRequisitionItemsID == id && specialItem.QuantityRequested > specialItem.QuantityIssued)
+                    orderQuantity = orderQuantity + ((int)specialItem.QuantityRequested - (int)specialItem.QuantityIssued);
             }
             return orderQuantity;
         }
