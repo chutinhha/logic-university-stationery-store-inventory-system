@@ -125,6 +125,26 @@ namespace SA33.Team12.SSIS.BLL
             return catalogDAO.GetStationeriesByQuantityInHandLessThanReorderLevel();
         }
 
+        public List<SpecialStationery> GetSpecialStationeryToBeOrdered()
+        {
+            List<SpecialStationery> specialStationeries= new List<SpecialStationery>();
+            foreach (SpecialRequisitionItem item in context.SpecialRequisitionItems)
+            {
+                if (item.QuantityRequested > item.QuantityIssued)
+                {
+                    bool existing = false;
+                    foreach (SpecialStationery s in specialStationeries)
+                    {
+                        if (s == item.SpecialStationery)
+                            existing = true;
+                    }
+                    if(!existing)
+                    specialStationeries.Add(item.SpecialStationery);
+                }
+            }
+            return specialStationeries;
+        }
+
         public List<Stationery> GetStationeriesByCategory(int CategoryID)
         {
             return catalogDAO.GetStationeriesByCategory(CategoryID);
@@ -153,7 +173,7 @@ namespace SA33.Team12.SSIS.BLL
             {
                 if (stationery != null)
                 {
-                    stationery.DateModified = DateTime.Now;                    
+                    stationery.DateModified = DateTime.Now;
                     catalogDAO.UpdateStationery(stationery);
                 }
             }
