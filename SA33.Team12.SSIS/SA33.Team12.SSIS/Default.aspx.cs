@@ -8,7 +8,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class _Default : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
