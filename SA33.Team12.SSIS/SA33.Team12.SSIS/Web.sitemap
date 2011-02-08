@@ -21,7 +21,7 @@
     </siteMapNode>
 
     <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />
-    <siteMapNode url="~/Print" title="Print">
+    <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx?" title="Print">
       <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee" />
       <siteMapNode url="~/Print/Store/StationeryOrderedByCategoryReport.aspx" title="Stationery Ordered By Category" />
       <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
