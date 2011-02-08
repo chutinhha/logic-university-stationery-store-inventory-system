@@ -62,8 +62,11 @@ namespace SA33.Team12.SSIS.Stock
                     av.DateIssued = po.DateOfOrder;
                     av.DateApproved = DateTime.Now;
                     av.ApprovedBy = Membership.GetCurrentLoggedInUser().UserID;
+
+                    
                     foreach (PurchaseOrderItem item in po.PurchaseOrderItems)
                     {
+                        // generate stocklog for each poItem
                         StockLog log = new StockLog();
                         log.AdjustmentVoucher = av;
                         log.Balance =  item.Stationery.QuantityInHand;
@@ -73,8 +76,10 @@ namespace SA33.Team12.SSIS.Stock
                         log.Type = 3;           // "replenishment" accroding to enu in DAL.AdjustmentVoucherDAO
                         log.Price = item.Price;
                         log.DateCreated = DateTime.Now;
-               //         avm.CreateStockLog(log);
                         av.StockLogs.Add(log) ;
+
+                        // update replensih stationery stock
+                        item.Stationery.QuantityInHand = item.Stationery.QuantityInHand + item.QuantityToOrder;
                     }
                     avm.CreateAdjustmentVoucher(av);
                 }
