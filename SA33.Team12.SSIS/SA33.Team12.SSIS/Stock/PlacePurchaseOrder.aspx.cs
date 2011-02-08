@@ -55,7 +55,7 @@ namespace SA33.Team12.SSIS.Stock
                     purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
                     purchaseOrder.IsDelivered = false;
                     DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
-                    dtfi.ShortDatePattern = "dd/MM/yyyy";
+                    dtfi.ShortDatePattern = "MM/dd/yyyy";
                     dtfi.DateSeparator = "/";
 
                     purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text, dtfi);
