@@ -130,7 +130,7 @@ namespace SA33.Team12.SSIS.BLL
             var Query = from ss in context.SpecialStationeries
                         where context.SpecialRequisitionItems.Any(
                             sritem => sritem.SpecialStationeryID == ss.SpecialStationeryID
-                            && sritem.QuantityIssued < sritem.QuantityRequested && ss != null)
+                            && (int)sritem.QuantityIssued < sritem.QuantityRequested && ss != null)
                         select ss;
             return Query.ToList<SpecialStationery>();
         }
