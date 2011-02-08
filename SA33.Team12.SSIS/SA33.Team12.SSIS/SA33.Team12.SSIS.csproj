@@ -245,6 +245,18 @@
     <Compile Include="Catalog\SpecialStationeries.aspx.designer.cs">
       <DependentUpon>SpecialStationeries.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Distribution\Disbursements.aspx.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Distribution\Disbursements.aspx.designer.cs">
+      <DependentUpon>Disbursements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Distribution\Distribution.aspx.cs">
+      <DependentUpon>Distribution.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Distribution\Distribution.aspx.designer.cs">
+      <DependentUpon>Distribution.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Print\Employee\PrintRequestHistory.aspx.cs">
       <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
