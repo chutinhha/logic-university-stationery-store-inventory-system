@@ -44,7 +44,7 @@
         AutoGenerateColumns="False" DataSourceID="CategoryObjectDataSource"
         SelectedRowStyle-BackColor="LightGray" 
         onselectedindexchanged="CategoryGridView_SelectedIndexChanged" 
-        DataKeyNames="CategoryID">
+        DataKeyNames="CategoryID" onrowdeleted="CategoryGridView_RowDeleted">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
                 ShowSelectButton="True" />
@@ -68,7 +68,8 @@
         DataObjectTypeName="SA33.Team12.SSIS.DAL.Category" DeleteMethod="DeleteCategory" 
         InsertMethod="CreateCategory" SelectMethod="GetAllCategories" 
         TypeName="SA33.Team12.SSIS.BLL.CatalogManager" 
-        UpdateMethod="UpdateCategory" OldValuesParameterFormatString="original_{0}">
+        UpdateMethod="UpdateCategory" OldValuesParameterFormatString="original_{0}" 
+            ondeleted="CategoryObjectDataSource_Deleted">
     </asp:ObjectDataSource>
 
 
