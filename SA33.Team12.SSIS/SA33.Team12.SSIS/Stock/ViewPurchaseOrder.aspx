@@ -127,7 +127,8 @@
                         <%# ((Supplier) Eval("Supplier")).CompanyName %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="IsDelivered" HeaderText="Delivered" SortExpression="IsDelivered" />
+                <asp:CheckBoxField DataField="IsDelivered" HeaderText="Delivered" 
+                    ReadOnly="True" SortExpression="IsDelivered" />
             </Columns>
         </asp:GridView>
     </fieldset>
