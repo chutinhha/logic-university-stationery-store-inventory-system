@@ -8,6 +8,7 @@ using SA33.Team12.SSIS.Utilities;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using System.Globalization;
 
 namespace SA33.Team12.SSIS.Stock
 {
@@ -53,7 +54,11 @@ namespace SA33.Team12.SSIS.Stock
                     purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
                     purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
                     purchaseOrder.IsDelivered = false;
-                    purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);
+                    DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
+                    dtfi.ShortDatePattern = "dd/MM/yyyy";
+                    dtfi.DateSeparator = "/";
+
+                    purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text,dtfi);
                     purchaseOrder.SupplierID = s.SupplierID;
 
                     foreach (GridViewRow r in gvPOItems.Rows)
