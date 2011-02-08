@@ -22,12 +22,14 @@
     </siteMapNode>
 
     <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />
-    <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx?" title="Print">
+    <siteMapNode url="~/Print/Default.aspx" title="Print">
+      <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="Print Request History" description="Print Request History"></siteMapNode>
       <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee" />
+      <siteMapNode url="~/Print/Store/InventoryStatus.aspx" title="Inventory Status" description="Inventory Status" />
       <siteMapNode url="~/Print/Store/StationeryOrderedByCategoryReport.aspx" title="Stationery Ordered By Category" />
       <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
     </siteMapNode>
-    <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="View Request History" description="View Request History"></siteMapNode>
+    
     <siteMapNode url="~/Administration/Users.aspx?"
                  title="Administration"
                  description="Maintain Users">
@@ -44,7 +46,7 @@
                    title="Change Collection Point"
                    description="Change Collection Point" />
     </siteMapNode>
-    <siteMapNode url="~/Catalog" title="Catalog" description="Catalog">
+    <siteMapNode url="~/Catalog/Stationeries.aspx?" title="Catalog" description="Catalog">
       <siteMapNode url="~/Catalog/Categories.aspx" title="Stationery Category" description="Stationery Category"></siteMapNode>
       <siteMapNode url="~/Catalog/Locations.aspx" title="Stationery Location" description="Stationery Location"></siteMapNode>
       <siteMapNode url="~/Catalog/SpecialStationeries.aspx" title="Manage Special Stationery" description="Manage Special Stationery"></siteMapNode>

@@ -80,7 +80,7 @@
     <Content Include="Catalog\Suppliers.aspx" />
     <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
-    <Content Include="Print\Employee\PrintRequestHistory.aspx" />
+    <Content Include="Print\Default.aspx" />
     <Content Include="Print\Employee\PrintStationeryCatalogue.aspx" />
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
@@ -262,12 +262,12 @@
     <Compile Include="Distribution\Distribution.aspx.designer.cs">
       <DependentUpon>Distribution.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Print\Employee\PrintRequestHistory.aspx.cs">
-      <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
+    <Compile Include="Print\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Print\Employee\PrintRequestHistory.aspx.designer.cs">
-      <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
+    <Compile Include="Print\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Print\Employee\PrintStationeryCatalogue.aspx.cs">
       <DependentUpon>PrintStationeryCatalogue.aspx</DependentUpon>
@@ -627,11 +627,13 @@
     <Content Include="Approval\Web.config" />
     <Content Include="App_Themes\BlueTheme\Default.skin" />
     <Content Include="Administration\web.config" />
+    <Content Include="Catalog\Web.config" />
     <None Include="ClassDiagram1.cd" />
     <Content Include="RequestStationery\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Print\Department\Web.config" />
+    <Content Include="Print\Web.config" />
     <Content Include="Print\Employee\Web.config" />
     <None Include="Print\ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
