@@ -265,7 +265,7 @@ namespace SA33.Team12.SSIS.Test
                         Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID, false);
                     }
 
-                    requisition = null;
+                    Session["Requisition"] = null;
                 }
             }
             catch (Exception)
