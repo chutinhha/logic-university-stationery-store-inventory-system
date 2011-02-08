@@ -97,6 +97,7 @@
     <Content Include="Stock\AdjustmentVoucherDetail.aspx" />
     <Content Include="Stock\ApplyAdjustmentVoucher.aspx" />
     <Content Include="Stock\ApproveAdjustmentVoucher.aspx" />
+    <Content Include="Stock\PlacePurchaseOrderSpecial.aspx" />
     <Content Include="Stock\PurchaseOrderDetail.aspx" />
     <Content Include="Stock\ReplenishStock.aspx" />
     <Content Include="Stock\StockCard.aspx" />
@@ -387,6 +388,13 @@
     </Compile>
     <Compile Include="Stock\ApproveAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock\PlacePurchaseOrderSpecial.aspx.cs">
+      <DependentUpon>PlacePurchaseOrderSpecial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stock\PlacePurchaseOrderSpecial.aspx.designer.cs">
+      <DependentUpon>PlacePurchaseOrderSpecial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock\PurchaseOrderDetail.aspx.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
