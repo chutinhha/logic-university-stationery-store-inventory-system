@@ -794,6 +794,18 @@ namespace SA33.Team12.SSIS.BLL
             }
         }
 
+        public List<SpecialRequisitionItem> getSpecialRequisitionItemsNeedToBeOrdered()
+        {
+            List<SpecialRequisitionItem> results = new List<SpecialRequisitionItem>();
+            foreach (SpecialRequisitionItem sri in requisitionDAO.GetAllSpecialRequisitionItems())
+            {
+                if (sri.QuantityIssued < sri.QuantityRequested)
+                    results.Add(sri);
+            }
+
+            return results;
+        }
+
         /// <summary>
         /// Validate SpecialRequisitionItem
         /// </summary>
