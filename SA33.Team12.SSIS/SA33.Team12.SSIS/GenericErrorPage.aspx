@@ -6,4 +6,8 @@
 <p>
     <asp:Literal runat="server"  ID="ErrorMessage" />
 </p>
+
+<p>
+    Are you looking for a place to <asp:HyperLink runat="server" Text="login in" NavigateUrl="~/Account/Login.aspx" EnableViewState="false" />?
+</p>
 </asp:Content>

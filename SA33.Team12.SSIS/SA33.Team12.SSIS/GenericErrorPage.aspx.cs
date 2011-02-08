@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SA33.Team12.SSIS
 {
@@ -17,7 +12,13 @@ namespace SA33.Team12.SSIS
                 if(exception != null)
                 {
                     this.ErrorMessage.Text = exception.Message;
+                    while(exception.InnerException != null)
+                    {
+                        exception = exception.InnerException;
+                        this.ErrorMessage.Text += "<br />" + exception.Message;
+                    }
                 }
+                Server.ClearError();
             }
         }
     }

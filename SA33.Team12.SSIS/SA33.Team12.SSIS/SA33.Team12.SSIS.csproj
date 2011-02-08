@@ -213,6 +213,9 @@
     <Compile Include="Administration\UpdateCollectionPoint.aspx.designer.cs">
       <DependentUpon>UpdateCollectionPoint.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Approval\RequestApproval.aspx.cs">
       <DependentUpon>RequestApproval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
