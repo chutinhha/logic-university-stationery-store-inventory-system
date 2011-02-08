@@ -90,9 +90,8 @@
                             UserName:
                         </th>
                         <td>
-                            <%# Eval("UserName") %>
                             <asp:DynamicControl ID="UserNameDynamicControl" runat="server" DataField="UserName"
-                                Mode="Edit" Visible="false" />
+                                Mode="Edit" />
                         </td>
                     </tr>
                     <tr class="odd">
@@ -305,16 +304,7 @@
                                     DataField="Password" Mode="ReadOnly" />
                             </td>
                         </tr>
-                 <tr class="odd">
-                    <th>
-                        Roles</th>
-                    <td>
-                        <asp:DynamicControl ID="RoleDynamicControl" runat="server" 
-                            DataField="Role" Mode="ReadOnly" />
-                    </td>
-                </tr>
-
-                    <tr>
+                    <tr class="odd">
                             <th>
                                 IsEnabled</th>
                             <td>
