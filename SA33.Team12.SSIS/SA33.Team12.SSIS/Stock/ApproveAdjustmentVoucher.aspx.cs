@@ -14,7 +14,6 @@ namespace SA33.Team12.SSIS.Stock
     {
 
         List<AdjustmentVoucherTransaction> trans;
-        User currentUser;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +21,6 @@ namespace SA33.Team12.SSIS.Stock
             {
                 Populate();
             }
-
         }
 
         private void Populate()
@@ -94,7 +92,7 @@ namespace SA33.Team12.SSIS.Stock
                     avm.DeleteStockLogTransaction(logTran);
                 }
                 avm.CreateAdjustmentVoucher(voucher);
-      //          UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
+      //        UtilityFunctions.SendEmail(voucher.AdjustmentVoucherID + " - Your adjustment voucher has been approved", "Dear " + voucher.CreatedByUser.FirstName + "<br />" + "Your request has been approved.", voucher.ApprovedByUser);
 
             }
             Populate();
