@@ -240,6 +240,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempStationery.ModifiedBy = stationery.ModifiedBy;                                
                 tempStationery.UnitOfMeasure = stationery.UnitOfMeasure;
                 tempStationery.IsApproved = stationery.IsApproved;
+                tempStationery.QuantityInHand = stationery.QuantityInHand;
 
                 using (TransactionScope ts = new TransactionScope())
                 {               
