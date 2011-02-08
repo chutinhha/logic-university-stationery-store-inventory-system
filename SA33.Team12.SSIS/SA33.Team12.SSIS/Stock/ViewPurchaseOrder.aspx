@@ -50,7 +50,7 @@
                           $(function () {
                               $('#<%= this.txtStartDateOfOrder.ClientID %>').datepicker({
                                   showOn: 'button',
-                                  dateFormat: 'dd/mm/yy',
+                                  dateFormat: 'mm/dd/yy',
                                   buttonImage: '/Styles/jqui/images/calendar.gif',
                                   buttonImageOnly: true,
                                   setDate:  '<%= DateTime.Now%>',
@@ -71,7 +71,7 @@
                         $(function () {
                             $('#<%= this.txtEndDateOfOrder.ClientID %>').datepicker({
                                 showOn: 'button',
-                                dateFormat: 'dd/mm/yy',
+                                dateFormat: 'mm/dd/yy',
                                 buttonImage: '/Styles/jqui/images/calendar.gif',
                                 buttonImageOnly: true,
                                 setDate:  '<%= DateTime.Now%>',
