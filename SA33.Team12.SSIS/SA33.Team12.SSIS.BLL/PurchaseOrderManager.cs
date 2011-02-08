@@ -181,52 +181,24 @@ namespace SA33.Team12.SSIS.BLL
         {
             int orderQuantity = 0;
 
-            // get all the requisitions/requisition items that are appoved by temp department head
-
-            RequisitionSearchDTO criteria = new RequisitionSearchDTO();
-            criteria.StatusID = 1;  // respoding to the status "Approved & pending"
-            using (RequisitionManager rm = new RequisitionManager())
+            foreach (RequisitionItem item in context.RequisitionItems)
             {
-                List<Requisition> requisitions = rm.FindRequisitionByCriteria(criteria);
-                foreach (Requisition r in requisitions)
-                {
-                 
-                        foreach (RequisitionItem ri in r.RequisitionItems)
-                        {
-                            if (ri.StationeryID == stationeryId)
-                            {
-                                orderQuantity += ri.QuantityRequested;
-                            }
-                        }
-                        using (CatalogManager cm = new CatalogManager())
-                        {
-                            Stationery stationeryToOrder = cm.FindStationeryByID(stationeryId);
-                            orderQuantity += stationeryToOrder.ReorderLevel - stationeryToOrder.QuantityInHand + stationeryToOrder.ReorderQuantity;
-                        }
-                    }
+                if (item.StationeryID == stationeryId && item.QuantityRequested > item.QuantityIssued)
+                    orderQuantity += (item.QuantityRequested - item.QuantityIssued);
             }
             return orderQuantity;
         }
+
         // purchase order reorder automation, will give recommended reorder quantity for specialstationery to satisfy pending requisition 
         public int GetQuantityToOrderSpecial(SpecialStationery item)
         {
 
             int orderQuantity = 0;
-            RequisitionSearchDTO criteria = new RequisitionSearchDTO();
-            criteria.StatusID = 1;  // respoding to the status "Approved & pending"
-            using (RequisitionManager rm = new RequisitionManager())
+
+            foreach (SpecialRequisitionItem specialItem in context.SpecialRequisitionItems)
             {
-                List<Requisition> requisitions = rm.FindRequisitionByCriteria(criteria);
-                foreach (Requisition r in requisitions)
-                {
-                    foreach (SpecialRequisitionItem ri in r.SpecialRequisitionItems)
-                    {
-                        if (ri.SpecialStationeryID == item.SpecialStationeryID)
-                        {
-                            orderQuantity += ri.QuantityRequested;
-                        }
-                    }
-                }
+                if (specialItem.SpecialRequisitionItemsID == item.SpecialStationeryID && specialItem.QuantityRequested > specialItem.QuantityIssued)
+                    orderQuantity += ((int)specialItem.QuantityRequested - (int)specialItem.QuantityIssued);
             }
             return orderQuantity;
         }
@@ -297,7 +269,7 @@ namespace SA33.Team12.SSIS.BLL
                         errMsg = "Update Purchase Order item failed. Please try again later";
                         if ((item.PurchaseOrderID != 0 || item.PurchaseOrder != null) &&
                             // comment off because of current test database error
-                       //      ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
+                            //      ((item.StationeryID != 0 && item.SpecialStationeryID == 0) || ((item.StationeryID == 0 && item.SpecialStationeryID != 0))) &&
                              (item.QuantityToOrder != 0))
                         {
                             return true;
