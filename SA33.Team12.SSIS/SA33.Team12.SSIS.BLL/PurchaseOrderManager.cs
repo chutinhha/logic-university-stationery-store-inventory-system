@@ -186,6 +186,7 @@ namespace SA33.Team12.SSIS.BLL
                 if (item.StationeryID == stationeryId && item.QuantityRequested > item.QuantityIssued)
                     orderQuantity += (item.QuantityRequested - item.QuantityIssued);
             }
+
             return orderQuantity;
         }
 
