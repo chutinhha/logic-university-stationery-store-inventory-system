@@ -195,7 +195,7 @@
             <Columns>
                 <asp:CommandField ShowEditButton="True" ValidationGroup="requestEdit" />
                 <asp:CommandField ShowDeleteButton="True" ValidationGroup="requestEdit" />
-                <asp:TemplateField HeaderText="StationeryID">
+                <asp:TemplateField HeaderText="Item Name">
                     <ItemTemplate>
                         <%# ((SA33.Team12.SSIS.DAL.Stationery)Eval("Stationery")) == null ? Eval("StationeryID") : ((SA33.Team12.SSIS.DAL.Stationery)Eval("Stationery")).Description %>
                     </ItemTemplate>

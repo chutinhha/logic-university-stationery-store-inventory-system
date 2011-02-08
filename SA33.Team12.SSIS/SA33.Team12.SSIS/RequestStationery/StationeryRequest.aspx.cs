@@ -26,8 +26,16 @@ namespace SA33.Team12.SSIS.Test
             {
                 UrgencyDDL.DataSource = requisitionManager.GetAllUrgencies();
                 UrgencyDDL.DataTextField = "Name";
-                UrgencyDDL.DataValueField = "UrgencyID";
+                UrgencyDDL.DataValueField = "UrgencyID";                
                 DataBind();
+
+                foreach (ListItem item in UrgencyDDL.Items)
+                {
+                    if(item.Text == "Normal")
+                    {
+                        item.Selected = true;
+                    }
+                }
             }
 
             if (Session["Requisition"] != null)
@@ -69,7 +77,10 @@ namespace SA33.Team12.SSIS.Test
                     RequestItemGridView.Columns[1].Visible = false;
                     SpecialRequestItemGridView.Columns[0].Visible = false;
                     SubmitButton.Visible = false;
-                    CancelButton.Visible = true;
+                    if (requisition.Status.Name == "Pending")
+                    {
+                        CancelButton.Visible = true;
+                    }
                     GridDataBind();
                 }
             }
