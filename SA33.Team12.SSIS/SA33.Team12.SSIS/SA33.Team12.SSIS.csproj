@@ -81,6 +81,7 @@
     <Content Include="Catalog\Locations.aspx" />
     <Content Include="Catalog\SpecialStationeries.aspx" />
     <Content Include="Print\Employee\PrintRequestHistory.aspx" />
+    <Content Include="Print\Employee\PrintStationeryCatalogue.aspx" />
     <Content Include="Print\Store\InventoryStatus.aspx" />
     <Content Include="Print\Store\StationeryRequisitionTrendReportByDept.aspx" />
     <Content Include="Print\Department\PrintRequestByIndividualEmployee.aspx" />
@@ -265,6 +266,19 @@
     </Compile>
     <Compile Include="Print\Employee\PrintRequestHistory.aspx.designer.cs">
       <DependentUpon>PrintRequestHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\Employee\PrintStationeryCatalogue.aspx.cs">
+      <DependentUpon>PrintStationeryCatalogue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\Employee\PrintStationeryCatalogue.aspx.designer.cs">
+      <DependentUpon>PrintStationeryCatalogue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\Employee\PrintStationeryCatalogue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintStationeryCatalogue.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Print\Store\InventoryStatus.aspx.cs">
       <DependentUpon>InventoryStatus.aspx</DependentUpon>
@@ -620,6 +634,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Print\Employee\PrintStationeryCatalogue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintStationeryCatalogue.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Print\Store\InventoryStatus.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InventoryStatus.cs</LastGenOutput>
