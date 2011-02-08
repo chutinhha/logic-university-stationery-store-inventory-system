@@ -54,16 +54,14 @@
                 Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
+     <asp:Panel ID="Panel4" runat="server">
     <fieldset>
-        <legend>Add Stationery Items</legend>
-        <asp:Panel ID="Panel3" runat="server">
+        <legend>Add Stationery Items</legend>       
             <fieldset>
                 <legend>Urgency Level</legend>
                 <asp:DropDownList ID="UrgencyDDL" runat="server">
                 </asp:DropDownList>
-            </fieldset>
-        </asp:Panel>
-        <asp:Panel ID="Panel4" runat="server">
+            </fieldset>      
             <fieldset>
                 <legend>Add Normal Items</legend>
                 <asp:Panel ID="Panel1" runat="server">
@@ -185,8 +183,9 @@
                     </p>
                 </asp:Panel>
             </fieldset>
-        </asp:Panel>
+        
     </fieldset>
+    </asp:Panel>
     <fieldset>
         <legend>Normal Items List</legend>
         <asp:GridView ID="RequestItemGridView" runat="server" AutoGenerateColumns="False"

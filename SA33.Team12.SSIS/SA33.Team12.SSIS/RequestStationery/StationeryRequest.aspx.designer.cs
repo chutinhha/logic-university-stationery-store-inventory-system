@@ -31,13 +31,13 @@ namespace SA33.Team12.SSIS.Test {
         protected global::System.Web.UI.WebControls.ObjectDataSource RequisitionDetailsDS;
         
         /// <summary>
-        /// Panel3 control.
+        /// Panel4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel3;
+        protected global::System.Web.UI.WebControls.Panel Panel4;
         
         /// <summary>
         /// UrgencyDDL control.
@@ -47,15 +47,6 @@ namespace SA33.Team12.SSIS.Test {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList UrgencyDDL;
-        
-        /// <summary>
-        /// Panel4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel4;
         
         /// <summary>
         /// Panel1 control.
