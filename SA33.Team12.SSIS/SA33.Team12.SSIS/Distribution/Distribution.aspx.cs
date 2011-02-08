@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 
@@ -41,9 +37,11 @@ namespace SA33.Team12.SSIS.Distribution
         {
             using (DisbursementManager dm = new DisbursementManager())
             {
-                List<vw_GetStationeryDistributionList> distributionLists = dm.GetDistributionListByDisbursementID(this.DisbursementId);
+                List<vw_GetStationeryDistributionList> distributionLists 
+                    = dm.GetDistributionListByDisbursementID(this.DisbursementId);
                 this.DistributionGridView.DataSource = distributionLists;
                 this.DistributionGridView.DataBind();
+                Utilities.Format.MergeRowBySameValue(this.DistributionGridView, 1);
             }
         }
     }

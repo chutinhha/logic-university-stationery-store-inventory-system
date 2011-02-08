@@ -9,8 +9,18 @@
     <legend>Distribution by item</legend>
 
     <asp:GridView runat="server" ID="DistributionGridView" 
-        AutoGenerateColumns="False">
+        AutoGenerateColumns="false">
         <Columns>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <%# Container.DataItemIndex + 1 %>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Employee">
+                <ItemTemplate>
+                    <%# ((User) Eval("Employee")).UserName %>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Requisition No." 
                 SortExpression="RequisitionID">
                 <ItemTemplate>
@@ -31,11 +41,12 @@
             <asp:TemplateField HeaderText="StationeryID" 
                 SortExpression="StationeryID">
                 <ItemTemplate>
-                    <%# ((Stationery) Eval("Stationery")).ItemCode %>
+                    <%# Convert.ToInt32(Eval("StationeryID")) == 0
+                                                ? ((SpecialStationery)Eval("SpecialStationery")).ItemCode + ", " + ((SpecialStationery)Eval("SpecialStationery")).Description
+                                                    : ((Stationery)Eval("Stationery")).ItemCode + ", " + ((Stationery)Eval("Stationery")).Description%>
                 </ItemTemplate>    
             </asp:TemplateField>
-            <asp:BoundField DataField="SpecialStationeryID" 
-                HeaderText="SpecialStationeryID" SortExpression="SpecialStationeryID" />
+            <asp:CheckBoxField DataField="IsSpecial" HeaderText="Is Special" />
             <asp:BoundField DataField="QuantityActual" HeaderText="QuantityActual" 
                 SortExpression="QuantityActual" />
             <asp:BoundField DataField="QuantityDisbursed" HeaderText="QuantityDisbursed" 

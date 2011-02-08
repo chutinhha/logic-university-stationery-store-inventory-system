@@ -82,10 +82,12 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "VW_RequisitionsByDepartmentDepartment", "VW_RequisitionsByDepartment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.VW_RequisitionsByDepartment), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "Departments_Disbursements_FK1", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), "Disbursement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.Disbursement), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "SpecialStationeries_StockLogTransactions_FK1", "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), "StockLogTransaction", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.StockLogTransaction), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListRequisition", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Requisition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
-[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListDepartment", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListRequisition", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Requisition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.Requisition), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListStationeryRetrievalFormItem", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "StationeryRetrievalFormItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SA33.Team12.SSIS.DAL.StationeryRetrievalFormItem), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListStationery", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Stationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Stationery), true)]
 [assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListSpecialStationery", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "SpecialStationery", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.SpecialStationery), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListDepartment", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.Department), true)]
+[assembly: EdmRelationshipAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListUser", "vw_GetStationeryDistributionList", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SA33.Team12.SSIS.DAL.vw_GetStationeryDistributionList), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SA33.Team12.SSIS.DAL.User), true)]
 
 #endregion
 
@@ -2878,6 +2880,30 @@ namespace SA33.Team12.SSIS.DAL
         private Nullable<global::System.Int32> _DepartmentID;
         partial void OnDepartmentIDChanging(Nullable<global::System.Int32> value);
         partial void OnDepartmentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsCompleted
+        {
+            get
+            {
+                return _IsCompleted;
+            }
+            set
+            {
+                OnIsCompletedChanging(value);
+                ReportPropertyChanging("IsCompleted");
+                _IsCompleted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsCompleted");
+                OnIsCompletedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsCompleted;
+        partial void OnIsCompletedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsCompletedChanged();
 
         #endregion
     
@@ -10401,20 +10427,51 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// Create a new vw_GetStationeryDistributionList object.
         /// </summary>
+        /// <param name="stationeryRetrievalFormItemByDeptID">Initial value of the StationeryRetrievalFormItemByDeptID property.</param>
         /// <param name="requisitionID">Initial value of the RequisitionID property.</param>
-        /// <param name="quantityDisbursed">Initial value of the QuantityDisbursed property.</param>
         /// <param name="disbursementID">Initial value of the DisbursementID property.</param>
-        public static vw_GetStationeryDistributionList Createvw_GetStationeryDistributionList(global::System.Int32 requisitionID, global::System.Int32 quantityDisbursed, global::System.Int32 disbursementID)
+        /// <param name="quantityDisbursed">Initial value of the QuantityDisbursed property.</param>
+        /// <param name="isSpecial">Initial value of the IsSpecial property.</param>
+        public static vw_GetStationeryDistributionList Createvw_GetStationeryDistributionList(global::System.Int32 stationeryRetrievalFormItemByDeptID, global::System.Int32 requisitionID, global::System.Int32 disbursementID, global::System.Int32 quantityDisbursed, global::System.Boolean isSpecial)
         {
             vw_GetStationeryDistributionList vw_GetStationeryDistributionList = new vw_GetStationeryDistributionList();
+            vw_GetStationeryDistributionList.StationeryRetrievalFormItemByDeptID = stationeryRetrievalFormItemByDeptID;
             vw_GetStationeryDistributionList.RequisitionID = requisitionID;
-            vw_GetStationeryDistributionList.QuantityDisbursed = quantityDisbursed;
             vw_GetStationeryDistributionList.DisbursementID = disbursementID;
+            vw_GetStationeryDistributionList.QuantityDisbursed = quantityDisbursed;
+            vw_GetStationeryDistributionList.IsSpecial = isSpecial;
             return vw_GetStationeryDistributionList;
         }
 
         #endregion
         #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 StationeryRetrievalFormItemByDeptID
+        {
+            get
+            {
+                return _StationeryRetrievalFormItemByDeptID;
+            }
+            set
+            {
+                if (_StationeryRetrievalFormItemByDeptID != value)
+                {
+                    OnStationeryRetrievalFormItemByDeptIDChanging(value);
+                    ReportPropertyChanging("StationeryRetrievalFormItemByDeptID");
+                    _StationeryRetrievalFormItemByDeptID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("StationeryRetrievalFormItemByDeptID");
+                    OnStationeryRetrievalFormItemByDeptIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _StationeryRetrievalFormItemByDeptID;
+        partial void OnStationeryRetrievalFormItemByDeptIDChanging(global::System.Int32 value);
+        partial void OnStationeryRetrievalFormItemByDeptIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10442,54 +10499,6 @@ namespace SA33.Team12.SSIS.DAL
         private global::System.Int32 _RequisitionID;
         partial void OnRequisitionIDChanging(global::System.Int32 value);
         partial void OnRequisitionIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DateRequested
-        {
-            get
-            {
-                return _DateRequested;
-            }
-            set
-            {
-                OnDateRequestedChanging(value);
-                ReportPropertyChanging("DateRequested");
-                _DateRequested = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DateRequested");
-                OnDateRequestedChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _DateRequested;
-        partial void OnDateRequestedChanging(Nullable<global::System.DateTime> value);
-        partial void OnDateRequestedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> StationeryRetrievalFormItemByDeptID
-        {
-            get
-            {
-                return _StationeryRetrievalFormItemByDeptID;
-            }
-            set
-            {
-                OnStationeryRetrievalFormItemByDeptIDChanging(value);
-                ReportPropertyChanging("StationeryRetrievalFormItemByDeptID");
-                _StationeryRetrievalFormItemByDeptID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StationeryRetrievalFormItemByDeptID");
-                OnStationeryRetrievalFormItemByDeptIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _StationeryRetrievalFormItemByDeptID;
-        partial void OnStationeryRetrievalFormItemByDeptIDChanging(Nullable<global::System.Int32> value);
-        partial void OnStationeryRetrievalFormItemByDeptIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10566,6 +10575,54 @@ namespace SA33.Team12.SSIS.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DisbursementID
+        {
+            get
+            {
+                return _DisbursementID;
+            }
+            set
+            {
+                OnDisbursementIDChanging(value);
+                ReportPropertyChanging("DisbursementID");
+                _DisbursementID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DisbursementID");
+                OnDisbursementIDChanged();
+            }
+        }
+        private global::System.Int32 _DisbursementID;
+        partial void OnDisbursementIDChanging(global::System.Int32 value);
+        partial void OnDisbursementIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateRequested
+        {
+            get
+            {
+                return _DateRequested;
+            }
+            set
+            {
+                OnDateRequestedChanging(value);
+                ReportPropertyChanging("DateRequested");
+                _DateRequested = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateRequested");
+                OnDateRequestedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateRequested;
+        partial void OnDateRequestedChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateRequestedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.Int32> QuantityActual
@@ -10616,24 +10673,48 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 DisbursementID
+        public global::System.Boolean IsSpecial
         {
             get
             {
-                return _DisbursementID;
+                return _IsSpecial;
             }
             set
             {
-                OnDisbursementIDChanging(value);
-                ReportPropertyChanging("DisbursementID");
-                _DisbursementID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DisbursementID");
-                OnDisbursementIDChanged();
+                OnIsSpecialChanging(value);
+                ReportPropertyChanging("IsSpecial");
+                _IsSpecial = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsSpecial");
+                OnIsSpecialChanged();
             }
         }
-        private global::System.Int32 _DisbursementID;
-        partial void OnDisbursementIDChanging(global::System.Int32 value);
-        partial void OnDisbursementIDChanged();
+        private global::System.Boolean _IsSpecial;
+        partial void OnIsSpecialChanging(global::System.Boolean value);
+        partial void OnIsSpecialChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CreatedBy;
+        partial void OnCreatedByChanging(Nullable<global::System.Int32> value);
+        partial void OnCreatedByChanged();
 
         #endregion
     
@@ -10683,16 +10764,16 @@ namespace SA33.Team12.SSIS.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListDepartment", "Department")]
-        public Department Department
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListStationeryRetrievalFormItem", "StationeryRetrievalFormItem")]
+        public StationeryRetrievalFormItem StationeryRetrievalFormItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListStationeryRetrievalFormItem", "StationeryRetrievalFormItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListStationeryRetrievalFormItem", "StationeryRetrievalFormItem").Value = value;
             }
         }
         /// <summary>
@@ -10700,17 +10781,17 @@ namespace SA33.Team12.SSIS.DAL
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Department> DepartmentReference
+        public EntityReference<StationeryRetrievalFormItem> StationeryRetrievalFormItemReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListStationeryRetrievalFormItem", "StationeryRetrievalFormItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StationeryRetrievalFormItem>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListStationeryRetrievalFormItem", "StationeryRetrievalFormItem", value);
                 }
             }
         }
@@ -10787,6 +10868,82 @@ namespace SA33.Team12.SSIS.DAL
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SpecialStationery>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListSpecialStationery", "SpecialStationery", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListDepartment", "Department")]
+        public Department Department
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Department> DepartmentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListDepartment", "Department", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SA33.Team12.SSIS.Model", "vw_GetStationeryDistributionListUser", "User")]
+        public User Employee
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListUser", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListUser", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> EmployeeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SA33.Team12.SSIS.Model.vw_GetStationeryDistributionListUser", "User", value);
                 }
             }
         }
