@@ -23,33 +23,25 @@ namespace SA33.Team12.SSIS.Administration
             if (!Page.IsPostBack)
                 DataBindUserGridView();
         }
+
         protected void DataBindUserGridView()
         {
-            DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
-            string[] roles = Utilities.Membership.GetCurrentLoggedInUserRole();
-
             List<User> UserList = null;
 
-            var isAdmin = (from r in roles
-                           where r.Contains("Administrators")
-                           select r);
-            var isDeptHead = (from r in roles
-                              where r.Contains("DepartmentHeads") || r.Contains("TemporaryDepartmentHeads")
-                              select r);
             using (UserManager um = new UserManager())
-                if (isAdmin.Count() > 0)
+                if (Utilities.Membership.IsAdmin)
                 {
                     UserList = um.GetAllUsers();
                 }
-                else if (isDeptHead.Count() > 0)
+                else if (Utilities.Membership.IsDeptHead || Utilities.Membership.IsTempDeptHead)
                 {
                     UserList = um.FindUsersByCriteria(
-                        new UserSearchDTO() { DepartmentID = loggedInUser.DepartmentID });
+                        new UserSearchDTO() { DepartmentID = Utilities.Membership.LoggedInuser.DepartmentID });
                 }
                 else
                 {
                     UserList = um.FindUsersByCriteria(
-                        new UserSearchDTO() { UserID = loggedInUser.UserID });
+                        new UserSearchDTO() { UserID = Utilities.Membership.LoggedInuser.UserID });
                 }
             this.UserGridView.DataSource = UserList;
             this.UserGridView.DataBind();
@@ -102,8 +94,7 @@ namespace SA33.Team12.SSIS.Administration
 
                 e.Values["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
 
-                DropDownList MemebershipRoleDropDownList =
-                 UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
+
                 CheckBoxList MembershipRoleCheckBoxList =
                  UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
                 string roles = string.Empty;
@@ -124,8 +115,6 @@ namespace SA33.Team12.SSIS.Administration
                     userFormView.FindControl("DepartmentDropDownList") as DropDownList;
                 e.NewValues["DepartmentID"] = departmentDropDownList.SelectedValue.ToString();
 
-                DropDownList MemebershipRoleDropDownList =
-                  UserFormView.FindControl("MemebershipRoleDropDownList") as DropDownList;
                 CheckBoxList MembershipRoleCheckBoxList =
                  UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
                 string roles = string.Empty;
@@ -160,16 +149,26 @@ namespace SA33.Team12.SSIS.Administration
                     MembershipRoleCheckBoxList.DataSource = Roles.GetAllRoles();
                     MembershipRoleCheckBoxList.DataBind();
                     string[] roles =
-                        DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] { "," },
+                        DataBinder.Eval(UserFormView.DataItem, "Role").ToString().Split(new string[] {","},
                                                                                         StringSplitOptions.
                                                                                             RemoveEmptyEntries);
                     foreach (ListItem item in MembershipRoleCheckBoxList.Items)
                         foreach (string role in roles)
                             if (item.Text == role) item.Selected = true;
-                }
 
+
+                    foreach (ListItem item in MembershipRoleCheckBoxList.Items)
+                    {
+                        if (Utilities.Membership.IsDeptHead)
+                        {
+                            if (item.Text == "Administrators") item.Enabled = false;
+                            if (item.Text == "DepartmentHeads") item.Enabled = false;
+                            if (item.Text.Contains("Store")) item.Enabled = false;
+                        }
+                    }
+                }
             }
-            else if (this.UserFormView.CurrentMode == FormViewMode.Insert)
+            if (this.UserFormView.CurrentMode == FormViewMode.Insert)
             {
                 CheckBoxList MembershipRoleCheckBoxList =
                     UserFormView.FindControl("MembershipRoleCheckBoxList") as CheckBoxList;
@@ -177,9 +176,20 @@ namespace SA33.Team12.SSIS.Administration
                 {
                     MembershipRoleCheckBoxList.DataSource = Roles.GetAllRoles();
                     MembershipRoleCheckBoxList.DataBind();
+                    foreach (ListItem item in MembershipRoleCheckBoxList.Items)
+                    {
+                        if (Utilities.Membership.IsDeptHead)
+                        {
+                            if (item.Text == "Administrators") item.Enabled = false;
+                            if (item.Text == "DepartmentHeads") item.Enabled = false;
+                            if (item.Text.Contains("Store")) item.Enabled = false;
+                        }
+                    }
                 }
             }
         }
+
+
 
         protected void UserFormView_ItemCommand(object sender, FormViewCommandEventArgs e)
         {
