@@ -53,6 +53,14 @@ namespace SA33.Team12.SSIS.Stock
                 po.DateReceived = Convert.ToDateTime(txtReceivedDate.Text.ToString());
                 po.ReceivedBy = Membership.GetCurrentLoggedInUser().UserID;
                 pom.UpdatePurchaseOrder(po);
+
+                AdjustmentVoucher av = new AdjustmentVoucher();
+                
+                foreach (PurchaseOrderItem item in po.PurchaseOrderItems)
+                {
+                    StockLog log = new StockLog();
+
+                }
             }
 
             Response.Redirect("ViewPurchaseOrder.aspx");
