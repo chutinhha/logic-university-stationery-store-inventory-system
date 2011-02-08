@@ -686,6 +686,11 @@ namespace SA33.Team12.SSIS.DAL
             }
         }
 
+        public List<SpecialRequisitionItem> GetAllSpecialRequisitionItems()
+        {
+            return (from sri in context.SpecialRequisitionItems select sri).ToList<SpecialRequisitionItem>();
+        }
+
         /// <summary>
         /// Get All special RequisitionItems in the requisition form
         /// </summary>
