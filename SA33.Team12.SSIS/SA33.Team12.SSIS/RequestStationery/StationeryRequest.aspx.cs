@@ -76,6 +76,7 @@ namespace SA33.Team12.SSIS.Test
                     RequestItemGridView.Columns[0].Visible = false;
                     RequestItemGridView.Columns[1].Visible = false;
                     SpecialRequestItemGridView.Columns[0].Visible = false;
+                    Panel4.Visible = false;
                     SubmitButton.Visible = false;
                     if (requisition.Status.Name == "Pending")
                     {
@@ -203,12 +204,13 @@ namespace SA33.Team12.SSIS.Test
 
         protected void DetailsView1_ItemInserting(object sender, DetailsViewInsertEventArgs e)
         {
+            CatalogManager manager = new CatalogManager();
             RequisitionItem item = new RequisitionItem();
-            item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("stDDL")).SelectedValue);
+            //item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("stDDL")).SelectedValue);
             item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("stTextBox")).Text);
             item.QuantityIssued = 0;
             item.Price = 0;
-
+            item.Stationery = manager.FindStationeryByID(Convert.ToInt32(((DropDownList)DetailsView1.FindControl("stDDL")).SelectedValue));
             if (requisition.RequisitionItems.Count == 0)
             {
                 requisition.RequisitionItems.Add(item);
@@ -220,6 +222,7 @@ namespace SA33.Team12.SSIS.Test
                     if (item.StationeryID == req.StationeryID)
                     {
                         req.QuantityRequested += item.QuantityRequested;
+                        
                         break;
                     }
                     else
@@ -258,6 +261,7 @@ namespace SA33.Team12.SSIS.Test
             splItem.Price = 0;
 
             requisition.SpecialRequisitionItems.Add(splItem);
+            
             GridDataBind();
         }
 
