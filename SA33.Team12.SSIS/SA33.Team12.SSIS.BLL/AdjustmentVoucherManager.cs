@@ -24,6 +24,20 @@ namespace SA33.Team12.SSIS.BLL
             adjustmentVoucherDAO = new AdjustmentVoucherDAO();
         }
 
+        public string GenerateVoucherNumber()
+        {
+            string VoucherNumber = "";
+            foreach (AdjustmentVoucher voucher in context.AdjustmentVouchers)
+            {
+                if (voucher.VoucherNumber.CompareTo(VoucherNumber) > 0)
+                {
+                    VoucherNumber = voucher.VoucherNumber;
+                }
+            }
+            VoucherNumber = (int.Parse(VoucherNumber) + 1).ToString();
+            return VoucherNumber;
+        }
+
         #region AdjustmentVoucherTransaction(Temporary Table) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
 
         public AdjustmentVoucherTransaction CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
