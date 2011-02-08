@@ -88,9 +88,7 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
                         StationeryRetrievalFormItemByDeptGridView.DataSource = srfiByDept;
                         StationeryRetrievalFormItemByDeptGridView.DataBind();
                     }
-                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 3);
-                    //FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 2);
-                    FormatStationeryRetrievalFormItemByDeptGridView(StationeryRetrievalFormItemByDeptGridView, 1);
+                    Utilities.Format.MergeRowBySameValue(StationeryRetrievalFormItemByDeptGridView, 1);
 
                 }
             }
@@ -178,62 +176,6 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
             Response.Redirect("~/HandleRequest/StationeryRetrievalList.aspx");
         }
 
-        protected void FormatStationeryRetrievalFormItemByDeptGridView(GridView srfByDept, int cellIndex)
-        {
-            bool odd = true;
-            for (int i = 0; i < srfByDept.Rows.Count; i++)
-            {
-                int rowToSpan = 1;
-                GridViewRow currentRow = srfByDept.Rows[i];
-                string currentText = string.Empty;
-                DataBoundLiteralControl currentCellCtrl = null;
-                if (currentRow.Cells[cellIndex].Controls.Count > 0)
-                    currentCellCtrl = currentRow.Cells[cellIndex].Controls[0] as DataBoundLiteralControl;
-                if (currentCellCtrl != null)
-                    currentText = currentCellCtrl.Text.Trim();
-                else
-                {
-                    currentText = currentRow.Cells[cellIndex].Text.Trim();
-                }
-                for (int j = i; j < srfByDept.Rows.Count; j++)
-                {
-                    if (srfByDept.Rows.Count - 1 > j + 1)
-                    {
-                        GridViewRow nextRow = srfByDept.Rows[j + 1];
-                        string nextText = string.Empty;
-                        DataBoundLiteralControl nextCellCtrl = null;
-                        if (nextRow.Cells[cellIndex].Controls.Count > 0)
-                            nextCellCtrl = nextRow.Cells[cellIndex].Controls[0] as DataBoundLiteralControl;
-                        if (nextCellCtrl != null) nextText = nextCellCtrl.Text.Trim();
-                        else
-                        {
-                            nextText = nextRow.Cells[cellIndex].Text.Trim();
-                        }
-                        if (currentText == nextText)
-                        {
-                            rowToSpan++;
-                            nextRow.Cells.RemoveAt(cellIndex);
-                            if (odd)
-                                nextRow.CssClass = "odd";
-                            else
-                                nextRow.CssClass = "";
-                        }
-                        else
-                        {
-                            i = j;
-                            break;
-                        }
-                    }
-                }
-                if (odd)
-                    currentRow.CssClass = "odd";
-                else
-                    currentRow.CssClass = "";
-                odd = !odd;
-                currentRow.Cells[cellIndex].RowSpan = rowToSpan;
-
-            }
-        }
 
         protected void UpdateButton_Command(object sender, CommandEventArgs e)
         {

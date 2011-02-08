@@ -566,6 +566,7 @@
     <Compile Include="Administration\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Format.cs" />
     <Compile Include="Utilities\Membership.cs" />
   </ItemGroup>
   <ItemGroup>
