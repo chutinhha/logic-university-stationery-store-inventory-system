@@ -65,8 +65,8 @@ namespace SA33.Team12.SSIS.Stock
                             PurchaseOrderItem item = new PurchaseOrderItem();
                             item.PurchaseOrder = purchaseOrder;
                             item.StationeryID = (int)gvPOItems.DataKeys[r.RowIndex].Value;
-                            item.QuantityToOrder = 5;
-                            //  item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
+                            //item.QuantityToOrder = 5;
+                            item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
                             using (CatalogManager cm = new CatalogManager())
                             {
                                 StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
