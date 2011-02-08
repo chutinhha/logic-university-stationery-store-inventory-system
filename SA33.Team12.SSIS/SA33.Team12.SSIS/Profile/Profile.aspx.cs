@@ -8,10 +8,17 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL.DTO;
 
-namespace SA33.Team12.SSIS.Administration
+namespace SA33.Team12.SSIS.Profile
 {
     public partial class Users : System.Web.UI.Page
     {
+        public int UserId
+        {
+            get { DAL.User loggedInUser = Utilities.Membership.GetCurrentLoggedInUser();
+                return loggedInUser.UserID;
+            }
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             DynamicDataManager.RegisterControl(this.UserFormView);
@@ -21,7 +28,11 @@ namespace SA33.Team12.SSIS.Administration
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-                DataBindUserGridView();
+            {
+                Parameter userId = new Parameter("userId", TypeCode.Int32, this.UserId.ToString());
+                this.UserDetailObjectDataSource.SelectParameters["userId"] = userId;
+                this.UserDetailObjectDataSource.DataBind();
+            }
         }
         protected void DataBindUserGridView()
         {

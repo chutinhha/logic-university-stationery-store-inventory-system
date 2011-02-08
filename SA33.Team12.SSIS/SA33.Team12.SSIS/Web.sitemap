@@ -51,6 +51,7 @@
       <siteMapNode url="~/Catalog/Stationeries.aspx" title="Manage Stationery" description="Manage Stationery"></siteMapNode>
       <siteMapNode url="~/Catalog/Suppliers.aspx" title="Manage Supplier" description="Manage Supplier"></siteMapNode>
     </siteMapNode>
+    <siteMapNode url="~/Profile/Profile.aspx" title="Profile" description="Profile" />
     <siteMapNode url="About.aspx" title="About Us"  description="About Us" />
   </siteMapNode>
 </siteMap>

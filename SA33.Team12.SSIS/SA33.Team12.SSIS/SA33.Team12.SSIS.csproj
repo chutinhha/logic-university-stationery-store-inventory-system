@@ -89,6 +89,7 @@
     <Content Include="HandleRequest\Disbursements.aspx" />
     <Content Include="Distribution\Disbursements.aspx" />
     <Content Include="Distribution\Distribution.aspx" />
+    <Content Include="Profile\Profile.aspx" />
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalList.aspx" />
@@ -337,6 +338,13 @@
     </Compile>
     <Compile Include="HandleRequest\Disbursements.aspx.designer.cs">
       <DependentUpon>Disbursements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="RequestStationery\ViewRequestHistory.aspx.cs">
       <DependentUpon>ViewRequestHistory.aspx</DependentUpon>
