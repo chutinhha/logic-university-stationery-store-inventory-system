@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA33.Team12.SSIS.UserAdministration {
+namespace SA33.Team12.SSIS.Administration {
     
     
     public partial class Users {
