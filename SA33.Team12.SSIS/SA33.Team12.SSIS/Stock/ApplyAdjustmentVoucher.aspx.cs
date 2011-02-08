@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
@@ -50,7 +51,7 @@ namespace SA33.Team12.SSIS.Stock
                     StockLogTransaction adj = new StockLogTransaction();
                     adj.Reason = txtReason.Text.ToString();
                     adj.Quantity = int.Parse(txtQuantity.Text.ToString());
-                    adj.Stationery = stationery;
+                    adj.StationeryID = stationery.StationeryID;
                     adj.Balance = stationery.QuantityInHand;
                     adj.Price = 0.0m;
                     adj.DateCreated = DateTime.Now;
@@ -69,14 +70,14 @@ namespace SA33.Team12.SSIS.Stock
             {
                 AdjustmentVoucherTransaction tran = new AdjustmentVoucherTransaction();
 
-                tran.VoucherNumber = "88888"; // tesing only
+                tran.VoucherNumber = avm.GenerateVoucherNumber();
                 tran.DateIssued = DateTime.Now;
-                tran.CreatedBy = 1; //testing purpose only
+                tran.CreatedBy = Membership.GetCurrentLoggedInUser().UserID; 
 
                 foreach (StockLogTransaction adj in adjustments)
                 {
                     adj.AdjustmentVoucherTransaction = tran;
-                    //avm.CreateStockLogTransaction(adj);
+                    tran.StockLogTransactions.Add(adj);
                 }
 
                 avm.CreateAdjustmentVoucherTransaction(tran);
