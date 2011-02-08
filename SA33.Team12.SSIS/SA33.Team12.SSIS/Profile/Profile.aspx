@@ -70,14 +70,14 @@
                 <table class="screenFriendlyGridView">
                     <tr class="odd">
                         <th>
-                            DepartmentID:
+                            Department:
                         </th>
                         <td>
                             <asp:DynamicControl ID="UserIDDynamicControl" runat="server" DataField="UserID" Visible="false" Mode="Edit" />
                             <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" DataField="DepartmentID"
                                 Mode="Edit" Visible="false" />
                             <asp:DropDownList runat="server" ID="DepartmentDropDownList" DataTextField="Name"
-                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource" 
+                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource" Enabled="false"
                                 SelectedValue='<%# Eval("DepartmentID") %>'>
                             </asp:DropDownList>
                             <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"
@@ -137,7 +137,8 @@
                         <td>
                             <asp:DynamicControl ID="RoleDynamicControl" runat="server" DataField="Role" Mode="Edit"
                                 Visible="false" />
-                            <asp:CheckBoxList ID="MembershipRoleCheckBoxList" runat="server">
+                            <asp:CheckBoxList ID="MembershipRoleCheckBoxList" runat="server"
+                                Enabled="false">
                             </asp:CheckBoxList>
                         </td>
                         <tr>
@@ -145,8 +146,12 @@
                                 IsEnabled: &nbsp;&nbsp;
                             </th>
                             <td>
+                                <input type="checkbox" disabled="disabled"
+                                     <%# (bool) Eval("IsEnabled") ? "checked='checked'":"" %> />
+
+
                                 <asp:DynamicControl ID="IsEnabledDynamicControl" runat="server" DataField="IsEnabled"
-                                    Mode="Edit" />
+                                    Mode="Edit" Visible="false" />
                             </td>
                         </tr>
                     <tr class="odd">

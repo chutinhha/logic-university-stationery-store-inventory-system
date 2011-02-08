@@ -63,7 +63,7 @@
             <EmptyDataTemplate>
                 Please select a user to view its detail.
                 <br />
-                <asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
+                <asp:Button ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
                     Text="New" CssClass="button" />
             </EmptyDataTemplate>
             <EditItemTemplate>
@@ -78,7 +78,8 @@
                                 Mode="Edit" Visible="false" />
                             <asp:DropDownList runat="server" ID="DepartmentDropDownList" DataTextField="Name"
                                 DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource" 
-                                SelectedValue='<%# Eval("DepartmentID") %>'>
+                                SelectedValue='<%# Eval("DepartmentID") %>'
+                                Enabled='<%# SA33.Team12.SSIS.Utilities.Membership.IsAdmin %>'>
                             </asp:DropDownList>
                             <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"
                                 TypeName="SA33.Team12.SSIS.BLL.UserManager" SelectMethod="GetAllDepartments">
@@ -154,9 +155,9 @@
                                 &nbsp;
                             </th>
                             <td>
-                                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
+                                <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
                                     Text="Update" />
-                                <asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
+                                <asp:Button ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
                                     Text="Cancel" />
                             </td>
                         </tr>
@@ -172,7 +173,10 @@
                             <asp:DynamicControl ID="DepartmentIDDynamicControl" runat="server" DataField="DepartmentID"
                                 Mode="Insert" Visible="false" />
                             <asp:DropDownList runat="server" ID="DepartmentDropDownList" DataTextField="Name"
-                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource">
+                                DataValueField="DepartmentID" DataSourceID="DepartmentObjectDataSource"
+                                SelectedValue='<%# SA33.Team12.SSIS.Utilities.Membership.LoggedInuser.DepartmentID %>'
+                                Enabled='<%# SA33.Team12.SSIS.Utilities.Membership.IsAdmin %>'>
+
                             </asp:DropDownList>
                             <asp:ObjectDataSource runat="server" ID="DepartmentObjectDataSource" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"
                                 TypeName="SA33.Team12.SSIS.BLL.UserManager" SelectMethod="GetAllDepartments">
@@ -247,9 +251,9 @@
                                 &nbsp;
                             </td>
                             <td>
-                                <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert"
+                                <asp:Button ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert"
                                     Text="Insert" ValidationGroup="Insert" />
-                                &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False"
+                                &nbsp;<asp:Button ID="InsertCancelButton" runat="server" CausesValidation="False"
                                     CommandName="Cancel" Text="Cancel" />
                             </td>
                         </tr>
@@ -322,15 +326,19 @@
                                     DataField="IsEnabled" Mode="ReadOnly" />
                             </td>
                         </tr>
-                    </tbody>
+                 <tr class="odd">
+                    <th></th>
+                    <td>
+                <asp:Button ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
+                    Text="Edit" />
+                &nbsp;<asp:Button ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete"
+                    Text="Delete" />
+                &nbsp;<asp:Button ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
+                    Text="New" />
+                    </td>
+                </tr>                    </tbody>
                 </table>
                 <br />
-                <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
-                    Text="Edit" />
-                &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete"
-                    Text="Delete" />
-                &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
-                    Text="New" />
             </ItemTemplate>
         </asp:FormView>
         <asp:ObjectDataSource ID="UserDetailObjectDataSource" runat="server" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"

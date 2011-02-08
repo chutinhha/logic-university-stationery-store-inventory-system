@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
 using System.Web.Security;
 using SA33.Team12.SSIS.BLL;
@@ -11,6 +12,112 @@ namespace SA33.Team12.SSIS.Utilities
 {
     public static class Membership
     {
+        public static User LoggedInuser
+        {
+            get { return Utilities.Membership.GetCurrentLoggedInUser(); }
+        }
+
+        public static string[] Roles
+        {
+            get { return Utilities.Membership.GetCurrentLoggedInUserRole(); }
+        }
+
+        public static bool IsLoggedIn
+        {
+            get { WebSecurity.MembershipUser muser = WebSecurity.Membership.GetUser();
+            if (muser != null) return true;
+            return false;
+            }
+        }
+
+        public static bool IsAdmin
+        {
+            get
+            {
+                var isAdmin = (from r in Membership.Roles
+                               where r.Contains("Administrators")
+                               select r);
+                return (isAdmin.Count() > 0);
+            }
+        }
+
+        public static bool IsDeptHead
+        {
+            get
+            {
+                var isDeptHead = (from r in Membership.Roles
+                                  where r.Contains("DepartmentHeads")
+                                  select r);
+                return (isDeptHead.Count() > 0);
+            }
+        }
+
+        public static bool IsTempDeptHead
+        {
+            get
+            {
+                var isDeptHead = (from r in Membership.Roles
+                                  where r.Contains("TemporaryDepartmentHeads")
+                                  select r);
+                return (isDeptHead.Count() > 0);
+            }
+        }
+
+        public static bool IsDeptRepresentative
+        {
+            get
+            {
+                var isDeptHead = (from r in Membership.Roles
+                                  where r.Contains("DepartmentRepresentatives")
+                                  select r);
+                return (isDeptHead.Count() > 0);
+            }
+        }
+
+        public static bool IsStoreManager
+        {
+            get
+            {
+                var isStoreManager = (from r in Membership.Roles
+                                  where r.Contains("StoreManagers")
+                                  select r);
+                return (isStoreManager.Count() > 0);
+            }
+        }
+
+        public static bool IsStoreSupervisor
+        {
+            get
+            {
+                var q = (from r in Membership.Roles
+                         where r.Contains("StoreSupervisors")
+                         select r);
+                return (q.Count() > 0);
+            }
+        }
+
+        public static bool IsEmployee
+        {
+            get
+            {
+                var q = (from r in Membership.Roles
+                         where r.Contains("Employees")
+                         select r);
+                return (q.Count() > 0);
+            }
+        }
+
+        public static bool IsStoreClerk
+        {
+            get
+            {
+                var q = (from r in Membership.Roles
+                         where r.Contains("StoreClerks")
+                         select r);
+                return (q.Count() > 0);
+            }
+        }
+        
         private static void AddUserToRoles(string userName, string[] roles)
         {
             string[] allRoles = WebSecurity.Roles.GetAllRoles();
