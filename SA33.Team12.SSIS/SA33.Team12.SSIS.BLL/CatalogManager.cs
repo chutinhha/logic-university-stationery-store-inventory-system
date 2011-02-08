@@ -93,7 +93,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog deletion failed.");
+                //throw new Exceptions.UserException("Catalog deletion failed.");
             }
         }
 
@@ -186,7 +186,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog stationery deletion failed.");
+                //throw new Exceptions.UserException("Catalog stationery deletion failed.");
             }
         }
         #endregion
@@ -256,7 +256,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog special stationery item deletion failed.");
+                //throw new Exceptions.UserException("Catalog special stationery item deletion failed.");
             }
         }
 
@@ -341,7 +341,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog item location deletion failed.");
+                //throw new Exceptions.UserException("Catalog item location deletion failed.");
             }
         }
         #endregion
@@ -415,7 +415,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog stationery item price deletion failed.");
+                //throw new Exceptions.UserException("Catalog stationery item price deletion failed.");
             }
         }
         #endregion
@@ -498,7 +498,7 @@ namespace SA33.Team12.SSIS.BLL
             }
             catch (Exception)
             {
-                throw new Exceptions.UserException("Catalog supplier deletion failed.");
+                //throw new Exceptions.UserException("Catalog supplier deletion failed.");
             }
         }
         #endregion
