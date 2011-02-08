@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="Users.aspx.cs" Inherits="SA33.Team12.SSIS.Administration.Users" %>
+    CodeBehind="Profile.aspx.cs" Inherits="SA33.Team12.SSIS.Profile.Users" %>
 
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Maintain Users</h2>
+        User Profile</h2>
     <p class="failureNotification">
         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
     </p>
-    <fieldset>
+    <fieldset style="display:none">
         <legend>Users List</legend>
         <asp:GridView runat="server" ID="UserGridView" AutoGenerateColumns="False" DataKeyNames="UserID"
             OnRowCommand="UserGridView_RowCommand" AllowPaging="True" 
@@ -54,8 +54,8 @@
             InsertMethod="CreateUser" UpdateMethod="UpdateUser"></asp:ObjectDataSource>
     </fieldset>
     <fieldset>
-        <legend>Selected User's Detail</legend>
-        <asp:FormView runat="server" ID="UserFormView" EnableModelValidation="True" DataSourceID="UserDetailObjectDataSource"
+        <legend>Profile Detail</legend>
+        <asp:FormView runat="server" ID="UserFormView" DataSourceID="UserDetailObjectDataSource"
             OnItemInserting="UserFormView_ItemInserting" OnItemUpdating="UserFormView_ItemUpdating"
             OnItemCommand="UserFormView_ItemCommand" 
             OnDataBound="UserFormView_DataBound" 
@@ -64,7 +64,7 @@
                 Please select a user to view its detail.
                 <br />
                 <asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
-                    Text="New" CssClass="button" />
+                    Text="New" CssClass="button" Visible="false" />
             </EmptyDataTemplate>
             <EditItemTemplate>
                 <table class="screenFriendlyGridView">
@@ -154,9 +154,9 @@
                                 &nbsp;
                             </th>
                             <td>
-                                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
+                                <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
                                     Text="Update" />
-                                <asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
+                                <asp:Button ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
                                     Text="Cancel" />
                             </td>
                         </tr>
@@ -322,23 +322,26 @@
                                     DataField="IsEnabled" Mode="ReadOnly" />
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-                <br />
-                <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
+                 <tr class="odd">
+                    <th></th>
+                    <td>
+                <asp:Button ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
                     Text="Edit" />
                 &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete"
-                    Text="Delete" />
+                    Text="Delete" Visible="false" />
                 &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
-                    Text="New" />
+                    Text="New" Visible="false" />                    </td>
+                </tr>
+                    </tbody>
+                </table>
             </ItemTemplate>
         </asp:FormView>
         <asp:ObjectDataSource ID="UserDetailObjectDataSource" runat="server" DataObjectTypeName="SA33.Team12.SSIS.DAL.User"
             DeleteMethod="DeleteUser" InsertMethod="CreateUser" SelectMethod="GetUsersById"
-            TypeName="SA33.Team12.SSIS.Utilities.Membership" UpdateMethod="UpdateUser">
+            TypeName="SA33.Team12.SSIS.Utilities.Membership" UpdateMethod="UpdateUser" 
+            OldValuesParameterFormatString="original_{0}">
             <SelectParameters>
-                <asp:ControlParameter ControlID="UserGridView" Name="userId" PropertyName="SelectedValue"
-                    Type="Int32" />
+                <asp:Parameter DefaultValue="0" Name="userId" Type="Int32" />
             </SelectParameters>
         </asp:ObjectDataSource>
     </fieldset>
