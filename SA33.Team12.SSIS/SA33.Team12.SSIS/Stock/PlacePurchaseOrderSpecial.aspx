@@ -74,6 +74,10 @@
                          });
                      });
 				</script>
+                <br />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                    ControlToValidate="txtDateToSupply" ErrorMessage="Supply Date is required." 
+                    ValidationGroup="input"></asp:RequiredFieldValidator>
 </td>
         </tr>
     </table>
@@ -81,10 +85,32 @@
     
     <fieldset>
     <legend>Items To Order</legend>
-        <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False">
+        <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False" 
+            onrowdatabound="gvPOItems_RowDataBound" DataKeyNames="SpecialStationeryID">
             <Columns>
                 <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
                 <asp:BoundField DataField="Description" HeaderText="Description" />
+                <asp:TemplateField HeaderText="Requested Quantity">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltlQuantity" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Order Quantity">
+                    <ItemTemplate>
+                        <asp:TextBox ID="txtOrderQuantity" runat="server"></asp:TextBox>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Supplier">
+                    <ItemTemplate>
+                        <asp:DropDownList ID="ddlSupplier" runat="server" 
+                            DataSourceID="SupplierDataSource" DataTextField="CompanyName" 
+                            DataValueField="SupplierID">
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="SupplierDataSource" runat="server" 
+                            SelectMethod="GetAllSuppliers" TypeName="SA33.Team12.SSIS.BLL.CatalogManager">
+                        </asp:ObjectDataSource>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </fieldset>
@@ -97,7 +123,7 @@
                 &nbsp;</td>
             <td>
                 <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" 
-                    Text="Submit" Height="44px" Width="98px" />
+                    Text="Submit" Height="44px" Width="98px" ValidationGroup="input" />
             </td>
         </tr>
         </table>
