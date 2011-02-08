@@ -13,7 +13,7 @@ namespace SA33.Team12.SSIS.Stock
 {
     public partial class ReplenishStock : System.Web.UI.Page
     {
-      //  public PurchaseOrder po = new PurchaseOrder();
+        //  public PurchaseOrder po = new PurchaseOrder();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -54,12 +54,28 @@ namespace SA33.Team12.SSIS.Stock
                 po.ReceivedBy = Membership.GetCurrentLoggedInUser().UserID;
                 pom.UpdatePurchaseOrder(po);
 
-                AdjustmentVoucher av = new AdjustmentVoucher();
-                
-                foreach (PurchaseOrderItem item in po.PurchaseOrderItems)
+                using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
                 {
-                    StockLog log = new StockLog();
-
+                    SA33.Team12.SSIS.DAL.AdjustmentVoucher av = new SA33.Team12.SSIS.DAL.AdjustmentVoucher();
+                    av.VoucherNumber = avm.GenerateVoucherNumber();
+                    av.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
+                    av.DateIssued = po.DateOfOrder;
+                    av.DateApproved = DateTime.Now;
+                    av.ApprovedBy = Membership.GetCurrentLoggedInUser().UserID;
+                    foreach (PurchaseOrderItem item in po.PurchaseOrderItems)
+                    {
+                        StockLog log = new StockLog();
+                        log.AdjustmentVoucher = av;
+                        log.Balance =  item.Stationery.QuantityInHand;
+                        log.Quantity = item.QuantityToOrder;
+                        log.Reason = "Supplier - " + po.Supplier.CompanyName;
+                        log.StationeryID = item.StationeryID;
+                        log.Type = 3;           // "replenishment" accroding to enu in DAL.AdjustmentVoucherDAO
+                        log.Price = item.Price;
+               //         avm.CreateStockLog(log);
+                        av.StockLogs.Add(log) ;
+                    }
+                    avm.CreateAdjustmentVoucher(av);
                 }
             }
 
