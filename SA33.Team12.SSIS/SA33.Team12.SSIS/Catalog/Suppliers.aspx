@@ -33,10 +33,9 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                         ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
                         ErrorMessage="Supplier code is required" ValidationGroup="input"></asp:RequiredFieldValidator>
-                    <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                         ControlToValidate="SupplierCodeTextBox" Display="Dynamic" 
-                        ErrorMessage="Max 4 chars" MaximumValue="4" MinimumValue="1" 
-                        ValidationGroup="input"></asp:RangeValidator>
+                        ErrorMessage="Enter 4 Charecters" ValidationExpression="\w{4}"></asp:RegularExpressionValidator>
                 </td>
                 <td>
                     &nbsp;</td>
