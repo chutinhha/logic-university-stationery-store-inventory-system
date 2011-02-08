@@ -89,6 +89,7 @@ namespace SA33.Team12.SSIS.Stock
                     log.StationeryID = logTran.StationeryID;
                     log.Type = logTran.Type;
                     log.Price = logTran.Price;
+                    log.DateCreated = DateTime.Now;
                     avm.CreateStockLog(log);
                     avm.DeleteStockLogTransaction(logTran);
                 }
