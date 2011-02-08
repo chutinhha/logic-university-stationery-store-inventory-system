@@ -116,26 +116,28 @@ namespace SA33.Team12.SSIS.Stock
                 if (stationeryID != 0)
                 {
                     TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
-                    DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
-                    if (tb != null)
-                    {
-                        using (PurchaseOrderManager pom = new PurchaseOrderManager())
-                        {
-                            tb.Text = pom.GetQuantityToOrder(stationeryID).ToString();
-                        }
-                    }
+                    DropDownList SupplierDrowDownList = e.Row.FindControl("ddlSupplier") as DropDownList;
                     List<Supplier> suppliers = new List<Supplier>();
 
-                    DropDownList SupplierDrowDownList = e.Row.FindControl("ddlSupplier") as DropDownList;
                     using (CatalogManager cm = new CatalogManager())
                     {
                         List<StationeryPrice> prices = cm.GetStationeryPricesByStationeryID(stationeryID);
+                        Stationery stationery = cm.FindStationeryByID(stationeryID);
                         foreach (StationeryPrice p in prices)
                         {
                             suppliers.Add(p.Supplier);
                         }
                         SupplierDrowDownList.DataSource = suppliers;
                         SupplierDrowDownList.DataBind();
+
+                        if (tb != null)
+                        {
+                            using (PurchaseOrderManager pom = new PurchaseOrderManager())
+                            {
+                                tb.Text = (pom.GetQuantityToOrder(stationeryID) - stationery.QuantityInHand 
+                                    + stationery.ReorderLevel + stationery.ReorderQuantity).ToString();
+                            }
+                        }
                     }
                 }
             }
