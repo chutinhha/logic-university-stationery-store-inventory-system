@@ -8,7 +8,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL.DTO;
 
-namespace SA33.Team12.SSIS.UserAdministration
+namespace SA33.Team12.SSIS.Administration
 {
     public partial class Users : System.Web.UI.Page
     {

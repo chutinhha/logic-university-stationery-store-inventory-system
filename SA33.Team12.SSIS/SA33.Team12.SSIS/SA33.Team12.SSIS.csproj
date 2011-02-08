@@ -72,7 +72,6 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Administration\BlackListLogs.aspx" />
-    <Content Include="Administration\Copy of Users.aspx" />
     <Content Include="Administration\MaintainCollectionPoint.aspx" />
     <Content Include="Administration\MaintainDepartment.aspx" />
     <Content Include="Administration\UpdateCollectionPoint.aspx" />
@@ -189,13 +188,6 @@
     </Compile>
     <Compile Include="Administration\BlackListLogs.aspx.designer.cs">
       <DependentUpon>BlackListLogs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administration\Copy of Users.aspx.cs">
-      <DependentUpon>Copy of Users.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administration\Copy of Users.aspx.designer.cs">
-      <DependentUpon>Copy of Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\MaintainCollectionPoint.aspx.cs">
       <DependentUpon>MaintainCollectionPoint.aspx</DependentUpon>
