@@ -202,13 +202,13 @@ namespace SA33.Team12.SSIS.BLL
                 }
                 else
                 {
-                    ErrorMessage("Approval of Requisition Failed");
+                    ErrorMessage("Rejection of Requisition Failed");
                 }
             }
             catch (Exception)
             {
 
-                throw new ApprovalException("Approval Failed for all requisitions.");
+                throw new ApprovalException("Rejection Failed for all requisitions.");
             }
         }
 
@@ -463,7 +463,7 @@ namespace SA33.Team12.SSIS.BLL
                         }
                     }
 
-                    if (requisitionMethod == RequisitionMethod.Approve)
+                    if (requisitionMethod == RequisitionMethod.Approve || requisitionMethod == RequisitionMethod.Reject)
                     {
                         if (requisition.ApprovedBy != 0 && requisition.ApprovedByUser.Role == "DepartmentHeads")
                         {

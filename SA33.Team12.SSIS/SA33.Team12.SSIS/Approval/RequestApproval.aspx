@@ -3,9 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h2>Pending Request For Approval</h2>
-    <p>
-        <asp:Label ID="Label1" runat="server"></asp:Label>
-    </p>
     <fieldset>
     <fieldset>
     <legend>Result</legend>
@@ -36,11 +33,20 @@
                     SortExpression="DateRequested" />
                 <asp:TemplateField HeaderText="Approve" ShowHeader="False">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" 
+                        <asp:LinkButton ID="ApproveLinkButton" runat="server" CausesValidation="false" 
                             CommandName="Approve" CommandArgument='<%# Eval("RequisitionID") %>' Text="Approve"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Reject" ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="RejectLinkButton" runat="server" CausesValidation="false" 
+                            CommandName="Reject" CommandArgument='<%# Eval("RequisitionID") %>' Text="Reject"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
+            <EmptyDataTemplate>
+                No requests are pending for approval.
+            </EmptyDataTemplate>
         </asp:GridView>
         </fieldset>
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
