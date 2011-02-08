@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
+using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
@@ -73,7 +74,7 @@ namespace SA33.Team12.SSIS.Stock
                 SA33.Team12.SSIS.DAL.AdjustmentVoucher voucher = new SA33.Team12.SSIS.DAL.AdjustmentVoucher();
 
                 voucher.CreatedBy = tran.CreatedBy;
-                voucher.ApprovedBy = 3; //tesing only
+                voucher.ApprovedBy = Membership.GetCurrentLoggedInUser().UserID; 
                 voucher.DateApproved = DateTime.Now;
                 voucher.DateIssued = tran.DateIssued;
                 voucher.VoucherNumber = tran.VoucherNumber;
