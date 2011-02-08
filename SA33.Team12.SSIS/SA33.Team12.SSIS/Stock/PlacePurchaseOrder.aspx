@@ -96,7 +96,8 @@
     <fieldset>
     <legend>Items To Order</legend>
     <asp:GridView ID="gvPOItems" runat="server" AutoGenerateColumns="False" 
-            onrowdatabound="gvPOItems_RowDataBound" DataKeyNames="StationeryID">
+            onrowdatabound="gvPOItems_RowDataBound" DataKeyNames="StationeryID" 
+            AllowPaging="True" onpageindexchanging="gvPOItems_PageIndexChanging">
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Description" HeaderText="Item Description" />
