@@ -72,6 +72,7 @@ namespace SA33.Team12.SSIS.Stock
                         log.StationeryID = item.StationeryID;
                         log.Type = 3;           // "replenishment" accroding to enu in DAL.AdjustmentVoucherDAO
                         log.Price = item.Price;
+                        log.DateCreated = DateTime.Now;
                //         avm.CreateStockLog(log);
                         av.StockLogs.Add(log) ;
                     }
