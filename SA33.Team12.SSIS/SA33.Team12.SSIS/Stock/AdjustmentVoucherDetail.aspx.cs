@@ -64,12 +64,6 @@ namespace SA33.Team12.SSIS.Stock
             }
         }
 
-        protected void txtReason_TextChanged(object sender, EventArgs e)
-        {
-            if(txtReason.Text != string.Empty)
-            btnReject.Enabled = true;
-        }
-
         protected void btnReject_Click(object sender, EventArgs e)
         {
             RejectSingleAdj(int.Parse(Request.QueryString["ID"]));
