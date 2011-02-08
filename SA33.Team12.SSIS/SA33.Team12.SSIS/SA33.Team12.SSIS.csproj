@@ -247,12 +247,14 @@
     </Compile>
     <Compile Include="Distribution\Disbursements.aspx.cs">
       <DependentUpon>Disbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Distribution\Disbursements.aspx.designer.cs">
       <DependentUpon>Disbursements.aspx</DependentUpon>
     </Compile>
     <Compile Include="Distribution\Distribution.aspx.cs">
       <DependentUpon>Distribution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Distribution\Distribution.aspx.designer.cs">
       <DependentUpon>Distribution.aspx</DependentUpon>
