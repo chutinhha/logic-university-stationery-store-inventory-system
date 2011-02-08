@@ -3587,7 +3587,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="StationeryModel" ZoomLevel="108">
+      <Diagram Name="StationeryModel" ZoomLevel="100">
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucher" Width="1.5" PointX="7.5" PointY="25.5" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.AdjustmentVoucherTransaction" Width="1.5" PointX="3.125" PointY="20.25" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="SA33.Team12.SSIS.Model.ApprovalAudit" Width="1.5" PointX="7.5" PointY="29.25" Height="2.172587890624996" IsExpanded="true" />
