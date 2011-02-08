@@ -58,7 +58,7 @@ namespace SA33.Team12.SSIS.Stock
                     dtfi.ShortDatePattern = "dd/MM/yyyy";
                     dtfi.DateSeparator = "/";
 
-                    purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text,dtfi);
+                    purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text, dtfi);
                     purchaseOrder.SupplierID = s.SupplierID;
 
                     foreach (GridViewRow r in gvPOItems.Rows)
@@ -68,14 +68,13 @@ namespace SA33.Team12.SSIS.Stock
                             PurchaseOrderItem item = new PurchaseOrderItem();
                             item.PurchaseOrder = purchaseOrder;
                             item.StationeryID = (int)gvPOItems.DataKeys[r.RowIndex].Value;
-                            item.QuantityToOrder = 5;
-                            //   item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
+                            //     item.QuantityToOrder = 5;
+                            item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
                             using (CatalogManager cm = new CatalogManager())
                             {
                                 StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
                                 criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("ddlSupplier")).SelectedValue.ToString());
                                 criteria.StationeryID = (int)item.StationeryID;
-                                //            item.Price = (decimal)88.88;
                                 item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;
 
                                 // record supplier ID for the PO
@@ -86,40 +85,6 @@ namespace SA33.Team12.SSIS.Stock
                     }
                     pom.CreatePurchaseOrder(purchaseOrder);
                 }
-
-
-                //PurchaseOrder purchaseOrder = new PurchaseOrder();
-
-                //purchaseOrder.PONumber = pom.CreatePONumber();
-                //purchaseOrder.DateOfOrder = DateTime.Now;
-                //purchaseOrder.AttentionTo = Convert.ToInt32(ddlAttentionTo.SelectedValue);
-                //purchaseOrder.CreatedBy = Membership.GetCurrentLoggedInUser().UserID;
-                //purchaseOrder.IsDelivered = false;
-                //purchaseOrder.DateToSupply = Convert.ToDateTime(txtDateToSupply.Text);  //dont know working or not
-
-                //foreach (GridViewRow r in gvPOItems.Rows)
-                //{
-                //    PurchaseOrderItem item = new PurchaseOrderItem();
-
-                //    item.PurchaseOrder = purchaseOrder;
-                //    item.StationeryID = (int)gvPOItems.DataKeys[r.RowIndex].Value;
-                //    item.QuantityToOrder = 5;
-                //    //   item.QuantityToOrder = Convert.ToInt32(((TextBox)r.FindControl("txtRecommend")).Text.ToString());
-                //    using (CatalogManager cm = new CatalogManager())
-                //    {
-                //        StationeryPriceSearchDTO criteria = new StationeryPriceSearchDTO();
-                //        criteria.SupplierID = Convert.ToInt32(((DropDownList)r.FindControl("ddlSupplier")).SelectedValue.ToString());
-                //        criteria.StationeryID = (int)item.StationeryID;
-                //        //            item.Price = (decimal)88.88;
-                //        item.Price = cm.FindStationeryPricesByCriteria(criteria)[0].Price;
-
-                //        // record supplier ID for the PO
-                //        purchaseOrder.SupplierID = criteria.SupplierID;
-                //    }
-
-                //    purchaseOrder.PurchaseOrderItems.Add(item); // only this way works
-                //}
-                //pom.CreatePurchaseOrder(purchaseOrder);
             }
         }
 
@@ -151,33 +116,31 @@ namespace SA33.Team12.SSIS.Stock
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 int stationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
-                //if (StationeryID != 0)
-                //{
-                //    TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
-                //    DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
-                //    if (tb != null)
-                //    {
-                //        using (PurchaseOrderManager pom = new PurchaseOrderManager())
-                //        {
-                //            tb.Text = pom.GetQuantityToOrder(StationeryID).ToString();
-                //        }
-                //    }
-                List<Supplier> suppliers = new List<Supplier>();
-
-                DropDownList SupplierDrowDownList = e.Row.FindControl("ddlSupplier") as DropDownList;
-                using (CatalogManager cm = new CatalogManager())
+                if (stationeryID != 0)
                 {
-                    List<StationeryPrice> prices = cm.GetStationeryPricesByStationeryID(stationeryID);
-                    foreach (StationeryPrice p in prices)
+                    TextBox tb = e.Row.FindControl("txtRecommend") as TextBox;
+                    DropDownList supplier = e.Row.FindControl("ddlSupplier") as DropDownList;
+                    if (tb != null)
                     {
-                        suppliers.Add(p.Supplier);
+                        using (PurchaseOrderManager pom = new PurchaseOrderManager())
+                        {
+                            tb.Text = pom.GetQuantityToOrder(stationeryID).ToString();
+                        }
                     }
-                    SupplierDrowDownList.DataSource = suppliers;
-                    SupplierDrowDownList.DataBind();
+                    List<Supplier> suppliers = new List<Supplier>();
+
+                    DropDownList SupplierDrowDownList = e.Row.FindControl("ddlSupplier") as DropDownList;
+                    using (CatalogManager cm = new CatalogManager())
+                    {
+                        List<StationeryPrice> prices = cm.GetStationeryPricesByStationeryID(stationeryID);
+                        foreach (StationeryPrice p in prices)
+                        {
+                            suppliers.Add(p.Supplier);
+                        }
+                        SupplierDrowDownList.DataSource = suppliers;
+                        SupplierDrowDownList.DataBind();
+                    }
                 }
-                //    }
-
-
             }
         }
 
