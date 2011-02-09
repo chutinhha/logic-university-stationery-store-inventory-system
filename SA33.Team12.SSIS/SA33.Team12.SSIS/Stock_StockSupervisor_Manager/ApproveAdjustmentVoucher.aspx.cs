@@ -62,7 +62,8 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
             }
             if (e.CommandName == "AdjustmentVoucherTransactionID")
             {
-                Response.Redirect("~/Stock_StoreSupervisor_Manager/AdjustmentVoucherDetail.aspx?ID=" + e.CommandArgument);
+
+                Response.Redirect("~/Stock_StockSupervisor_Manager/AdjustmentVoucherTransactionDetail.aspx?ID=" + e.CommandArgument);
             }
         }
 
