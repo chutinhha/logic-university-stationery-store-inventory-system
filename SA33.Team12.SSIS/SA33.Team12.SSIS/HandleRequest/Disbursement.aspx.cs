@@ -143,7 +143,6 @@ namespace SA33.Team12.SSIS.HandleRequest
                     if (item != null && item.QuantityDamaged > 0)
                     {
                         Stationery stationery = item.Stationery;
-                        SpecialStationery specialStationery = item.SpecialStationery;
 
                         StockLogTransaction adj = new StockLogTransaction();
                         adj.Reason = item.Reason;
@@ -154,14 +153,15 @@ namespace SA33.Team12.SSIS.HandleRequest
                             adj.StationeryID = item.StationeryID;
                             StationeryPrice price = stationery.StationeryPrices.First();
                             adj.Price = price.Price;
+                            adj.Balance = stationery.QuantityInHand;
                         }
                         else
                         {
                             adj.SpecialStationeryID = item.SpecialStationeryID;
                             adj.Price = 0.0m;
+                            adj.Balance = 0;
                         }
 
-                        adj.Balance = stationery.QuantityInHand;
                         adj.DateCreated = DateTime.Now;
                         adj.Type = (int)AdjustmentType.Damage;
                         adjustmentVoucher.StockLogTransactions.Add(adj);

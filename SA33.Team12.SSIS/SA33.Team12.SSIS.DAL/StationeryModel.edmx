@@ -2137,7 +2137,7 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <Property Name="ApprovedBy" Type="Int32" />
-          <Property Name="RequisitionForm" Type="String" Nullable="false" MaxLength="13" Unicode="false" FixedLength="false" />
+          <Property Name="RequisitionForm" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="UrgencyID" Type="Int32" Nullable="false" />
           <Property Name="DateRequested" Type="DateTime" Nullable="false" />

@@ -37,7 +37,7 @@
             SortExpression="DateRetrieved" DataFormatString="{0:dd/MMM/yyyy}" />
         <asp:CheckBoxField DataField="IsRetrieved" HeaderText="Is Retrieved" 
             SortExpression="IsRetrieved" />
-        <asp:CheckBoxField DataField="IsCollected" HeaderText="Is Collected" 
+        <asp:CheckBoxField DataField="IsCollected" HeaderText="Is Allocated" 
             SortExpression="IsCollected" />
         <asp:CheckBoxField DataField="IsDistributed" HeaderText="Is Disbursed" 
             SortExpression="IsDistributed" />

@@ -101,29 +101,81 @@ namespace SA33.Team12.SSIS.StationeryRetrieval
 
             if (StationeryRetrievalFormItemGridView != null)
             {
-                int srfID = Convert.ToInt32(this.StationeryRetrievalFormView.DataKey.Value);
-                using (StationeryRetrievalManager srm = new StationeryRetrievalManager())
+                try
                 {
-                    DAL.StationeryRetrievalForm srf = srm.GetStationeryRetrievalFormByID(srfID);
-                    List<StationeryRetrievalFormItem> srfis = srf.StationeryRetrievalFormItems.ToList();
-                    foreach (GridViewRow row in StationeryRetrievalFormItemGridView.Rows)
+                    int srfID = Convert.ToInt32(this.StationeryRetrievalFormView.DataKey.Value);
+
+                    AdjustmentVoucherTransaction adj = new AdjustmentVoucherTransaction();
+                    List<Stationery> stationeries = new List<Stationery>();
+                    List<SpecialStationery> specialStationeries = new List<SpecialStationery>();
+
+                    using (StationeryRetrievalManager srm = new StationeryRetrievalManager())
                     {
-                        HiddenField StationeryRetrievalFormItemIDHiddenField =
-                            row.FindControl("StationeryRetrievalFormItemIDHiddenField") as HiddenField;
-                        int srfiID = Convert.ToInt32(StationeryRetrievalFormItemIDHiddenField.Value);
-                        TextBox QtyRetrieved = row.FindControl("QuantityRetrievedTextBox") as TextBox;
-                        StationeryRetrievalFormItem srfi = (from s in srfis
-                                                            where s.StationeryRetrievalFormItemID == srfiID
-                                                            select s).FirstOrDefault();
-                        srfi.QuantityRetrieved = Convert.ToInt32(QtyRetrieved.Text);
+                        DAL.StationeryRetrievalForm srf = srm.GetStationeryRetrievalFormByID(srfID);
+                        List<StationeryRetrievalFormItem> srfis = srf.StationeryRetrievalFormItems.ToList();
+                        foreach (GridViewRow row in StationeryRetrievalFormItemGridView.Rows)
+                        {
+                            HiddenField StationeryRetrievalFormItemIDHiddenField =
+                                row.FindControl("StationeryRetrievalFormItemIDHiddenField") as HiddenField;
+                            int srfiID = Convert.ToInt32(StationeryRetrievalFormItemIDHiddenField.Value);
+                            TextBox QtyRetrieved = row.FindControl("QuantityRetrievedTextBox") as TextBox;
+                            StationeryRetrievalFormItem srfi = (from s in srfis
+                                                                where s.StationeryRetrievalFormItemID == srfiID
+                                                                select s).FirstOrDefault();
+
+                            int quantityRetrieved = Convert.ToInt32(QtyRetrieved.Text);
+                            srfi.QuantityRetrieved = quantityRetrieved;
+
+                            StockLogTransaction stockLogTransaction = new StockLogTransaction();
+                            stockLogTransaction.Reason = "";
+                            stockLogTransaction.Quantity = quantityRetrieved;
+
+
+                            if (srfi.Stationery != null)
+                            {
+                                Stationery stationery = srfi.Stationery;
+                                stockLogTransaction.StationeryID = srfi.Stationery.StationeryID;
+                                StationeryPrice price = stationery.StationeryPrices.First();
+                                stockLogTransaction.Price = price.Price;
+                                stationery.QuantityInHand -= quantityRetrieved;
+                                stationeries.Add(stationery);
+                             stockLogTransaction.Balance = stationery.QuantityInHand;
+                           }
+                            else
+                            {
+                                SpecialStationery specialStationery = srfi.SpecialStationery;
+                                stockLogTransaction.SpecialStationeryID = srfi.SpecialStationery.SpecialStationeryID;
+                                stockLogTransaction.Price = 0.0m;
+                                specialStationery.Quantity -= quantityRetrieved;
+                                stockLogTransaction.Balance = specialStationery.Quantity;
+                                specialStationeries.Add(specialStationery);
+                            }
+
+                            stockLogTransaction.DateCreated = DateTime.Now;
+                            stockLogTransaction.Type = (int) AdjustmentType.Consumption;
+                            adj.StockLogTransactions.Add(stockLogTransaction);
+
+                        }
+                        StationeryRetrievalForm newSRF = srm.UpdateReceivedQuantity(srf);
+                        newSRF = srm.SetRecommendedQuantity(newSRF.StationeryRetrievalFormID);
+                        using(CatalogManager cm = new CatalogManager())
+                        {
+                            foreach (Stationery stationery in stationeries)
+                            {
+                                cm.UpdateStationery(stationery);
+                            }
+                            foreach (SpecialStationery specialStationery in specialStationeries)
+                            {
+                                cm.UpdateSpecialStationery(specialStationery);
+                            }
+                        }
                     }
-                    StationeryRetrievalForm newSRF = srm.UpdateReceivedQuantity(srf);
-                    newSRF = srm.SetRecommendedQuantity(newSRF.StationeryRetrievalFormID);
                 }
-
-
+                catch (Exception exception)
+                {
+                    this.ErrorMessage.Text = exception.Message;
+                }
             }
-
         }
 
         protected void UpdateActualQuantity()
