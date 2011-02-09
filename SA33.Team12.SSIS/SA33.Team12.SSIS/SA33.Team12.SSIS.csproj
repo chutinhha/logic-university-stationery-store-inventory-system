@@ -374,54 +374,63 @@
     </Compile>
     <Compile Include="Stock_StockClerk\ApplyAdjustmentVoucher.aspx.cs">
       <DependentUpon>ApplyAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\ApplyAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>ApplyAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\PlacePurchaseOrder.aspx.cs">
       <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\PlacePurchaseOrder.aspx.designer.cs">
       <DependentUpon>PlacePurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\PlacePurchaseOrderSpecial.aspx.cs">
       <DependentUpon>PlacePurchaseOrderSpecial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\PlacePurchaseOrderSpecial.aspx.designer.cs">
       <DependentUpon>PlacePurchaseOrderSpecial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\PurchaseOrderDetail.aspx.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\PurchaseOrderDetail.aspx.designer.cs">
       <DependentUpon>PurchaseOrderDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\ReplenishStock.aspx.cs">
       <DependentUpon>ReplenishStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\ReplenishStock.aspx.designer.cs">
       <DependentUpon>ReplenishStock.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\StockCard.aspx.cs">
       <DependentUpon>StockCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\StockCard.aspx.designer.cs">
       <DependentUpon>StockCard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockClerk\ViewPurchaseOrder.aspx.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockClerk\ViewPurchaseOrder.aspx.designer.cs">
       <DependentUpon>ViewPurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\AdjustmentVoucherDetail.aspx.cs">
       <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\AdjustmentVoucherDetail.aspx.designer.cs">
       <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\ApproveAdjustmentVoucher.aspx.cs">
       <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\ApproveAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
