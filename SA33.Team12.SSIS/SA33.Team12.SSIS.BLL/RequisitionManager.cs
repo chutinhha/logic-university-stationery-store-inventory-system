@@ -63,6 +63,7 @@ namespace SA33.Team12.SSIS.BLL
                         foreach (SpecialRequisitionItem specialRequisitionItem in requisition.SpecialRequisitionItems)
                         {
                             isTestOK = ValidateSpecialRequisitionItem(specialRequisitionItem, RequisitionMethod.Create);
+                            
                             if (!isTestOK)
                             {
                                 break;
@@ -72,6 +73,7 @@ namespace SA33.Team12.SSIS.BLL
 
                     if (isTestOK)
                     {
+                        
                         requisitionDAO.CreateRequisition(requisition);
                         return requisition;
                     }
