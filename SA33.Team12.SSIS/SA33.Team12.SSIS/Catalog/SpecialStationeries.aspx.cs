@@ -67,12 +67,19 @@ namespace SA33.Team12.SSIS.Catalog
             try
             {
                 manager.CreateSpecialStationery(specialStationery);
+                DataBind();
+                
             }
             catch (Exception)
             {
                 ErrorLabel.Text = "Create Special Request Failed";
             }
 
+        }
+
+        protected void SpecialStationeryGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            
         }
 
        

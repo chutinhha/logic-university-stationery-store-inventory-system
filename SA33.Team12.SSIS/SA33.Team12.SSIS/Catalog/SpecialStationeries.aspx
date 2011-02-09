@@ -86,24 +86,23 @@
         AutoGenerateColumns="False" DataSourceID="SpecialStationeryObjectDataSource"
         SelectedRowStyle-BackColor="LightGray" 
         onselectedindexchanged="SpecialStationeryGridView_SelectedIndexChanged" 
-            DataKeyNames="SpecialStationeryID">
+            DataKeyNames="SpecialStationeryID" 
+            onrowcommand="SpecialStationeryGridView_RowCommand">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-            <asp:BoundField DataField="SpecialStationeryID" 
-                HeaderText="SpecialStationeryID" SortExpression="SpecialStationeryID" />
             <asp:TemplateField HeaderText="Category">
             <ItemTemplate>
             <%# ((SA33.Team12.SSIS.DAL.Category)Eval("Category")) == null ? "" : ((SA33.Team12.SSIS.DAL.Category)Eval("Category")).Name%>
-            </ItemTemplate>
+            </ItemTemplate>            
             </asp:TemplateField>
             <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" 
                 SortExpression="ItemCode" />
             <asp:BoundField DataField="Description" HeaderText="Description" 
                 SortExpression="Description" />
-            <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
-                SortExpression="Quantity" />
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" 
                 SortExpression="UnitOfMeasure" />
+            <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
+                SortExpression="Quantity" />
         </Columns>
 
 <SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>
