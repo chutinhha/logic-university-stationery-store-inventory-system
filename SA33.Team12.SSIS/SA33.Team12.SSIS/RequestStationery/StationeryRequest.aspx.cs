@@ -36,12 +36,9 @@ namespace SA33.Team12.SSIS.Test
                     {
                         item.Selected = true;
                     }
-                }
-
-            
+                }            
                     requisition = CreateRequisition();
-                    Session["Requisition"] = requisition;
-                
+                    Session["Requisition"] = requisition;                
             }
 
                if (Session["Requisition"] != null)
@@ -278,9 +275,10 @@ namespace SA33.Team12.SSIS.Test
                     if (temp != null)
                     {
                         Response.Redirect("~/RequestStationery/StationeryRequest.aspx?RequestID=" + temp.RequisitionID, false);
+                        Session["Requisition"] = null;
                     }
 
-                    Session["Requisition"] = null;
+                   
                 }
             }
             catch (Exception)
