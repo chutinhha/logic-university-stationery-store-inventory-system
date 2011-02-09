@@ -639,6 +639,7 @@
     <Content Include="Print\Department\Web.config" />
     <Content Include="Print\Web.config" />
     <Content Include="Print\Employee\Web.config" />
+    <Content Include="Distribution\web.config" />
     <None Include="Print\ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </None>

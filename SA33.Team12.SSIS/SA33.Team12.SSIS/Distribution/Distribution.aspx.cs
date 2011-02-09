@@ -133,6 +133,7 @@ namespace SA33.Team12.SSIS.Distribution
                     }
                     ts.Complete();
                 }
+                Response.Redirect("~/Distribution/Disbursements.aspx");
             }
             catch (Exception exception)
             {

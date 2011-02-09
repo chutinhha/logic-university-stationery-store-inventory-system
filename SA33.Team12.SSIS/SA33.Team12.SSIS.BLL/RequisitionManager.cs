@@ -99,35 +99,35 @@ namespace SA33.Team12.SSIS.BLL
         {
             try
             {
-                bool isTrue = false;
-                if (ValidateRequisition(requisition, RequisitionMethod.Update))
-                {
-                    foreach (RequisitionItem item in requisition.RequisitionItems)
-                    {
-                        isTrue = ValidateRequisitionItem(item, RequisitionMethod.Update);
-                        if (!isTrue)
-                        {
-                            break;
-                        }
-                    }
-                    foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
-                    {
-                        isTrue = ValidateSpecialRequisitionItem(splItem, RequisitionMethod.Update);
-                        if (!isTrue)
-                        {
-                            break;
-                        }
-                    }
-
-                    if (isTrue)
-                    {
                         requisitionDAO.UpdateRequisition(requisition);
-                    }
-                    else
-                    {
-                        ErrorMessage("Update Requisition Failed");
-                    }
-                }
+                //bool isTrue = false;
+                //if (ValidateRequisition(requisition, RequisitionMethod.Update))
+                //{
+                //    foreach (RequisitionItem item in requisition.RequisitionItems)
+                //    {
+                //        isTrue = ValidateRequisitionItem(item, RequisitionMethod.Update);
+                //        if (!isTrue)
+                //        {
+                //            break;
+                //        }
+                //    }
+                //    foreach (SpecialRequisitionItem splItem in requisition.SpecialRequisitionItems)
+                //    {
+                //        isTrue = ValidateSpecialRequisitionItem(splItem, RequisitionMethod.Update);
+                //        if (!isTrue)
+                //        {
+                //            break;
+                //        }
+                //    }
+
+                //    if (isTrue)
+                //    {
+                //    }
+                //    else
+                //    {
+                //        ErrorMessage("Update Requisition Failed");
+                //    }
+                //}
             }
             catch (Exception)
             {
