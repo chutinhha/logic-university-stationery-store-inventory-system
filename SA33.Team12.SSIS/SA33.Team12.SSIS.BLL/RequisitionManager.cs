@@ -391,6 +391,16 @@ namespace SA33.Team12.SSIS.BLL
         }
 
         /// <summary>
+        /// Get All Pending Request by Department
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        public List<VW_PendingRequestNotification> GetPendingRequest(Department department)
+        {
+            return requisitionDAO.GetPendingRequest(department);
+        }
+
+        /// <summary>
         /// Generate the requisitionID for each requisition
         /// </summary>
         /// <param name="requisition"></param>
@@ -465,7 +475,7 @@ namespace SA33.Team12.SSIS.BLL
 
                     if (requisitionMethod == RequisitionMethod.Approve || requisitionMethod == RequisitionMethod.Reject)
                     {
-                        if (requisition.ApprovedBy != 0 && requisition.ApprovedByUser.Role == "DepartmentHeads")
+                        if (requisition.ApprovedBy != 0 && requisition.ApprovedByUser.Role.Contains("DepartmentHeads"))
                         {
                             return true;
                         }
