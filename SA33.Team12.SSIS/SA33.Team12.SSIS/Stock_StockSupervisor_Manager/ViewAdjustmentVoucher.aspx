@@ -10,7 +10,7 @@
     <fieldset>
         <legend>Adjustment Vouchers</legend>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="AdjustmentVoucherDataSource"
-            AllowPaging="True">
+            AllowPaging="True" onrowcommand="gvAdjustments_RowCommand">
             <Columns>
                 <asp:BoundField DataField="AdjustmentVoucherID" HeaderText="AdjustmentVoucherID"
                     SortExpression="AdjustmentVoucherID" />
