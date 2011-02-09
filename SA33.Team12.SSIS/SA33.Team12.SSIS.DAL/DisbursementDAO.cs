@@ -146,8 +146,7 @@ namespace SA33.Team12.SSIS.DAL
 
         public List<vw_GetStationeryDistributionList> GetDistributionListByDisbursementID(int disbursementId)
         {
-            List<vw_GetStationeryDistributionList> distributionLists = context.vw_GetStationeryDistributionList.ToList();
-            var Query = from d in distributionLists
+            var Query = from d in context.vw_GetStationeryDistributionList
                         where d.DisbursementID == disbursementId
                         select d;
             return Query.ToList();
