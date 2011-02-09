@@ -79,6 +79,7 @@
         <legend>Transaction History</legend>
         <asp:GridView ID="gvTransactions" runat="server" AutoGenerateColumns="False">
             <Columns>
+                <asp:BoundField DataField="DateCreated" HeaderText="Date Created" />
                 <asp:BoundField DataField="Reason" HeaderText="Reason" />
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
                 <asp:BoundField DataField="Balance" HeaderText="Balance" />
