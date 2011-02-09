@@ -198,7 +198,7 @@
                 <asp:CommandField ShowDeleteButton="True" ValidationGroup="requestEdit" />
                 <asp:TemplateField HeaderText="Item Name">
                     <ItemTemplate>
-                        <%# ((SA33.Team12.SSIS.DAL.Stationery)Eval("Stationery")) == null ? Eval("StationeryID") : ((SA33.Team12.SSIS.DAL.Stationery)Eval("Stationery")).Description %>
+                        <asp:Literal runat="server" ID="StationeryLiteral" />
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:DropDownList ID="stationeryDDL" runat="server" DataSourceID="StationeryDS" DataTextField="Description"

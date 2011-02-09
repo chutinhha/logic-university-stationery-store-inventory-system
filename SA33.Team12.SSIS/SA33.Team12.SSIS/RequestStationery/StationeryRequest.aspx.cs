@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -322,7 +323,19 @@ namespace SA33.Team12.SSIS.Test
 
         protected void RequestItemGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Literal StationeryLiteral = e.Row.FindControl("StationeryLiteral") as Literal;
+                if (StationeryLiteral != null)
+                {
+                    int stationeryID = (int)DataBinder.Eval(e.Row.DataItem, "StationeryID");
+                    using (StationeryManager sm = new StationeryManager())
+                    {
+                        Stationery stationery = sm.FindStationeryByID(stationeryID);
+                        StationeryLiteral.Text = stationery.Description;
+                    }
+                }
+            }
         }
 
         protected void RequestItemGridView_RowCommand(object sender, GridViewCommandEventArgs e)

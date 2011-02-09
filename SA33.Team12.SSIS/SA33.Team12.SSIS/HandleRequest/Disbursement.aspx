@@ -5,6 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <fieldset>
     <legend> <h2>Disbursement</h2></legend>
+    <asp:Label runat="server" ID="ErrorMessage"
+        CssClass="failureNotification" />
 
     <asp:FormView runat="server" ID="DisbursementFormView" DataKeyNames="DisbursementID"
         ondatabound="DisbursementFormView_DataBound">
@@ -208,7 +210,7 @@
                            HeaderText="StationeryRetrievalFormItemByDeptID" 
                            SortExpression="StationeryRetrievalFormItemByDeptID" Visible="false" />
                        <asp:TemplateField HeaderText="Adjustment Voucher No." 
-                            SortExpression="AdjustmentVoucherID">
+                            SortExpression="AdjustmentVoucherID" Visible="false">
                             <ItemTemplate>
                                 <%# Convert.ToInt32(Eval("AdjustmentVoucherID")) == 0 ? "" : 
                                     ((AdjustmentVoucher) Eval("AdjustmentVoucher")).VoucherNumber %>
@@ -218,11 +220,18 @@
                            SortExpression="StationeryID">
                            <ItemTemplate>
                                 <%# Convert.ToInt32(Eval("StationeryID")) == 0 
-                                    ? ((SpecialStationery) Eval("SpecialStationery")).ItemCode
-                                    : ((Stationery)Eval("Stationery")).ItemCode %>
+                                    ? ((SpecialStationery) Eval("SpecialStationery")).Description
+                                    : ((Stationery)Eval("Stationery")).Description %>
                            </ItemTemplate>
                         </asp:TemplateField>
-                       <asp:TemplateField  
+                       <asp:TemplateField HeaderText="Is Special">
+                           <ItemTemplate>
+                                <input type="checkbox" disabled="disabled"
+                                <%# Convert.ToInt32(Eval("StationeryID")) == 0 
+                                    ? "checked='checked'": "" %> />
+                           </ItemTemplate>
+                        </asp:TemplateField>                      
+                         <asp:TemplateField  
                             HeaderText="Quantity Disbursed" 
                            SortExpression="QuantityDisbursed">
                            <ItemTemplate>
@@ -269,7 +278,8 @@
                    </Columns>
     </asp:GridView>
     </fieldset>
-    <asp:Button runat="server" ID="UpdateButton" Text="Update" />
+    <asp:Button runat="server" ID="UpdateButton" Text="Update" 
+            onclick="UpdateButton_Click" />
     <asp:Button runat="server" ID="BackButton" Text="Back" onclick="BackButton_Click" />
 </fieldset>
 </asp:Content>
