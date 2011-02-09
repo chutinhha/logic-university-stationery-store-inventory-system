@@ -4,10 +4,17 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <h2>
-        About team twelve
-    </h2>
+    <h2>Uniquely Team 12</h2>
     <p>
-        Because of AD project, 7 young people come together, not only because of the project, but also because we share a common goal, that is to create a harmonious and effective team, become a part of this team. During the past month, we complement each other, sharing and learning, Finally, our team has become more mature, can go to meet the next mission …
-    </p>
+We are a team of IT people, called Uniquely Team 12, with extensive domain knowledge in various industries, trained in the professionally trained by Institute of Systems Science in Graduate Diploma for Systems Analyst.
+ 
+Yang Hui - Well versed in Project Management and have handled large scale projects or similar capacity.
+ 
+Wang Pingyi - A very detailed person who have rich experience in quality management such as the widely acknowledge ISO quality management.
+ 
+Naing Myo Aung - An experience team lead programmer and database architect who has rich industrial experience and has been trained and certified in numerous latest technologies such as Microsoft Certifications.
+ 
+Tong Wei Jian Victor - A white hacker, who has experience in testing or crashing software applications.
+ 
+Zhang Yang, Sundar Aravind, Teo Boon Chuan Anthony - Have programming and wide industrial experience in various domains.    </p>
 </asp:Content>

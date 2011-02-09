@@ -93,6 +93,7 @@
     <Content Include="RequestStationery\ViewRequestHistory.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalForm.aspx" />
     <Content Include="HandleRequest\StationeryRetrievalList.aspx" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.9.custom.min.js" />
     <Content Include="Stock\AdjustmentVoucherDetail.aspx" />
     <Content Include="Stock\ApplyAdjustmentVoucher.aspx" />
