@@ -37,6 +37,7 @@
                 <%# ((User)Eval("User")).UserName %>
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:CheckBoxField DataField="IsCompleted" HeaderText="Is Disbursed" />
         <asp:TemplateField HeaderText="Action">
             <ItemTemplate>
                 <a href='<%=Page.ResolveClientUrl("~") %>HandleRequest/Disbursement.aspx?DisbursementID=<%# Eval("DisbursementID") %>'>

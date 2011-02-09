@@ -265,7 +265,8 @@
                             <ItemTemplate>
                                 <asp:LinkButton ID="EditLinkButton" runat="server"
                                     CommandName="Edit" Text="Edit" 
-                                    CommandArgument='<%# Eval("DisbursementItemID") %>' />
+                                    CommandArgument='<%# Eval("DisbursementItemID") %>'
+                                    Visible='<%# !((Disbursement) Eval("Disbursement")).IsCompleted %>' />
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:LinkButton ID="UpdateLinkButton" runat="server"
