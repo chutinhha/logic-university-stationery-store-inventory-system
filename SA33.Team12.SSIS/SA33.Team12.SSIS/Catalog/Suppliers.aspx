@@ -94,8 +94,15 @@
                 SortExpression="SupplierCode" />
             <asp:BoundField DataField="CompanyName" HeaderText="CompanyName" 
                 SortExpression="CompanyName" />
-            <asp:BoundField DataField="TenderedYear" HeaderText="TenderedYear" 
-                SortExpression="TenderedYear" />
+            <asp:TemplateField HeaderText="TenderedYear" SortExpression="TenderedYear">
+                <ItemTemplate>
+                    <%# DateTime.Parse(Eval("TenderedYear").ToString()).Year %>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:Calendar ID="Calendar1" runat="server" 
+                        SelectedDate='<%# Bind("TenderedYear") %>'></asp:Calendar>
+                </EditItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="PreferredRank" HeaderText="PreferredRank" 
                 SortExpression="PreferredRank" />
         </Columns>
