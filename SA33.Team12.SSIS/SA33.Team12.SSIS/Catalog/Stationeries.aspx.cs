@@ -26,7 +26,6 @@ namespace SA33.Team12.SSIS.Catalog
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
         }
 
         protected void SpecialStationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
