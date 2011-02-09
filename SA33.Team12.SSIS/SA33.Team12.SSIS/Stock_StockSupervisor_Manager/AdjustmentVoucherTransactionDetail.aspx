@@ -22,6 +22,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<h1> Adjustment Voucher Transaction Details</h1>
     <fieldset>
         <legend>Adjustment Voucher Information</legend>
         <table style="width: 100%;">
