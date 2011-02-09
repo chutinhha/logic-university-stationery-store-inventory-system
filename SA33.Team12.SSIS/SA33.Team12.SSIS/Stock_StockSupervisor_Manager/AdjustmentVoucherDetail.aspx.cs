@@ -8,7 +8,7 @@ using SA33.Team12.SSIS.BLL;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 
-namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
+namespace SA33.Team12.SSIS.Stock_StockSupervisor_Manager
 {
     public partial class AdjustmentVoucherDetail : System.Web.UI.Page
     {
@@ -27,8 +27,8 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
                 int adjID = int.Parse(Request.QueryString["ID"]);
                 using (AdjustmentVoucherManager avm = new AdjustmentVoucherManager())
                 {
-                    AdjustmentVoucherTransaction tran = avm.GetAdjustmentVoucherTransactionByID(adjID);
-                    this.gvAdjustmentItems.DataSource = tran.StockLogTransactions.ToList<StockLogTransaction>();
+                    AdjustmentVoucher tran = avm.FindAdjustmentVoucherByID(adjID);
+                    this.gvAdjustmentItems.DataSource = tran.StockLogs.ToList<StockLog>();
                     this.gvAdjustmentItems.DataBind();
 
                     lblVoucherNumber.Text = tran.VoucherNumber;
@@ -38,7 +38,7 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
                         User u = um.GetUserByID(tran.CreatedBy);
                         lblCreatedBy.Text = u.UserName;
                     }
-                    decimal totalCost = avm.getTotalCost(tran);
+                    decimal totalCost = avm.GetTotalCostVoucher(tran);
                     lblCost.Text = String.Format("{0:C}", totalCost);
                 }
             }
@@ -126,5 +126,6 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
             ApproveSingleAdj(int.Parse(Request.QueryString["ID"]));
             Response.Redirect("~/Stock/ApproveAdjustmentVoucher.aspx");
         }
+
     }
 }

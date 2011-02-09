@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="ViewAdjustmentVoucher.aspx.cs" Inherits="SA33.Team12.SSIS.Stock_StoreSupervisor_Manager.ViewAdjustmentVoucher" %>
+    CodeBehind="ViewAdjustmentVoucher.aspx.cs" Inherits="SA33.Team12.SSIS.Stock_StockSupervisor_Manager.ViewAdjustmentVoucher" %>
 
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
