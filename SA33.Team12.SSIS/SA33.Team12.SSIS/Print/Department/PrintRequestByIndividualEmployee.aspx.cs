@@ -21,7 +21,7 @@ namespace SA33.Team12.SSIS.Print
             ta.Fill(ds.VW_RequisitionsByEmployee);
 
             DataView dv = ds.VW_RequisitionsByEmployee.DefaultView;
-            dv.RowFilter = "username like '%" + Utilities.Membership.GetCurrentLoggedInUser().UserName + "%'";
+            dv.RowFilter = "departmentid =" + Utilities.Membership.GetCurrentLoggedInUser().DepartmentID;
 
             GridView1.DataSource = dv;
             DataBind();
