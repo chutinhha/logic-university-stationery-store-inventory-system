@@ -38,7 +38,7 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
                         User u = um.GetUserByID(tran.CreatedBy);
                         lblCreatedBy.Text = u.UserName;
                     }
-                    decimal totalCost = avm.getTotalCost(tran);
+                    decimal totalCost = avm.GetTotalCost(tran);
                     lblCost.Text = String.Format("{0:C}", totalCost);
                 }
             }
