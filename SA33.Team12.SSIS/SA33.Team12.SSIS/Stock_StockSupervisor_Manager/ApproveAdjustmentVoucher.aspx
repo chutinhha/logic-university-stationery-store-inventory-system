@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApproveAdjustmentVoucher.aspx.cs" Inherits="SA33.Team12.SSIS.Stock_StoreSupervisor_Manager.ApproveAdjustmentVoucher" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ApproveAdjustmentVoucher.aspx.cs" Inherits="SA33.Team12.SSIS.Stock_StockSupervisor_Manager.ApproveAdjustmentVoucher" %>
 
 <%@ Import Namespace="SA33.Team12.SSIS.DAL" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">

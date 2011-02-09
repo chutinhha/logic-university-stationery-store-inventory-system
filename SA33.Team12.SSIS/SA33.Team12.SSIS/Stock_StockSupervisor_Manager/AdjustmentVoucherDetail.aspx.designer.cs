@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager {
+namespace SA33.Team12.SSIS.Stock_StockSupervisor_Manager {
     
     
     public partial class AdjustmentVoucherDetail {

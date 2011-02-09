@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using SA33.Team12.SSIS.Utilities;
 
-namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
+namespace SA33.Team12.SSIS.Stock_StockSupervisor_Manager
 {
     public partial class ApproveAdjustmentVoucher : System.Web.UI.Page
     {

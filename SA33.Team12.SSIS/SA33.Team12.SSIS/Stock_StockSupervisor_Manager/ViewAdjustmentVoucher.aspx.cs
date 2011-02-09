@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 using SA33.Team12.SSIS.Utilities;
 
-namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
+namespace SA33.Team12.SSIS.Stock_StockSupervisor_Manager
 {
     public partial class ViewAdjustmentVoucher : System.Web.UI.Page
     {
@@ -26,7 +26,7 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
         {
             if (e.CommandName == "AdjustmentVoucherDetail")
             {
-                Response.Redirect("~/Stock_StoreSupervisor_Manager/AdjustmentVoucherDetail.aspx?ID=" + e.CommandArgument);
+                Response.Redirect("~/Stock_StockSupervisor_Manager/AdjustmentVoucherDetail.aspx?ID=" + e.CommandArgument);
             }
         }
 
