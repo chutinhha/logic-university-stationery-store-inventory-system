@@ -36,17 +36,17 @@ namespace SA33.Team12.SSIS.Test
                         item.Selected = true;
                     }
                 }
+
+            
+                    requisition = CreateRequisition();
+                    Session["Requisition"] = requisition;
+                
             }
 
-            if (Session["Requisition"] != null)
-            {
-                requisition = (Requisition)Session["Requisition"];
-            }
-            else
-            {
-                requisition = CreateRequisition();
-                Session["Requisition"] = requisition;
-            }
+               if (Session["Requisition"] != null)
+                {
+                    requisition = (Requisition)Session["Requisition"];
+                }
 
             string key = string.Empty;
             int val = 0;
