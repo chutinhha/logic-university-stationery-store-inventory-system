@@ -237,7 +237,7 @@ namespace SA33.Team12.SSIS.DAL
                 tempStationery.ReorderLevel = stationery.ReorderLevel;
                 tempStationery.ReorderQuantity = stationery.ReorderQuantity;  
                 tempStationery.DateModified = stationery.DateModified;                
-                tempStationery.ModifiedBy = stationery.ModifiedBy;                                
+                tempStationery.ModifiedByUser = stationery.ModifiedByUser;                                
                 tempStationery.UnitOfMeasure = stationery.UnitOfMeasure;
                 tempStationery.IsApproved = stationery.IsApproved;
                 tempStationery.QuantityInHand = stationery.QuantityInHand;
@@ -366,14 +366,16 @@ namespace SA33.Team12.SSIS.DAL
                 tempSpecialStationery.Category = specialStationery.Category;
                 tempSpecialStationery.ItemCode = specialStationery.ItemCode;
                 tempSpecialStationery.Description = specialStationery.Description;
-                tempSpecialStationery.Quantity = specialStationery.Quantity;
-                tempSpecialStationery.DateCreated = specialStationery.DateCreated;
+                tempSpecialStationery.Quantity = specialStationery.Quantity;               
                 tempSpecialStationery.DateModified = specialStationery.DateModified;
-                tempSpecialStationery.DateApproved = specialStationery.DateApproved;
-                tempSpecialStationery.CreatedByUser = specialStationery.CreatedByUser;
-                tempSpecialStationery.ModifiedByUser = specialStationery.ModifiedByUser;
-                tempSpecialStationery.ApprovedByUser = specialStationery.ApprovedByUser;
-                tempSpecialStationery.IsApproved = specialStationery.IsApproved;
+                if (specialStationery.DateApproved != null)
+                {
+                    tempSpecialStationery.DateApproved = specialStationery.DateApproved;
+                    tempSpecialStationery.ApprovedByUser = specialStationery.ApprovedByUser;
+                    tempSpecialStationery.IsApproved = specialStationery.IsApproved;
+                }                
+                tempSpecialStationery.ModifiedByUser = specialStationery.ModifiedByUser;   
+                
                 tempSpecialStationery.UnitOfMeasure = specialStationery.UnitOfMeasure;
 
                 using (TransactionScope ts = new TransactionScope())

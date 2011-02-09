@@ -3001,7 +3001,7 @@
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="DateTime" Name="DateCreated" Nullable="false" />
           <Property Type="DateTime" Name="DateModified" Nullable="false" />
-          <Property Type="DateTime" Name="DateApproved" />
+          <Property Type="DateTime" Name="DateApproved" Nullable="true" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
           <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
           <Property Type="Int32" Name="ApprovedBy" />

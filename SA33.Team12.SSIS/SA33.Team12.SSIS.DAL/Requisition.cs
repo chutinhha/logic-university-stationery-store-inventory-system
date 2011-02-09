@@ -16,8 +16,6 @@ namespace SA33.Team12.SSIS.DAL
         [Required(ErrorMessage="Requisition form cannot be blank!")]
         [StringLength(13, ErrorMessage="Requisition form cannot be longer than 13 characters")]
         public string RequisitionForm { get; set; }
-
-        [Required(ErrorMessage = "Please select urgency level!")]
-        public int UrgencyID { get; set; }
+       
     }
 }

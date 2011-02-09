@@ -34,6 +34,9 @@
                     <td class="style3">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox"
                             Display="Dynamic" ErrorMessage="Item Code is required" ValidationGroup="input"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="NameTextBox"
+                            Display="Dynamic" ErrorMessage="Example code:  C001" ValidationExpression="^\w{1}\d{3}"
+                            ValidationGroup="input"></asp:RegularExpressionValidator>
                     </td>
                     <td>
                         &nbsp;
@@ -220,8 +223,7 @@
                     <asp:TemplateField HeaderText="CategoryID" SortExpression="CategoryID">
                         <EditItemTemplate>
                             <asp:DropDownList ID="CategoryDDL" runat="server" DataSourceID="ObjectDataSource1"
-                                DataTextField="Name" DataValueField="CategoryID" 
-                                SelectedValue='<%# Bind("CategoryID") %>'>
+                                DataTextField="Name" DataValueField="CategoryID" SelectedValue='<%# Bind("CategoryID") %>'>
                             </asp:DropDownList>
                             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllCategories"
                                 TypeName="SA33.Team12.SSIS.BLL.CatalogManager"></asp:ObjectDataSource>
@@ -242,16 +244,56 @@
                             <%# ((SA33.Team12.SSIS.DAL.Location) Eval("Location")).Name %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="ItemCode" >
-                    <ItemTemplate>
-                    <% %>
-                    </ItemTemplate>
+                    <asp:TemplateField HeaderText="ItemCode">
+                        <ItemTemplate>
+                            <%# Eval("ItemCode") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="itemTextBox" runat="server" Text='<%# Bind("ItemCode") %>'></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="itemTextBox"
+                                runat="server" ErrorMessage="Max 4 chars" ValidationExpression="\w{4}"></asp:RegularExpressionValidator>
+                        </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-                    <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" SortExpression="UnitOfMeasure" />
-                    <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
-                    <asp:BoundField DataField="ReorderQuantity" HeaderText="ReorderQuantity" SortExpression="ReorderQuantity" />
-                    <asp:BoundField DataField="QuantityInHand" HeaderText="QuantityInHand" SortExpression="QuantityInHand" />
+                    <asp:TemplateField HeaderText="Description">
+                        <ItemTemplate>
+                            <asp:DynamicControl DataField="Description" Mode="ReadOnly" runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DynamicControl DataField="Description" Mode="Edit" runat="server" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="UnitOfMeasure">
+                        <ItemTemplate>
+                            <asp:DynamicControl DataField="UnitOfMeasure" Mode="ReadOnly" runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DynamicControl DataField="UnitOfMeasure" Mode="Edit" runat="server" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="ReorderLevel">
+                        <ItemTemplate>
+                            <asp:DynamicControl  DataField="ReorderLevel" Mode="ReadOnly"
+                                runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DynamicControl  DataField="ReorderLevel" Mode="Edit" runat="server" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="ReorderQuantity">
+                        <ItemTemplate>
+                            <asp:DynamicControl DataField="ReorderQuantity" Mode="ReadOnly"
+                                runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DynamicControl DataField="ReorderQuantity" Mode="Edit"
+                                runat="server" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="QuantityInHand">
+                        <ItemTemplate>
+                            <%# Eval("QuantityInHand") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>
             </asp:GridView>
@@ -259,7 +301,11 @@
                 DeleteMethod="DeleteStationery" InsertMethod="CreateStationery" SelectMethod="GetAllStationeries"
                 TypeName="SA33.Team12.SSIS.BLL.CatalogManager" UpdateMethod="UpdateStationery"
                 OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
-            <asp:DynamicDataManager ID="DynamicDataManager" runat="server" />
+            <asp:DynamicDataManager ID="DynamicDataManager" runat="server" >
+            <DataControls>
+                <asp:DataControlReference ControlID="StationeryGridView" />
+            </DataControls>
+            </asp:DynamicDataManager>
             <asp:ValidationSummary runat="server" DisplayMode="BulletList" CssClass="failureNotification" />
         </fieldset>
         <fieldset>

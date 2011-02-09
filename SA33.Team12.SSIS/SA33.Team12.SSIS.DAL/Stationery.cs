@@ -23,9 +23,11 @@ namespace SA33.Team12.SSIS.DAL
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Please enter reorder level.")]
+        [Range(0, 10000, ErrorMessage = "Value should be 0 - 10000")]
         public int ReorderLevel { get; set; }
 
         [Required(ErrorMessage = "Please enter reorder quantity.")]
+        [Range(1,10000, ErrorMessage="Value should be 0 - 10000")]
         public int ReorderQuantity { get; set; }
 
         [Required(ErrorMessage = "Please enter quantity in hand.")]
