@@ -506,10 +506,10 @@ namespace SA33.Team12.SSIS.DAL
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             var riList = (from r in context.Requisitions where r.DepartmentID == department.DepartmentID select r).ToList<Requisition>();
-            int count = 0;
+            int count;
             if (riList.Count == 0)
             {
-                count = 1;
+                count = 0;
             }
             else
             {
