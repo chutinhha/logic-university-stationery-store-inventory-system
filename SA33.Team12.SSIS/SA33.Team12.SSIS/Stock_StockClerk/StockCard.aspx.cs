@@ -48,10 +48,5 @@ namespace SA33.Team12.SSIS.Stock_StoreClerk
             btnPrint.Enabled = true;
             btnPrint.Visible = true;
         }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
