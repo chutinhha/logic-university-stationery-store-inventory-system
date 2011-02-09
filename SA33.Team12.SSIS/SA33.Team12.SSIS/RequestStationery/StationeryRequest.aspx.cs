@@ -17,34 +17,36 @@ namespace SA33.Team12.SSIS.Test
     public partial class StationeryRequest : AppCode.PageBase
     {
         private RequisitionManager requisitionManager;
+        private CatalogManager cManager;
         private Requisition requisition;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             requisitionManager = new RequisitionManager();
+            cManager = new CatalogManager();
             CancelButton.Visible = false;
             if (!IsPostBack)
             {
                 UrgencyDDL.DataSource = requisitionManager.GetAllUrgencies();
                 UrgencyDDL.DataTextField = "Name";
-                UrgencyDDL.DataValueField = "UrgencyID";                
+                UrgencyDDL.DataValueField = "UrgencyID";
                 DataBind();
 
                 foreach (ListItem item in UrgencyDDL.Items)
                 {
-                    if(item.Text == "Normal")
+                    if (item.Text == "Normal")
                     {
                         item.Selected = true;
                     }
-                }            
-                    requisition = CreateRequisition();
-                    Session["Requisition"] = requisition;                
+                }
+                requisition = CreateRequisition();
+                Session["Requisition"] = requisition;
             }
 
-               if (Session["Requisition"] != null)
-                {
-                    requisition = (Requisition)Session["Requisition"];
-                }
+            if (Session["Requisition"] != null)
+            {
+                requisition = (Requisition)Session["Requisition"];
+            }
 
             string key = string.Empty;
             int val = 0;
@@ -69,7 +71,7 @@ namespace SA33.Team12.SSIS.Test
                 if (requisition != null)
                 {
                     Panel1.Visible = false;
-                    Panel2.Visible = false;                    
+                    Panel2.Visible = false;
                     RequestItemGridView.Columns[0].Visible = false;
                     RequestItemGridView.Columns[1].Visible = false;
                     SpecialRequestItemGridView.Columns[0].Visible = false;
@@ -206,7 +208,7 @@ namespace SA33.Team12.SSIS.Test
             item.StationeryID = Convert.ToInt32(((DropDownList)DetailsView1.FindControl("stDDL")).SelectedValue);
             item.QuantityRequested = Convert.ToInt32(((TextBox)DetailsView1.FindControl("stTextBox")).Text);
             item.QuantityIssued = 0;
-            item.Price = 0;            
+            item.Price = 0;
 
             if (requisition.RequisitionItems.Count == 0)
             {
@@ -219,7 +221,7 @@ namespace SA33.Team12.SSIS.Test
                     if (item.StationeryID == req.StationeryID)
                     {
                         req.QuantityRequested += item.QuantityRequested;
-                        
+
                         break;
                     }
                     else
@@ -258,7 +260,7 @@ namespace SA33.Team12.SSIS.Test
             splItem.Price = 0;
 
             requisition.SpecialRequisitionItems.Add(splItem);
-            
+
             GridDataBind();
         }
 
@@ -269,6 +271,30 @@ namespace SA33.Team12.SSIS.Test
                 if (requisition.RequisitionItems.Count > 0 || requisition.SpecialRequisitionItems.Count > 0)
                 {
                     requisition.UrgencyID = Convert.ToInt32(UrgencyDDL.SelectedValue);
+
+                    foreach (SpecialRequisitionItem item in requisition.SpecialRequisitionItems)
+                    {
+                        SpecialStationery spl = new SpecialStationery()
+                        {                     
+                            UnitOfMeasure = "",
+                            Description = item.Name,
+                            DateCreated = DateTime.Now,
+                            DateModified = DateTime.Now,
+                            CreatedBy = Utilities.Membership.GetCurrentLoggedInUser().UserID,
+                            ModifiedBy = Utilities.Membership.GetCurrentLoggedInUser().UserID,
+                            Quantity = 0,
+                            CategoryID = 1,
+                            IsApproved = false,
+                            
+          
+                        };
+                        SpecialStationery spltemp = cManager.CreateSpecialStationery(spl);
+                        if(spltemp!= null)
+                        {
+                        item.SpecialStationeryID = spltemp.SpecialStationeryID;
+                        }
+                    }
+
                     Requisition temp = requisitionManager.CreateRequisition(requisition);
                     // UtilityFunctions.SendEmail(temp.RequisitionID + " - Requisition Created Successfully ", "The requisition has been created successfully. You can view the status of requisition from the below link.<br /> <a href=>", temp.CreatedByUser);
 
@@ -278,7 +304,7 @@ namespace SA33.Team12.SSIS.Test
                         Session["Requisition"] = null;
                     }
 
-                   
+
                 }
             }
             catch (Exception)
