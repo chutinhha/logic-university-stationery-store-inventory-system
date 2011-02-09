@@ -336,20 +336,13 @@ namespace SA33.Team12.SSIS.DAL
         }
 
         //Need to FindByGetID Temp Table AdjustmentVoucher
-        public List<AdjustmentVoucher> FindAdjustmentVoucherByGetID(AdjustmentVoucherSearchDTO adjustmentVoucherSearchDTO)
+        public AdjustmentVoucher FindAdjustmentVoucherByID(int AdjustmentVoucherID)
         {
             var tempQuery = (from r in context.AdjustmentVouchers
-                             where 1 == 1
+                             where r.AdjustmentVoucherID == AdjustmentVoucherID
                              select r);
 
-            if (adjustmentVoucherSearchDTO != null)
-            {
-                if (adjustmentVoucherSearchDTO.AdjustmentVoucherID != -1)
-                {
-                    tempQuery = tempQuery.Where(r => r.AdjustmentVoucherID == adjustmentVoucherSearchDTO.AdjustmentVoucherID);
-                }
-            }
-            return (from q in tempQuery select q).ToList<AdjustmentVoucher>();
+            return tempQuery.FirstOrDefault();
         }
 
         #endregion
