@@ -19,7 +19,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        stationeries</h2>
+        &nbsp;stationeries</h2>
     <fieldset>
         <fieldset>
             <legend>Add Stationery</legend>
@@ -217,7 +217,6 @@
                 OnSelectedIndexChanged="SpecialStationeryGridView_SelectedIndexChanged" DataKeyNames="StationeryID">
                 <Columns>
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
-                    <asp:BoundField DataField="StationeryID" HeaderText="StationeryID" SortExpression="StationeryID" />
                     <asp:TemplateField HeaderText="CategoryID" SortExpression="CategoryID">
                         <EditItemTemplate>
                             <asp:DropDownList ID="CategoryDDL" runat="server" DataSourceID="ObjectDataSource1"
@@ -243,33 +242,16 @@
                             <%# ((SA33.Team12.SSIS.DAL.Location) Eval("Location")).Name %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="ItemCode" HeaderText="ItemCode" SortExpression="ItemCode" />
+                    <asp:TemplateField HeaderText="ItemCode" >
+                    <ItemTemplate>
+                    <% %>
+                    </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                     <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" SortExpression="UnitOfMeasure" />
                     <asp:BoundField DataField="ReorderLevel" HeaderText="ReorderLevel" SortExpression="ReorderLevel" />
                     <asp:BoundField DataField="ReorderQuantity" HeaderText="ReorderQuantity" SortExpression="ReorderQuantity" />
                     <asp:BoundField DataField="QuantityInHand" HeaderText="QuantityInHand" SortExpression="QuantityInHand" />
-                    <asp:BoundField DataField="DateCreated" HeaderText="DateCreated" SortExpression="DateCreated" />
-                    <asp:BoundField DataField="DateModified" HeaderText="DateModified" SortExpression="DateModified" />
-                    <asp:TemplateField HeaderText="CreatedBy" SortExpression="CreatedBy">
-                        <ItemTemplate>
-                            <%# ((SA33.Team12.SSIS.DAL.User) Eval("CreatedByUser")).UserName %>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <%# Eval("CreatedBy") %>
-                        </EditItemTemplate>
-                    </asp:TemplateField>
-                            
-                    <asp:CheckBoxField DataField="IsApproved" HeaderText="IsApproved" SortExpression="IsApproved" />
-                    <asp:BoundField DataField="DateApproved" HeaderText="DateApproved" SortExpression="DateApproved" />
-                    <asp:TemplateField HeaderText="ModifiedBy">
-                        <EditItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("ModifiedBy")%>'></asp:Label>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <%# Eval("ModifiedBy") %>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                 </Columns>
                 <SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>
             </asp:GridView>
