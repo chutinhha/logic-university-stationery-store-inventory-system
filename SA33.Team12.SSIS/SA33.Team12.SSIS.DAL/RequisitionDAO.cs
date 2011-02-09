@@ -517,7 +517,7 @@ namespace SA33.Team12.SSIS.DAL
                 String[] temp = ri.RequisitionForm.Split('/');
                 count = Convert.ToInt32(temp[1]);
             }
-            return department.Code + "/" + String.Format("{0:000}", (++count)) + "/" + DateTime.Now.Year.ToString("yy");
+            return department.Code + "/" + String.Format("{0:0000}", (++count)) + "/" + DateTime.Now.ToString("yy");
         }
         #endregion
 
