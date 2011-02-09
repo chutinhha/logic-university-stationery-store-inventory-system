@@ -53,7 +53,7 @@ namespace SA33.Team12.SSIS.Stock_StoreClerk
 
         protected void btnReplenish_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Stock/ReplenishStock.aspx?ID=" + Request.QueryString["ID"]);
+            Response.Redirect("~/stock_StockClerk/ReplenishStock.aspx?ID=" + Request.QueryString["ID"]);
         }
     }
 }
