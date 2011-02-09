@@ -506,10 +506,18 @@ namespace SA33.Team12.SSIS.DAL
         {
             var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
             var riList = (from r in context.Requisitions where r.DepartmentID == department.DepartmentID select r).ToList<Requisition>();
-            Requisition ri = riList.Last<Requisition>(); 
-            String[] temp = ri.RequisitionForm.Split('/');
-            int count = Convert.ToInt32(temp[1]);
-            return department.Code + "/" + (++count) + "/" + DateTime.Now.Year;
+            int count = 0;
+            if (riList.Count == 0)
+            {
+                count = 1;
+            }
+            else
+            {
+                Requisition ri = riList.Last<Requisition>();
+                String[] temp = ri.RequisitionForm.Split('/');
+                count = Convert.ToInt32(temp[1]);
+            }
+            return department.Code + "/" + String.Format("{0:000}", (++count)) + "/" + DateTime.Now.Year.ToString("yy");
         }
         #endregion
 
