@@ -10,6 +10,7 @@
       <siteMapNode url="~/Stock_StockClerk/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
       <siteMapNode url="~/Stock_StockSupervisor_Manager/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
       <siteMapNode url="~/Stock_StockClerk/ApplyAdjustmentVoucher.aspx" title="Apply Adjustment" description="Apply Adjustment Voucher"/>
+      <siteMapNode url="~/Stock_StockSupervisor_Manager/ViewAdjustmentVoucher.aspx" title="View Adjustment" description="View Adjustment Voucher"/>
       <siteMapNode url="~/Stock_StockClerk/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
     </siteMapNode>
     
