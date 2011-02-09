@@ -86,7 +86,7 @@
         </asp:GridView>
     </fieldset>
     <div>
-        <asp:Button ID="btnPrint" runat="server" CssClass="style3" Enabled="False" OnClick="Button1_Click"
-            Text="Print" Visible="False" />
+        <asp:Button ID="btnPrint" runat="server" CssClass="style3" Enabled="True"
+            Text="Print" OnClientClick="window.print();" />
     </div>
 </asp:Content>
