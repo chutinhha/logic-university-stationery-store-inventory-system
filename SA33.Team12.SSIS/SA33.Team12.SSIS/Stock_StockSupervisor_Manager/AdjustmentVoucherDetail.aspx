@@ -76,26 +76,5 @@
             </Columns>
         </asp:GridView>
     </fieldset>
-    <fieldset>
-        <table style="width: 100%;">
-            <tr>
-                <td class="style4">
-                    Reason:
-                    <asp:TextBox ID="txtReason" runat="server" Width="229px"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
-                        ErrorMessage="Reject reason is required." ControlToValidate="txtReason" 
-                        ValidationGroup="input"></asp:RequiredFieldValidator>
-                </td>
-                <td>
-                    &nbsp;
-                    <asp:Button ID="btnReject" runat="server" OnClick="btnReject_Click"
-                        Text="Reject" ValidationGroup="input" />
-                </td>
-                <td>
-                    &nbsp;
-                    <asp:Button ID="btnApprove" runat="server" OnClick="btnApprove_Click" Text="Approve" />
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+    
 </asp:Content>
