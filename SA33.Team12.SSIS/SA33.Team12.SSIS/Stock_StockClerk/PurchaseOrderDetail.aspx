@@ -19,6 +19,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<h1>Purchase Order Details</h1>
     <fieldset>
         <legend>PO Information</legend>
         <table style="width: 100%;">
