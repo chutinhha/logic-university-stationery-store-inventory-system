@@ -102,27 +102,6 @@
                 SortExpression="Description" />
             <asp:BoundField DataField="Quantity" HeaderText="Quantity" 
                 SortExpression="Quantity" />
-            <asp:BoundField DataField="DateCreated" HeaderText="DateCreated" 
-                SortExpression="DateCreated" />
-            <asp:BoundField DataField="DateModified" HeaderText="DateModified" 
-                SortExpression="DateModified" />
-            <asp:BoundField DataField="DateApproved" HeaderText="DateApproved" 
-                SortExpression="DateApproved" />
-            <asp:TemplateField HeaderText="CreatedBy">
-            <ItemTemplate>
-            <%# ((SA33.Team12.SSIS.DAL.User) Eval("CreatedByUser")).UserName %>
-            </ItemTemplate>
-            </asp:TemplateField>
-              <asp:TemplateField HeaderText="ModifiedBy">
-            <ItemTemplate>
-            <%# ((SA33.Team12.SSIS.DAL.User) Eval("ModifiedByUser")).UserName %>
-            </ItemTemplate>
-            </asp:TemplateField>
-              <asp:TemplateField HeaderText="ApprovedBy">
-            <ItemTemplate>
-            <%# ((SA33.Team12.SSIS.DAL.User)Eval("ApprovedByUser")) == null ? "" : ((SA33.Team12.SSIS.DAL.User)Eval("ApprovedByUser")).UserName%>
-            </ItemTemplate>
-            </asp:TemplateField>
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="UnitOfMeasure" 
                 SortExpression="UnitOfMeasure" />
         </Columns>
