@@ -5,12 +5,12 @@
 
     <siteMapNode url="~/RequestStationery/StationeryRequest.aspx" title="Request Stationery"></siteMapNode>
     
-    <siteMapNode url="~/Stock/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
-      <siteMapNode url="~/Stock/PlacePurchaseOrderSpecial.aspx" title="Place Special Order" description="Place Special Purchase Order"/>
-      <siteMapNode url="~/Stock/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
-      <siteMapNode url="~/Stock/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
-      <siteMapNode url="~/Stock/ApplyAdjustmentVoucher.aspx" title="Apply Adjustment" description="Apply Adjustment Voucher"/>
-      <siteMapNode url="~/stock/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
+    <siteMapNode url="~/Stock_StockClerk/PlacePurchaseOrder.aspx" title="Place Order" description="Place Purchase Order">
+      <siteMapNode url="~/Stock_StockClerk/PlacePurchaseOrderSpecial.aspx" title="Place Special Order" description="Place Special Purchase Order"/>
+      <siteMapNode url="~/Stock_StockClerk/ViewPurchaseOrder.aspx" title=" View Order" description="View Purchase Order" />
+      <siteMapNode url="~/Stock_StockSupervisor_Manager/ApproveAdjustmentVoucher.aspx" title="Approve Adjustment" description="Approve Adjustment Voucher"/>
+      <siteMapNode url="~/Stock_StockClerk/ApplyAdjustmentVoucher.aspx" title="Apply Adjustment" description="Apply Adjustment Voucher"/>
+      <siteMapNode url="~/Stock_StockClerk/StockCard.aspx" title="Stock Card" description="View Stock Card"/>
     </siteMapNode>
     
     <siteMapNode url="~/HandleRequest/StationeryRetrievalList.aspx"
