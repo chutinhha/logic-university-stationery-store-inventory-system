@@ -7,7 +7,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.StationeryRetrieval
 {
-    public partial class StationeryRetrievalList : System.Web.UI.Page
+    public partial class StationeryRetrievalList : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

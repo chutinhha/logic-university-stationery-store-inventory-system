@@ -10,7 +10,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Administration
 {
-    public partial class BlackListLogs : System.Web.UI.Page
+    public partial class BlackListLogs : AppCode.PageBase
     {
         protected void Page_Init(object sender, EventArgs e)
         {

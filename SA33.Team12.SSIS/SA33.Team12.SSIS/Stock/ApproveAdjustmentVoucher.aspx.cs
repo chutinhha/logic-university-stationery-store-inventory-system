@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class ApproveAdjustmentVoucher : System.Web.UI.Page
+    public partial class ApproveAdjustmentVoucher : AppCode.PageBase
     {
 
         List<AdjustmentVoucherTransaction> trans;

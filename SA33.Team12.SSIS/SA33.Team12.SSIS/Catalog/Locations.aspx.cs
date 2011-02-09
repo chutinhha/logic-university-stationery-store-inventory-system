@@ -15,7 +15,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.Catalog
 {
-    public partial class Locations : System.Web.UI.Page
+    public partial class Locations : AppCode.PageBase
     {
         protected void Page_Init(object sender, EventArgs e)
         {

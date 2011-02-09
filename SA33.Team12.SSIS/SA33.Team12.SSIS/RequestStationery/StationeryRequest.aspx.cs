@@ -13,7 +13,7 @@ using System.Collections;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class StationeryRequest : System.Web.UI.Page
+    public partial class StationeryRequest : AppCode.PageBase
     {
         private RequisitionManager requisitionManager;
         private Requisition requisition;

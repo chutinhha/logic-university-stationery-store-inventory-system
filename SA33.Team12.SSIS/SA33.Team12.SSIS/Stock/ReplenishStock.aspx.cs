@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class ReplenishStock : System.Web.UI.Page
+    public partial class ReplenishStock : AppCode.PageBase
     {
         //  public PurchaseOrder po = new PurchaseOrder();
         protected void Page_Load(object sender, EventArgs e)

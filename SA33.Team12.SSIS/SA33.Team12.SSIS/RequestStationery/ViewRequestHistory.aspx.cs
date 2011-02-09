@@ -10,7 +10,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class ViewRequestHistory : System.Web.UI.Page
+    public partial class ViewRequestHistory : AppCode.PageBase
     {
         RequisitionManager reqManager;
         User currentUser;

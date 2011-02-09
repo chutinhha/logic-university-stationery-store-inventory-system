@@ -10,7 +10,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Profile
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class Users : AppCode.PageBase
     {
         public int UserId
         {

@@ -12,7 +12,7 @@ using System.Data;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class PlaceStockAdjustment : System.Web.UI.Page
+    public partial class PlaceStockAdjustment : AppCode.PageBase
     {
 
         protected void Page_Load(object sender, EventArgs e)

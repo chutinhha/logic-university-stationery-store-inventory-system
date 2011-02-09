@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class TestWebForm1 : System.Web.UI.Page
+    public partial class TestWebForm1 : AppCode.PageBase
     {
         RequisitionDAO rDAO = new RequisitionDAO();
         CatalogDAO cDAO = new CatalogDAO();

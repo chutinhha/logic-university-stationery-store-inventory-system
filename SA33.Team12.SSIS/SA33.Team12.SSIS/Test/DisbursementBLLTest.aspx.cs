@@ -13,7 +13,7 @@ using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class DisbursementBLLTest : System.Web.UI.Page
+    public partial class DisbursementBLLTest : AppCode.PageBase
     {
         DisbursementManager disbursementBLL = new DisbursementManager();
         protected void Page_Load(object sender, EventArgs e)

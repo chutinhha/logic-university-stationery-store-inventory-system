@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.Administration
 {
-    public partial class UpdateCollectionPoint : System.Web.UI.Page
+    public partial class UpdateCollectionPoint : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

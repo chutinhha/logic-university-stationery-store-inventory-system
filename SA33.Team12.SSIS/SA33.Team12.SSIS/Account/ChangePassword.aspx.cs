@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SA33.Team12.SSIS.Account
 {
-    public partial class ChangePassword : System.Web.UI.Page
+    public partial class ChangePassword : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

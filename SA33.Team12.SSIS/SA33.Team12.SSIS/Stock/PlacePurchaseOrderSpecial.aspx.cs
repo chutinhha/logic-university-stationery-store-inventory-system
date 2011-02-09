@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class PlacePurchaseOrderSpecial : System.Web.UI.Page
+    public partial class PlacePurchaseOrderSpecial : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -10,7 +10,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class POTest : System.Web.UI.Page
+    public partial class POTest : AppCode.PageBase
     {
         PurchaseOrderDAO poDAO = new PurchaseOrderDAO();
         protected void Page_Load(object sender, EventArgs e)

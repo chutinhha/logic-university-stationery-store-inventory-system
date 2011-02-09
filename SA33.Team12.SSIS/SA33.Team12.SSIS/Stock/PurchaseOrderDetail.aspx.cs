@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class PurchaseOrderDetail : System.Web.UI.Page
+    public partial class PurchaseOrderDetail : AppCode.PageBase
     {
         static string prevPage = String.Empty;
         protected void Page_Load(object sender, EventArgs e)

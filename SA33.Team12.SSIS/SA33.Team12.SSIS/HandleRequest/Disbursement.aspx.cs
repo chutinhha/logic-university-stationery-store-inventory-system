@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.HandleRequest
 {
-    public partial class Disbursement : System.Web.UI.Page
+    public partial class Disbursement : AppCode.PageBase
     {
         public int DisbursementId
         {

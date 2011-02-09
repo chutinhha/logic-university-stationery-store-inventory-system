@@ -29,7 +29,7 @@ namespace SA33.Team12.SSIS.DAL
                     && u.FirstName.Contains((criteria.FirstName == null || criteria.FirstName == "" ? u.FirstName : criteria.FirstName))
                     && u.LastName.Contains((criteria.LastName == null || criteria.LastName == "" ? u.LastName : criteria.LastName))
                     && u.Email == (criteria.Email == null || criteria.Email == "" ? u.Email : criteria.Email)
-                    orderby u.Department.Name, u.Role
+                    orderby u.UserName, u.Role
                     select u;
                 List<User> users = Query.ToList<User>();
                 return users;
