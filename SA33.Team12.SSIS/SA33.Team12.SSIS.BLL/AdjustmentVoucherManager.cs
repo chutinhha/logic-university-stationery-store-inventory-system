@@ -38,6 +38,7 @@ namespace SA33.Team12.SSIS.BLL
             return voucherNumber;
         }
 
+
         #region AdjustmentVoucherTransaction(Temporary Table) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
 
         public AdjustmentVoucherTransaction CreateAdjustmentVoucherTransaction(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
@@ -54,12 +55,22 @@ namespace SA33.Team12.SSIS.BLL
             return adjustmentVoucherTransaction;
         }
 
-        public decimal getTotalCost(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
+        public decimal GetTotalCost(AdjustmentVoucherTransaction adjustmentVoucherTransaction)
         {
             decimal totalCost = 0;
             foreach (StockLogTransaction logTran in adjustmentVoucherTransaction.StockLogTransactions)
             {
                 totalCost += logTran.Quantity * logTran.Price;
+            }
+            return totalCost;
+        }
+
+        public decimal GetTotalCostVoucher(AdjustmentVoucher adjustmentVoucher)
+        {
+            decimal totalCost = 0;
+            foreach (StockLog log in adjustmentVoucher.StockLogs)
+            {
+                totalCost += log.Quantity * log.Price;
             }
             return totalCost;
         }
@@ -169,6 +180,16 @@ namespace SA33.Team12.SSIS.BLL
         #endregion
 
         #region AdjustmentVoucher(Actual Table) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)
+
+        public List<AdjustmentVoucher> GetAllAdjustmentVoucher()
+        {
+            return adjustmentVoucherDAO.GetAllAdjustmentVoucher();
+        }
+
+        public AdjustmentVoucher FindAdjustmentVoucherByID(int AdjustmentVoucherID)
+        {
+            return adjustmentVoucherDAO.FindAdjustmentVoucherByID(AdjustmentVoucherID);
+        }
 
         public void CreateAdjustmentVoucher(AdjustmentVoucher adjustmentVoucher)
         {
