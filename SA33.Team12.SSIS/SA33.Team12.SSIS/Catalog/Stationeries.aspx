@@ -315,7 +315,6 @@
                 OnRowUpdating="StationeryPriceGridView_RowUpdating">
                 <Columns>
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-                    <asp:BoundField DataField="StationeryPriceID" HeaderText="StationeryPriceID" SortExpression="StationeryPriceID" />
                     <asp:BoundField DataField="StationeryID" HeaderText="StationeryID" SortExpression="StationeryID" />
                     <asp:TemplateField HeaderText="SupplierID" SortExpression="SupplierID">
                         <EditItemTemplate>

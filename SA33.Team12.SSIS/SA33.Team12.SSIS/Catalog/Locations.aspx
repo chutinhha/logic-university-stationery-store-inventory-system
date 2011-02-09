@@ -57,16 +57,6 @@
                         Mode="Edit" />
                 </EditItemTemplate>
             </asp:TemplateField>
-           <asp:TemplateField HeaderText="CreatedBy">
-           <ItemTemplate>
-           <%# ((SA33.Team12.SSIS.DAL.User) Eval("CreatedByUser")).UserName %>
-           </ItemTemplate>
-           </asp:TemplateField>
-               <asp:TemplateField HeaderText="CreatedDate">
-           <ItemTemplate>
-           <%# Eval("CreatedDate") %>
-           </ItemTemplate>
-           </asp:TemplateField>
         </Columns>
 
 <SelectedRowStyle BackColor="LightGray"></SelectedRowStyle>
