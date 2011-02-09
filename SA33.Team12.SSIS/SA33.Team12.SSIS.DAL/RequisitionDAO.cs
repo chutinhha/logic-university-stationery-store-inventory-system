@@ -504,11 +504,12 @@ namespace SA33.Team12.SSIS.DAL
         /// <returns>string</returns>
         public string GetRequisitionNumber(Requisition requisition)
         {
-            var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();            
-            Requisition ri = context.Requisitions.Last<Requisition>();
+            var department = (from d in context.Departments where d.DepartmentID == requisition.DepartmentID select d).FirstOrDefault<Department>();
+            var riList = (from r in context.Requisitions where r.DepartmentID == department.DepartmentID select r).ToList<Requisition>();
+            Requisition ri = riList.Last<Requisition>(); 
             String[] temp = ri.RequisitionForm.Split('/');
-            int count = Convert.ToInt32(temp);
-            return department.Code + "/" + count++ + DateTime.Now.Year;
+            int count = Convert.ToInt32(temp[1]);
+            return department.Code + "/" + (++count) + "/" + DateTime.Now.Year;
         }
         #endregion
 
