@@ -9,6 +9,7 @@ using System;
 using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using SA33.Team12.SSIS.DAL;
 using SA33.Team12.SSIS.DAL.DTO;
 
@@ -26,16 +27,15 @@ namespace SA33.Team12.SSIS.BLL
 
         public string GenerateVoucherNumber()
         {
-            string VoucherNumber = "";
-            foreach (AdjustmentVoucher voucher in context.AdjustmentVouchers)
-            {
-                if (voucher.VoucherNumber.CompareTo(VoucherNumber) > 0)
-                {
-                    VoucherNumber = voucher.VoucherNumber;
-                }
-            }
-            VoucherNumber = (int.Parse(VoucherNumber) + 1).ToString();
-            return VoucherNumber;
+            string voucherNumber = "";
+            string monthString = DateTime.Now.ToString("MMM");
+            string yearString = DateTime.Now.ToString("yy");
+
+            int lastID =
+                context.AdjustmentVoucherTransactions.Max(id => id.AdjustmentVoucherTransactionID);
+            string serialNumber = string.Format("{0:00000}", lastID + 1);
+            voucherNumber = string.Format("{0}/{1}/{2}", monthString, serialNumber, yearString);
+            return voucherNumber;
         }
 
         #region AdjustmentVoucherTransaction(Temporary Table) (Create, Update, Delete) Query(GetAll, GetID, GetCriteria)

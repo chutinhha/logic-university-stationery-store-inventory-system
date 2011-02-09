@@ -58,8 +58,8 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Stationery">
                         <ItemTemplate>
-                            <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "" : ((Stationery) Eval("Stationery")).ItemCode  %>
-                            <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 ? "" : ((SpecialStationery)Eval("SpecialStationery")).ItemCode%>
+                            <%# Convert.ToInt32(Eval("StationeryID")) == 0 ? "" : ((Stationery) Eval("Stationery")).Description  %>
+                            <%# Convert.ToInt32(Eval("SpecialStationeryID")) == 0 ? "" : ((SpecialStationery)Eval("SpecialStationery")).Description%>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Is Special">
@@ -97,7 +97,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Stationery">
                         <ItemTemplate>
-                            <%# Convert.ToBoolean(Eval("IsSpecial")) ? ((SpecialStationery)Eval("SpecialStationery")).ItemCode : ((Stationery)Eval("Stationery")).ItemCode%>          
+                            <%# Convert.ToBoolean(Eval("IsSpecial")) ? ((SpecialStationery)Eval("SpecialStationery")).Description : ((Stationery)Eval("Stationery")).Description%>          
                             </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>

@@ -97,7 +97,7 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
                 SA33.Team12.SSIS.DAL.AdjustmentVoucher voucher = new SA33.Team12.SSIS.DAL.AdjustmentVoucher();
 
                 voucher.CreatedBy = tran.CreatedBy;
-                voucher.ApprovedBy = 3; //tesing only
+                voucher.ApprovedByUser = Utilities.Membership.LoggedInuser;
                 voucher.DateApproved = DateTime.Now;
                 voucher.DateIssued = tran.DateIssued;
                 voucher.VoucherNumber = tran.VoucherNumber;
