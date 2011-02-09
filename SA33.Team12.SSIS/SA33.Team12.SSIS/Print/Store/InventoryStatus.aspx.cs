@@ -8,7 +8,7 @@ using CrystalDecisions.CrystalReports.Engine;
 
 namespace SA33.Team12.SSIS.Print.Store
 {
-    public partial class InventoryStatus1 : System.Web.UI.Page
+    public partial class InventoryStatus1 : AppCode.PageBase
     {
         ReportDS ds;
         ReportDSTableAdapters.StationeriesTableAdapter ta;

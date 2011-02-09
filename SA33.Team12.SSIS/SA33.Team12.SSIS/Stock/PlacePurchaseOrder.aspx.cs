@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class PlacePurchaseOrder : System.Web.UI.Page
+    public partial class PlacePurchaseOrder : AppCode.PageBase
     {
         private List<PurchaseOrderItem> items = new List<PurchaseOrderItem>();
         private List<Stationery> stationeries = new List<Stationery>();

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SA33.Team12.SSIS.Print
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -397,7 +397,7 @@ namespace SA33.Team12.SSIS.BLL
         /// <returns></returns>
         public List<VW_PendingRequestNotification> GetPendingRequest(Department department)
         {
-            return requisitionDAO.GetPendingRequest(department);
+            return null;//return requisitionDAO.GetPendingRequest(department);
         }
 
         /// <summary>

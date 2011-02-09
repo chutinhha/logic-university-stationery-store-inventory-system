@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 
 namespace SA33.Team12.SSIS.Approval
 {
-    public partial class RequestApproval : System.Web.UI.Page
+    public partial class RequestApproval : AppCode.PageBase
     {
         RequisitionManager requisitionManager;
         List<Requisition> requisitions;

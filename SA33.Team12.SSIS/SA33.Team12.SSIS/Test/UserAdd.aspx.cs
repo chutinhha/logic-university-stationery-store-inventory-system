@@ -13,7 +13,7 @@ using System.Transactions;
 
 namespace SA33.Team12.SSIS.UserAdministration
 {
-    public partial class UserAdd : System.Web.UI.Page
+    public partial class UserAdd : AppCode.PageBase
     {
 
         protected void Page_Load(object sender, EventArgs e)

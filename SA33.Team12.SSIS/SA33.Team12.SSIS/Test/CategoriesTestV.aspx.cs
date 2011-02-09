@@ -16,7 +16,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Catalog
 {
-    public partial class CategoriesTestV : System.Web.UI.Page
+    public partial class CategoriesTestV : AppCode.PageBase
     {
         protected void Page_Init(object sender, EventArgs e)
         {

@@ -11,7 +11,7 @@ using SA33.Team12.SSIS.Utilities;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class AdjustmentVoucher : System.Web.UI.Page
+    public partial class AdjustmentVoucher : AppCode.PageBase
     {
         private List<StockLogTransaction> adjustments = new List<StockLogTransaction>();
         //      private List<Stationery> stationeries = new List<Stationery>();

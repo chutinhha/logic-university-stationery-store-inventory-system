@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Distribution
 {
-    public partial class Distribution : System.Web.UI.Page
+    public partial class Distribution : AppCode.PageBase
     {
         public int DisbursementId
         {

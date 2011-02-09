@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.StationeryRetrieval
 {
-    public partial class UpdateStationeryRetrievalForm : System.Web.UI.Page
+    public partial class UpdateStationeryRetrievalForm : AppCode.PageBase
     {
         private bool isRetrieved = false;
         public bool IsRetrieved

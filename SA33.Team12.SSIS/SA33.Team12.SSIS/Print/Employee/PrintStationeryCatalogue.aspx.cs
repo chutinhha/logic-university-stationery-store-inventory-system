@@ -9,7 +9,7 @@ using System.Data;
 
 namespace SA33.Team12.SSIS.Print.Employee
 {
-    public partial class PrintStationeryCatalogue1 : System.Web.UI.Page
+    public partial class PrintStationeryCatalogue1 : AppCode.PageBase
     {
         ReportDS ds;
         ReportDSTableAdapters.VW_StationeryCatalogueTableAdapter ta;

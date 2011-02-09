@@ -9,7 +9,7 @@ using System.Data;
 
 namespace SA33.Team12.SSIS.Print
 {
-    public partial class PrintRequestByIndividualEmployee : System.Web.UI.Page
+    public partial class PrintRequestByIndividualEmployee : AppCode.PageBase
     {
         ReportDS ds;
         ReportDSTableAdapters.VW_RequisitionsByEmployeeTableAdapter ta;

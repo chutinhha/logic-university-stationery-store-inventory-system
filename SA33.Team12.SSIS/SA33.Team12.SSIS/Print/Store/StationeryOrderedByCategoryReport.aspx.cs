@@ -12,7 +12,7 @@ using SA33.Team12.SSIS.Print.ReportDSTableAdapters;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class StationeryOrderedByCategoryReport : System.Web.UI.Page
+    public partial class StationeryOrderedByCategoryReport : AppCode.PageBase
     {
         ReportDS ds;
         DataView dv;

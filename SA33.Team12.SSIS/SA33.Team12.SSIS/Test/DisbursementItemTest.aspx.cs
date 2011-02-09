@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class DisbursementItemTest : System.Web.UI.Page
+    public partial class DisbursementItemTest : AppCode.PageBase
     {
         DisbursementDAO disbursementDAO = new DisbursementDAO();
         protected void Page_Load(object sender, EventArgs e)

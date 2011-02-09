@@ -12,7 +12,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Stock
 {
-    public partial class ViewPurchaseOrder : System.Web.UI.Page
+    public partial class ViewPurchaseOrder : AppCode.PageBase
     {
         PurchaseOrderSearchDTO criteria = new PurchaseOrderSearchDTO();
         protected void Page_Load(object sender, EventArgs e)

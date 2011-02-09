@@ -10,7 +10,7 @@ using SA33.Team12.SSIS.DAL.DTO;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class StockLogTransactionTest : System.Web.UI.Page
+    public partial class StockLogTransactionTest : AppCode.PageBase
     {
         AdjustmentVoucherDAO adjDAO = new AdjustmentVoucherDAO();
 

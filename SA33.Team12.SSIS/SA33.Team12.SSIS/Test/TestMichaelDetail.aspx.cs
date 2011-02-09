@@ -9,7 +9,7 @@ using SA33.Team12.SSIS.DAL;
 
 namespace SA33.Team12.SSIS.Test
 {
-    public partial class TestMichaelDetail : System.Web.UI.Page
+    public partial class TestMichaelDetail : AppCode.PageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {

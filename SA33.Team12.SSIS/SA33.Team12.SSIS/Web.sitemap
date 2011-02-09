@@ -26,6 +26,7 @@
       <siteMapNode url="~/RequestStationery/ViewRequestHistory.aspx" title="Print Request History" description="Print Request History"></siteMapNode>
       <siteMapNode url="~/Print/Department/PrintRequestByIndividualEmployee.aspx" title="Print Request By Individual Employee" description="Print Request By Individual Employee" />
       <siteMapNode url="~/Print/Store/InventoryStatus.aspx" title="Inventory Status" description="Inventory Status" />
+      <siteMapNode url="~/Print/Employee/PrintStationeryCatalogue.aspx" title="Print Stationery Catalogue" />
       <siteMapNode url="~/Print/Store/StationeryOrderedByCategoryReport.aspx" title="Stationery Ordered By Category" />
       <siteMapNode url="~/Print/Store/StationeryRequisitionTrendReportByDept.aspx" title="Stationery Requisition Trend Report By Department" />
     </siteMapNode>
