@@ -18,8 +18,8 @@
       <siteMapNode url="~/HandleRequest/StationeryRetrievalForm.aspx"
                    title="Stationery Retrieval Form" description="Stationery Retrieval Form" />
       <siteMapNode url="~/HandleRequest/Disbursements.aspx" title="Disbursements" description="Disbursements" />
-      <siteMapNode url="~/Distribution/Disbursements.aspx" title="Disbursements to Distribute" description="Disbursements to Distribute" />
     </siteMapNode>
+    <siteMapNode url="~/Distribution/Disbursements.aspx" title="Disbursements to Distribute" description="Disbursements to Distribute" />
 
     <siteMapNode url="~/Approval/RequestApproval.aspx" title="Approve Stationery Request" description="Approve Stationery Request" />
     <siteMapNode url="~/Print/Default.aspx" title="Print">

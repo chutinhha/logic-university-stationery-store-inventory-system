@@ -39,7 +39,7 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Action">
             <ItemTemplate>
-                <a href='<%=Page.ResolveClientUrl("~") %>Distribution/Distribution.aspx?DisbursementID=<%# Eval("DisbursementID") %>'>
+                <a href='<%=Page.ResolveClientUrl("~") %>Distribution/Distribution.aspx?DisbursementID=<%# Eval("DisbursementID") %>' <%# (bool) Eval("IsDistributed") ? "style='display:none'" : "" %>>
                     Distribute</a>
                     
             </ItemTemplate>
