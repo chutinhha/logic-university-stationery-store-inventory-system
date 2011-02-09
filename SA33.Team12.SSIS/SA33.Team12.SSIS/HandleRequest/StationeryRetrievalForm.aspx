@@ -7,7 +7,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <fieldset>
 <legend><h2>Stationery Retrieval Form</h2></legend>
-
+    <script type="text/javascript">
+        function validateQuantityRetrieved(sender, arg) {
+            var qty = $("#" + sender.id).attr("QuantityNeeded");
+            if (parseInt(arg.Value) > parseInt(qty)) arg.IsValid = false;
+            else arg.IsValid = true;
+        }
+    </script>
+    <asp:Label runat="server" ID="ErrorMessage" CssClass="failureNotification" />
     <asp:FormView runat="server" ID="StationeryRetrievalFormView" 
         DataKeyNames="StationeryRetrievalFormID"
         AllowPaging="false" OnDataBound="StationeryRetrievalFormView_DataBound">
@@ -74,9 +81,24 @@
                                 ID="StationeryRetrievalFormItemIDHiddenField" 
                                 Value='<%# Eval("StationeryRetrievalFormItemID") %>' />
                             <asp:TextBox runat="server" Visible='<%# !this.IsRetrieved || !this.IsCollected %>'
-                                ID="QuantityRetrievedTextBox" Text='<%# ((int) Eval("QuantityNeeded")) - 5 %>'
+                                ID="QuantityRetrievedTextBox"
                                 CssClass="numericEntry">
                             </asp:TextBox>
+                            <asp:RequiredFieldValidator errormessage="The retrieved quantity is required." 
+                                controltovalidate="QuantityRetrievedTextBox" runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="Update" />
+                            <asp:RegularExpressionValidator errormessage="Invalid quantity value."
+                                ValidationExpression="\d{1,5}" ValidationGroup="Update" 
+                                Display="Dynamic"
+                                controltovalidate="QuantityRetrievedTextBox" runat="server"/>
+                            <asp:CustomValidator errormessage="Quantity retrieved cannot be larger than quantity needed."
+                                QuantityNeeded='<%# Eval("QuantityNeeded") %>'
+                                controltovalidate="QuantityRetrievedTextBox"
+                                EnableClientScript="True" ValidationGroup="Update"
+                                ClientValidationFunction="validateQuantityRetrieved" 
+                                Display="Dynamic"
+                                runat="server"/>
                             <asp:Literal runat="server" 
                                 ID="QuantityRetrievedLabel" Visible='<%# this.IsRetrieved %>'
                                 Text='<%# Eval("QuantityRetrieved") %>'>
@@ -138,8 +160,23 @@
                         <ItemTemplate>
                             <asp:HiddenField runat="server" ID="srfByDeptIDHiddenField" 
                                 Value='<%# Eval("StationeryRetrievalFormItemByDeptID") %>' />
-                            <asp:TextBox runat="server" ID="QuantityActualTextBox"
+                            <asp:TextBox runat="server" ID="QuantityActualTextBox" 
                                 Text='<%# Eval("QuantityRecommended") %>'  Visible='<%# !this.IsCollected %>' />
+                            <asp:RequiredFieldValidator errormessage="The retrieved quantity is required." 
+                                 ValidationGroup="Update"
+                                Display="Dynamic"
+                                controltovalidate="QuantityActualTextBox" runat="server" />
+                            <asp:RegularExpressionValidator errormessage="Invalid quantity value."
+                                ValidationExpression="\d{1,5}" ValidationGroup="Update"
+                                Display="Dynamic"
+                                controltovalidate="QuantityActualTextBox" runat="server"/>
+                            <asp:CustomValidator errormessage="Actual quantity cannot be larger than quantity needed." 
+                                QuantityNeeded='<%# Eval("QuantityNeeded") %>'
+                                controltovalidate="QuantityActualTextBox"
+                                EnableClientScript="True" ValidationGroup="Update"
+                                ClientValidationFunction="validateQuantityRetrieved" 
+                                Display="Dynamic"
+                                runat="server"/>
                             <asp:Label runat="server" ID="QuantityActualLabel"
                                 Text='<%# Eval("QuantityActual") %>' Visible='<%# this.IsCollected %>' />
                         </ItemTemplate>
@@ -151,9 +188,9 @@
     </asp:FormView>
     <asp:Button runat="server" ID="BackButton" Text="Back" OnClick="BackButton_Click" />
     <asp:Button runat="server" ID="UpdateRetrievedQuantityButton" Text="Update" 
-        oncommand="UpdateButton_Command" CommandName="Retrieved" />
+        oncommand="UpdateButton_Command" CommandName="Retrieved" ValidationGroup="Update" />
     <asp:Button runat="server" ID="UpdateActualQuantityButton" Text="Update" 
-        oncommand="UpdateButton_Command" CommandName="Actual" />
+        oncommand="UpdateButton_Command" CommandName="Actual" ValidationGroup="Update" />
 
 </fieldset>
 </asp:Content>
