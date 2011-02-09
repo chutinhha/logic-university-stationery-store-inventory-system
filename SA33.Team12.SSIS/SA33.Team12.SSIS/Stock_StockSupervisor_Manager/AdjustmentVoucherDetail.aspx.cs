@@ -14,7 +14,7 @@ namespace SA33.Team12.SSIS.Stock_StoreSupervisor_Manager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (!Page.IsPostBack) 
             {
                 Populate();
             }

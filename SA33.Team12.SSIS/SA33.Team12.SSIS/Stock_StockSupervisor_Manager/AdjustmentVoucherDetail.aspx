@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdjustmentVoucherDetail.aspx.cs" Inherits="SA33.Team12.SSIS.Stock_StoreSupervisor_Manager.AdjustmentVoucherDetail" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server"> 
     <style type="text/css">
         .style1
         {
