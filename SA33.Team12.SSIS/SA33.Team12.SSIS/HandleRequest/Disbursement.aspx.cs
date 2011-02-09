@@ -42,14 +42,27 @@ namespace SA33.Team12.SSIS.HandleRequest
             }
         }
 
+        private bool isCompleted = false;
+        public bool IsCompleted
+        {
+            get { return isCompleted; }
+        }
+
         protected void DataBindDisbursementFormView(int disbursementId)
         {
             using (DisbursementManager dm = new DisbursementManager())
             {
-                this.DisbursementFormView.DataSource =
-                    dm.FindDisbursementByCriteria(
+                List<DAL.Disbursement> disbursements = dm.FindDisbursementByCriteria(
                         new DisbursementSearchDTO() { DisbursementID = disbursementId });
+                this.DisbursementFormView.DataSource = disbursements;
                 this.DisbursementFormView.DataBind();
+
+                DAL.Disbursement disbursement = disbursements.FirstOrDefault();
+                if (disbursement != null)
+                {
+                    this.isCompleted = (bool) disbursement.IsDistributed;
+                }
+                this.UpdateButton.Visible = !this.IsCompleted;
             }
         }
 
@@ -168,6 +181,20 @@ namespace SA33.Team12.SSIS.HandleRequest
                             {
                                 DAL.Disbursement disbursement = dm.FindDisbursementByID(this.DisbursementId);
                                 disbursement.IsDistributed = true;
+                                dm.UpdateDisbursement(disbursement);
+                            }
+                            ts.Complete();
+                        }
+                        Response.Redirect("~/HandleRequest/Disbursements.aspx");
+                    }
+                    else
+                    {
+                        using (TransactionScope ts = new TransactionScope())
+                        {
+                            using (DisbursementManager dm = new DisbursementManager())
+                            {
+                                DAL.Disbursement disbursement = dm.FindDisbursementByID(this.DisbursementId);
+                                disbursement.IsCompleted = true;
                                 dm.UpdateDisbursement(disbursement);
                             }
                             ts.Complete();
