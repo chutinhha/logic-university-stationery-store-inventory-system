@@ -103,7 +103,9 @@
     <Content Include="Stock_StockClerk\StockCard.aspx" />
     <Content Include="Stock_StockClerk\ViewPurchaseOrder.aspx" />
     <Content Include="Stock_StockSupervisor_Manager\AdjustmentVoucherDetail.aspx" />
+    <Content Include="Stock_StockSupervisor_Manager\AdjustmentVoucherTransactionDetail.aspx" />
     <Content Include="Stock_StockSupervisor_Manager\ApproveAdjustmentVoucher.aspx" />
+    <Content Include="Stock_StockSupervisor_Manager\ViewAdjustmentVoucher.aspx" />
     <Content Include="Styles\FormElements.css" />
     <Content Include="Styles\GridViewTable.css" />
     <Content Include="Styles\jqui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -428,12 +430,26 @@
     <Compile Include="Stock_StockSupervisor_Manager\AdjustmentVoucherDetail.aspx.designer.cs">
       <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Stock_StockSupervisor_Manager\AdjustmentVoucherTransactionDetail.aspx.cs">
+      <DependentUpon>AdjustmentVoucherTransactionDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stock_StockSupervisor_Manager\AdjustmentVoucherTransactionDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentVoucherTransactionDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\ApproveAdjustmentVoucher.aspx.cs">
       <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Stock_StockSupervisor_Manager\ApproveAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>ApproveAdjustmentVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_StockSupervisor_Manager\ViewAdjustmentVoucher.aspx.cs">
+      <DependentUpon>ViewAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stock_StockSupervisor_Manager\ViewAdjustmentVoucher.aspx.designer.cs">
+      <DependentUpon>ViewAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\CategoriesTestV.aspx.cs">
       <DependentUpon>CategoriesTestV.aspx</DependentUpon>
