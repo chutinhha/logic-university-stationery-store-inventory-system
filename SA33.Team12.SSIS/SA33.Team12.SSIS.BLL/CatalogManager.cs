@@ -218,6 +218,15 @@ namespace SA33.Team12.SSIS.BLL
             {
                 if (specialStationery != null)
                 {
+                    var tempList = context.SpecialStationeries.ToList<SpecialStationery>();
+                    SpecialStationery temp = tempList.Last<SpecialStationery>();
+                    int num = 0;
+                    if (temp != null)
+                    {
+                        num = Convert.ToInt32(temp.ItemCode.Substring(1, 3));
+                        
+                    }
+                    specialStationery.ItemCode = "S" + String.Format("{0:000}", num++);
                     catalogDAO.CreateSpecialStationery(specialStationery);
                 }
             }
