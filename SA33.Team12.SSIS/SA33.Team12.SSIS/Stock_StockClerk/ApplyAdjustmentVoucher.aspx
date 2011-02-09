@@ -6,7 +6,7 @@
     <style type="text/css">
         .style1
         {
-            width: 165px;
+            width: 55px;
         }
         .style2
         {
@@ -69,12 +69,27 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtQuantity" runat="server" Width="51px"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                        ControlToValidate="txtQuantity" ErrorMessage="Quantity is required." 
+                        ValidationGroup="input"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                        ControlToValidate="txtQuantity" ErrorMessage="Quantity must be less than 1000." 
+                        MaximumValue="1000" MinimumValue="1" ValidationGroup="input" 
+                        Display="Dynamic" Type="Integer"></asp:RangeValidator>
+                    <br />
                 </td>
                 <td>
                     <asp:TextBox ID="txtReason" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                        ControlToValidate="txtReason" ErrorMessage="Reason is required." 
+                        ValidationGroup="input">Reason is required.</asp:RequiredFieldValidator>
                 </td>
                 <td>
-                    <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" />
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" 
+                        ValidationGroup="input" />
                 </td>
             </tr>
         </table>
