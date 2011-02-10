@@ -45,6 +45,11 @@ namespace SA33.Team12.SSIS.DAL
             return FindUsersByCriteria(new DTO.UserSearchDTO());
         }
 
+        public List<User> GetUserByDepartment(int departmentID)
+        {
+            return GetAllUsers().Where(x => x.DepartmentID == departmentID).ToList<User>();
+        }
+
         public User GetUserByID(int UserID)
         {
             return (from u in context.Users
