@@ -62,6 +62,15 @@ namespace SA33.Team12.SSIS.BLL
             return udao.GetAllUsers();
         }
 
+        public List<User> GetUserByDepartment(int departmentID)
+        {
+            if (departmentID > 0)
+            {
+                return udao.GetUserByDepartment(departmentID);
+            }
+            return null;
+        }
+
         public User GetUserByID(int UserID)
         {
             return udao.GetUserByID(UserID);

@@ -7,14 +7,6 @@
         {
             width: 129px;
         }
-        .style2
-        {
-            width: 118px;
-        }
-        .style4
-        {
-            width: 225px;
-        }
         .style5
         {
             width: 175px;
@@ -26,10 +18,6 @@
         .style8
         {
             width: 324px;
-        }
-        .style9
-        {
-            width: 330px;
         }
         .style10
         {
@@ -53,12 +41,9 @@
             <td class="style10">
                 Attention To:</td>
             <td>
-                <asp:DropDownList ID="ddlAttentionTo" runat="server" 
-                    DataSourceID="UserDataSource" DataTextField="UserName" DataValueField="UserID">
+                <asp:DropDownList ID="ddlAttentionTo" runat="server" DataTextField="UserName" 
+                    DataValueField="UserID">
                 </asp:DropDownList>
-                <asp:ObjectDataSource ID="UserDataSource" runat="server" 
-                    SelectMethod="GetAllUsers" TypeName="SA33.Team12.SSIS.BLL.UserManager">
-                </asp:ObjectDataSource>
             </td>
         </tr>
         <tr>
@@ -70,7 +55,7 @@
             <td class="style10">
                 Supply By</td>
             <td>
-                <asp:TextBox ID="txtDateToSupply" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDateToSupply" runat="server" ValidationGroup="edit"></asp:TextBox>
                  <script type="text/javascript">
                      $(function () {
                          $('#<%= this.txtDateToSupply.ClientID %>').datepicker({
@@ -88,6 +73,9 @@
                          });
                      });
 				</script>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                    ControlToValidate="txtDateToSupply" Display="Dynamic" 
+                    ErrorMessage="Date Required" ValidationGroup="edit"></asp:RequiredFieldValidator>
 </td>
         </tr>
     </table>
@@ -119,7 +107,10 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Recommended Reorder Quantity">
                 <ItemTemplate>
-                    <asp:TextBox ID="txtRecommend" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtRecommend" runat="server" ValidationGroup="edit"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                        ControlToValidate="txtRecommend" Display="Dynamic" 
+                        ErrorMessage="Quantity Required" ValidationGroup="edit"></asp:RequiredFieldValidator>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -134,7 +125,7 @@
                 &nbsp;</td>
             <td>
                 <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" 
-                    Text="Submit" Height="44px" Width="98px" />
+                    Text="Submit" Height="44px" Width="98px" ValidationGroup="edit" />
             </td>
         </tr>
         </table>

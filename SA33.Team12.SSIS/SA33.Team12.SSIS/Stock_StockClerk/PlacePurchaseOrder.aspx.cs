@@ -24,6 +24,9 @@ namespace SA33.Team12.SSIS.Stock_StoreClerk
 
         protected void Populate()
         {
+            UserManager um = new UserManager();
+            ddlAttentionTo.DataSource = um.GetUserByDepartment(Utilities.Membership.GetCurrentLoggedInUser().DepartmentID);
+            DataBind();
             using (CatalogManager cm = new CatalogManager())
             {
                 List<Stationery> stationeries = cm.GetStationeriesByQuantityInHandLessThanReorderLevel();
